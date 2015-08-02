@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gnss.constellation.controller.Menus">
+	<MenuBar fx:id="menuBar">
+		<menus>
+			<Menu text="File">
+				<items>
+					<MenuItem text="New" />
+					<MenuItem text="Open" />
+					<MenuItem text="Save" />
+					<MenuItem text="Save As" />
+					<SeparatorMenuItem />
+					<MenuItem text="Exit" />
+				</items>
+			</Menu>
+			<Menu text="Help">
+				<items>
+					<MenuItem text="About" onAction="#handleAboutAction" />
+				</items>
+			</Menu>
+		</menus>
+	</MenuBar>
+</VBox>

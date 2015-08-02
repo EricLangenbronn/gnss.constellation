@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gnss.constellation.controller.VisualisationParameter">
+	<children>
+		<Label maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="600.0" text="Temporal and spacial parameters" textAlignment="CENTER" />
+		<Label prefHeight="30.0" prefWidth="85.0" text="Start Time : " />
+		<DatePicker fx:id="startTime" prefHeight="31.0" prefWidth="499.0" />
+		<Label prefHeight="33.0" prefWidth="172.0" text="Elevation mark (degrees) : " />
+		<TextField fx:id="elevationMark" prefHeight="31.0" prefWidth="412.0" />
+	</children>
+</FlowPane>

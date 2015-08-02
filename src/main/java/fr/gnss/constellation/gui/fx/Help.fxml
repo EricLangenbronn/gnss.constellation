@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
+	<!-- TODO Add Nodes -->
+</AnchorPane>
+
+
+<!-- 
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import fr.projet.java.gnss.constellation.controller.Main?>
+
+<AnchorPane prefHeight="968.0" prefWidth="1024.0"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.projet.java.gnss.constellation.controller.Main">
+
+
+
+	<!-- <fx:include source="Menus.fxml" fx:id="vBoxMenus" />
+	<fx:include source="VisualisationParameter.fxml" fx:id="vBoxVisualisationParameter" /> -->
+
+</AnchorPane>
+
+
+ -->
+
