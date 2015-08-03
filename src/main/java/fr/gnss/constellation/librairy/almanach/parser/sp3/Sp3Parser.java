@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import fr.gnss.constellation.Exception.BusinessException;
 import fr.gnss.constellation.Exception.TechnicalException;
+import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
 
 public class Sp3Parser {
 
@@ -65,5 +69,78 @@ public class Sp3Parser {
 			String message = "";
 			throw new BusinessException(message);
 		}
+	}
+
+	public String getVersionSymbol() throws TechnicalException {
+		return sp3HeaderParser.getVersionSymbol();
+	}
+
+	public LocalDateTime getStartEpochRecord() throws TechnicalException {
+		return sp3HeaderParser.getStartEpochRecord();
+	}
+
+	public int getNumberOfEpoch() throws TechnicalException {
+		return sp3HeaderParser.getNumberOfEpoch();
+	}
+
+	public String getDataUsed() throws TechnicalException {
+		return sp3HeaderParser.getDataUsed();
+	}
+
+	public String getCoordinateSystem() throws TechnicalException {
+		return sp3HeaderParser.getCoordinateSystem();
+	}
+
+	public String getOrbitType() throws TechnicalException {
+		return sp3HeaderParser.getOrbitType();
+	}
+
+	public String getAgency() throws TechnicalException {
+		return sp3HeaderParser.getAgency();
+	}
+
+	public int getGPSWeek() throws TechnicalException {
+		return sp3HeaderParser.getGPSWeek();
+	}
+
+	public double getSecondsOfWeek() throws TechnicalException {
+		return sp3HeaderParser.getSecondsOfWeek();
+	}
+
+	public double getEpochInterval() throws TechnicalException {
+		return sp3HeaderParser.getEpochInterval();
+	}
+
+	public int getModJulDaySt() throws TechnicalException {
+		return sp3HeaderParser.getModJulDaySt();
+	}
+
+	public double getFractionalDay() throws TechnicalException {
+		return sp3HeaderParser.getFractionalDay();
+	}
+
+	public int getNumber0fSats() throws TechnicalException {
+		return sp3HeaderParser.getNumber0fSats();
+	}
+
+	public String[] getSatId() throws TechnicalException, BusinessException {
+		return sp3HeaderParser.getSatId();
+	}
+
+	public int[] getSatAccuracy() throws TechnicalException, BusinessException {
+		return sp3HeaderParser.getSatAccuracy();
+	}
+
+	public String getFileType() throws TechnicalException {
+		return sp3HeaderParser.getFileType();
+	}
+
+	public String getTimeSystem() throws TechnicalException {
+		return sp3HeaderParser.getTimeSystem();
+	}
+
+	public Map<LocalDateTime, List<PositionAndClockRecord>> getPositionAndClockRecord()
+			throws TechnicalException, BusinessException {
+		return sp3CoreParser.getPositionAndClockRecord();
 	}
 }

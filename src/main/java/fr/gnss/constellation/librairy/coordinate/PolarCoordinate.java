@@ -10,7 +10,7 @@ public class PolarCoordinate {
 		theta = 0;
 	}
 
-	public PolarCoordinate(CartesianCoordinate c) {
+	public PolarCoordinate(CartesianCoordinate3D c) {
 		this();
 		r = Math.sqrt(Math.pow(c.X(), 2)
 				+ Math.pow(c.Y(), 2));
