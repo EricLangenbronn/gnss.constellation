@@ -26,14 +26,14 @@ public class GeodeticCoordinate {
 		position = new double[3];
 	}
 
-	public GeodeticCoordinate(double lambda, double phi, double h) {
+	public GeodeticCoordinate(double x, double y, double z) {
 		this();
-		position[0] = lambda;
-		position[1] = phi;
-		position[2] = h;
+		position[0] = x;
+		position[1] = y;
+		position[2] = z;
 	}
 
-	public GeodeticCoordinate(double... p) {
+	public GeodeticCoordinate(double[] p) {
 		this();
 		if (p.length != 3) {
 			throw new IllegalArgumentException(
@@ -60,6 +60,14 @@ public class GeodeticCoordinate {
 
 	public double getAltitude() {
 		return position[2];
+	}
+
+	public double[] getPosition() {
+		return position;
+	}
+
+	public void setPosition(double[] position) {
+		this.position = position;
 	}
 
 	@Override

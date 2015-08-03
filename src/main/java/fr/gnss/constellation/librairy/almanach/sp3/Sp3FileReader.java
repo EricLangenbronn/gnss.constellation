@@ -1,12 +1,10 @@
 package fr.gnss.constellation.librairy.almanach.sp3;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
 
-import fr.gnss.constellation.Exception.BusinessException;
-import fr.gnss.constellation.Exception.TechnicalException;
 import fr.gnss.constellation.librairy.almanach.parser.sp3.Sp3Parser;
 
 public class Sp3FileReader {
@@ -24,9 +22,14 @@ public class Sp3FileReader {
 		parser = new Sp3Parser(fl);
 	}
 
-	public Map<LocalDateTime, List<PositionAndClockRecord>> getPositionAndClockRecord()
-			throws TechnicalException, BusinessException {
-		return parser.getPositionAndClockRecord();
+	public double[][] getPositions(LocalDateTime p_epochRecord) {
+		double[][] res = new double[0][0];
+		return res;
+	}
+
+	public double[] getPosition(String p_vehicleId, LocalDateTime p_epochRecord) {
+		double[] res = new double[0];
+		return res;
 	}
 
 }

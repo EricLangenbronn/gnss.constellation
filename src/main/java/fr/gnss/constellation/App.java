@@ -2,7 +2,7 @@ package fr.gnss.constellation;
 
 import java.io.IOException;
 
-import fr.gnss.constellation.librairy.coordinate.CartesianCoordinate3D;
+import fr.gnss.constellation.librairy.coordinate.CartesianCoordinate;
 import fr.gnss.constellation.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.librairy.coordinate.GeodeticCoordinate;
 import javafx.application.Application;
@@ -33,7 +33,7 @@ public class App extends Application {
 				CoordinateFunction.degreeToRadian(res));
 		System.out.println("res : " + cg);
 
-		CartesianCoordinate3D cc = CoordinateFunction.geodeticToCartesian(cg);
+		CartesianCoordinate cc = CoordinateFunction.geodeticToCartesian(cg);
 		System.out.println("cc : " + cc);
 		cc.normalize();
 		System.out.println("cc normalize : " + cc);
