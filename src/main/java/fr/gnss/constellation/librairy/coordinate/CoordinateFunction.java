@@ -47,7 +47,7 @@ public class CoordinateFunction {
 	 * @param cg
 	 * @return
 	 */
-	public static CartesianCoordinate geodeticToCartesian(GeodeticCoordinate cg) {
+	public static CartesianCoordinate3D geodeticToCartesian(GeodeticCoordinate cg) {
 
 		double e = (2.0 - CoordinateFunction.f) * CoordinateFunction.f;
 		double N = CoordinateFunction.a
@@ -61,7 +61,7 @@ public class CoordinateFunction {
 		double z = ((N * (1 - Math.pow(e, 2))) + cg.getAltitude())
 				* Math.sin(cg.getLatitude());
 
-		CartesianCoordinate cc = new CartesianCoordinate(x, y, z);
+		CartesianCoordinate3D cc = new CartesianCoordinate3D(x, y, z);
 
 		return cc;
 	}
@@ -82,11 +82,11 @@ public class CoordinateFunction {
 	 * @param lambda
 	 *            (en radian)
 	 */
-	public static CartesianCoordinate transformECEFtoENU(double phi,
-			double lambda, CartesianCoordinate satelite,
-			CartesianCoordinate station) {
+	public static CartesianCoordinate3D transformECEFtoENU(double phi,
+			double lambda, CartesianCoordinate3D satelite,
+			CartesianCoordinate3D station) {
 
-		CartesianCoordinate stationSatelite = CartesianCoordinate.minus(
+		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(
 				satelite.normalized(), station.normalized());
 
 		double[][] matriceData2 = new double[1][3];
@@ -110,9 +110,9 @@ public class CoordinateFunction {
 		matriceData[2][2] = Math.sin(phi);
 		SimpleMatrix a = new SimpleMatrix(matriceData);
 
-		SimpleMatrix c = a.mult(b);
+		SimpleMatrix c = b.mult(a);
 
-		CartesianCoordinate res = new CartesianCoordinate(c.get(0), c.get(1),
+		CartesianCoordinate3D res = new CartesianCoordinate3D(c.get(0), c.get(1),
 				c.get(2));
 
 		return res;

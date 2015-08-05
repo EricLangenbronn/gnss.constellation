@@ -1,7 +1,5 @@
 package fr.gnss.constellation.librairy.almanach.sp3;
 
-import java.time.LocalDateTime;
-
 public class PositionAndClockRecord {
 
 	private String vehicleId;
@@ -25,6 +23,22 @@ public class PositionAndClockRecord {
 		xCoordinate = p_xCoordinate;
 		yCoordinate = p_yCoordinate;
 		zCoordinate = p_zCoordinate;
+	}
+
+	public String getVehicleId() {
+		return vehicleId;
+	}
+
+	public double getxCoordinate() {
+		return xCoordinate;
+	}
+
+	public double getyCoordinate() {
+		return yCoordinate;
+	}
+
+	public double getzCoordinate() {
+		return zCoordinate;
 	}
 
 	@Override
