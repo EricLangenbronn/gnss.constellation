@@ -21,24 +21,6 @@ public class App extends Application {
 	public static void main(String[] args) {
 		launch(args);
 
-		double lat = 38.889139;
-		double lon = -77.049;
-		double alt = 130.049;
-
-		double[] res = new double[3];
-		res[0] = lat;
-		res[1] = lon;
-		res[2] = alt;
-		GeodeticCoordinate cg = new GeodeticCoordinate(
-				CoordinateFunction.degreeToRadian(res));
-		System.out.println("res : " + cg);
-
-		CartesianCoordinate3D cc = CoordinateFunction.geodeticToCartesian(cg);
-		System.out.println("cc : " + cc);
-		cc.normalize();
-		System.out.println("cc normalize : " + cc);
-		System.out.println("cc length : " + cc.magnitude() );
-
 	}
 
 	@Override

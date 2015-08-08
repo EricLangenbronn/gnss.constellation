@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gnss.constellation.controller.TemporalSpatialParam">
+	<children>
+		<Label maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="680.0" text="Temporal and spatial parameters" textAlignment="CENTER" />
+		<Group>
+			<children>
+				<FlowPane layoutX="-14.0" prefHeight="50.0" prefWidth="680.0">
+					<children>
+						<Label text="Start time" />
+                  <Region prefHeight="31.0" prefWidth="20.0" />
+						<TextField fx:id="txtSTYears" prefWidth="60.0" promptText="Years" />
+						<ComboBox fx:id="cbSTMonth" prefWidth="100.0" promptText="Month" visibleRowCount="12" />
+						<ComboBox fx:id="cbSTDay" prefWidth="80.0" promptText="Day" />
+						<ComboBox fx:id="cbSTHours" prefWidth="100.0" promptText="Hours" />
+						<ComboBox fx:id="cbSTMinutes" prefWidth="80.0" promptText="Min" />
+						<ComboBox fx:id="cbSTSecondes" prefWidth="100.0" promptText="Sec" />
+                  <Region prefHeight="31.0" prefWidth="75.0" />
+                  <Region prefHeight="31.0" prefWidth="20.0" />
+					</children>
+				</FlowPane>
+			</children>
+		</Group>
+      <Group>
+         <children>
+            <FlowPane prefHeight="50.0" prefWidth="680.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="70.0" text="Duration" />
+                  <Region prefHeight="31.0" prefWidth="20.0" />
+                  <ComboBox fx:id="cbDDays" prefHeight="31.0" prefWidth="91.0" promptText="Days" />
+                  <ComboBox fx:id="cbDHours" prefHeight="31.0" prefWidth="100.0" promptText="Hours" />
+                  <ComboBox fx:id="cbDMinutes" prefHeight="31.0" prefWidth="110.0" promptText="Minutes" />
+                  <ComboBox fx:id="cbDSeconds" prefHeight="31.0" prefWidth="110.0" promptText="Seconds" />
+               </children>
+            </FlowPane>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <FlowPane prefHeight="50.0" prefWidth="680.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="110.0" text="Elevation mask" />
+                  <Region prefHeight="31.0" prefWidth="20.0" />
+                  <TextField fx:id="txtEM" prefHeight="31.0" prefWidth="50.0" />
+                  <Region prefHeight="31.0" prefWidth="20.0" />
+                  <Label text="degrees" />
+               </children>
+            </FlowPane>
+         </children>
+      </Group>
+	</children>
+</FlowPane>

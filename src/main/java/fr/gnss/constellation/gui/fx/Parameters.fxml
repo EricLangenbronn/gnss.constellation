@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="680.0">
+         <children>
+            <fx:include source="TemporalSpatialParam.fxml" />
+            <Separator prefWidth="200.0" />
+            <fx:include source="BaseStationCoordinate.fxml" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

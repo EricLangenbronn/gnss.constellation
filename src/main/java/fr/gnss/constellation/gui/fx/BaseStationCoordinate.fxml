@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <FlowPane prefHeight="75.0" prefWidth="680.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="680.0" text="Synthetic measurement generator" textAlignment="CENTER" />
+            <Group>
+               <children>
+                  <FlowPane prefHeight="28.0" prefWidth="680.0">
+                     <children>
+                        <TextField fx:id="txtLongitude" prefHeight="31.0" prefWidth="100.0" promptText="Longitude" />
+                        <TextField fx:id="txtLatitude" prefHeight="31.0" prefWidth="100.0" promptText="Latitude" />
+                        <Region prefHeight="31.0" prefWidth="20.0" />
+                        <Label text="degrees" />
+                        <Region prefHeight="31.0" prefWidth="20.0" />
+                        <TextField fx:id="txtAltitude" prefHeight="31.0" prefWidth="100.0" promptText="Altitude" />
+                        <Region prefHeight="31.0" prefWidth="20.0" />
+                        <Label text="meters" />
+                     </children>
+                  </FlowPane>
+               </children>
+            </Group>
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>
