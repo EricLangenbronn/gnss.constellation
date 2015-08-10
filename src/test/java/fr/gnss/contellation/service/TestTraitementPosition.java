@@ -4,6 +4,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.junit.Test;
 
@@ -47,7 +48,7 @@ public class TestTraitementPosition {
 
 		while (true) {
 			try {
-				Map<LocalDateTime, List<PositionAndClockRecord>> map = TraitementPositions
+				List<Entry<LocalDateTime, List<PositionAndClockRecord>>> map = TraitementPositions
 						.getSateliteVisble(fileReader, gStation);
 				TraitementPositions.afficheSateliteVisible(map);
 			} catch (BusinessException e) {

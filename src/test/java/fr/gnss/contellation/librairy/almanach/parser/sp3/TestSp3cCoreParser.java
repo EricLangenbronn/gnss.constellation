@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import junit.framework.Assert;
 
@@ -37,7 +38,7 @@ public class TestSp3cCoreParser {
 	@Test
 	public void TestPositionAndClockRecord() throws TechnicalException,
 			BusinessException {
-		Map<LocalDateTime, List<PositionAndClockRecord>> res = sp3cCP
+		List<Entry<LocalDateTime, List<PositionAndClockRecord>>> res = sp3cCP
 				.getPositionAndClockRecord();
 		Assert.assertNotNull(res);
 		Assert.assertEquals(1, res.size());

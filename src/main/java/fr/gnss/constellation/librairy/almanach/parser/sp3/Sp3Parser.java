@@ -7,6 +7,7 @@ import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -141,7 +142,7 @@ public class Sp3Parser {
 		return sp3HeaderParser.getTimeSystem();
 	}
 
-	public Map<LocalDateTime, List<PositionAndClockRecord>> getPositionAndClockRecord()
+	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
 			throws TechnicalException, BusinessException {
 		return sp3CoreParser.getPositionAndClockRecord();
 	}

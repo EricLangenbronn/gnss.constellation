@@ -8,9 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 
 public class Main implements Initializable {
-	
-	@FXML
-	private VBox vBoxMenus;
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		

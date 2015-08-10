@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import fr.gnss.constellation.Exception.BusinessException;
 import fr.gnss.constellation.Exception.TechnicalException;
@@ -26,7 +27,7 @@ public class Sp3aCoreParser extends AbstractCoreParser implements
 	}
 
 	@Override
-	public Map<LocalDateTime, List<PositionAndClockRecord>> getPositionAndClockRecord()
+	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
 			throws TechnicalException, BusinessException {
 		// TODO Auto-generated method stub
 		/*

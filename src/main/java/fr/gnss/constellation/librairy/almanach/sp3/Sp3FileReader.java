@@ -4,6 +4,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import fr.gnss.constellation.Exception.BusinessException;
 import fr.gnss.constellation.Exception.TechnicalException;
@@ -24,7 +25,7 @@ public class Sp3FileReader {
 		parser = new Sp3Parser(fl);
 	}
 
-	public Map<LocalDateTime, List<PositionAndClockRecord>> getPositionAndClockRecord()
+	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
 			throws TechnicalException, BusinessException {
 		return parser.getPositionAndClockRecord();
 	}

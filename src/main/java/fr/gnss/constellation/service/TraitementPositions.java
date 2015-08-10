@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.AbstractMap.SimpleEntry;
 
 import com.sun.corba.se.spi.orbutil.fsm.State;
 
@@ -61,11 +63,28 @@ public class TraitementPositions {
 				pos.getyCoordinate(), pos.getzCoordinate());
 	}
 
-	public static Map<LocalDateTime, List<PositionAndClockRecord>> getSateliteVisble(
+	public static List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getSateliteVisble(
 			Sp3FileReader sp3FileParser, GeodeticCoordinate gStation) throws Exception {
+		
+		List<Entry<LocalDateTime, List<PositionAndClockRecord>>> fileSatelite = sp3FileParser.getPositionAndClockRecord();
+		List<Entry<LocalDateTime, List<PositionAndClockRecord>>> sateliteVisible = new ArrayList<>();
+		for(Entry<LocalDateTime, List<PositionAndClockRecord>> e: fileSatelite) {
+			List<PositionAndClockRecord> tmpSatVisible = new ArrayList<>();
+			for(PositionAndClockRecord p : e.getValue()) {
+				double[] angles = TraitementPositions.processElevationAzimut(
+						gStation, CoordinateFunction
+								.geodeticToCartesian(gStation),
+						TraitementPositions
+								.getCoordinateToPositionAndClock(p));
+				if ((angles[1] >= 0.2617) && (angles[1] < (3.1415 / 2))) {
+					tmpSatVisible.add(p);
+				}
+			}
+			sateliteVisible.add(new SimpleEntry<LocalDateTime, List<PositionAndClockRecord>>(e.getKey(), tmpSatVisible));
+		}
+		
+		/*
 		Map<LocalDateTime, List<PositionAndClockRecord>> sateliteVisible = new HashMap<LocalDateTime, List<PositionAndClockRecord>>();
-
-		Map<LocalDateTime, List<PositionAndClockRecord>> map = sp3FileParser.getPositionAndClockRecord();
 		for (LocalDateTime localDateTime : map.keySet()) {
 			sateliteVisible.put(localDateTime,
 					new ArrayList<PositionAndClockRecord>());
@@ -82,17 +101,18 @@ public class TraitementPositions {
 				}
 			}
 		}
+		*/
 
 		return sateliteVisible;
 
 	}
 
 	public static void afficheSateliteVisible(
-			Map<LocalDateTime, List<PositionAndClockRecord>> map) {
+			List<Entry<LocalDateTime, List<PositionAndClockRecord>>> map) {
 
-		for (LocalDateTime localDateTime : map.keySet()) {
-			List<PositionAndClockRecord> lpos = map.get(localDateTime);
-			System.out.println("Satelite visible heure : " + localDateTime);
+		for (Entry<LocalDateTime, List<PositionAndClockRecord>> e: map) {
+			List<PositionAndClockRecord> lpos = e.getValue();
+			System.out.println("Satelite visible heure : " + e.getKey());
 			for (PositionAndClockRecord pos : lpos) {
 				System.out.println(pos.getVehicleId());
 			}

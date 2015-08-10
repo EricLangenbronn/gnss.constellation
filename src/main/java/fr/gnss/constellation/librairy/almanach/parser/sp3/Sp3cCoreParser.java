@@ -4,10 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -81,9 +81,9 @@ public class Sp3cCoreParser extends AbstractCoreParser implements
 		return clock;
 	}
 
-	public Map<LocalDateTime, List<PositionAndClockRecord>> getPositionAndClockRecord()
+	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
 			throws TechnicalException, BusinessException {
-		List<PositionAndClockRecord> lstPositionAndClockRecord = new ArrayList<PositionAndClockRecord>();
+		List<PositionAndClockRecord> lstPositionAndClockRecord = new ArrayList<>();
 
 		LocalDateTime clock = null;
 		int nbSatelites = 32;
@@ -97,8 +97,8 @@ public class Sp3cCoreParser extends AbstractCoreParser implements
 			throw new BusinessException(message, e);
 		}
 
-		Map<LocalDateTime, List<PositionAndClockRecord>> res = new HashMap<LocalDateTime, List<PositionAndClockRecord>>();
-		res.put(clock, lstPositionAndClockRecord);
+		List<Entry<LocalDateTime, List<PositionAndClockRecord>>> res = new ArrayList<>();
+		res.add(new SimpleEntry<LocalDateTime, List<PositionAndClockRecord>>(clock, lstPositionAndClockRecord));
 		
 		return res;
 	}
