@@ -5,6 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import fr.gnss.constellation.controller.CustomControl?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="420.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gnss.constellation.controller.Main">
    <children>
@@ -39,6 +40,11 @@
                            </children></AnchorPane>
                   </content>
                 </Tab>
+                  <Tab text="Untitled Tab 3">
+                     <content>
+                        <CustomControl />
+                     </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </center>

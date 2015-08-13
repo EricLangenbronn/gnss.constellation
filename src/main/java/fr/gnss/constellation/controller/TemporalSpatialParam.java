@@ -12,9 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import fr.gnss.constellation.Exception.BusinessException;
 
-public class TemporalSpatialParam implements Initializable {
+public class TemporalSpatialParam extends AnchorPane implements Initializable {
 
 	@FXML
 	TextField txtSTYears;
@@ -136,7 +137,7 @@ public class TemporalSpatialParam implements Initializable {
 		return startDateTimeMeasurement;
 	}
 
-	public LocalDateTime getPeriodMeasurment() throws BusinessException {
+	public LocalDateTime getEndDateTimeMeasurment() throws BusinessException {
 
 		LocalDateTime startDateTimeMeasurement = this
 				.getStartDateTimeMeasurment();

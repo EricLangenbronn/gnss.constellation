@@ -26,7 +26,7 @@ public class Visibility implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+/*
 		try {
 			String fileName = getClass().getResource("/Sp3File/igs17720.sp3")
 					.getFile();
@@ -57,6 +57,7 @@ public class Visibility implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+*/
 	}
+
 }

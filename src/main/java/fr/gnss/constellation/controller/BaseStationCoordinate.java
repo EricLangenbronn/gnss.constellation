@@ -6,8 +6,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
-public class BaseStationCoordinate implements Initializable {
+public class BaseStationCoordinate extends AnchorPane implements Initializable {
 
 	@FXML
 	TextField txtLongitude;
