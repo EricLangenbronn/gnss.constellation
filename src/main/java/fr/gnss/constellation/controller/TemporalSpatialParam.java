@@ -1,5 +1,6 @@
 package fr.gnss.constellation.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,85 +10,99 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import fr.gnss.constellation.Exception.BusinessException;
+import javafx.scene.layout.VBox;
 
-public class TemporalSpatialParam extends AnchorPane implements Initializable {
+public class TemporalSpatialParam extends VBox implements Initializable {
 
 	@FXML
 	TextField txtSTYears;
 
 	@FXML
-	ComboBox<Integer> cbSTMonth;
+	ComboBox<String> cbSTMonth;
 
 	@FXML
-	ComboBox<Integer> cbSTDay;
+	ComboBox<String> cbSTDay;
 
 	@FXML
-	ComboBox<Integer> cbSTHours;
+	ComboBox<String> cbSTHours;
 
 	@FXML
-	ComboBox<Integer> cbSTMinutes;
+	ComboBox<String> cbSTMinutes;
 
 	@FXML
-	ComboBox<Integer> cbSTSecondes;
+	ComboBox<String> cbSTSecondes;
 
 	@FXML
-	ComboBox<Integer> cbDDays;
+	ComboBox<String> cbDDays;
 
 	@FXML
-	ComboBox<Integer> cbDHours;
+	ComboBox<String> cbDHours;
 
 	@FXML
-	ComboBox<Integer> cbDMinutes;
+	ComboBox<String> cbDMinutes;
 
 	@FXML
-	ComboBox<Integer> cbDSeconds;
+	ComboBox<String> cbDSeconds;
 
 	@FXML
 	TextField txtEM;
 
-	private ObservableList<Integer> cbSTMonthData = FXCollections
+	private ObservableList<String> cbSTMonthData = FXCollections
 			.observableArrayList();
 
-	private ObservableList<Integer> cbSTDayData = FXCollections
+	private ObservableList<String> cbSTDayData = FXCollections
 			.observableArrayList();
 
-	private ObservableList<Integer> cbSTHoursData = FXCollections
+	private ObservableList<String> cbSTHoursData = FXCollections
 			.observableArrayList();
 
-	private ObservableList<Integer> cbSTMinutesData = FXCollections
+	private ObservableList<String> cbSTMinutesData = FXCollections
 			.observableArrayList();
 
-	private ObservableList<Integer> cbSTSecondesData = FXCollections
+	private ObservableList<String> cbSTSecondesData = FXCollections
 			.observableArrayList();
 
-	private ObservableList<Integer> cbDDaysData = FXCollections
+	private ObservableList<String> cbDDaysData = FXCollections
 			.observableArrayList();
 
-	private ObservableList<Integer> cbDHoursData = FXCollections
+	private ObservableList<String> cbDHoursData = FXCollections
 			.observableArrayList();
 
-	private ObservableList<Integer> cbDMinutesData = FXCollections
+	private ObservableList<String> cbDMinutesData = FXCollections
 			.observableArrayList();
 
-	private ObservableList<Integer> cbDSecondsData = FXCollections
+	private ObservableList<String> cbDSecondsData = FXCollections
 			.observableArrayList();
+
+	public TemporalSpatialParam() {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+				"/fr/gnss/constellation/gui/fx/TemporalSpatialParam.fxml"));
+		fxmlLoader.setRoot(this);
+		fxmlLoader.setController(this);
+
+		try {
+			fxmlLoader.load();
+		} catch (IOException exception) {
+			throw new RuntimeException(exception);
+		}
+	}
 
 	public void loadData() {
-		Integer[] MonthData = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-		Integer[] HoursData = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-				14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-		Integer[] STDayData = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15,
-				16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
-		Integer[] MinSecData = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15,
-				16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
-				32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
-				48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60 };
-		Integer[] DDaysData = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		String[] MonthData = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
+		String[] HoursData = { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
+				"14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+		String[] STDayData = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13", "14", "15",
+				"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
+		String[] MinSecData = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13", "14", "15",
+				"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31",
+				"32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47",
+				"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" };
+		String[] DDaysData = { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10" };
 
 		cbSTMonthData.addAll(MonthData);
 		cbSTDayData.addAll(STDayData);
@@ -118,11 +133,11 @@ public class TemporalSpatialParam extends AnchorPane implements Initializable {
 
 	public LocalDateTime getStartDateTimeMeasurment() throws BusinessException {
 		String dateTime = txtSTYears.getText() + "-"
-				+ cbSTMonth.getSelectionModel() + "-"
-				+ cbSTDay.getSelectionModel() + "T"
-				+ cbSTHours.getSelectionModel() + ":"
-				+ cbSTMinutes.getSelectionModel() + ":"
-				+ cbSTSecondes.getSelectionModel();
+				+ cbSTMonth.getSelectionModel().getSelectedItem() + "-"
+				+ cbSTDay.getSelectionModel().getSelectedItem() + "T"
+				+ cbSTHours.getSelectionModel().getSelectedItem() + ":"
+				+ cbSTMinutes.getSelectionModel().getSelectedItem() + ":"
+				+ cbSTSecondes.getSelectionModel().getSelectedItem();
 
 		LocalDateTime startDateTimeMeasurement = null;
 		try {
@@ -141,11 +156,12 @@ public class TemporalSpatialParam extends AnchorPane implements Initializable {
 
 		LocalDateTime startDateTimeMeasurement = this
 				.getStartDateTimeMeasurment();
-		
+
 		LocalDateTime endDateTimeMeasurment = startDateTimeMeasurement
-				.plusDays(cbDDays.getValue()).plusHours(cbDHours.getValue())
-				.plusMinutes(cbDMinutes.getValue())
-				.plusSeconds(cbDSeconds.getValue());
+				.plusDays(Long.parseLong(cbDDays.getSelectionModel().getSelectedItem()))
+				.plusHours(Long.parseLong(cbDHours.getSelectionModel().getSelectedItem()))
+				.plusMinutes(Long.parseLong(cbDMinutes.getSelectionModel().getSelectedItem()))
+				.plusSeconds(Long.parseLong(cbDSeconds.getSelectionModel().getSelectedItem()));
 
 		return endDateTimeMeasurment;
 	}

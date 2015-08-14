@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import fr.gnss.constellation.controller.CustomControl?>
+<?import fr.gnss.constellation.controller.Visibility?>
+<?import fr.gnss.constellation.controller.Parameters?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="420.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gnss.constellation.controller.Main">
    <children>
@@ -16,35 +14,16 @@
          <center>
             <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="Untitled Tab 1">
+                <Tab text="Parameters">
                   <content>
-                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="350.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <center>
-                                    <fx:include source="Parameters.fxml" />
-                                 </center>
-                              </BorderPane>
-                           </children></AnchorPane>
+                    <Parameters fx:id="parameters" />
                   </content>
                 </Tab>
-                <Tab text="Untitled Tab 2">
+                <Tab text="Visibility">
                   <content>
-                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="149.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <fx:include source="Visibility.fxml" />
-                                 </children>
-                              </VBox>
-                           </children></AnchorPane>
+                    <Visibility fx:id="visibility" />
                   </content>
                 </Tab>
-                  <Tab text="Untitled Tab 3">
-                     <content>
-                        <CustomControl />
-                     </content>
-                  </Tab>
               </tabs>
             </TabPane>
          </center>

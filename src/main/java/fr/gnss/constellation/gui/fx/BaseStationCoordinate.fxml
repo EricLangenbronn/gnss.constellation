@@ -3,35 +3,29 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="90.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="90.0" prefWidth="680.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="680.0" text="Synthetic measurement generator" textAlignment="CENTER" />
+      <Group>
          <children>
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="680.0" text="Synthetic measurement generator" textAlignment="CENTER" />
-            <Group>
+            <FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="680.0">
                <children>
-                  <FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="680.0">
-                     <children>
-                        <TextField fx:id="txtLongitude" prefHeight="31.0" prefWidth="100.0" promptText="Longitude" />
-                        <TextField fx:id="txtLatitude" prefHeight="31.0" prefWidth="100.0" promptText="Latitude" />
-                        <Region prefHeight="31.0" prefWidth="20.0" />
-                        <Label text="degrees" />
-                        <Region prefHeight="31.0" prefWidth="20.0" />
-                        <TextField fx:id="txtAltitude" prefHeight="31.0" prefWidth="100.0" promptText="Altitude" />
-                        <Region prefHeight="31.0" prefWidth="20.0" />
-                        <Label text="meters" />
-                     </children>
-                  </FlowPane>
+                  <TextField fx:id="txtLongitude" prefHeight="31.0" prefWidth="100.0" promptText="Longitude" />
+                  <TextField fx:id="txtLatitude" prefHeight="31.0" prefWidth="100.0" promptText="Latitude" />
+                  <Region prefHeight="31.0" prefWidth="20.0" />
+                  <Label text="degrees" />
+                  <Region prefHeight="31.0" prefWidth="20.0" />
+                  <TextField fx:id="txtAltitude" prefHeight="31.0" prefWidth="100.0" promptText="Altitude" />
+                  <Region prefHeight="31.0" prefWidth="20.0" />
+                  <Label text="meters" />
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Group>
+            </FlowPane>
          </children>
-      </VBox>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Group>
    </children>
-</AnchorPane>
+</fx:root>
