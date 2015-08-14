@@ -2,8 +2,19 @@ package fr.gnss.constellation.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
+import fr.gnss.constellation.Exception.BusinessException;
+import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
+import fr.gnss.constellation.librairy.almanach.sp3.Sp3FileReader;
+import fr.gnss.constellation.librairy.coordinate.GeodeticCoordinate;
+import fr.gnss.constellation.service.TraitementPositions;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,7 +42,7 @@ public class Visibility extends VBox implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-/*
+
 		try {
 			String fileName = getClass().getResource("/Sp3File/igs17720.sp3")
 					.getFile();
@@ -60,9 +71,9 @@ public class Visibility extends VBox implements Initializable {
 			barGraphe.getData().addAll(series1);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();	
 		}
-*/
+
 	}
 
 	public void setSeries(XYChart.Series ... series) {

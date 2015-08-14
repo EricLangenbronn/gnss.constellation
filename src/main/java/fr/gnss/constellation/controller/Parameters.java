@@ -42,6 +42,7 @@ public class Parameters extends VBox implements Initializable {
 	public void handleExecute(ActionEvent e) {
 
 		System.out.println("execute");
+		
 		try {
 
 			LocalDateTime startDateTimeMeasure = temporalSpacialParam.getStartDateTimeMeasurment();

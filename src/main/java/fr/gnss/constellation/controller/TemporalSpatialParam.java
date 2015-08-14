@@ -52,36 +52,27 @@ public class TemporalSpatialParam extends VBox implements Initializable {
 	@FXML
 	TextField txtEM;
 
-	private ObservableList<String> cbSTMonthData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbSTMonthData = FXCollections.observableArrayList();
 
-	private ObservableList<String> cbSTDayData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbSTDayData = FXCollections.observableArrayList();
 
-	private ObservableList<String> cbSTHoursData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbSTHoursData = FXCollections.observableArrayList();
 
-	private ObservableList<String> cbSTMinutesData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbSTMinutesData = FXCollections.observableArrayList();
 
-	private ObservableList<String> cbSTSecondesData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbSTSecondesData = FXCollections.observableArrayList();
 
-	private ObservableList<String> cbDDaysData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbDDaysData = FXCollections.observableArrayList();
 
-	private ObservableList<String> cbDHoursData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbDHoursData = FXCollections.observableArrayList();
 
-	private ObservableList<String> cbDMinutesData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbDMinutesData = FXCollections.observableArrayList();
 
-	private ObservableList<String> cbDSecondsData = FXCollections
-			.observableArrayList();
+	private ObservableList<String> cbDSecondsData = FXCollections.observableArrayList();
 
 	public TemporalSpatialParam() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-				"/fr/gnss/constellation/gui/fx/TemporalSpatialParam.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(
+				getClass().getResource("/fr/gnss/constellation/gui/fx/TemporalSpatialParam.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 
@@ -94,14 +85,14 @@ public class TemporalSpatialParam extends VBox implements Initializable {
 
 	public void loadData() {
 		String[] MonthData = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
-		String[] HoursData = { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
-				"14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
-		String[] STDayData = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13", "14", "15",
-				"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
-		String[] MinSecData = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13", "14", "15",
-				"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31",
-				"32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47",
-				"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" };
+		String[] HoursData = { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14",
+				"15", "16", "17", "18", "19", "20", "21", "22", "23" };
+		String[] STDayData = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13", "14", "15", "16",
+				"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
+		String[] MinSecData = { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13", "14",
+				"15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31",
+				"32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48",
+				"49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" };
 		String[] DDaysData = { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10" };
 
 		cbSTMonthData.addAll(MonthData);
@@ -131,22 +122,54 @@ public class TemporalSpatialParam extends VBox implements Initializable {
 		cbDSeconds.setItems(cbDSecondsData);
 	}
 
+	public boolean isStartDateTimeSelected() {
+		boolean res = false;
+
+		int cbSTMonthIndex = cbSTMonth.getSelectionModel().getSelectedIndex();
+		int cbSTDayIndex = cbSTDay.getSelectionModel().getSelectedIndex();
+		int cbSTHoursIndex = cbSTHours.getSelectionModel().getSelectedIndex();
+		int cbSTMinutesIndex = cbSTMinutes.getSelectionModel().getSelectedIndex();
+		int cbSTSecondesIndex = cbSTSecondes.getSelectionModel().getSelectedIndex();
+		if ((cbSTMonthIndex > -1) && (cbSTDayIndex > -1) && (cbSTHoursIndex > -1) && (cbSTMinutesIndex > -1)
+				&& (cbSTSecondesIndex > -1)) {
+			res = true;
+		}
+
+		return res;
+	}
+
+	public boolean isEndDateTimeSelected() {
+		boolean res = false;
+
+		int cbDDaysIndex = cbDDays.getSelectionModel().getSelectedIndex();
+		int cbDHoursIndex = cbDHours.getSelectionModel().getSelectedIndex();
+		int cbDMinutesIndex = cbDMinutes.getSelectionModel().getSelectedIndex();
+		int cbDSecondsIndex = cbDSeconds.getSelectionModel().getSelectedIndex();
+		if ((cbDDaysIndex > -1) && (cbDHoursIndex > -1) && (cbDMinutesIndex > -1) && (cbDSecondsIndex > -1)) {
+			res = true;
+		}
+
+		return res;
+	}
+
 	public LocalDateTime getStartDateTimeMeasurment() throws BusinessException {
-		String dateTime = txtSTYears.getText() + "-"
-				+ cbSTMonth.getSelectionModel().getSelectedItem() + "-"
-				+ cbSTDay.getSelectionModel().getSelectedItem() + "T"
-				+ cbSTHours.getSelectionModel().getSelectedItem() + ":"
-				+ cbSTMinutes.getSelectionModel().getSelectedItem() + ":"
-				+ cbSTSecondes.getSelectionModel().getSelectedItem();
 
 		LocalDateTime startDateTimeMeasurement = null;
-		try {
-			startDateTimeMeasurement = LocalDateTime.parse(dateTime,
-					DateTimeFormatter.ISO_DATE_TIME);
-		} catch (DateTimeParseException e) {
-			String message = "Impossible de parser la date. [dateTime="
-					+ dateTime + "]";
-			throw new BusinessException(message, e);
+		if (isStartDateTimeSelected()) {
+			String dateTime = txtSTYears.getText() + "-" + cbSTMonth.getSelectionModel().getSelectedItem() + "-"
+					+ cbSTDay.getSelectionModel().getSelectedItem() + "T"
+					+ cbSTHours.getSelectionModel().getSelectedItem() + ":"
+					+ cbSTMinutes.getSelectionModel().getSelectedItem() + ":"
+					+ cbSTSecondes.getSelectionModel().getSelectedItem();
+			try {
+				startDateTimeMeasurement = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
+			} catch (DateTimeParseException e) {
+				String message = "Impossible de parser la date. [dateTime=" + dateTime + "]";
+				throw new BusinessException(message, e);
+			}
+		} else {
+			String message = "Veuillez selectionner tous les champs de la date de début de mesure";
+			throw new BusinessException(message);
 		}
 
 		return startDateTimeMeasurement;
@@ -154,14 +177,18 @@ public class TemporalSpatialParam extends VBox implements Initializable {
 
 	public LocalDateTime getEndDateTimeMeasurment() throws BusinessException {
 
-		LocalDateTime startDateTimeMeasurement = this
-				.getStartDateTimeMeasurment();
-
-		LocalDateTime endDateTimeMeasurment = startDateTimeMeasurement
-				.plusDays(Long.parseLong(cbDDays.getSelectionModel().getSelectedItem()))
-				.plusHours(Long.parseLong(cbDHours.getSelectionModel().getSelectedItem()))
-				.plusMinutes(Long.parseLong(cbDMinutes.getSelectionModel().getSelectedItem()))
-				.plusSeconds(Long.parseLong(cbDSeconds.getSelectionModel().getSelectedItem()));
+		LocalDateTime endDateTimeMeasurment = null;
+		if (isEndDateTimeSelected()) {
+			LocalDateTime startDateTimeMeasurement = this.getStartDateTimeMeasurment();
+			endDateTimeMeasurment = startDateTimeMeasurement
+					.plusDays(Long.parseLong(cbDDays.getSelectionModel().getSelectedItem()))
+					.plusHours(Long.parseLong(cbDHours.getSelectionModel().getSelectedItem()))
+					.plusMinutes(Long.parseLong(cbDMinutes.getSelectionModel().getSelectedItem()))
+					.plusSeconds(Long.parseLong(cbDSeconds.getSelectionModel().getSelectedItem()));
+		} else {
+			String message = "Veuillez selectionner tous les champs de la date de fin de mesure";
+			throw new BusinessException(message);
+		}
 
 		return endDateTimeMeasurment;
 	}

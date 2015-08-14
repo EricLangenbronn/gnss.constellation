@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import fr.gnss.constellation.controller.Visibility?>
+<?import fr.gnss.constellation.*?>
+
+
 <?import fr.gnss.constellation.controller.Parameters?>
+<?import fr.gnss.constellation.controller.Visibility?>
+
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="420.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gnss.constellation.controller.Main">
    <children>
@@ -28,7 +34,13 @@
             </TabPane>
          </center>
          <bottom>
-            <ProgressBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER" />
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="23.0" prefWidth="680.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="userInfo" prefHeight="23.0" prefWidth="340.0" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <ProgressBar fx:id="progressBar" prefHeight="23.0" prefWidth="340.0" progress="0.0" />
+               </children>
+            </HBox>
          </bottom>
       </BorderPane>
    </children>

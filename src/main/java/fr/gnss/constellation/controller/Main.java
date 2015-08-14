@@ -5,7 +5,8 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
 public class Main implements Initializable {
 
@@ -14,6 +15,12 @@ public class Main implements Initializable {
 
 	@FXML
 	Visibility visibility;
+	
+	@FXML
+	Label userInfo;
+	
+	@FXML
+	ProgressBar progressBar;
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		

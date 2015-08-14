@@ -14,6 +14,7 @@ import fr.gnss.constellation.librairy.almanach.sp3.Sp3FileReader;
 import fr.gnss.constellation.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.librairy.coordinate.GeodeticCoordinate;
+import fr.gnss.constellation.librairy.coordinate.SphericalCoordinate;
 import fr.gnss.constellation.service.TraitementPositions;
 
 public class TestTraitementPosition {
@@ -29,11 +30,10 @@ public class TestTraitementPosition {
 		CartesianCoordinate3D satelite = new CartesianCoordinate3D(
 				-12110.343226, -13482.507392, -19488.380856);
 
-		double[] angle = TraitementPositions.processElevationAzimut(stationGeo,
+		SphericalCoordinate sphere = TraitementPositions.processSphericalCoordinate(stationGeo,
 				stationCar, satelite);
 
-		System.out.println("angle : " + angle[0] + ", " + angle[1] + ", "
-				+ angle[2]);
+		System.out.println("angle : " + sphere);
 
 	}
 

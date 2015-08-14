@@ -18,6 +18,7 @@ import fr.gnss.constellation.librairy.almanach.sp3.Sp3FileReader;
 import fr.gnss.constellation.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.librairy.coordinate.GeodeticCoordinate;
+import fr.gnss.constellation.librairy.coordinate.SphericalCoordinate;
 
 public class TraitementPositions {
 
@@ -28,7 +29,7 @@ public class TraitementPositions {
 	 * @param satelite
 	 * @return norme, élévation, azimut
 	 */
-	public static double[] processElevationAzimut(GeodeticCoordinate gStation,
+	public static SphericalCoordinate processSphericalCoordinate(GeodeticCoordinate gStation,
 			CartesianCoordinate3D station, CartesianCoordinate3D satelite) {
 
 		CartesianCoordinate3D enuStationSatelite = CoordinateFunction
@@ -54,7 +55,7 @@ public class TraitementPositions {
 			angles[2] = -1;
 		}
 
-		return angles;
+		return new SphericalCoordinate(angles);
 	}
 
 	public static CartesianCoordinate3D getCoordinateToPositionAndClock(
@@ -71,12 +72,12 @@ public class TraitementPositions {
 		for(Entry<LocalDateTime, List<PositionAndClockRecord>> e: fileSatelite) {
 			List<PositionAndClockRecord> tmpSatVisible = new ArrayList<>();
 			for(PositionAndClockRecord p : e.getValue()) {
-				double[] angles = TraitementPositions.processElevationAzimut(
+				SphericalCoordinate sphCoord = TraitementPositions.processSphericalCoordinate(
 						gStation, CoordinateFunction
 								.geodeticToCartesian(gStation),
 						TraitementPositions
 								.getCoordinateToPositionAndClock(p));
-				if ((angles[1] >= 0.2617) && (angles[1] < (3.1415 / 2))) {
+				if ((sphCoord.getInclination() >= 0.2617) && (sphCoord.getInclination() < (3.1415 / 2))) {
 					tmpSatVisible.add(p);
 				}
 			}
