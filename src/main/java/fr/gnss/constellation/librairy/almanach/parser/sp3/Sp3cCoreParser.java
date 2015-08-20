@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,14 @@ public class Sp3cCoreParser extends AbstractCoreParser implements
 		Sp3ICoreParser {
 
 	private static final long END_HEADER = 1342;
+	
+	private LocalDateTime startMeasure;
+	private int numberOfSat;
 
-	public Sp3cCoreParser(FileReader p_fr) throws TechnicalException {
+	public Sp3cCoreParser(FileReader p_fr, LocalDateTime p_startMeasure, int p_nbSat) throws TechnicalException {
 		super(p_fr);
+		startMeasure = p_startMeasure;
+		numberOfSat = p_nbSat;
 	}
 
 	@Override
@@ -101,5 +107,20 @@ public class Sp3cCoreParser extends AbstractCoreParser implements
 		res.add(new SimpleEntry<LocalDateTime, List<PositionAndClockRecord>>(clock, lstPositionAndClockRecord));
 		
 		return res;
+	}
+
+	@Override
+	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord(final LocalDateTime start,
+			final LocalDateTime end) throws TechnicalException, BusinessException {
+		
+		LocalDateTime wrapStart = start.plusSeconds(0); // tips to copy date
+		while(wrapStart.compareTo(end) < 0) {
+			
+			
+			wrapStart = wrapStart.plusMinutes(NB_MIN_MEASURE);
+		}
+		
+		
+		return null;
 	}
 }

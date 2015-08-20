@@ -2,10 +2,7 @@ package fr.gnss.constellation.librairy.almanach.parser.sp3;
 
 import java.io.FileReader;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import fr.gnss.constellation.Exception.BusinessException;
@@ -41,6 +38,13 @@ public class Sp3aCoreParser extends AbstractCoreParser implements
 		 * 
 		 * }
 		 */
+		return null;
+	}
+
+	@Override
+	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord(LocalDateTime start,
+			LocalDateTime end) throws TechnicalException, BusinessException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -1,18 +1,13 @@
 package fr.gnss.constellation.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
-import com.sun.corba.se.spi.orbutil.fsm.State;
-
-import javafx.geometry.Pos;
-import fr.gnss.constellation.librairy.almanach.parser.sp3.Sp3Parser;
+import fr.gnss.constellation.Exception.BusinessException;
+import fr.gnss.constellation.Exception.TechnicalException;
 import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
 import fr.gnss.constellation.librairy.almanach.sp3.Sp3FileReader;
 import fr.gnss.constellation.librairy.coordinate.CartesianCoordinate3D;
@@ -65,7 +60,7 @@ public class TraitementPositions {
 	}
 
 	public static List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getSateliteVisble(
-			Sp3FileReader sp3FileParser, GeodeticCoordinate gStation) throws Exception {
+			Sp3FileReader sp3FileParser, GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
 		
 		List<Entry<LocalDateTime, List<PositionAndClockRecord>>> fileSatelite = sp3FileParser.getPositionAndClockRecord();
 		List<Entry<LocalDateTime, List<PositionAndClockRecord>>> sateliteVisible = new ArrayList<>();
@@ -83,29 +78,14 @@ public class TraitementPositions {
 			}
 			sateliteVisible.add(new SimpleEntry<LocalDateTime, List<PositionAndClockRecord>>(e.getKey(), tmpSatVisible));
 		}
-		
-		/*
-		Map<LocalDateTime, List<PositionAndClockRecord>> sateliteVisible = new HashMap<LocalDateTime, List<PositionAndClockRecord>>();
-		for (LocalDateTime localDateTime : map.keySet()) {
-			sateliteVisible.put(localDateTime,
-					new ArrayList<PositionAndClockRecord>());
-
-			List<PositionAndClockRecord> lpos = map.get(localDateTime);
-			for (PositionAndClockRecord pos : lpos) {
-				double[] angles = TraitementPositions.processElevationAzimut(
-						gStation, CoordinateFunction
-								.geodeticToCartesian(gStation),
-						TraitementPositions
-								.getCoordinateToPositionAndClock(pos));
-				if ((angles[1] >= 0.2617) && (angles[1] < (3.1415 / 2))) {
-					sateliteVisible.get(localDateTime).add(pos);
-				}
-			}
-		}
-		*/
-
+	
 		return sateliteVisible;
 
+	}
+	
+	public static void getSatelieVisible(Sp3FileReader sp3FileReader) throws TechnicalException, BusinessException
+	{
+		
 	}
 
 	public static void afficheSateliteVisible(

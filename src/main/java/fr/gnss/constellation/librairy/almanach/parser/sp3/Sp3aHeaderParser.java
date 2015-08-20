@@ -2,15 +2,11 @@ package fr.gnss.constellation.librairy.almanach.parser.sp3;
 
 import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.gnss.constellation.Exception.BusinessException;
 import fr.gnss.constellation.Exception.TechnicalException;
 import fr.gnss.constellation.librairy.almanach.parser.AbstractHeaderParser;
-import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
 
 public class Sp3aHeaderParser extends AbstractHeaderParser implements
 		Sp3IHeaderParser {

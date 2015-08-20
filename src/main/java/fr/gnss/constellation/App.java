@@ -2,9 +2,6 @@ package fr.gnss.constellation;
 
 import java.io.IOException;
 
-import fr.gnss.constellation.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.librairy.coordinate.CoordinateFunction;
-import fr.gnss.constellation.librairy.coordinate.GeodeticCoordinate;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

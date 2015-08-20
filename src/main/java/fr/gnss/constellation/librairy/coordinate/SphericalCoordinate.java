@@ -33,7 +33,7 @@ public class SphericalCoordinate {
 		position[1] = theta;
 		position[2] = phi;
 		
-		validate();
+		//validate();
 	}
 	
 	public SphericalCoordinate(double... p) {
@@ -45,7 +45,7 @@ public class SphericalCoordinate {
 
 		position = Arrays.copyOf(p, 3);
 		
-		validate();
+		//validate();
 	}
 
 	public SphericalCoordinate(SphericalCoordinate p) {
@@ -55,7 +55,7 @@ public class SphericalCoordinate {
 		position[1] = p.getInclination();
 		position[2] = p.getAzimuth();
 		
-		validate();
+		//validate();
 	}
 	
 	/**

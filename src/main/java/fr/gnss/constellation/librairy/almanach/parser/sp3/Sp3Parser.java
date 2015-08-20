@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -30,13 +29,11 @@ public class Sp3Parser {
 		this.loadParser(sp3File);
 	}
 
-	private void loadParser(File sp3File) throws TechnicalException,
-			BusinessException {
+	private void loadParser(File sp3File) throws TechnicalException, BusinessException {
 
 		if (sp3File.exists() && sp3File.isFile()) {
 			try {
-				RandomAccessFile sp3HeaderReader = new RandomAccessFile(
-						sp3File, "r");
+				RandomAccessFile sp3HeaderReader = new RandomAccessFile(sp3File, "r");
 				FileReader sp3CoreReader = new FileReader(sp3File);
 				byte[] cbuf = new byte[2];
 
@@ -44,7 +41,8 @@ public class Sp3Parser {
 				if (cbuf[0] == '#' && (cbuf[1] == 'c' || cbuf[1] == 'a')) {
 					if (cbuf[1] == 'c') {
 						sp3HeaderParser = new Sp3cHeaderParser(sp3HeaderReader);
-						sp3CoreParser = new Sp3cCoreParser(sp3CoreReader);
+						sp3CoreParser = new Sp3cCoreParser(sp3CoreReader, sp3HeaderParser.getStartEpochRecord(),
+								sp3HeaderParser.getNumber0fSats());
 						if (LOGGER.isDebugEnabled()) {
 							LOGGER.debug("Parser type c. [cbuf=" + cbuf + "]");
 						}
@@ -57,8 +55,7 @@ public class Sp3Parser {
 						}
 					}
 				} else {
-					String message = "La version n'est pas reconnu. [version="
-							+ cbuf.toString() + "]";
+					String message = "La version n'est pas reconnu. [version=" + cbuf.toString() + "]";
 					throw new BusinessException(message);
 				}
 
@@ -67,8 +64,7 @@ public class Sp3Parser {
 				throw new TechnicalException(message);
 			}
 		} else {
-			String message = "Impossible d'acceder au fichier [sp3File="
-					+ sp3File.getAbsolutePath() + "] [exists="
+			String message = "Impossible d'acceder au fichier [sp3File=" + sp3File.getAbsolutePath() + "] [exists="
 					+ sp3File.exists() + ", isFile=" + sp3File.isFile() + "]";
 			throw new BusinessException(message);
 		}
@@ -144,6 +140,11 @@ public class Sp3Parser {
 
 	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
 			throws TechnicalException, BusinessException {
+		return sp3CoreParser.getPositionAndClockRecord();
+	}
+
+	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord(LocalDateTime start,
+			LocalDateTime end) throws TechnicalException, BusinessException {
 		return sp3CoreParser.getPositionAndClockRecord();
 	}
 }
