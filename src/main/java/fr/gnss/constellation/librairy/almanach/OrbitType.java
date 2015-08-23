@@ -5,10 +5,9 @@ import fr.gnss.constellation.Exception.BusinessException;
 public enum OrbitType {
 	clk, cls, erp, sp3, sum;
 
-	public static OrbitType stringToOrbitTypeType(String p_type) throws Exception {
+	public static OrbitType stringToOrbitTypeType(String p_type) throws BusinessException {
 		if (p_type == null) {
-			String message = "Le type de l'orbite doit être renseigné. [type="
-					+ p_type + "]";
+			String message = "Le type de l'orbite doit être renseigné. [type=" + p_type + "]";
 			throw new BusinessException(message);
 		}
 
@@ -36,8 +35,8 @@ public enum OrbitType {
 			break;
 		default:
 			throw new BusinessException(
-					"Le paramètre ne peut pas être convertit en OrbitType,  OrbitType inexistant [type="
-							+ p_type + "]");
+					"Le paramètre ne peut pas être convertit en OrbitType,  OrbitType inexistant [type=" + p_type
+							+ "]");
 		}
 
 		return l_res;

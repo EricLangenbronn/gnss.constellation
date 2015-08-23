@@ -1,7 +1,9 @@
 package fr.gnss.constellation.controller;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -9,10 +11,11 @@ import java.util.ResourceBundle;
 
 import fr.gnss.constellation.Exception.BusinessException;
 import fr.gnss.constellation.Exception.TechnicalException;
-import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
+import fr.gnss.constellation.librairy.almanach.sp3.Satelite;
 import fr.gnss.constellation.librairy.almanach.sp3.Sp3FileReader;
 import fr.gnss.constellation.librairy.coordinate.GeodeticCoordinate;
-import fr.gnss.constellation.service.TraitementPositions;
+import fr.gnss.constellation.service.ConfigurationService;
+import fr.gnss.constellation.service.ExecutionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,8 +40,10 @@ public class MainController implements Initializable {
 	@FXML
 	ProgressBar progressBar;
 
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	private ConfigurationService configService;
 
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		configService = new ConfigurationService();
 	}
 
 	public void setUserInfo(String message) {
@@ -62,14 +67,11 @@ public class MainController implements Initializable {
 
 			String fileName = getClass().getResource("/Sp3File/igs17720.sp3").getFile();
 			Sp3FileReader sp3FileParser = new Sp3FileReader(fileName);
-			List<Entry<LocalDateTime, List<PositionAndClockRecord>>> visibleSatelite = new ArrayList<>();
-			while (true) {
-				try {
-					visibleSatelite.addAll(TraitementPositions.getSateliteVisble(sp3FileParser, gStation));
-				} catch (BusinessException e) {
-					break;
-				}
-			}
+			List<Entry<LocalDateTime, List<Satelite>>> visibleSatelite = new ArrayList<>();
+			LocalDateTime start = LocalDateTime.parse("2013-12-22T10:00", DateTimeFormatter.ISO_DATE_TIME);
+			LocalDateTime end = LocalDateTime.parse("2013-12-22T14:00", DateTimeFormatter.ISO_DATE_TIME);
+
+			visibleSatelite = configService.getSateliteVisiblePeriod(start, end, sp3FileParser, gStation);
 
 			visibility.cleanSeries();
 			visibility.setSeries(visibleSatelite);

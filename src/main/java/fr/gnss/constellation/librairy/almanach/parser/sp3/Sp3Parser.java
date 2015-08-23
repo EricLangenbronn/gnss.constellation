@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 
 import fr.gnss.constellation.Exception.BusinessException;
 import fr.gnss.constellation.Exception.TechnicalException;
-import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
+import fr.gnss.constellation.librairy.almanach.sp3.Satelite;
 
 public class Sp3Parser {
 
@@ -138,13 +138,13 @@ public class Sp3Parser {
 		return sp3HeaderParser.getTimeSystem();
 	}
 
-	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
+	public List<Entry<LocalDateTime, List<Satelite>>> getPositionAndClockRecordAll()
 			throws TechnicalException, BusinessException {
-		return sp3CoreParser.getPositionAndClockRecord();
+		return null; // sp3CoreParser.getPositionAndClockRecord();
 	}
 
-	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord(LocalDateTime start,
+	public List<Entry<LocalDateTime, List<Satelite>>> getPositionAndClockRecord(LocalDateTime start,
 			LocalDateTime end) throws TechnicalException, BusinessException {
-		return sp3CoreParser.getPositionAndClockRecord();
+		return sp3CoreParser.getPeriodOfPosition(start, end);
 	}
 }

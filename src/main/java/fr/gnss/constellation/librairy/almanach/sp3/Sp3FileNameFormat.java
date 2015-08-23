@@ -1,6 +1,7 @@
 package fr.gnss.constellation.librairy.almanach.sp3;
 
 import fr.gnss.constellation.Exception.BusinessException;
+import fr.gnss.constellation.Exception.TechnicalException;
 import fr.gnss.constellation.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.librairy.almanach.OrbitType;
 
@@ -13,22 +14,20 @@ public class Sp3FileNameFormat {
 	private OrbitType orbitType; // Orbit, other extensions are clk,cls,erp,sum
 	private String compressType; // Z Files are Unix compressed
 
-	public Sp3FileNameFormat(String p_fileName) throws Exception {
+	public Sp3FileNameFormat(String p_fileName) throws BusinessException {
 		this.parseFileName(p_fileName);
 	}
 
-	private void parseFileName(String p_fileName) throws Exception {
+	private void parseFileName(String p_fileName) throws BusinessException {
 		if (p_fileName == null || p_fileName.isEmpty()) {
-			String message = "Le nom du fichier doit être renseigné. [fileName="
-					+ p_fileName + "]";
+			String message = "Le nom du fichier doit être renseigné. [fileName=" + p_fileName + "]";
 			throw new BusinessException(message);
 		}
 
 		try {
 			String[] l_fileName = p_fileName.split("\\.");
 
-			ephemerideType = EphemerideType
-					.stringToEphemerideType(l_fileName[0].substring(0, 3));
+			ephemerideType = EphemerideType.stringToEphemerideType(l_fileName[0].substring(0, 3));
 			gpsWeek = Integer.parseInt(l_fileName[0].substring(3, 7));
 			day = Integer.parseInt(l_fileName[0].substring(7, 8));
 
@@ -44,8 +43,7 @@ public class Sp3FileNameFormat {
 				compressType = l_fileName[2];
 			}
 		} catch (NumberFormatException e) {
-			String l_message = "Impossible de parser le nom du fichier. [fileName="
-					+ p_fileName + "]";
+			String l_message = "Impossible de parser le nom du fichier. [fileName=" + p_fileName + "]";
 			throw new BusinessException(l_message, e);
 		}
 	}
@@ -84,9 +82,7 @@ public class Sp3FileNameFormat {
 
 	@Override
 	public String toString() {
-		return "Sp3FileNameFormat [ephemerideType=" + ephemerideType
-				+ ", gpsWeek=" + gpsWeek + ", day=" + day + ", hour=" + hour
-				+ ", orbitType=" + orbitType + ", compressType=" + compressType
-				+ "]";
+		return "Sp3FileNameFormat [ephemerideType=" + ephemerideType + ", gpsWeek=" + gpsWeek + ", day=" + day
+				+ ", hour=" + hour + ", orbitType=" + orbitType + ", compressType=" + compressType + "]";
 	}
 }

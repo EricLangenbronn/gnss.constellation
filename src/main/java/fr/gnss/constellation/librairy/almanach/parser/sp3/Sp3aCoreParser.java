@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import fr.gnss.constellation.Exception.BusinessException;
 import fr.gnss.constellation.Exception.TechnicalException;
 import fr.gnss.constellation.librairy.almanach.parser.AbstractCoreParser;
-import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
+import fr.gnss.constellation.librairy.almanach.sp3.Satelite;
 
 public class Sp3aCoreParser extends AbstractCoreParser implements
 		Sp3ICoreParser {
@@ -24,25 +24,14 @@ public class Sp3aCoreParser extends AbstractCoreParser implements
 	}
 
 	@Override
-	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
+	public Entry<LocalDateTime, List<Satelite>> getPositionAndClockRecord()
 			throws TechnicalException, BusinessException {
 		// TODO Auto-generated method stub
-		/*
-		 * List<PositionAndClockRecord> lstPositionAndClockRecord = new
-		 * ArrayList<PositionAndClockRecord>();
-		 * 
-		 * // * 15 minutes * 60 secondes = 900 seconde int section = (int)
-		 * (epochRecord.toSecondOfDay() / 900.0);
-		 * 
-		 * int nbSatelites = 32; for (int i = 0; i < nbSatelites; ++i) {
-		 * 
-		 * }
-		 */
 		return null;
 	}
 
 	@Override
-	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord(LocalDateTime start,
+	public List<Entry<LocalDateTime, List<Satelite>>> getPeriodOfPosition(LocalDateTime start,
 			LocalDateTime end) throws TechnicalException, BusinessException {
 		// TODO Auto-generated method stub
 		return null;

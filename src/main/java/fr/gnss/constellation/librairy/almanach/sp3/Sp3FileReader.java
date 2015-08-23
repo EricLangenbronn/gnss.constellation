@@ -24,12 +24,12 @@ public class Sp3FileReader {
 		parser = new Sp3Parser(fl);
 	}
 
-	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
+	public List<Entry<LocalDateTime, List<Satelite>>> getPositionAndClockRecordAll()
 			throws TechnicalException, BusinessException {
-		return parser.getPositionAndClockRecord();
+		return parser.getPositionAndClockRecordAll();
 	}
 	
-	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord(LocalDateTime start, LocalDateTime end)
+	public List<Entry<LocalDateTime, List<Satelite>>> getPositionAndClockRecord(LocalDateTime start, LocalDateTime end)
 			throws TechnicalException, BusinessException {
 		return parser.getPositionAndClockRecord(start, end);
 	}

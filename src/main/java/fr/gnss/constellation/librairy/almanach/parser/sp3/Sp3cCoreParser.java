@@ -15,7 +15,7 @@ import java.util.Objects;
 import fr.gnss.constellation.Exception.BusinessException;
 import fr.gnss.constellation.Exception.TechnicalException;
 import fr.gnss.constellation.librairy.almanach.parser.AbstractCoreParser;
-import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
+import fr.gnss.constellation.librairy.almanach.sp3.Satelite;
 
 public class Sp3cCoreParser extends AbstractCoreParser implements
 		Sp3ICoreParser {
@@ -42,7 +42,7 @@ public class Sp3cCoreParser extends AbstractCoreParser implements
 		}
 	}
 
-	private PositionAndClockRecord splitLine(String line)
+	private Satelite splitLine(String line)
 			throws BusinessException {
 		Objects.requireNonNull(line);
 
@@ -57,7 +57,7 @@ public class Sp3cCoreParser extends AbstractCoreParser implements
 		double z = Double.parseDouble(line.substring(32, 46).trim());
 		double clock = Double.parseDouble(line.substring(46, 60).trim());
 
-		PositionAndClockRecord res = new PositionAndClockRecord(vehicleId, x,
+		Satelite res = new Satelite(vehicleId, x,
 				y, z);
 
 		return res;
@@ -87,15 +87,14 @@ public class Sp3cCoreParser extends AbstractCoreParser implements
 		return clock;
 	}
 
-	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord()
+	public Entry<LocalDateTime, List<Satelite>> getPositionAndClockRecord()
 			throws TechnicalException, BusinessException {
-		List<PositionAndClockRecord> lstPositionAndClockRecord = new ArrayList<>();
+		List<Satelite> lstPositionAndClockRecord = new ArrayList<>();
 
 		LocalDateTime clock = null;
-		int nbSatelites = 32;
 		try {
 			clock = splitClockLine(readLine()); // On passe la clock
-			for (int i = 0; i < nbSatelites; ++i) {
+			for (int i = 0; i < numberOfSat; ++i) {
 				lstPositionAndClockRecord.add(splitLine(readLine()));
 			}
 		} catch (NoSuchElementException e) {
@@ -103,24 +102,33 @@ public class Sp3cCoreParser extends AbstractCoreParser implements
 			throw new BusinessException(message, e);
 		}
 
-		List<Entry<LocalDateTime, List<PositionAndClockRecord>>> res = new ArrayList<>();
-		res.add(new SimpleEntry<LocalDateTime, List<PositionAndClockRecord>>(clock, lstPositionAndClockRecord));
+	
 		
-		return res;
+		return new SimpleEntry<LocalDateTime, List<Satelite>>(clock, lstPositionAndClockRecord);
 	}
 
 	@Override
-	public List<Entry<LocalDateTime, List<PositionAndClockRecord>>> getPositionAndClockRecord(final LocalDateTime start,
+	public List<Entry<LocalDateTime, List<Satelite>>> getPeriodOfPosition(final LocalDateTime start,
 			final LocalDateTime end) throws TechnicalException, BusinessException {
 		
+		List<Entry<LocalDateTime, List<Satelite>>> res = new ArrayList<>();
+		
+		LocalDateTime wrapStartMeasure = startMeasure.plusSeconds(0);
+		while(wrapStartMeasure.compareTo(start) < 0) {
+			for(int i = 0; i < numberOfSat; ++i) {
+				readLine();//position sat
+			}
+			readLine();//position de la clock
+			wrapStartMeasure = wrapStartMeasure.plusMinutes(NB_MIN_MEASURE);
+		}
+		//debut acquisition des données
 		LocalDateTime wrapStart = start.plusSeconds(0); // tips to copy date
 		while(wrapStart.compareTo(end) < 0) {
-			
+			res.add(getPositionAndClockRecord());
 			
 			wrapStart = wrapStart.plusMinutes(NB_MIN_MEASURE);
 		}
 		
-		
-		return null;
+		return res;
 	}
 }

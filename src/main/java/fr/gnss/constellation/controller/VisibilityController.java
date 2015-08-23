@@ -10,7 +10,7 @@ import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
-import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
+import fr.gnss.constellation.librairy.almanach.sp3.Satelite;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,9 +41,9 @@ public class VisibilityController extends VBox implements Initializable {
 
 	}
 
-	public void setSeries(List<Entry<LocalDateTime, List<PositionAndClockRecord>>> visibleSatelite) {
+	public void setSeries(List<Entry<LocalDateTime, List<Satelite>>> visibleSatelite) {
 		XYChart.Series<String, Integer> series = new XYChart.Series<>();
-		for (Entry<LocalDateTime, List<PositionAndClockRecord>> e : visibleSatelite) {
+		for (Entry<LocalDateTime, List<Satelite>> e : visibleSatelite) {
 			String date = e.getKey().format(DateTimeFormatter.ofPattern("HH:mm", new Locale("fr")));
 
 			series.getData().add(new XYChart.Data<String, Integer>(date, e.getValue().size()));

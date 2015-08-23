@@ -9,13 +9,13 @@ import java.util.Map.Entry;
 import org.junit.Test;
 
 import fr.gnss.constellation.Exception.BusinessException;
-import fr.gnss.constellation.librairy.almanach.sp3.PositionAndClockRecord;
+import fr.gnss.constellation.librairy.almanach.sp3.Satelite;
 import fr.gnss.constellation.librairy.almanach.sp3.Sp3FileReader;
 import fr.gnss.constellation.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.librairy.coordinate.SphericalCoordinate;
-import fr.gnss.constellation.service.TraitementPositions;
+import fr.gnss.constellation.service.ExecutionService;
 
 public class TestTraitementPosition {
 
@@ -30,7 +30,8 @@ public class TestTraitementPosition {
 		CartesianCoordinate3D satelite = new CartesianCoordinate3D(
 				-12110.343226, -13482.507392, -19488.380856);
 
-		SphericalCoordinate sphere = TraitementPositions.processSphericalCoordinate(stationGeo,
+		ExecutionService exec = new ExecutionService();
+		SphericalCoordinate sphere = exec.processSphericalCoordinate(stationGeo,
 				stationCar, satelite);
 
 		System.out.println("angle : " + sphere);
@@ -48,9 +49,10 @@ public class TestTraitementPosition {
 
 		while (true) {
 			try {
-				List<Entry<LocalDateTime, List<PositionAndClockRecord>>> map = TraitementPositions
-						.getSateliteVisble(fileReader, gStation);
-				TraitementPositions.afficheSateliteVisible(map);
+				ExecutionService exec = new ExecutionService();
+				List<Entry<LocalDateTime, List<Satelite>>> map = exec
+						.getSateliteVisbleAll(fileReader, gStation);
+				exec.afficheSateliteVisible(map);
 			} catch (BusinessException e) {
 				System.out.println("end of file");
 				break;

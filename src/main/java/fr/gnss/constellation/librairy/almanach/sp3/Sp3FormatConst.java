@@ -9,6 +9,6 @@ public class Sp3FormatConst {
 	public int sampleInterval = 15;
 	
 	static {
-		 firstEpochRecord = LocalDate.parse("1980-01-06", DateTimeFormatter.ISO_INSTANT);
+		 firstEpochRecord = LocalDate.parse("1980-01-06", DateTimeFormatter.ISO_DATE);
 	}
 }

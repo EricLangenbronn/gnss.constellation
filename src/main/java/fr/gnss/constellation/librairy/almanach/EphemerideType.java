@@ -6,7 +6,7 @@ public enum EphemerideType {
 	igl, igr, igs, igu;
 
 	public static EphemerideType stringToEphemerideType(String type)
-			throws Exception {
+			throws BusinessException {
 		if (type == null) {
 			String message = "Le type de l'orbite doit être renseigné. [type="
 					+ type + "]";
