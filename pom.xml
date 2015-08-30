@@ -27,9 +27,7 @@
 		<tomcat.version>7.0.34</tomcat.version>
 		<servlet.api.version>3.0.1</servlet.api.version>
 		<jsp.api.version>2.0</jsp.api.version>
-		<weld.version>1.0.1-Final</weld.version>
-		<el.api.version>2.2.2</el.api.version>
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.version>4.2.0.RELEASE</spring.version>
 		<jstl.version>1.2</jstl.version>
 		<struts.jquery.plugin.version>3.7.1</struts.jquery.plugin.version>
 
@@ -118,6 +116,13 @@
 				<version>${spring.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+				<scope>compile</scope>
+			</dependency>
+
 
 			<!-- Servlet & Jsp -->
 			<dependency>

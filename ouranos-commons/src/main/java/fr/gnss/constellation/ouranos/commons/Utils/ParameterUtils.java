@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.commons.Utils;
+package fr.gnss.constellation.ouranos.commons.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

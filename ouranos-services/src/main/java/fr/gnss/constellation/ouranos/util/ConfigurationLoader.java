@@ -7,8 +7,8 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import fr.gnss.constellation.ouranos.commons.Utils.ParameterUtils;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
+import fr.gnss.constellation.ouranos.commons.utils.ParameterUtils;
 
 public class ConfigurationLoader {
 	/**
