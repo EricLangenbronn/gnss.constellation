@@ -15,6 +15,10 @@
 			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-commons</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>fr.gnss.constellation.ouranos</groupId>
+			<artifactId>ouranos-services</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
