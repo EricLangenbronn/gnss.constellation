@@ -1,47 +1,52 @@
 package fr.gnss.constellation.ouranos.bean;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
-import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Parameters {
 
-	private LocalDateTime startMeasure;
-	private LocalTime timeOfMeasure;
+	@NotNull
+	@Past
+	@DateTimeFormat(pattern = "dd/mm/yyyy l:MM")
+	private String startMeasure;
+
+	@NotNull
+	@Past
+	@DateTimeFormat(pattern = "HH:MM")
+	private String timeOfMeasure;
+
+	@NotNull
+	@Size(min = 0, max = 90, message = "{elevation.size}")
 	private double elevationMask;
-	private GeodeticCoordinate basePosition;
 
-	public Parameters() {
+	@NotNull
+	@Size(min = -180, max = 180, message = "{longitude.size}")
+	private String longitude;
 
-	}
+	@NotNull
+	@Size(min = -90, max = 90, message = "{latitude.size}")
+	private String latitude;
 
-	public Parameters(LocalDateTime p_startMeasure, GeodeticCoordinate p_basePosition) {
-		this(p_startMeasure, LocalTime.parse("23:45", DateTimeFormatter.ISO_TIME), 15.0, p_basePosition);
-	}
+	@NotNull
+	@Size(min = -11034, max = 8850, message = "{altitude.size}")
+	private String altitude;
 
-	public Parameters(LocalDateTime p_startMeasure, LocalTime p_timeOfMeasure, double p_elevationMask,
-			GeodeticCoordinate p_basePosition) {
-		startMeasure = p_startMeasure;
-		timeOfMeasure = p_timeOfMeasure;
-		elevationMask = p_elevationMask;
-		basePosition = p_basePosition;
-	}
-
-	public LocalDateTime getStartMeasure() {
+	public String getStartMeasure() {
 		return startMeasure;
 	}
 
-	public void setStartMeasure(LocalDateTime startMeasure) {
+	public void setStartMeasure(String startMeasure) {
 		this.startMeasure = startMeasure;
 	}
 
-	public LocalTime getTimeOfMeasure() {
+	public String getTimeOfMeasure() {
 		return timeOfMeasure;
 	}
 
-	public void setTimeOfMeasure(LocalTime timeOfMeasure) {
+	public void setTimeOfMeasure(String timeOfMeasure) {
 		this.timeOfMeasure = timeOfMeasure;
 	}
 
@@ -53,17 +58,35 @@ public class Parameters {
 		this.elevationMask = elevationMask;
 	}
 
-	public GeodeticCoordinate getBasePosition() {
-		return basePosition;
+	public String getLongitude() {
+		return longitude;
 	}
 
-	public void setBasePosition(GeodeticCoordinate basePosition) {
-		this.basePosition = basePosition;
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getAltitude() {
+		return altitude;
+	}
+
+	public void setAltitude(String altitude) {
+		this.altitude = altitude;
 	}
 
 	@Override
 	public String toString() {
 		return "Parameters [startMeasure=" + startMeasure + ", timeOfMeasure=" + timeOfMeasure + ", elevationMask="
-				+ elevationMask + ", basePosition=" + basePosition + "]";
+				+ elevationMask + ", longitude=" + longitude + ", latitude=" + latitude + ", altitude=" + altitude
+				+ "]";
 	}
+
 }

@@ -5,9 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="cache-control" content="no-store" />
+<meta http-equiv="expires" content="0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ouranos</title>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/media/css/bootstrap.min.css" />" />
+
+<jsp:include page="<%=\"layouts/components/css.jsp\"%>" />
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/media/css/bootstrap-datetimepicker.min.css" />" />
 <script type="text/javascript"
@@ -20,29 +25,9 @@
 	src="<c:url value="/resources/media/js/bootstrap.datetimepicker-4.15.35.min.js" />"></script>
 </head>
 <body>
+	<jsp:include page="<%=\"layouts/components/header.jsp\"%>" />
 	<div class="container">
-		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class=" icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Ouranos</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="homepage">Home</a></li>
-					<li class="active"><a href="#">Parameters</a></li>
-					<li><a href="display">Display</a></li>
-					<li><a href="about">About</a></li>
-				</ul>
-			</div>
-		</div>
-		</nav>
+		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
 
 		<div class="jumbotron">
 			<form method="post" action="parameters/register">
@@ -62,8 +47,8 @@
 									<label class="sr-only" for="startDateTime">Start time
 										of measurement</label>
 									<div class="input-group date" id="startDateTime">
-										<input type="text" class="form-control"
-											placeholder="Start time of measurement" /> <span
+										<input type="text" class="form-control" name="startMeasure"
+											placeholder="Start time of measurement" required /> <span
 											class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"> </span>
 										</span>
@@ -77,26 +62,17 @@
 									<label class="col-sm-2 label label-default">Duration :
 									</label>
 								</h3>
-								<div class="col-sm-2">
+								<div class="col-sm-3">
 									<div class="form-group">
 										<label class="sr-only" for="durationInHours">Duration
-											of measure in hours</label> <select class="form-control"
-											id="durationInHours">
-											<option value="">Hours</option>
-											<option value="0">0</option>
-											<option value="1">1</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-sm-2">
-									<div class="form-group">
-										<label class="sr-only" for="durationInMinutes">Duration
-											of measure in minutes</label> <select class="form-control"
-											id="durationInMinutes">
-											<option value="">Minutes</option>
-											<option value="0">0</option>
-											<option value="1">1</option>
-										</select>
+											of measure in hours</label>
+										<div class='input-group date' id='timeOfMeasure'>
+											<input type='text' class="form-control" name="timeOfMeasure"
+												placeholder="Time of measure" required /> <span
+												class="input-group-addon"> <span
+												class="glyphicon glyphicon-time"></span>
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -110,8 +86,9 @@
 								<div class="col-sm-4">
 									<div class="input-group">
 										<div class="input-group-addon">°</div>
-										<input class="form-control" type="text" id="elevationMask" name="elevationMask"
-											placeholder="Elevation mask in degrees" />
+										<input class="form-control" type="text" id="elevationMask"
+											name="elevationMask" placeholder="Elevation mask in degrees"
+											required />
 									</div>
 								</div>
 							</div>
@@ -136,7 +113,7 @@
 											longitude in degrees</label>
 										<div class="input-group-addon">°</div>
 										<input class="form-control" type="text" id="longitude"
-											placeholder="Longitude in degrees" />
+											name="longitude" placeholder="Longitude in degrees" required />
 									</div>
 								</div>
 							</div>
@@ -147,7 +124,7 @@
 											latitude in degrees</label>
 										<div class="input-group-addon">°</div>
 										<input class="form-control" type="text" id="latitude"
-											placeholder="Latitude in degrees" />
+											name="latitude" placeholder="Latitude in degrees" required />
 									</div>
 								</div>
 							</div>
@@ -158,7 +135,7 @@
 											altitude in meters</label>
 										<div class="input-group-addon">m</div>
 										<input class="form-control" type="text" id="altitude"
-											placeholder="Altitude in meters" />
+											name="altitude" placeholder="Altitude in meters" required />
 									</div>
 								</div>
 							</div>
@@ -169,6 +146,7 @@
 					<button type="submit" class="btn btn-lg btn-primary">Execute</button>
 				</div>
 			</form>
+			<jsp:include page="<%=\"layouts/components/footer.jsp\"%>" />
 		</div>
 	</div>
 </body>
@@ -177,6 +155,12 @@
 	$(function() {
 		$('#startDateTime').datetimepicker({
 			viewMode : 'years'
+		});
+	});
+
+	$(function() {
+		$('#timeOfMeasure').datetimepicker({
+			format : 'LT'
 		});
 	});
 </script>

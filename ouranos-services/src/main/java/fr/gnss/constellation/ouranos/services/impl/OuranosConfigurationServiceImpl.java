@@ -15,6 +15,10 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileReader;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.services.OuranosConfigurationService;
+import fr.gnss.constellation.ouranos.services.bean.Parameters;
+import fr.gnss.constellation.ouranos.services.bean.Resultats;
+import fr.gnss.constellation.ouranos.services.dao.ExecutionDao;
+import fr.gnss.constellation.ouranos.services.dao.Sp3Dao;
 
 public class OuranosConfigurationServiceImpl implements OuranosConfigurationService {
 
@@ -24,27 +28,50 @@ public class OuranosConfigurationServiceImpl implements OuranosConfigurationServ
 	private static final Log LOGGER = LogFactory.getLog(OuranosConfigurationServiceImpl.class);
 
 	private OuranosValidationServiceImpl validationService;
-	private OuranosExecutionServiceImpl executionService;
+	private ExecutionDao executionDao;
 
-	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(LocalDateTime start, LocalDateTime end,
-			Sp3FileReader sp3FileParser, GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
+	private Sp3Dao sp3Dao;
 
+	/*
+	 * public List<Entry<LocalDateTime, List<Satelite>>>
+	 * getSateliteVisiblePeriod(LocalDateTime start, LocalDateTime end,
+	 * Sp3FileReader sp3FileParser, GeodeticCoordinate gStation) throws
+	 * TechnicalException, BusinessException {
+	 * 
+	 * List<Entry<LocalDateTime, List<Satelite>>> visibleSats = new
+	 * ArrayList<>(); File sp3FileData =
+	 * validationService.isDataForPeriod(start, end); if (sp3FileData != null) {
+	 * visibleSats = executionService.getSateliteVisiblePeriod(start, end,
+	 * sp3FileParser, gStation); } else { String message =
+	 * "Il n'existe pas de données pour la période séléctionnée.";
+	 * LOGGER.info(message); } return visibleSats; }
+	 */
+
+	@Override
+	public void launchExecution(Parameters parameters, Resultats resultat)
+			throws TechnicalException, BusinessException {
 		List<Entry<LocalDateTime, List<Satelite>>> visibleSats = new ArrayList<>();
-		File sp3FileData = validationService.isDataForPeriod(start, end);
+		File sp3FileData = validationService.isDataForPeriod(parameters.getStartOfMeasure(),
+				parameters.getTimeOfMeasure());
 		if (sp3FileData != null) {
-			visibleSats = executionService.getSateliteVisiblePeriod(start, end, sp3FileParser, gStation);
+			visibleSats = executionDao.getSateliteVisiblePeriod(parameters.getStartOfMeasure(),
+					parameters.getTimeOfMeasure(), parameters.getBaseCoordiante());
+			resultat.setVisibleSats(visibleSats);
 		} else {
 			String message = "Il n'existe pas de données pour la période séléctionnée.";
 			LOGGER.info(message);
 		}
-		return visibleSats;
+	}
+
+	public void setSp3Dao(Sp3Dao sp3Dao) {
+		this.sp3Dao = sp3Dao;
+	}
+	
+	public void setExecutionDao(ExecutionDao executionDao) {
+		this.executionDao = executionDao;
 	}
 
 	public void setValidationService(OuranosValidationServiceImpl validationService) {
 		this.validationService = validationService;
-	}
-
-	public void setExecutionService(OuranosExecutionServiceImpl executionService) {
-		this.executionService = executionService;
 	}
 }

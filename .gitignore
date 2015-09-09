@@ -72,5 +72,9 @@ Temporary Items
 # PDT-specific
 .buildpath
 
+# Java binaire
+.class
+.jar
+
 # sbteclipse plugin
 .target

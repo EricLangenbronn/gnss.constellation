@@ -10,19 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/display/*")
 public class DisplayController {
 
-	/*private DisplayRepository displayRepository;*/
+	/* private DisplayRepository displayRepository; */
 
-	/*
-	@Autowired
-	public DisplayController(DisplayRepository p_displayRepository) {
-		displayRepository = p_displayRepository;
-	}
-	*/
-	
 	@RequestMapping(method = GET)
 	public String display(Model model) {
-		/*model.addAttribute(displayRepository.getVisibleSatelite());*/
-		
+
 		return "display";
 	}
 }

@@ -2,39 +2,26 @@
 <%@ page session="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="cache-control" content="no-store" />
+<meta http-equiv="expires" content="0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ouranos</title>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/media/css/bootstrap.min.css" />" >
+
+<jsp:include page="<%=\"layouts/components/css.jsp\"%>" />
 </head>
 <body>
+	<jsp:include page="<%=\"layouts/components/header.jsp\"%>" />
 	<div class="container">
-		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Ouranos</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="parameters">Parameters</a></li>
-					<li><a href="display">Display</a></li>
-					<li><a href="about">About</a></li>
-				</ul>
-			</div>
-		</div>
-		</nav>
+		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
+	
 		<div class="jumbotron"></div>
+		
+		<jsp:include page="<%=\"layouts/components/footer.jsp\"%>" />
 	</div>
-
 </body>
 </html>

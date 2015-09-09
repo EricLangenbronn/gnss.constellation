@@ -23,7 +23,7 @@
 		<commons.logging.version>1.2</commons.logging.version>
 		<ejml.version>0.27</ejml.version>
 
-		<struts2.version>2.3.16</struts2.version>
+		<struts2.version>2.3.24</struts2.version>
 		<tomcat.version>7.0.34</tomcat.version>
 		<servlet.api.version>3.0.1</servlet.api.version>
 		<jsp.api.version>2.0</jsp.api.version>

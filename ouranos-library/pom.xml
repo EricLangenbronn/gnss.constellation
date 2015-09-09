@@ -16,6 +16,10 @@
 			<artifactId>ouranos-commons</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>fr.gnss.constellation.ouranos</groupId>
+			<artifactId>ouranos-library</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 		</dependency>

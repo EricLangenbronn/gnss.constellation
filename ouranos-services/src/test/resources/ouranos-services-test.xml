@@ -7,11 +7,12 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="configurationService"
 		class="fr.gnss.constellation.ouranos.services.impl.OuranosConfigurationServiceImpl">
 		<property name="validationService" ref="validationService"></property>
-		<property name="executionService" ref="executionService"></property>
+		<property name="executionDao" ref="executionDao"></property>
 	</bean>
 
 	<bean id="executionService"
 		class="fr.gnss.constellation.ouranos.services.impl.OuranosExecutionServiceImpl">
+		<property name="configurationService" ref="configurationService"></property>
 	</bean>
 
 	<bean id="validationService"

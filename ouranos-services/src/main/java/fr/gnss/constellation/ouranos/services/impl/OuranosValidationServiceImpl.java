@@ -8,10 +8,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
+import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileNameFormat;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FormatConst;
 import fr.gnss.constellation.ouranos.services.OuranosConfigurationService;
 import fr.gnss.constellation.ouranos.services.OuranosValidationService;
+import fr.gnss.constellation.ouranos.services.dao.Sp3Dao;
 import fr.gnss.constellation.ouranos.util.ConfigurationLoader;
 
 public class OuranosValidationServiceImpl implements OuranosValidationService {
@@ -21,19 +23,13 @@ public class OuranosValidationServiceImpl implements OuranosValidationService {
 	 */
 	private static final Log LOGGER = LogFactory.getLog(OuranosValidationServiceImpl.class);
 
-	private static FilenameFilter filter = new FilenameFilter() {
-		public boolean accept(File directory, String fileName) {
-			return fileName.endsWith(".sp3") || fileName.endsWith(".sp3.Z");
-		}
-	};
+	private Sp3Dao sp3Dao;
 
-	public File isDataForPeriod(LocalDateTime start, LocalDateTime end) throws BusinessException {
+	public File isDataForPeriod(LocalDateTime start, LocalDateTime end) throws TechnicalException, BusinessException {
 
 		File isDataForPeriod = null;
-		File sp3Dir = new File(ConfigurationLoader.getProperty("repertoire.sp3"));
 
-		LOGGER.info("Chargement des données à partir du répertoire : " + sp3Dir.getAbsolutePath());
-		for (File sp3File : sp3Dir.listFiles(filter)) {
+		for (File sp3File : sp3Dao.getListSp3File()) {
 			Sp3FileNameFormat fileNameFormat = new Sp3FileNameFormat(sp3File.getName());
 
 			LocalDateTime startDay = Sp3FormatConst.firstEpochRecord.plusWeeks(fileNameFormat.getGpsWeek())
@@ -47,5 +43,9 @@ public class OuranosValidationServiceImpl implements OuranosValidationService {
 		}
 
 		return isDataForPeriod;
+	}
+
+	public void setSp3Dao(Sp3Dao sp3Dao) {
+		this.sp3Dao = sp3Dao;
 	}
 }
