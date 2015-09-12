@@ -8,7 +8,6 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 		class="fr.gnss.constellation.ouranos.services.impl.OuranosConfigurationServiceImpl">
 		<property name="validationService" ref="validationService"></property>
 		<property name="executionDao" ref="executionDao"></property>
-		<property name="sp3Dao" ref="sp3Dao"></property>
 	</bean>
 
 	<bean id="executionService"
@@ -18,6 +17,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="validationService"
 		class="fr.gnss.constellation.ouranos.services.impl.OuranosValidationServiceImpl">
+		<property name="sp3Dao" ref="sp3Dao"></property>
 	</bean>
 
 </beans>

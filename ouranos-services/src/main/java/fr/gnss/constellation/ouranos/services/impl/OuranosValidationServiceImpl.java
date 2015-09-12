@@ -1,20 +1,18 @@
 package fr.gnss.constellation.ouranos.services.impl;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.time.LocalDateTime;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
+import fr.gnss.constellation.ouranos.dao.Sp3Dao;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileNameFormat;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FormatConst;
-import fr.gnss.constellation.ouranos.services.OuranosConfigurationService;
 import fr.gnss.constellation.ouranos.services.OuranosValidationService;
-import fr.gnss.constellation.ouranos.services.dao.Sp3Dao;
-import fr.gnss.constellation.ouranos.util.ConfigurationLoader;
 
 public class OuranosValidationServiceImpl implements OuranosValidationService {
 

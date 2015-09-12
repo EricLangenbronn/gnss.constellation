@@ -8,15 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import fr.gnss.constellation.ouranos.dao.ExecutionDao;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 import fr.gnss.constellation.ouranos.services.OuranosExecutionService;
-import fr.gnss.constellation.ouranos.services.dao.ExecutionDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/ouranos-services-test.xml" })
+@ContextConfiguration(locations = { "/ouranos-dao-test.xml", "/ouranos-services-test.xml" })
 public class TestTraitementPosition {
 
 	@Autowired

@@ -1,22 +1,22 @@
 package fr.gnss.contellation.ouranos.services;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.gnss.constellation.ouranos.services.OuranosExecutionService;
 import fr.gnss.constellation.ouranos.services.OuranosValidationService;
-import fr.gnss.constellation.ouranos.services.impl.OuranosValidationServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/ouranos-services-test.xml" })
+@ContextConfiguration(locations = { "/ouranos-dao-test.xml", "/ouranos-services-test.xml" })
 public class TestValidationService {
 
 	@Autowired

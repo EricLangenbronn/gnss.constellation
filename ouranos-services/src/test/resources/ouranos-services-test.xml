@@ -17,6 +17,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="validationService"
 		class="fr.gnss.constellation.ouranos.services.impl.OuranosValidationServiceImpl">
+		<property name="sp3Dao" ref="sp3Dao"></property>
 	</bean>
 
 </beans>
