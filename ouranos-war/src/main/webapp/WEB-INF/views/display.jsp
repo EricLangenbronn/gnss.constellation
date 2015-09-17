@@ -14,28 +14,34 @@
 
 <jsp:include page="<%=\"layouts/components/css.jsp\"%>" />
 <script type="text/javascript"
-	src="<c:url value="/resources/media/js/jquery-2.1.4.min.js" />"></script>
+	src="<c:url value="/resources/media/js/libs/jquery-2.1.4.min.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/media/js/highcharts/modules/exporting.js" />"></script>
+	src="<c:url value="/resources/media/js/libs/highcharts/modules/exporting.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/media/js/highcharts/highcharts.js" />"></script>
+	src="<c:url value="/resources/media/js/libs/highcharts/highcharts.js" />"></script>
 </head>
 <body>
 	<jsp:include page="<%=\"layouts/components/header.jsp\"%>" />
 	<div class="container">
 		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
-	
+
 		<div class="jumbotron">
 			<div id="graph"
 				style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-				
+
+			<div id="cand"></div>
+
 			<jsp:include page="<%=\"layouts/components/footer.jsp\"%>" />
 		</div>
 	</div>
 </body>
 </html>
 <script type="text/javascript">
-	$(function() {
+	ouranosCategories = [];
+	ouranosSeries = [];
+	Jsondata = {};
+
+	function afficherGraphe(categorieValues, serieValues) {
 		$('#graph')
 				.highcharts(
 						{
@@ -49,9 +55,7 @@
 								text : ''
 							},
 							xAxis : {
-								categories : [ 'Jan', 'Feb', 'Mar', 'Apr',
-										'May', 'Jun', 'Jul', 'Aug', 'Sep',
-										'Oct', 'Nov', 'Dec' ],
+								categories : categorieValues, // Times
 								crosshair : true
 							},
 							yAxis : {
@@ -63,7 +67,7 @@
 							tooltip : {
 								headerFormat : '<span style="font-size:10px">{point.key}</span><table>',
 								pointFormat : '<tr><td style="color:{series.color};padding:0">{series.name}: </td>'
-										+ '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+										+ '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
 								footerFormat : '</table>',
 								shared : true,
 								useHTML : true
@@ -75,12 +79,34 @@
 								}
 							},
 							series : [ {
-								name : 'Times',
-								data : [ 49.9, 71.5, 106.4, 129.2, 144.0,
-										176.0, 135.6, 148.5, 216.4, 194.1,
-										95.6, 54.4 ]
-
+								name : 'Nb Sat',
+								data : serieValues
 							} ]
 						});
-	});
+	}
+
+	function loadData(data) {
+		Jsondata = data
+		lstObj = Jsondata["visibleSats"];
+		for (var i = 0; i < lstObj.length; i++) {
+			var tuple = lstObj[i];
+
+			ouranosCategories.push(tuple["key"]);
+			ouranosSeries.push(tuple["value"]);
+		}
+
+		afficherGraphe(ouranosCategories, ouranosSeries);
+	}
+
+	$(document).ready(
+			function() {
+				$.getJSON("http://127.0.0.1:8080/ouranos/display/listDateTime",
+						function(data) {
+							loadData(data);
+						});
+			});
+
+	afficherGraphe(ouranosCategories, ouranosSeries);
 </script>
+
+

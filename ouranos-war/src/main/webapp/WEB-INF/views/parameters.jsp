@@ -16,13 +16,13 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/media/css/bootstrap-datetimepicker.min.css" />" />
 <script type="text/javascript"
-	src="<c:url value="/resources/media/js/jquery-2.1.4.min.js" />"></script>
+	src="<c:url value="/resources/media/js/libs/jquery-2.1.4.min.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/media/js/bootstrap.min.js" />"></script>
+	src="<c:url value="/resources/media/js/libs/bootstrap.min.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/media/js/moment-2.10.6.min.js" />"></script>
+	src="<c:url value="/resources/media/js/libs/moment-2.10.6.min.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/media/js/bootstrap.datetimepicker-4.15.35.min.js" />"></script>
+	src="<c:url value="/resources/media/js/libs/bootstrap.datetimepicker-4.15.35.min.js" />"></script>
 </head>
 <body>
 	<jsp:include page="<%=\"layouts/components/header.jsp\"%>" />

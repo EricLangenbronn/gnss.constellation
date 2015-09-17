@@ -8,7 +8,7 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
 
 public class Resultats {
 
-	List<Entry<LocalDateTime, List<Satelite>>> visibleSats;
+	private List<Entry<LocalDateTime, List<Satelite>>> visibleSats;
 
 	public Resultats() {
 		super();
@@ -26,5 +26,4 @@ public class Resultats {
 	public void setVisibleSats(List<Entry<LocalDateTime, List<Satelite>>> visibleSats) {
 		this.visibleSats = visibleSats;
 	}
-
 }

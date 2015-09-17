@@ -26,7 +26,7 @@ public class ParameterUtils {
 			URL url = ClassLoader.getSystemResource(propsName);
 			props.load(url.openStream());
 		} catch (Exception e) {
-			String message = "";
+			String message = "Impossible de charger le properities à partir du classpath [propsName=" + propsName + "]";
 			throw new TechnicalException(message, e);
 		}
 		return props;
@@ -46,7 +46,7 @@ public class ParameterUtils {
 			props.load(fis);
 			fis.close();
 		} catch (IOException ex) {
-			String message = "";
+			String message = "Impossible de charger le fichier de properties [propsFile=" + propsFile + "]";
 			throw new TechnicalException(message, ex);
 		}
 		return props;

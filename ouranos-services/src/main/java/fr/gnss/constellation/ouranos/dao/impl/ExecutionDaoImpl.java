@@ -36,11 +36,12 @@ public class ExecutionDaoImpl implements ExecutionDao {
 		double normeProjectionStaSat = Math
 				.sqrt(Math.pow(enuStationSatelite.X(), 2) + Math.pow(enuStationSatelite.Y(), 2));
 
-		angles[0] = normeProjectionStaSat; // Angle d'élévation angles[1] =
-		Math.atan(normeProjectionStaSat / enuStationSatelite.Z());
+		angles[0] = normeProjectionStaSat;
+		// Angle d'élévation
+		angles[1] = Math.atan(normeProjectionStaSat / enuStationSatelite.Z());
 
-		// Angle azimute angles[2] =
-		CoordinateFunction.getAzimut(enuStationSatelite.X(), enuStationSatelite.Y());
+		// Angle azimute
+		angles[2] = CoordinateFunction.getAzimut(enuStationSatelite.X(), enuStationSatelite.Y());
 
 		if (angles[1] < 0) {
 			angles[0] = -1;
@@ -72,10 +73,10 @@ public class ExecutionDaoImpl implements ExecutionDao {
 
 	}
 
-	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(LocalDateTime start, LocalDateTime end,
-			GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
+	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(Sp3FileReader sp3FileParser,
+			LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
+					throws TechnicalException, BusinessException {
 
-		Sp3FileReader sp3FileParser = new Sp3FileReader("");
 		List<Entry<LocalDateTime, List<Satelite>>> fileSatelite = sp3FileParser.getPositionAndClockRecord(start, end);
 		List<Entry<LocalDateTime, List<Satelite>>> sateliteVisible = new ArrayList<>();
 		for (Entry<LocalDateTime, List<Satelite>> e : fileSatelite) {
@@ -89,6 +90,7 @@ public class ExecutionDaoImpl implements ExecutionDao {
 			}
 			sateliteVisible.add(new SimpleEntry<LocalDateTime, List<Satelite>>(e.getKey(), tmpSatVisible));
 		}
+		afficheSateliteVisible(sateliteVisible);
 
 		return sateliteVisible;
 

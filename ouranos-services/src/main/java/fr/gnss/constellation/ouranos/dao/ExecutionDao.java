@@ -17,6 +17,7 @@ public interface ExecutionDao {
 	public SphericalCoordinate processSphericalCoordinate(GeodeticCoordinate gStation, CartesianCoordinate3D station,
 			CartesianCoordinate3D satelite);
 
-	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(LocalDateTime start, LocalDateTime end,
-			GeodeticCoordinate gStation) throws TechnicalException, BusinessException;
+	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(Sp3FileReader sp3FileParser,
+			LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
+					throws TechnicalException, BusinessException;
 }

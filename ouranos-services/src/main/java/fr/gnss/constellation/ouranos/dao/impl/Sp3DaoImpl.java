@@ -33,6 +33,7 @@ public class Sp3DaoImpl implements Sp3Dao {
 		List<String> sp3FileNames = new ArrayList<>();
 
 		for (File sp3File : fileSp3Dir.listFiles(filter)) {
+			LOGGER.info("Chargement fichier : " + sp3File.getName());
 			sp3FileNames.add(sp3File.getName());
 		}
 
@@ -47,6 +48,7 @@ public class Sp3DaoImpl implements Sp3Dao {
 		List<File> sp3FileNames = new ArrayList<>();
 
 		for (File sp3File : fileSp3Dir.listFiles(filter)) {
+			LOGGER.info("Chargement fichier : " + sp3File.getName());
 			sp3FileNames.add(sp3File);
 		}
 

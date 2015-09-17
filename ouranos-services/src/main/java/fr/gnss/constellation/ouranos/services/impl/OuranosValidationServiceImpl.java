@@ -35,7 +35,8 @@ public class OuranosValidationServiceImpl implements OuranosValidationService {
 			LocalDateTime endDay = startDay.plusHours(23).plusMinutes(59);
 
 			if ((start.isEqual(startDay) || start.isAfter(startDay)) && (end.isEqual(endDay) || end.isBefore(endDay))) {
-				LOGGER.info("Il existe des données pour la période séléctionnée.");
+				LOGGER.info(
+						"Il existe des données pour la période séléctionnée. [start=" + start + ", end=" + end + "]");
 				isDataForPeriod = sp3File;
 			}
 		}

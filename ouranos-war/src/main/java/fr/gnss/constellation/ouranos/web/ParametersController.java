@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.gnss.constellation.ouranos.bean.Parameters;
+import fr.gnss.constellation.ouranos.model.Resultats;
 import fr.gnss.constellation.ouranos.services.OuranosExecutionService;
 import fr.gnss.constellation.ouranos.wrapper.WrapperParameters;
 
@@ -27,11 +28,12 @@ public class ParametersController {
 	public String processRegistration(Parameters parameters) {
 		try {
 			executionService.setParameters(WrapperParameters.wrapperParameter(parameters));
+			executionService.setResultats(new Resultats());
 			executionService.launchExecution();
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();	
 		}
-		return "redirect:/display/" + parameters.getElevationMask();
+		return "redirect:/display";
 	}
 
 	public void setExecutionService(OuranosExecutionService executionService) {

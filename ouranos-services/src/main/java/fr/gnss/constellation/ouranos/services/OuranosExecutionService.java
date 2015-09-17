@@ -9,7 +9,9 @@ public interface OuranosExecutionService {
 
 	public void setParameters(Parameters parameters);
 
-	public Resultats getResultat();
+	public void setResultats(Resultats resultats);
+
+	public Resultats getResultats();
 
 	public void launchExecution() throws TechnicalException, BusinessException;
 }

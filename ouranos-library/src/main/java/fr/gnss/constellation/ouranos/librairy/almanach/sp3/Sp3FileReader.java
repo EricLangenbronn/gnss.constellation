@@ -15,8 +15,7 @@ public class Sp3FileReader {
 	private Sp3Parser parser;
 
 	public Sp3FileReader(File p_file) throws TechnicalException, BusinessException {
-		fl = new File(p_file, "r");
-		parser = new Sp3Parser(fl);
+		parser = new Sp3Parser(p_file);
 	}
 
 	public Sp3FileReader(String p_fileName) throws TechnicalException, BusinessException {

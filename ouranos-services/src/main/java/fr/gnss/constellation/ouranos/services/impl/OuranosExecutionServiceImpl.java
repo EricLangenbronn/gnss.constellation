@@ -2,7 +2,6 @@ package fr.gnss.constellation.ouranos.services.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
@@ -33,8 +32,12 @@ public class OuranosExecutionServiceImpl implements OuranosExecutionService {
 
 	}
 
+	public void setResultats(Resultats resultat) {
+		this.resultat = resultat;
+	}
+
 	@Override
-	public Resultats getResultat() {
+	public Resultats getResultats() {
 		return resultat;
 	}
 
