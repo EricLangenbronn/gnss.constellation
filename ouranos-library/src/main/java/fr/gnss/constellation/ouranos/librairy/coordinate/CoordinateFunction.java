@@ -1,5 +1,7 @@
 package fr.gnss.constellation.ouranos.librairy.coordinate;
 
+import java.util.Objects;
+
 import org.ejml.simple.SimpleMatrix;
 
 public class CoordinateFunction {
@@ -15,8 +17,7 @@ public class CoordinateFunction {
 
 	public static double[] degreeToRadian(double degree[]) {
 		if (degree.length != 3) {
-			throw new IllegalArgumentException(
-					"Une position doit posséder trois valeurs");
+			throw new IllegalArgumentException("Une position doit posséder trois valeurs");
 		}
 
 		double[] radian = new double[3];
@@ -29,8 +30,7 @@ public class CoordinateFunction {
 
 	public static double[] radianToDegree(double[] radian) {
 		if (radian.length != 3) {
-			throw new IllegalArgumentException(
-					"Une position doit posséder trois valeurs");
+			throw new IllegalArgumentException("Une position doit posséder trois valeurs");
 		}
 
 		double[] degree = new double[3];
@@ -48,18 +48,14 @@ public class CoordinateFunction {
 	 * @return
 	 */
 	public static CartesianCoordinate3D geodeticToCartesian(GeodeticCoordinate cg) {
+		Objects.requireNonNull(cg, "GeodeticCoordinate");
 
 		double e = (2.0 - CoordinateFunction.f) * CoordinateFunction.f;
-		double N = CoordinateFunction.a
-				/ Math.sqrt(1.0 - e * Math.sin(cg.getLatitude())
-						* Math.sin(cg.getLatitude()));
+		double N = CoordinateFunction.a / Math.sqrt(1.0 - e * Math.sin(cg.getLatitude()) * Math.sin(cg.getLatitude()));
 
-		double x = (N + cg.getAltitude()) * Math.cos(cg.getLatitude())
-				* Math.cos(cg.getLongitude());
-		double y = (N + cg.getAltitude()) * Math.cos(cg.getLatitude())
-				* Math.sin(cg.getLongitude());
-		double z = ((N * (1 - Math.pow(e, 2))) + cg.getAltitude())
-				* Math.sin(cg.getLatitude());
+		double x = (N + cg.getAltitude()) * Math.cos(cg.getLatitude()) * Math.cos(cg.getLongitude());
+		double y = (N + cg.getAltitude()) * Math.cos(cg.getLatitude()) * Math.sin(cg.getLongitude());
+		double z = ((N * (1 - Math.pow(e, 2))) + cg.getAltitude()) * Math.sin(cg.getLatitude());
 
 		CartesianCoordinate3D cc = new CartesianCoordinate3D(x, y, z);
 
@@ -82,12 +78,13 @@ public class CoordinateFunction {
 	 * @param lambda
 	 *            (en radian)
 	 */
-	public static CartesianCoordinate3D transformECEFtoENU(double phi,
-			double lambda, CartesianCoordinate3D satelite,
+	public static CartesianCoordinate3D transformECEFtoENU(double phi, double lambda, CartesianCoordinate3D satelite,
 			CartesianCoordinate3D station) {
+		Objects.requireNonNull(satelite, "CartesianCoordinate3D");
+		Objects.requireNonNull(station, "CartesianCoordinate3D");
 
-		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(
-				satelite.normalized(), station.normalized());
+		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(satelite.normalized(),
+				station.normalized());
 
 		double[][] matriceData2 = new double[1][3];
 		matriceData2[0][0] = stationSatelite.X();
@@ -112,8 +109,7 @@ public class CoordinateFunction {
 
 		SimpleMatrix c = b.mult(a);
 
-		CartesianCoordinate3D res = new CartesianCoordinate3D(c.get(0), c.get(1),
-				c.get(2));
+		CartesianCoordinate3D res = new CartesianCoordinate3D(c.get(0), c.get(1), c.get(2));
 
 		return res;
 

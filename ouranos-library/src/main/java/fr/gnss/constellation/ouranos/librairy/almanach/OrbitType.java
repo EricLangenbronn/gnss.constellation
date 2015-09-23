@@ -1,12 +1,21 @@
 package fr.gnss.constellation.ouranos.librairy.almanach;
 
+import org.apache.commons.lang3.StringUtils;
+
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 
 public enum OrbitType {
 	clk, cls, erp, sp3, sum;
 
+	/**
+	 *  Returns an OrbitType with a value represented by the specified string. 
+	 *  
+	 * @param p_type - the string to be converted
+	 * @return the string representation of the specified OrbitType
+	 * @throws BusinessException - if the string is null, empty or not references
+	 */
 	public static OrbitType stringToOrbitTypeType(String p_type) throws BusinessException {
-		if (p_type == null) {
+		if (StringUtils.isBlank(p_type)) {
 			String message = "Le type de l'orbite doit être renseigné. [type=" + p_type + "]";
 			throw new BusinessException(message);
 		}

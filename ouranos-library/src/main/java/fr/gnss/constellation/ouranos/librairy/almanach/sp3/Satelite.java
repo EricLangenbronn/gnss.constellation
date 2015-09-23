@@ -8,16 +8,37 @@ public class Satelite {
 
 	private CartesianCoordinate3D position;
 
-	public Satelite(String p_vehicleId, double p_xCoordinate,
-			double p_yCoordinate, double p_zCoordinate) {
+	/**
+	 * Initializes a newly created Satelite object.
+	 * 
+	 * @param p_vehicleId
+	 *            - Id of the satelite
+	 * @param p_xCoordinate
+	 *            - x coordinate
+	 * @param p_yCoordinate
+	 *            - y coordinate
+	 * @param p_zCoordinate
+	 *            - z coordinate
+	 */
+	public Satelite(String p_vehicleId, double p_xCoordinate, double p_yCoordinate, double p_zCoordinate) {
 		vehicleId = p_vehicleId;
 		position = new CartesianCoordinate3D(p_xCoordinate, p_yCoordinate, p_zCoordinate);
 	}
-	
+
+	/**
+	 * Get the id of the satelite.
+	 * 
+	 * @return the id of the satelite
+	 */
 	public String getVehicleId() {
 		return vehicleId;
 	}
 
+	/**
+	 * Get the position of the satelite.
+	 * 
+	 * @return the position of the satelite
+	 */
 	public CartesianCoordinate3D getPosition() {
 		return position;
 	}

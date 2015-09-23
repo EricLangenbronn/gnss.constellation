@@ -90,7 +90,6 @@ public class ExecutionDaoImpl implements ExecutionDao {
 			}
 			sateliteVisible.add(new SimpleEntry<LocalDateTime, List<Satelite>>(e.getKey(), tmpSatVisible));
 		}
-		afficheSateliteVisible(sateliteVisible);
 
 		return sateliteVisible;
 

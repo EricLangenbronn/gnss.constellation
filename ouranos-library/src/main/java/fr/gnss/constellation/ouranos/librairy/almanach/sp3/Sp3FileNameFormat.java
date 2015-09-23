@@ -1,5 +1,7 @@
 package fr.gnss.constellation.ouranos.librairy.almanach.sp3;
 
+import org.apache.commons.lang3.StringUtils;
+
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
@@ -13,12 +15,26 @@ public class Sp3FileNameFormat {
 	private OrbitType orbitType; // Orbit, other extensions are clk,cls,erp,sum
 	private String compressType; // Z Files are Unix compressed
 
+	/**
+	 * Initializes a newly created Sp3FileNameFormat object.
+	 * 
+	 * @param p_fileName
+	 *            - A file name string.
+	 * @throws BusinessException
+	 */
 	public Sp3FileNameFormat(String p_fileName) throws BusinessException {
-		this.parseFileName(p_fileName);
+		this.valueOf(p_fileName);
 	}
 
-	private void parseFileName(String p_fileName) throws BusinessException {
-		if (p_fileName == null || p_fileName.isEmpty()) {
+	/**
+	 * Returns the Sp3FileNameFormat representation of the string argument.
+	 * 
+	 * @param p_fileName
+	 *            - a string.
+	 * @throws BusinessException
+	 */
+	private void valueOf(String p_fileName) throws BusinessException {
+		if (StringUtils.isBlank(p_fileName)) {
 			String message = "Le nom du fichier doit être renseigné. [fileName=" + p_fileName + "]";
 			throw new BusinessException(message);
 		}
@@ -47,32 +63,67 @@ public class Sp3FileNameFormat {
 		}
 	}
 
+	/**
+	 * Get the type of the ephemeride.
+	 * 
+	 * @return the type of the ephemeride.
+	 */
 	public EphemerideType getEphemerideType() {
 		return ephemerideType;
 	}
 
+	/**
+	 * Get the number of week from 1980-01-06
+	 * 
+	 * @return the number of GPS week.
+	 */
 	public int getGpsWeek() {
 		return gpsWeek;
 	}
 
+	/**
+	 * Get the day of the week.
+	 * 
+	 * @return the day of the week.
+	 */
 	public int getDay() {
 		return day;
 	}
 
+	/**
+	 * Get the start hour, if EphemeridType is "igu", -1 otherwise.
+	 * 
+	 * @return the start hour.
+	 */
 	public int getHour() {
 		return hour;
 	}
 
+	/**
+	 * Get the orbit type.
+	 * 
+	 * @return the orbit type.
+	 */
 	public OrbitType getOrbitType() {
 		return orbitType;
 	}
 
+	/**
+	 * Get the type of the compression.
+	 * 
+	 * @return the type of the compression.
+	 */
 	public String getCompressType() {
 		return compressType;
 	}
 
+	/**
+	 * Return true if compress, otherwise false.
+	 * 
+	 * @return true if compress, otherwise false.
+	 */
 	public boolean isCompress() {
-		if (compressType == null || compressType.isEmpty()) {
+		if (StringUtils.isBlank(compressType)) {
 			return false;
 		} else {
 			return true;

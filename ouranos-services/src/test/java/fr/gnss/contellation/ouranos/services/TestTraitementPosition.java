@@ -25,7 +25,7 @@ public class TestTraitementPosition {
 	@Test
 	public void testProcessElevationAzimut() {
 		GeodeticCoordinate stationGeo = new GeodeticCoordinate(Math.toRadians(38.889139), Math.toRadians(-77.049),
-				Math.toRadians(130.049));
+				130.049);
 
 		CartesianCoordinate3D stationCar = new CartesianCoordinate3D(
 				CoordinateFunction.geodeticToCartesian(stationGeo));

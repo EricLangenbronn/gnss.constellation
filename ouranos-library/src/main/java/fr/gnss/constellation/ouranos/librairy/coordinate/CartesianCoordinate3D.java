@@ -1,22 +1,36 @@
 package fr.gnss.constellation.ouranos.librairy.coordinate;
 
 import java.util.Arrays;
+import java.util.Objects;
 
+/**
+ * This class implements vectors in a three-dimensional space.
+ */
 public class CartesianCoordinate3D {
 
 	/**
-	 * Position est représenté par un vecteur 3
-	 * 
+	 * [0] - Abscissa. [1] - Ordinate. [2] - Height.
 	 */
 	private double[] position;
 
 	/**
-	 * Création d'un vecteur 3 dont l'origine est le centre de la terre
+	 * Initializes a newly created CartesianCoordinate3D object.
 	 */
 	public CartesianCoordinate3D() {
 		position = new double[3];
 	}
 
+	/**
+	 * Constructs a newly allocated CartesianCoordinate3D object that represents
+	 * the specified double values.
+	 * 
+	 * @param x
+	 *            - abscissa
+	 * @param y
+	 *            - ordinate
+	 * @param z
+	 *            - height
+	 */
 	public CartesianCoordinate3D(double x, double y, double z) {
 		this();
 		position[0] = x;
@@ -24,6 +38,13 @@ public class CartesianCoordinate3D {
 		position[2] = z;
 	}
 
+	/**
+	 * Constructs a newly allocated CartesianCoordinate3D object that represents
+	 * the specified array of double.
+	 * 
+	 * @param p
+	 *            - coordinates list
+	 */
 	public CartesianCoordinate3D(double... p) {
 		this();
 		if (p.length != 3) {
@@ -34,8 +55,19 @@ public class CartesianCoordinate3D {
 		position = Arrays.copyOf(p, 3);
 	}
 
+	/**
+	 * Initializes a newly created CartesianCoordinate3D object so that it
+	 * represents the same position of CartesianCoordinate3D as the argument; in
+	 * other words, the newly created CartesianCoordinate3D is a copy of the
+	 * argument CartesianCoordinate3D.
+	 * 
+	 * @param p
+	 *            - A CartesianCoordinate3D
+	 */
 	public CartesianCoordinate3D(CartesianCoordinate3D p) {
 		this();
+
+		Objects.requireNonNull(p, "CartesianCoordinate3D");
 
 		position[0] = p.X();
 		position[1] = p.Y();
@@ -44,13 +76,18 @@ public class CartesianCoordinate3D {
 	}
 
 	/**
-	 * Soustraction de deux vecteurs : v2 - v1
+	 * Subtract a CartesianCoordinate3D from the other. (v2 - v1)
+	 * 
 	 * @param v1
+	 *            - CartesianCoordinate3D to subtract
 	 * @param v2
-	 * @return
+	 *            -
+	 * @return the specified new CartesianCoordinate3D
 	 */
-	public static CartesianCoordinate3D minus(CartesianCoordinate3D v1,
-			CartesianCoordinate3D v2) {
+	public static CartesianCoordinate3D minus(CartesianCoordinate3D v1, CartesianCoordinate3D v2) {
+		Objects.requireNonNull(v1, "CartesianCoordinate3D");
+		Objects.requireNonNull(v2, "CartesianCoordinate3D");
+
 		double x = v2.X() - v1.X();
 		double y = v2.Y() - v1.Y();
 		double z = v2.Z() - v2.Z();
@@ -59,17 +96,16 @@ public class CartesianCoordinate3D {
 	}
 
 	/**
-	 * Longeur du vecteur courant.
+	 * Get the norm of the instance.
 	 * 
-	 * @return
+	 * @return the norm of the instance.
 	 */
 	public double magnitude() {
-		return Math.sqrt(Math.pow(position[0], 2) + Math.pow(position[1], 2)
-				+ Math.pow(position[2], 2));
+		return Math.sqrt(Math.pow(position[0], 2) + Math.pow(position[1], 2) + Math.pow(position[2], 2));
 	}
 
 	/**
-	 * Transformation du vecteur courant en vecteur unitaire. v.norme() = 1
+	 * Normalized CartesianCoordinate3D of the instance.
 	 */
 	public void normalize() {
 		double norme = this.magnitude();
@@ -81,10 +117,9 @@ public class CartesianCoordinate3D {
 	}
 
 	/**
-	 * Crée un nouveau vecteur identique au vecteur courant, transformation du
-	 * vecteur crée en vecteur untaire.
+	 * Get a normalized vector aligned with the instance.
 	 * 
-	 * @return
+	 * @return a new normalized CartesianCoordinate3D
 	 */
 	public CartesianCoordinate3D normalized() {
 		CartesianCoordinate3D res = new CartesianCoordinate3D(this);
@@ -93,34 +128,54 @@ public class CartesianCoordinate3D {
 	}
 
 	/**
-	 * Produit scalaire de deux vecteurs.
+	 * Compute the dot-product of the instance with an other
+	 * CartesianCoordinate3D.
 	 * 
 	 * @param c
-	 * @return
+	 *            - A CartesianCoordinate3D
+	 * @return the dot product
 	 */
 	public double dotProduct(CartesianCoordinate3D c) {
-		return position[0] * c.X() + position[1] * c.Y()
-				+ position[2] * c.Z();
+		Objects.requireNonNull(c, "CartesianCoordinate3D");
+		return position[0] * c.X() + position[1] * c.Y() + position[2] * c.Z();
 	}
 
 	/**
-	 * Calcul de l'angle entre deux vecteurs. Angle en degré.
+	 * Compute the angular separation of the instance with an other
+	 * CartesianCoordinate3D.
 	 * 
 	 * @param c
-	 * @return
+	 *            - A CartesianCoordinate3D
+	 * @return angular separation of the instance with c
 	 */
 	public double angle(CartesianCoordinate3D c) {
+		Objects.requireNonNull(c, "CartesianCoordinate3D");
 		return Math.acos(this.dotProduct(c) / (this.magnitude() * c.magnitude()));
 	}
 
+	/**
+	 * Get the abscissa of the vector.
+	 * 
+	 * @return the abscissa of the vector
+	 */
 	public double X() {
 		return position[0];
 	}
 
+	/**
+	 * Get the ordinate of the vector.
+	 * 
+	 * @return the ordinate of the vector
+	 */
 	public double Y() { // profondeur
 		return position[1];
 	}
 
+	/**
+	 * Get the height of the vector.
+	 * 
+	 * @return the height of the vector
+	 */
 	public double Z() {
 		return position[2];
 	}
@@ -133,8 +188,7 @@ public class CartesianCoordinate3D {
 
 		if (obj instanceof CartesianCoordinate3D) {
 			CartesianCoordinate3D anotherPosition = (CartesianCoordinate3D) obj;
-			if ((this.X() == anotherPosition.X())
-					&& (this.Y() == anotherPosition.Y())
+			if ((this.X() == anotherPosition.X()) && (this.Y() == anotherPosition.Y())
 					&& (this.Z() == anotherPosition.Z())) {
 				return true;
 			}
@@ -145,7 +199,6 @@ public class CartesianCoordinate3D {
 
 	@Override
 	public String toString() {
-		return "CoordinateCartesian [position=" + Arrays.toString(position)
-				+ "]";
+		return "CoordinateCartesian [position=" + Arrays.toString(position) + "]";
 	}
 }
