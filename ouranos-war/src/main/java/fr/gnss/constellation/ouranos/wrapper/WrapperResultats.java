@@ -9,7 +9,7 @@ import fr.gnss.constellation.ouranos.model.Resultats;
 
 public class WrapperResultats {
 
-	public static fr.gnss.constellation.ouranos.bean.Resultats wrapperResultats(Resultats res) {
+	public static fr.gnss.constellation.ouranos.bean.Resultats wrapperResultatsVisibility(Resultats res) {
 		fr.gnss.constellation.ouranos.bean.Resultats wrappeRes = new fr.gnss.constellation.ouranos.bean.Resultats();
 
 		for (Entry<LocalDateTime, List<Satelite>> elem : res.getVisibleSats()) {

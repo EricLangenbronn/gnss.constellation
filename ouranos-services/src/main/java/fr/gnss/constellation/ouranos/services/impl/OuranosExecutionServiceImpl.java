@@ -20,20 +20,23 @@ public class OuranosExecutionServiceImpl implements OuranosExecutionService {
 	private OuranosConfigurationService configurationService;
 	private Parameters parameters;
 	private Resultats resultat;
+	private boolean processComplet = false;
 
 	@Override
 	public void launchExecution() throws TechnicalException, BusinessException {
-		configurationService.launchExecution(parameters, resultat);
+		if (parameters == null) {
+			String message = "Le parametrage est null [parameters=null]";
+			throw new BusinessException(message);
+		} else {
+			resultat = new Resultats();
+			configurationService.launchExecution(parameters, resultat);
+			processComplet = true;
+		}
 	}
 
 	@Override
 	public void setParameters(Parameters parameters) {
 		this.parameters = parameters;
-
-	}
-
-	public void setResultats(Resultats resultat) {
-		this.resultat = resultat;
 	}
 
 	@Override
@@ -41,7 +44,18 @@ public class OuranosExecutionServiceImpl implements OuranosExecutionService {
 		return resultat;
 	}
 
+	@Override
+	public void setProcessComplet(boolean processComplet) {
+		this.processComplet = processComplet;
+	}
+
+	@Override
+	public boolean isProcessComplet() {
+		return processComplet;
+	}
+
 	public void setConfigurationService(OuranosConfigurationService configurationService) {
 		this.configurationService = configurationService;
 	}
+
 }

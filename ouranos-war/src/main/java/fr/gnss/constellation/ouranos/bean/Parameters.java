@@ -10,14 +10,13 @@ public class Parameters {
 
 	@NotNull
 	@Past
-	@DateTimeFormat(pattern = "dd/mm/yyyy l:MM")
-	private String startMeasure;
+	@DateTimeFormat(pattern = "dd/mm/yyyy l:MM a")
+	private String startOfMeasure;
 
 	@NotNull
 	@Past
-	@DateTimeFormat(pattern = "HH:MM")
-	private String timeOfMeasure;
-
+	@DateTimeFormat(pattern = "dd/mm/yyyy l:MM a")
+	private String endOfMeasure;
 	@NotNull
 	@Size(min = 0, max = 90, message = "{elevation.size}")
 	private double elevationMask;
@@ -34,20 +33,20 @@ public class Parameters {
 	@Size(min = -11034, max = 8850, message = "{altitude.size}")
 	private String altitude;
 
-	public String getStartMeasure() {
-		return startMeasure;
+	public String getStartOfMeasure() {
+		return startOfMeasure;
 	}
 
-	public void setStartMeasure(String startMeasure) {
-		this.startMeasure = startMeasure;
+	public void setStartOfMeasure(String startMeasure) {
+		this.startOfMeasure = startMeasure;
 	}
 
-	public String getTimeOfMeasure() {
-		return timeOfMeasure;
+	public String getEndOfMeasure() {
+		return endOfMeasure;
 	}
 
-	public void setTimeOfMeasure(String timeOfMeasure) {
-		this.timeOfMeasure = timeOfMeasure;
+	public void setEndOfMeasure(String endMeasure) {
+		this.endOfMeasure = endMeasure;
 	}
 
 	public double getElevationMask() {
@@ -84,7 +83,7 @@ public class Parameters {
 
 	@Override
 	public String toString() {
-		return "Parameters [startMeasure=" + startMeasure + ", timeOfMeasure=" + timeOfMeasure + ", elevationMask="
+		return "Parameters [startMeasure=" + startOfMeasure + ", endOfMeasure=" + endOfMeasure + ", elevationMask="
 				+ elevationMask + ", longitude=" + longitude + ", latitude=" + latitude + ", altitude=" + altitude
 				+ "]";
 	}

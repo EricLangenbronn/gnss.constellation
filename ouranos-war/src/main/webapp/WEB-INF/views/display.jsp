@@ -13,6 +13,8 @@
 <title>Ouranos</title>
 
 <jsp:include page="<%=\"layouts/components/css.jsp\"%>" />
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/resources/media/css/display.css" />">
 <script type="text/javascript"
 	src="<c:url value="/resources/media/js/libs/jquery-2.1.4.min.js" />"></script>
 <script type="text/javascript"
@@ -26,7 +28,13 @@
 		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
 
 		<div class="jumbotron">
-			<div id="graph"
+			<div class="alert alert-danger" style="display: none" role="alert"></div>
+
+			<div id="iconLoading" class="text-center">
+				<span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+			</div>
+
+			<div id="graph" style="display: none"
 				style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 			<div id="cand"></div>
@@ -37,76 +45,65 @@
 </body>
 </html>
 <script type="text/javascript">
-	ouranosCategories = [];
-	ouranosSeries = [];
-	Jsondata = {};
+	var ouranosCategories = [];
+	var ouranosSeries = [];
+	var Jsondata = {};
+
+	var dureeTimer = parseInt('1000');
+	var timerVisibilty = setInterval(appelJson, dureeTimer);
 
 	function afficherGraphe(categorieValues, serieValues) {
-		$('#graph')
-				.highcharts(
-						{
-							chart : {
-								type : 'column'
-							},
-							title : {
-								text : 'Visibility'
-							},
-							subtitle : {
-								text : ''
-							},
-							xAxis : {
-								categories : categorieValues, // Times
-								crosshair : true
-							},
-							yAxis : {
-								min : 0,
-								title : {
-									text : 'Number of satelites'
-								}
-							},
-							tooltip : {
-								headerFormat : '<span style="font-size:10px">{point.key}</span><table>',
-								pointFormat : '<tr><td style="color:{series.color};padding:0">{series.name}: </td>'
-										+ '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-								footerFormat : '</table>',
-								shared : true,
-								useHTML : true
-							},
-							plotOptions : {
-								column : {
-									pointPadding : 0.2,
-									borderWidth : 0
-								}
-							},
-							series : [ {
-								name : 'Nb Sat',
-								data : serieValues
-							} ]
-						});
+		$('#iconLoading').hide();
+		$('#graph').show();
+
+		$('#graph').highcharts({
+			chart : {
+				type : 'column'
+			},
+			title : {
+				text : 'Visibility'
+			},
+			subtitle : {
+				text : ''
+			},
+			xAxis : {
+				categories : categorieValues, // Times
+				crosshair : true
+			},
+			yAxis : {
+				min : 0,
+				title : {
+					text : 'Number of satelites'
+				}
+			},
+			series : [ {
+				name : 'Satelite(s)',
+				data : serieValues
+			} ]
+		});
 	}
 
 	function loadData(data) {
 		Jsondata = data
 		lstObj = Jsondata["visibleSats"];
-		for (var i = 0; i < lstObj.length; i++) {
-			var tuple = lstObj[i];
+		if (lstObj.length > 0) {
+			for (var i = 0; i < lstObj.length; i++) {
+				var tuple = lstObj[i];
 
-			ouranosCategories.push(tuple["key"]);
-			ouranosSeries.push(tuple["value"]);
+				ouranosCategories.push(tuple["key"]);
+				ouranosSeries.push(tuple["value"]);
+			}
+
+			afficherGraphe(ouranosCategories, ouranosSeries);
+			window.clearInterval(timerVisibilty);
 		}
-
-		afficherGraphe(ouranosCategories, ouranosSeries);
 	}
 
-	$(document).ready(
-			function() {
-				$.getJSON("http://127.0.0.1:8080/ouranos/display/listDateTime",
-						function(data) {
-							loadData(data);
-						});
-			});
-
-	afficherGraphe(ouranosCategories, ouranosSeries);
+	function appelJson() {
+		$.getJSON("<c:url value="/display/visibility" />", function(data) {
+			loadData(data);
+		});
+	}
 </script>
 
 

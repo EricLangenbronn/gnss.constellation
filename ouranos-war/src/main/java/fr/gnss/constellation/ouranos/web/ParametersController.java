@@ -28,7 +28,7 @@ public class ParametersController {
 	public String processRegistration(Parameters parameters) {
 		try {
 			executionService.setParameters(WrapperParameters.wrapperParameter(parameters));
-			executionService.setResultats(new Resultats());
+			executionService.setProcessComplet(false);
 			executionService.launchExecution();
 		} catch (Exception e) {
 			e.printStackTrace();	

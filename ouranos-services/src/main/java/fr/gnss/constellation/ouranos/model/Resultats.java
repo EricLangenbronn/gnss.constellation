@@ -1,6 +1,7 @@
 package fr.gnss.constellation.ouranos.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -12,6 +13,7 @@ public class Resultats {
 
 	public Resultats() {
 		super();
+		visibleSats = new ArrayList<Entry<LocalDateTime, List<Satelite>>>();
 	}
 
 	public Resultats(List<Entry<LocalDateTime, List<Satelite>>> visibleSats) {

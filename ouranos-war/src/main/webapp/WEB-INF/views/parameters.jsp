@@ -47,7 +47,7 @@
 									<label class="sr-only" for="startDateTime">Start time
 										of measurement</label>
 									<div class="input-group date" id="startDateTime">
-										<input type="text" class="form-control" name="startMeasure"
+										<input type="text" class="form-control" name="startOfMeasure"
 											placeholder="Start time of measurement" required /> <span
 											class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"> </span>
@@ -59,18 +59,18 @@
 						<div class="row">
 							<div class="form-group">
 								<h3>
-									<label class="col-sm-2 label label-default">Duration :
-									</label>
+									<label class="col-sm-2 label label-default" for="endDateTime">End
+										Time : </label>
 								</h3>
-								<div class="col-sm-3">
+								<div class="col-sm-4">
 									<div class="form-group">
-										<label class="sr-only" for="durationInHours">Duration
-											of measure in hours</label>
-										<div class='input-group date' id='timeOfMeasure'>
-											<input type='text' class="form-control" name="timeOfMeasure"
-												placeholder="Time of measure" required /> <span
+										<label class="sr-only" for="endDateTime">End time of
+											measurement</label>
+										<div class='input-group date' id='endDateTime'>
+											<input type='text' class="form-control" name="endOfMeasure"
+												placeholder="End time of measurement" required /> <span
 												class="input-group-addon"> <span
-												class="glyphicon glyphicon-time"></span>
+												class="glyphicon glyphicon-calendar"></span>
 											</span>
 										</div>
 									</div>
@@ -159,8 +159,22 @@
 	});
 
 	$(function() {
-		$('#timeOfMeasure').datetimepicker({
-			format : 'LT'
+		$('#endDateTime').datetimepicker({
+			viewMode : 'years'
 		});
 	});
+
+	$(function() {
+		$('#startDateTime').datetimepicker();
+		$('#endDateTime').datetimepicker({
+			useCurrent : false
+		//Important! See issue #1075
+		});
+		$("#startDateTime").on("dp.change", function(e) {
+			$('#endDateTime').data("DateTimePicker").minDate(e.date);
+		});
+		$("#endDateTime").on("dp.change", function(e) {
+			$('#startDateTime').data("DateTimePicker").maxDate(e.date);
+		});
+	});			
 </script>

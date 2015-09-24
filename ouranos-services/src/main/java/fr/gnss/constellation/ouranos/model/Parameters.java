@@ -8,13 +8,13 @@ public class Parameters {
 
 	private GeodeticCoordinate baseCoordiante;
 	private LocalDateTime startOfMeasure;
-	private LocalDateTime timeOfMeasure;
+	private LocalDateTime endOfMeasure;
 
-	public Parameters(GeodeticCoordinate baseCoordiante, LocalDateTime startOfMeasure, LocalDateTime timeOfMeasure) {
+	public Parameters(GeodeticCoordinate baseCoordiante, LocalDateTime startOfMeasure, LocalDateTime endOfMeasure) {
 		super();
 		this.baseCoordiante = baseCoordiante;
 		this.startOfMeasure = startOfMeasure;
-		this.timeOfMeasure = timeOfMeasure;
+		this.endOfMeasure = endOfMeasure;
 	}
 
 	public GeodeticCoordinate getBaseCoordiante() {
@@ -25,8 +25,8 @@ public class Parameters {
 		return startOfMeasure;
 	}
 
-	public LocalDateTime getTimeOfMeasure() {
-		return timeOfMeasure;
+	public LocalDateTime getEndOfMeasure() {
+		return endOfMeasure;
 	}
 
 }

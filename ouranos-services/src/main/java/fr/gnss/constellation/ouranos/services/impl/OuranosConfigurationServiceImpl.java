@@ -34,16 +34,16 @@ public class OuranosConfigurationServiceImpl implements OuranosConfigurationServ
 			throws TechnicalException, BusinessException {
 		List<Entry<LocalDateTime, List<Satelite>>> visibleSats = new ArrayList<>();
 		File sp3FileData = validationService.isDataForPeriod(parameters.getStartOfMeasure(),
-				parameters.getTimeOfMeasure());
+				parameters.getEndOfMeasure());
 
 		if (sp3FileData != null) {
 			Sp3FileReader sp3FileParser = new Sp3FileReader(sp3FileData);
 			visibleSats = executionDao.getSateliteVisiblePeriod(sp3FileParser, parameters.getStartOfMeasure(),
-					parameters.getTimeOfMeasure(), parameters.getBaseCoordiante());
+					parameters.getEndOfMeasure(), parameters.getBaseCoordiante());
 			resultat.setVisibleSats(visibleSats);
 		} else {
 			String message = "Il n'existe pas de données pour la période séléctionnée. [start="
-					+ parameters.getStartOfMeasure() + ", end=" + parameters.getTimeOfMeasure() + "]";
+					+ parameters.getStartOfMeasure() + ", end=" + parameters.getEndOfMeasure() + "]";
 			LOGGER.info(message);
 		}
 	}
