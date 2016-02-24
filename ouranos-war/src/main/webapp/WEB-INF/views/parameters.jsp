@@ -28,9 +28,15 @@
 	<jsp:include page="<%=\"layouts/components/header.jsp\"%>" />
 	<div class="container">
 		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
+		
+		<div id="success" name="success"><c:out value="${success}" /></div>
+		<div id="success1" name="success1">${success}</div>
 
 		<div class="jumbotron">
+			
+		
 			<form method="post" action="parameters/register">
+
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h2 class="panel-title" align="center">Temporal and spatial
@@ -176,5 +182,5 @@
 		$("#endDateTime").on("dp.change", function(e) {
 			$('#startDateTime').data("DateTimePicker").maxDate(e.date);
 		});
-	});			
+	});
 </script>

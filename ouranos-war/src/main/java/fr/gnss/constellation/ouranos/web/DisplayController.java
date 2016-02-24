@@ -2,6 +2,8 @@ package fr.gnss.constellation.ouranos.web;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,11 @@ import fr.gnss.constellation.ouranos.wrapper.WrapperResultats;
 @Controller
 @RequestMapping(value = "/display")
 public class DisplayController {
+
+	/**
+	 * Le logger de la classe.
+	 */
+	private static final Log LOGGER = LogFactory.getLog(DisplayController.class);
 
 	@Autowired
 	private OuranosExecutionService executionService;

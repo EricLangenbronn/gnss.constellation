@@ -28,7 +28,7 @@
 		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
 
 		<div class="jumbotron">
-			<div class="alert alert-danger" style="display: none" role="alert"></div>
+			<div id="errorMessage" class="alert alert-danger" style="display: none" role="alert"></div>
 
 			<div id="iconLoading" class="text-center">
 				<span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
@@ -45,65 +45,72 @@
 </body>
 </html>
 <script type="text/javascript">
-	var ouranosCategories = [];
-	var ouranosSeries = [];
-	var Jsondata = {};
+var ouranosCategories = [];
+var ouranosSeries = [];
+var Jsondata = {};
 
-	var dureeTimer = parseInt('1000');
-	var timerVisibilty = setInterval(appelJson, dureeTimer);
+var dureeTimer = parseInt('1000');
+var timerVisibilty = setInterval(appelJson, dureeTimer);
 
-	function afficherGraphe(categorieValues, serieValues) {
-		$('#iconLoading').hide();
-		$('#graph').show();
+function afficherGraphe(categorieValues, serieValues) {
+	$('#iconLoading').hide();
+	$('#graph').show();
 
-		$('#graph').highcharts({
-			chart : {
-				type : 'column'
-			},
+	$('#graph').highcharts({
+		chart : {
+			type : 'column'
+		},
+		title : {
+			text : 'Visibility'
+		},
+		subtitle : {
+			text : ''
+		},
+		xAxis : {
+			categories : categorieValues, // Times
+			crosshair : true
+		},
+		yAxis : {
+			min : 0,
 			title : {
-				text : 'Visibility'
-			},
-			subtitle : {
-				text : ''
-			},
-			xAxis : {
-				categories : categorieValues, // Times
-				crosshair : true
-			},
-			yAxis : {
-				min : 0,
-				title : {
-					text : 'Number of satelites'
-				}
-			},
-			series : [ {
-				name : 'Satelite(s)',
-				data : serieValues
-			} ]
-		});
-	}
-
-	function loadData(data) {
-		Jsondata = data
-		lstObj = Jsondata["visibleSats"];
-		if (lstObj.length > 0) {
-			for (var i = 0; i < lstObj.length; i++) {
-				var tuple = lstObj[i];
-
-				ouranosCategories.push(tuple["key"]);
-				ouranosSeries.push(tuple["value"]);
+				text : 'Number of satelites'
 			}
+		},
+		series : [ {
+			name : 'Satelite(s)',
+			data : serieValues
+		} ]
+	});
+}
 
-			afficherGraphe(ouranosCategories, ouranosSeries);
-			window.clearInterval(timerVisibilty);
+function loadData(data) {
+	Jsondata = data
+	lstObj = Jsondata["visibleSats"];
+	if (lstObj.length > 0) {
+		for (var i = 0; i < lstObj.length; i++) {
+			var tuple = lstObj[i];
+
+			ouranosCategories.push(tuple["key"]);
+			ouranosSeries.push(tuple["value"]);
 		}
-	}
 
-	function appelJson() {
-		$.getJSON("<c:url value="/display/visibility" />", function(data) {
-			loadData(data);
-		});
+		afficherGraphe(ouranosCategories, ouranosSeries);
+		window.clearInterval(timerVisibilty);
 	}
+	else
+	{
+		window.clearInterval(timerVisibilty);
+		$('#iconLoading').hide();
+		$('#errorMessage').show();
+		$('#errorMessage').text("Oups !, pas de satelite visble pour ces paramètres.");
+	}
+}
+
+function appelJson() {
+	$.getJSON("<c:url value="/display/visibility" />", function(data) {
+		loadData(data);
+	});
+}
 </script>
 
 

@@ -3,6 +3,7 @@ package fr.gnss.constellation.ouranos.dao.impl;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -30,12 +31,13 @@ public class Sp3DaoImpl implements Sp3Dao {
 	public List<String> getListSp3FileName() throws TechnicalException, BusinessException {
 		String pathSp3Dir = ConfigurationLoader.getProperty("repertoire.sp3");
 		File fileSp3Dir = new File(pathSp3Dir);
-		List<String> sp3FileNames = new ArrayList<>();
+		List<String> sp3FileNames = Arrays.asList(fileSp3Dir.list(filter));
 
+		/*
 		for (File sp3File : fileSp3Dir.listFiles(filter)) {
 			LOGGER.info("Chargement fichier : " + sp3File.getName());
 			sp3FileNames.add(sp3File.getName());
-		}
+		}*/
 
 		return sp3FileNames;
 	}
@@ -56,3 +58,4 @@ public class Sp3DaoImpl implements Sp3Dao {
 	}
 
 }
+

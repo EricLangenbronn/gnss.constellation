@@ -1,10 +1,19 @@
 package fr.gnss.constellation.ouranos.services.impl;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
+import fr.gnss.constellation.ouranos.dao.ExecutionDao;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileReader;
 import fr.gnss.constellation.ouranos.model.Parameters;
 import fr.gnss.constellation.ouranos.model.Resultats;
 import fr.gnss.constellation.ouranos.services.OuranosConfigurationService;
@@ -18,20 +27,38 @@ public class OuranosExecutionServiceImpl implements OuranosExecutionService {
 	private static final Log LOGGER = LogFactory.getLog(OuranosExecutionServiceImpl.class);
 
 	private OuranosConfigurationService configurationService;
+	private ExecutionDao executionDao;
 	private Parameters parameters;
 	private Resultats resultat;
 	private boolean processComplet = false;
 
 	@Override
 	public void launchExecution() throws TechnicalException, BusinessException {
-		if (parameters == null) {
-			String message = "Le parametrage est null [parameters=null]";
-			throw new BusinessException(message);
+		resultat = new Resultats();
+
+		File sp3File = configurationService.getSp3FileForPeriode(parameters.getStartOfMeasure(),
+				parameters.getEndOfMeasure());
+		if (sp3File != null) {
+			List<Entry<LocalDateTime, List<Satelite>>> visibleSats = new ArrayList<>();
+
+			Sp3FileReader sp3FileParser = new Sp3FileReader(sp3File);
+			visibleSats = executionDao.getSateliteVisiblePeriod(sp3FileParser, parameters.getStartOfMeasure(),
+					parameters.getEndOfMeasure(), parameters.getBaseCoordiante());
+			resultat.setVisibleSats(visibleSats);
 		} else {
-			resultat = new Resultats();
-			configurationService.launchExecution(parameters, resultat);
-			processComplet = true;
+
+			String message = "Il n'existe pas de données pour la période séléctionnée. [start="
+					+ parameters.getStartOfMeasure() + ", end=" + parameters.getEndOfMeasure() + "]";
+			LOGGER.info(message);
+			resultat.addError(new Error(message));
+			throw new BusinessException(message);
 		}
+
+		processComplet = true;
+	}
+
+	public void setExecutionDao(ExecutionDao executionDao) {
+		this.executionDao = executionDao;
 	}
 
 	@Override

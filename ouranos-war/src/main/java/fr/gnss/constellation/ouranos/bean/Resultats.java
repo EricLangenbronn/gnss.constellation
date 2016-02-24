@@ -7,11 +7,13 @@ import java.util.Map.Entry;
 
 public class Resultats {
 
+	private List<Error> errors;
 	private List<Entry<String, Integer>> visibleSats;
 
 	public Resultats() {
 		super();
 		visibleSats = new ArrayList<Entry<String, Integer>>();
+		errors = new ArrayList<Error>();
 	}
 
 	public List<Entry<String, Integer>> getVisibleSats() {
@@ -24,5 +26,17 @@ public class Resultats {
 
 	public void addElem(String dateTime, int nbSat) {
 		this.visibleSats.add(new SimpleEntry<String, Integer>(dateTime, nbSat));
+	}
+
+	public List<Error> getErrors() {
+		return errors;
+	}
+
+	public void setErrors(List<Error> errors) {
+		this.errors = errors;
+	}
+
+	public void addError(Error error) {
+		this.errors.add(error);
 	}
 }

@@ -3,12 +3,12 @@ package fr.gnss.constellation.ouranos.services.impl;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
@@ -27,29 +27,12 @@ public class OuranosConfigurationServiceImpl implements OuranosConfigurationServ
 	private static final Log LOGGER = LogFactory.getLog(OuranosConfigurationServiceImpl.class);
 
 	private OuranosValidationServiceImpl validationService;
-	private ExecutionDao executionDao;
-
+	
 	@Override
-	public void launchExecution(Parameters parameters, Resultats resultat)
+	public File getSp3FileForPeriode(LocalDateTime p_startOfMeasure, LocalDateTime p_endOfMeasure)
 			throws TechnicalException, BusinessException {
-		List<Entry<LocalDateTime, List<Satelite>>> visibleSats = new ArrayList<>();
-		File sp3FileData = validationService.isDataForPeriod(parameters.getStartOfMeasure(),
-				parameters.getEndOfMeasure());
-
-		if (sp3FileData != null) {
-			Sp3FileReader sp3FileParser = new Sp3FileReader(sp3FileData);
-			visibleSats = executionDao.getSateliteVisiblePeriod(sp3FileParser, parameters.getStartOfMeasure(),
-					parameters.getEndOfMeasure(), parameters.getBaseCoordiante());
-			resultat.setVisibleSats(visibleSats);
-		} else {
-			String message = "Il n'existe pas de données pour la période séléctionnée. [start="
-					+ parameters.getStartOfMeasure() + ", end=" + parameters.getEndOfMeasure() + "]";
-			LOGGER.info(message);
-		}
-	}
-
-	public void setExecutionDao(ExecutionDao executionDao) {
-		this.executionDao = executionDao;
+		return validationService.isDataForPeriod(p_startOfMeasure,
+				p_endOfMeasure);
 	}
 
 	public void setValidationService(OuranosValidationServiceImpl validationService) {
