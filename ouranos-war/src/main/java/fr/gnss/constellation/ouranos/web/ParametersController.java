@@ -3,11 +3,14 @@ package fr.gnss.constellation.ouranos.web;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,14 +34,20 @@ public class ParametersController {
 	private OuranosExecutionService executionService;
 
 	@RequestMapping(method = GET)
-	public String showRegistrationForm() {
+	public String showRegistrationForm(ModelMap model) {
+		Parameters parameters = new Parameters();
+		model.addAttribute("parameters", parameters);
 		return "parameters";
 	}
 
-	@RequestMapping(value = "/register", method = POST)
-	public String processRegistration(Parameters parameters, ModelMap model) {
+	@RequestMapping(method = POST)
+	public String processRegistration(@Valid Parameters parameters, BindingResult result, ModelMap model) {
 
 		String nextPage = "";
+
+		if (result.hasErrors()) {
+			return "parameters";
+		}
 
 		executionService.setParameters(WrapperParameters.wrapperParameter(parameters));
 		executionService.setProcessComplet(false);
@@ -48,12 +57,12 @@ public class ParametersController {
 		} catch (TechnicalException e) {
 			String l_message = "Erreur technique lors de l'exécuion";
 			LOGGER.info(l_message, e);
-			model.addAttribute("success", "false");
+			model.addAttribute("success", "startDateTime");
 			nextPage = "redirect:/parameters";
 		} catch (BusinessException e) {
 			String l_message = "Paramètre incorecte, pas d'exécution";
 			LOGGER.info(l_message, e);
-			model.addAttribute("success", "false");
+			model.addAttribute("success", "blopblop");
 			nextPage = "redirect:/parameters";
 		}
 

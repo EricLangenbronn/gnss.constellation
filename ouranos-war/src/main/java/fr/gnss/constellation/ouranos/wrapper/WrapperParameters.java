@@ -11,13 +11,13 @@ public class WrapperParameters {
 	public static fr.gnss.constellation.ouranos.model.Parameters wrapperParameter(Parameters param) {
 
 		DateTimeFormatter dateTimeformatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a");
-		LocalDateTime startLocal = LocalDateTime.parse(param.getStartOfMeasure(), dateTimeformatter);
+		LocalDateTime startLocal = param.getStartOfMeasure();
 
-		LocalDateTime endLocal = LocalDateTime.parse(param.getEndOfMeasure(), dateTimeformatter);
+		LocalDateTime endLocal = param.getEndOfMeasure();
 
-		double longitude = Math.toRadians(Double.parseDouble(param.getLongitude()));
-		double latitude = Math.toRadians(Double.parseDouble(param.getLatitude()));
-		double altitude = Double.parseDouble(param.getAltitude());
+		double longitude = Math.toRadians(param.getLongitude());
+		double latitude = Math.toRadians(param.getLatitude());
+		double altitude = param.getAltitude();
 		GeodeticCoordinate base = new GeodeticCoordinate(longitude, latitude, altitude);
 
 		fr.gnss.constellation.ouranos.model.Parameters wrapParam = new fr.gnss.constellation.ouranos.model.Parameters(

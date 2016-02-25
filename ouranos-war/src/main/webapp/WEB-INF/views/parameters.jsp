@@ -1,5 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -28,14 +31,15 @@
 	<jsp:include page="<%=\"layouts/components/header.jsp\"%>" />
 	<div class="container">
 		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
-		
-		<div id="success" name="success"><c:out value="${success}" /></div>
-		<div id="success1" name="success1">${success}</div>
+
+		<div class="success">
+			Confirmation message : ${success} <br> longitude:
+				${parameters.longitude}. 
+		</div>
 
 		<div class="jumbotron">
-			
-		
-			<form method="post" action="parameters/register">
+
+			<form:form method="POST" modelAttribute="parameters">
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -53,11 +57,14 @@
 									<label class="sr-only" for="startDateTime">Start time
 										of measurement</label>
 									<div class="input-group date" id="startDateTime">
-										<input type="text" class="form-control" name="startOfMeasure"
-											placeholder="Start time of measurement" required /> <span
-											class="input-group-addon"> <span
+										<form:input type="text" class="form-control"
+											path="startOfMeasure" placeholder="Start time of measurement" />
+										<span class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"> </span>
 										</span>
+										<div class="has-error">
+											<form:errors path="startOfMeasure" class="help-inline" />
+										</div>
 									</div>
 								</div>
 							</div>
@@ -73,11 +80,14 @@
 										<label class="sr-only" for="endDateTime">End time of
 											measurement</label>
 										<div class='input-group date' id='endDateTime'>
-											<input type='text' class="form-control" name="endOfMeasure"
-												placeholder="End time of measurement" required /> <span
-												class="input-group-addon"> <span
+											<form:input type='text' class="form-control"
+												path="endOfMeasure" placeholder="End time of measurement" />
+											<span class="input-group-addon"> <span
 												class="glyphicon glyphicon-calendar"></span>
 											</span>
+											<div class="has-error">
+												<form:errors path="endOfMeasure" class="help-inline" />
+											</div>
 										</div>
 									</div>
 								</div>
@@ -91,10 +101,13 @@
 								</h3>
 								<div class="col-sm-4">
 									<div class="input-group">
-										<div class="input-group-addon">°</div>
-										<input class="form-control" type="text" id="elevationMask"
-											name="elevationMask" placeholder="Elevation mask in degrees"
-											required />
+										<div class="input-group-addon">Â°</div>
+										<form:input class="form-control" type="text"
+											path="elevationMask" id="elevationMask"
+											placeholder="Elevation mask in degrees" />
+										<div class="has-error">
+											<form:errors path="elevationMask" class="help-inline" />
+										</div>
 									</div>
 								</div>
 							</div>
@@ -117,9 +130,12 @@
 									<div class="input-group">
 										<label class="sr-only" for="longitude">Base position,
 											longitude in degrees</label>
-										<div class="input-group-addon">°</div>
-										<input class="form-control" type="text" id="longitude"
-											name="longitude" placeholder="Longitude in degrees" required />
+										<div class="input-group-addon">Â°</div>
+										<form:input class="form-control" type="text" path="longitude"
+											id="longitude" placeholder="Longitude in degrees" />
+										<div class="has-error">
+											<form:errors path="longitude" class="help-inline" />
+										</div>
 									</div>
 								</div>
 							</div>
@@ -128,9 +144,12 @@
 									<div class="input-group">
 										<label class="sr-only" for="latitude">Base position,
 											latitude in degrees</label>
-										<div class="input-group-addon">°</div>
-										<input class="form-control" type="text" id="latitude"
-											name="latitude" placeholder="Latitude in degrees" required />
+										<div class="input-group-addon">Â°</div>
+										<form:input class="form-control" type="text" path="latitude"
+											id="latitude" placeholder="Latitude in degrees" />
+										<div class="has-error">
+											<form:errors path="latitude" class="help-inline" />
+										</div>
 									</div>
 								</div>
 							</div>
@@ -140,8 +159,11 @@
 										<label class="sr-only" for="altitude">Base position,
 											altitude in meters</label>
 										<div class="input-group-addon">m</div>
-										<input class="form-control" type="text" id="altitude"
-											name="altitude" placeholder="Altitude in meters" required />
+										<form:input class="form-control" type="text" path="altitude"
+											id="altitude" placeholder="Altitude in meters" />
+										<div class="has-error">
+											<form:errors path="altitude" class="help-inline" />
+										</div>
 									</div>
 								</div>
 							</div>
@@ -151,7 +173,7 @@
 				<div>
 					<button type="submit" class="btn btn-lg btn-primary">Execute</button>
 				</div>
-			</form>
+			</form:form>
 			<jsp:include page="<%=\"layouts/components/footer.jsp\"%>" />
 		</div>
 	</div>
