@@ -23,19 +23,20 @@
 		<commons.logging.version>1.2</commons.logging.version>
 		<ejml.version>0.27</ejml.version>
 
-		<struts2.version>2.3.24</struts2.version>
 		<tomcat.version>7.0.34</tomcat.version>
 		<servlet.api.version>3.0.1</servlet.api.version>
-		<jsp.api.version>2.0</jsp.api.version>
-		<spring.version>4.2.0.RELEASE</spring.version>
+		<jsp.api.version>2.2</jsp.api.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
+		<javax.validation.version>1.1.0.Final</javax.validation.version>
+		<hibernate.validator.version>5.2.4.Final</hibernate.validator.version>
 		<jstl.version>1.2</jstl.version>
-		<struts.jquery.plugin.version>3.7.1</struts.jquery.plugin.version>
 
 		<junit.version>4.12</junit.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- ########## Ouranos ########### -->
 			<dependency>
 				<groupId>fr.gnss.constellation.ouranos</groupId>
 				<artifactId>ouranos-war</artifactId>
@@ -64,6 +65,7 @@
 				<version>${project.version}</version>
 			</dependency>
 
+			<!-- ########## common lib ########### -->
 			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
@@ -90,19 +92,16 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-beans</artifactId>
 				<version>${spring.version}</version>
-				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
 				<version>${spring.version}</version>
-				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
 				<version>${spring.version}</version>
-				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -114,100 +113,44 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
 				<version>${spring.version}</version>
-				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
 				<version>${spring.version}</version>
-				<scope>compile</scope>
 			</dependency>
 
+			<!-- jsr303 validation dependencies -->
 			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>2.1.4</version>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${javax.validation.version}</version>
 			</dependency>
-
-
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.validator.version}</version>
+			</dependency>
 
 			<!-- Servlet & Jsp -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${servlet.api.version}</version>
-				<scope>provided</scope>
 			</dependency>
-
-
 			<dependency>
-				<groupId>javax.servlet</groupId>
+				<groupId>javax.servlet.jsp</groupId>
 				<artifactId>jsp-api</artifactId>
 				<version>${jsp.api.version}</version>
-				<scope>provided</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>javax.servlet</groupId>
-				<artifactId>jstl</artifactId>
-				<version>1.1.2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>taglibs</groupId>
-				<artifactId>standard</artifactId>
-				<version>1.1.2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>jstl</groupId>
 				<artifactId>jstl</artifactId>
 				<version>${jstl.version}</version>
 			</dependency>
 
-			<!-- ########## Struts2 ########### -->
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-core</artifactId>
-				<version>${struts2.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-sitemesh-plugin</artifactId>
-				<version>${struts2.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-spring-plugin</artifactId>
-				<version>${struts2.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-config-browser-plugin</artifactId>
-				<version>${struts2.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.jgeppert.struts2.jquery</groupId>
-				<artifactId>struts2-jquery-plugin</artifactId>
-				<version>${struts.jquery.plugin.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.jgeppert.struts2.jquery</groupId>
-				<artifactId>struts2-jquery-grid-plugin</artifactId>
-				<version>${struts.jquery.plugin.version}</version>
-			</dependency>
-
-			<!-- Struts 2 JSON Plugins -->
-			<dependency>
-				<groupId>org.apache.struts</groupId>
-				<artifactId>struts2-json-plugin</artifactId>
-				<version>${struts2.version}</version>
-			</dependency>
+			<!-- <dependency> <groupId>jstl</groupId> <artifactId>jstl</artifactId> 
+				<version>${jstl.version}</version> </dependency> -->
 
 			<dependency>
 				<groupId>junit</groupId>

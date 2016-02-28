@@ -2,15 +2,10 @@ package fr.gnss.constellation.ouranos.bean;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,38 +16,32 @@ public class Parameters implements Serializable {
 	 */
 	private static final long serialVersionUID = 1708054331528536487L;
 
-	@DateTimeFormat(pattern="MM/dd/yyyy K:mm a")
+	@DateTimeFormat(pattern="MM/dd/yyyy h:mm a")
 	@NotNull
-	@Past
 	private LocalDateTime startOfMeasure;
 
-	@DateTimeFormat(pattern="MM/dd/yyyy K:mm a")
+	@DateTimeFormat(pattern="MM/dd/yyyy h:mm a")
 	@NotNull
-	@Past
 	private LocalDateTime endOfMeasure;
 
 	@NotNull
-	@DecimalMax("0.0")
-	@DecimalMin("90.0")
-	// @Size(min = 0, max = 90, message = "{elevation.size}")
+	@DecimalMax("90.0")
+	@DecimalMin("0.0")
 	private double elevationMask;
 
 	@NotNull
-	@DecimalMax("-180.0")
-	@DecimalMin("180.0")
-	// @Size(min = -180, max = 180, message = "{longitude.size}")
+	@DecimalMax("180.0")
+	@DecimalMin("-180.0")
 	private double longitude;
 
 	@NotNull
-	@DecimalMax("-90.0")
-	@DecimalMin("90.0")
-	// @Size(min = -90, max = 90, message = "{latitude.size}")
+	@DecimalMax("90.0")
+	@DecimalMin("-90.0")
 	private double latitude;
 
 	@NotNull
-	@DecimalMax("-11034.0")
-	@DecimalMin("8850.0")
-	// @Size(min = -11034, max = 8850, message = "{altitude.size}")
+	@DecimalMax("8850.0")
+	@DecimalMin("-11034.0")
 	private double altitude;
 
 	public LocalDateTime getStartOfMeasure() {

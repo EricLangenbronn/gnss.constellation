@@ -62,9 +62,9 @@
 										<span class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"> </span>
 										</span>
-										<div class="has-error">
-											<form:errors path="startOfMeasure" class="help-inline" />
-										</div>
+									</div>
+									<div class="has-error">
+										<form:errors path="startOfMeasure" class="help-inline" />
 									</div>
 								</div>
 							</div>
@@ -85,9 +85,9 @@
 											<span class="input-group-addon"> <span
 												class="glyphicon glyphicon-calendar"></span>
 											</span>
-											<div class="has-error">
-												<form:errors path="endOfMeasure" class="help-inline" />
-											</div>
+										</div>
+										<div class="has-error">
+											<form:errors path="startOfMeasure" class="help-inline" />
 										</div>
 									</div>
 								</div>
@@ -105,9 +105,9 @@
 										<form:input class="form-control" type="text"
 											path="elevationMask" id="elevationMask"
 											placeholder="Elevation mask in degrees" />
-										<div class="has-error">
-											<form:errors path="elevationMask" class="help-inline" />
-										</div>
+									</div>
+									<div class="has-error">
+										<form:errors path="elevationMask" class="help-inline" />
 									</div>
 								</div>
 							</div>
@@ -133,9 +133,9 @@
 										<div class="input-group-addon">°</div>
 										<form:input class="form-control" type="text" path="longitude"
 											id="longitude" placeholder="Longitude in degrees" />
-										<div class="has-error">
-											<form:errors path="longitude" class="help-inline" />
-										</div>
+									</div>
+									<div class="has-error">
+										<form:errors path="longitude" class="help-inline" />
 									</div>
 								</div>
 							</div>
@@ -147,9 +147,9 @@
 										<div class="input-group-addon">°</div>
 										<form:input class="form-control" type="text" path="latitude"
 											id="latitude" placeholder="Latitude in degrees" />
-										<div class="has-error">
-											<form:errors path="latitude" class="help-inline" />
-										</div>
+									</div>
+									<div class="has-error">
+										<form:errors path="latitude" class="help-inline" />
 									</div>
 								</div>
 							</div>
@@ -161,9 +161,9 @@
 										<div class="input-group-addon">m</div>
 										<form:input class="form-control" type="text" path="altitude"
 											id="altitude" placeholder="Altitude in meters" />
-										<div class="has-error">
-											<form:errors path="altitude" class="help-inline" />
-										</div>
+									</div>
+									<div class="has-error">
+										<form:errors path="altitude" class="help-inline" />
 									</div>
 								</div>
 							</div>
