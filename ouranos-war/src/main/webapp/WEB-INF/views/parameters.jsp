@@ -32,12 +32,14 @@
 	<div class="container">
 		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
 
-		<div class="success">
-			Confirmation message : ${success} <br> longitude:
-				${parameters.longitude}. 
-		</div>
-
 		<div class="jumbotron">
+			<c:if test="${not empty errorMessage}">
+				<div class="alert alert-danger" role="alert">
+					<span class="glyphicon glyphicon-exclamation-sign"
+						aria-hidden="true"></span> <span class="sr-only">Error:</span>
+					${errorMessage}
+				</div>
+			</c:if>
 
 			<form:form method="POST" modelAttribute="parameters">
 

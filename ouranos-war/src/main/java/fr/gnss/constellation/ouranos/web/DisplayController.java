@@ -29,18 +29,12 @@ public class DisplayController {
 	private OuranosExecutionService executionService;
 
 	@RequestMapping(method = GET)
-	public ModelAndView display(Model model) {
-		ModelAndView mav = new ModelAndView("display");
-
-		return mav;
-	}
-
-	public void setExecutionService(OuranosExecutionService executionService) {
-		this.executionService = executionService;
+	public String showGraphForm(Model model) {
+		return "display";
 	}
 
 	@RequestMapping(value = "visibility", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody Resultats visibility() {
+	public @ResponseBody Resultats visibilitySatelite() {
 
 		Resultats res = null;
 		if (executionService.isProcessComplet()) {
@@ -50,6 +44,10 @@ public class DisplayController {
 		}
 
 		return res;
+	}
+	
+	public void setExecutionService(OuranosExecutionService executionService) {
+		this.executionService = executionService;
 	}
 
 }

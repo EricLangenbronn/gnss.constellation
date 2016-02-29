@@ -39,18 +39,19 @@ public class OuranosExecutionServiceImpl implements OuranosExecutionService {
 		File sp3File = configurationService.getSp3FileForPeriode(parameters.getStartOfMeasure(),
 				parameters.getEndOfMeasure());
 		if (sp3File != null) {
+			LOGGER.debug("Début du traitement du fichier sp3");
 			List<Entry<LocalDateTime, List<Satelite>>> visibleSats = new ArrayList<>();
 
 			Sp3FileReader sp3FileParser = new Sp3FileReader(sp3File);
 			visibleSats = executionDao.getSateliteVisiblePeriod(sp3FileParser, parameters.getStartOfMeasure(),
 					parameters.getEndOfMeasure(), parameters.getBaseCoordiante());
 			resultat.setVisibleSats(visibleSats);
+			LOGGER.debug("Fin de traitement du fichier sp3");
 		} else {
 
 			String message = "Il n'existe pas de données pour la période séléctionnée. [start="
 					+ parameters.getStartOfMeasure() + ", end=" + parameters.getEndOfMeasure() + "]";
 			LOGGER.info(message);
-			resultat.addError(new Error(message));
 			throw new BusinessException(message);
 		}
 

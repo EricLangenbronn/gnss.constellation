@@ -12,10 +12,6 @@ public class WrapperResultats {
 	public static fr.gnss.constellation.ouranos.bean.Resultats wrapperResultatsVisibility(Resultats res) {
 		fr.gnss.constellation.ouranos.bean.Resultats wrappeRes = new fr.gnss.constellation.ouranos.bean.Resultats();
 
-		for (Error error : res.getErrors()) {
-			wrappeRes.addError(error);
-		}
-
 		for (Entry<LocalDateTime, List<Satelite>> elem : res.getVisibleSats()) {
 			wrappeRes.addElem(elem.getKey().toString(), elem.getValue().size());
 		}

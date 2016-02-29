@@ -17,7 +17,7 @@ public class HomeController {
 	private static final Log LOGGER = LogFactory.getLog(HomeController.class);
 	
 	@RequestMapping(method = GET)
-	public String home() {
+	public String showHomeForm() {
 		return "home";
 	}
 }

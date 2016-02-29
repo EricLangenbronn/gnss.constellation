@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,40 +35,49 @@ public class ParametersController {
 	@Autowired
 	private OuranosExecutionService executionService;
 
+	private Parameters parameterInError = null;
+
 	@RequestMapping(method = GET)
-	public String showRegistrationForm(ModelMap model) {
-		Parameters parameters = new Parameters();
+	public String showParameterForm(Model model) {
+
+		Parameters parameters = null;
+		if (parameterInError != null) {
+			parameters = parameterInError;
+		} else {
+			parameters = new Parameters();
+		}
 		model.addAttribute("parameters", parameters);
 		return "parameters";
 	}
 
 	@RequestMapping(method = POST)
-	public String processRegistration(@Valid @ModelAttribute("parameters") Parameters parameters, BindingResult result,
-			ModelMap model) {
+	public String processLaunchParameters(@Valid Parameters parameters, BindingResult result,
+			Model model) {
 
 		String nextPage = "";
 
 		if (result.hasErrors()) {
-			LOGGER.error("validation incorrecte.");
-			System.out.println(result.getAllErrors());
-			return "parameters";
-		}
+			LOGGER.error("validation incorrecte : " + result.getAllErrors());
+			nextPage = "parameters";
+		} else {
 
-		executionService.setParameters(WrapperParameters.wrapperParameter(parameters));
-		executionService.setProcessComplet(false);
-		try {
-			executionService.launchExecution();
-			nextPage = "redirect:/display";
-		} catch (TechnicalException e) {
-			String l_message = "Erreur technique lors de l'exécuion";
-			LOGGER.info(l_message, e);
-			model.addAttribute("success", "startDateTime");
-			nextPage = "redirect:/parameters";
-		} catch (BusinessException e) {
-			String l_message = "Paramètre incorecte, pas d'exécution";
-			LOGGER.info(l_message, e);
-			model.addAttribute("success", "blopblop");
-			nextPage = "redirect:/parameters";
+			executionService.setParameters(WrapperParameters.wrapperParameter(parameters));
+			executionService.setProcessComplet(false);
+			try {
+				executionService.launchExecution();
+				parameterInError = null;
+				nextPage = "redirect:/display";
+			} catch (TechnicalException e) {
+				String l_message = "Erreur technique lors de l'exécuion";
+				LOGGER.info(l_message, e);
+				nextPage = "parameters";
+			} catch (BusinessException e) {
+				String l_message = "Paramètre incorecte, pas d'exécution";
+				LOGGER.info(l_message, e);
+				parameterInError = parameters;
+				model.addAttribute("errorMessage", e.getMessage());
+				nextPage = "parameters";
+			}
 		}
 
 		return nextPage;

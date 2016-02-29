@@ -15,12 +15,12 @@
 <jsp:include page="<%=\"layouts/components/css.jsp\"%>" />
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/resources/media/css/display.css" />">
-<script type="text/javascript"
-	src="<c:url value="/resources/media/js/libs/jquery-2.1.4.min.js" />"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/media/js/libs/highcharts/modules/exporting.js" />"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/media/js/libs/highcharts/highcharts.js" />"></script>
+	<script type="text/javascript"
+		src="<c:url value="/resources/media/js/libs/jquery-2.1.4.min.js" />"></script>
+	<script type="text/javascript"
+		src="<c:url value="/resources/media/js/libs/highcharts/highcharts.js" />"></script>
+	<script type="text/javascript"
+		src="<c:url value="/resources/media/js/libs/highcharts/modules/exporting.js" />"></script>
 </head>
 <body>
 	<jsp:include page="<%=\"layouts/components/header.jsp\"%>" />
@@ -28,7 +28,11 @@
 		<jsp:include page="<%=\"layouts/components/menu.jsp\"%>" />
 
 		<div class="jumbotron">
-			<div id="errorMessage" class="alert alert-danger" style="display: none" role="alert"></div>
+			<div class="alert alert-danger" role="alert" style="display: none">
+				<span class="glyphicon glyphicon-exclamation-sign"
+					aria-hidden="true"></span> <span id="errorMessage" class="sr-only">Error:</span>
+				${errorMessage}
+			</div>
 
 			<div id="iconLoading" class="text-center">
 				<span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
@@ -45,72 +49,71 @@
 </body>
 </html>
 <script type="text/javascript">
-var ouranosCategories = [];
-var ouranosSeries = [];
-var Jsondata = {};
+	var ouranosCategories = [];
+	var ouranosSeries = [];
+	var Jsondata = {};
 
-var dureeTimer = parseInt('1000');
-var timerVisibilty = setInterval(appelJson, dureeTimer);
+	var dureeTimer = parseInt('1000');
+	var timerVisibilty = setInterval(appelJson, dureeTimer);
 
-function afficherGraphe(categorieValues, serieValues) {
-	$('#iconLoading').hide();
-	$('#graph').show();
-
-	$('#graph').highcharts({
-		chart : {
-			type : 'column'
-		},
-		title : {
-			text : 'Visibility'
-		},
-		subtitle : {
-			text : ''
-		},
-		xAxis : {
-			categories : categorieValues, // Times
-			crosshair : true
-		},
-		yAxis : {
-			min : 0,
-			title : {
-				text : 'Number of satelites'
-			}
-		},
-		series : [ {
-			name : 'Satelite(s)',
-			data : serieValues
-		} ]
-	});
-}
-
-function loadData(data) {
-	Jsondata = data
-	lstObj = Jsondata["visibleSats"];
-	if (lstObj.length > 0) {
-		for (var i = 0; i < lstObj.length; i++) {
-			var tuple = lstObj[i];
-
-			ouranosCategories.push(tuple["key"]);
-			ouranosSeries.push(tuple["value"]);
-		}
-
-		afficherGraphe(ouranosCategories, ouranosSeries);
-		window.clearInterval(timerVisibilty);
-	}
-	else
-	{
-		window.clearInterval(timerVisibilty);
+	function afficherGraphe(categorieValues, serieValues) {
 		$('#iconLoading').hide();
-		$('#errorMessage').show();
-		$('#errorMessage').text("Oups !, pas de satelite visble pour ces paramètres.");
-	}
-}
+		$('#graph').show();
 
-function appelJson() {
-	$.getJSON("<c:url value="/display/visibility" />", function(data) {
-		loadData(data);
-	});
-}
+		$('#graph').highcharts({
+			chart : {
+				type : 'column'
+			},
+			title : {
+				text : 'Visibility'
+			},
+			subtitle : {
+				text : ''
+			},
+			xAxis : {
+				categories : categorieValues, // Times
+				crosshair : true
+			},
+			yAxis : {
+				min : 0,
+				title : {
+					text : 'Number of satelites'
+				}
+			},
+			series : [ {
+				name : 'Satelite(s)',
+				data : serieValues
+			} ]
+		});
+	}
+
+	function loadData(data) {
+		Jsondata = data
+		lstObj = Jsondata["visibleSats"];
+		if (lstObj.length > 0) {
+			for (var i = 0; i < lstObj.length; i++) {
+				var tuple = lstObj[i];
+
+				ouranosCategories.push(tuple["key"]);
+				ouranosSeries.push(tuple["value"]);
+			}
+
+			afficherGraphe(ouranosCategories, ouranosSeries);
+			window.clearInterval(timerVisibilty);
+		} else {
+			window.clearInterval(timerVisibilty);
+			$('#iconLoading').hide();
+			$('#errorMessage').show();
+			$('#errorMessage').text(
+					"Oups !, pas de satelite visble pour ces paramètres.");
+		}
+	}
+
+	function appelJson() {
+		$.getJSON("<c:url value="/display/visibility" />", function(data) {
+			loadData(data);
+		});
+	}
 </script>
 
 

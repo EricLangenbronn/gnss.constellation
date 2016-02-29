@@ -6,7 +6,7 @@
 		<artifactId>ouranos-parent</artifactId>
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>ouranos-war</artifactId>
 	<packaging>war</packaging>
 	<name>Ouranos - war</name>
@@ -27,7 +27,7 @@
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 		</dependency>
-		
+
 		<!-- ########## Spring ########### -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -54,6 +54,12 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 
+		<!-- Jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
 		<!-- jsr303 validation dependencies -->
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -77,13 +83,6 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-
-<!-- 
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
- -->
 
 		<dependency>
 			<groupId>junit</groupId>
