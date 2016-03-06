@@ -12,7 +12,7 @@ public class GeodeticCoordinate {
 	/**
 	 * Position est représenté par un vecteur 3
 	 * 
-	 * X : latitude : lambda : radian (NordSud) Y : longitude : phi : radian
+	 * X : latitude : phi : radian (NordSud) Y : longitude : lambda : radian
 	 * (EstOuest) Z : altitude : h : metre
 	 */
 	private double[] position;
@@ -28,17 +28,17 @@ public class GeodeticCoordinate {
 	 * Constructs a newly allocated GeodeticCoordinate object that represents
 	 * the specified double values.
 	 * 
-	 * @param lambda
-	 *            - latitude
 	 * @param phi
+	 *            - latitude
+	 * @param lambda
 	 *            - longitude
 	 * @param h
 	 *            - altitude
 	 */
-	public GeodeticCoordinate(double lambda, double phi, double h) {
+	public GeodeticCoordinate(double phi, double lambda, double h) {
 		this();
-		position[0] = lambda;
-		position[1] = phi;
+		position[0] = phi;
+		position[1] = lambda;
 		position[2] = h;
 	}
 

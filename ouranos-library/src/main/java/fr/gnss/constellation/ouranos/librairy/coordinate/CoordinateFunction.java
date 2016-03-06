@@ -11,9 +11,8 @@ public class CoordinateFunction {
 	 * de 1984) est le système géodésique mondial le plus courant, car il est
 	 * utilisé par le système GPS.
 	 */
-	public static double a = 6378137.0; // demi grand axe en metre
-	public static double f = 0.00335281066474748071984552861852; // degré
-																	// d'applatissement
+	public static double a = 6378137.0000; // demi grand axe en metre
+	public static double b = 6356752.3142; // demi petit axe en metre
 
 	public static double[] degreeToRadian(double degree[]) {
 		if (degree.length != 3) {
@@ -47,15 +46,16 @@ public class CoordinateFunction {
 	 * @param cg
 	 * @return
 	 */
-	public static CartesianCoordinate3D geodeticToCartesian(GeodeticCoordinate cg) {
+	public static CartesianCoordinate3D geodeticToCartesianWSG84(GeodeticCoordinate cg) {
 		Objects.requireNonNull(cg, "GeodeticCoordinate");
 
-		double e = (2.0 - CoordinateFunction.f) * CoordinateFunction.f;
-		double N = CoordinateFunction.a / Math.sqrt(1.0 - e * Math.sin(cg.getLatitude()) * Math.sin(cg.getLatitude()));
+		double ee = 1 - (Math.pow((b / a), 2));
+		double N = CoordinateFunction.a
+				/ Math.sqrt(1.0 - ee * (Math.sin(cg.getLatitude()) * Math.sin(cg.getLatitude())));
 
 		double x = (N + cg.getAltitude()) * Math.cos(cg.getLatitude()) * Math.cos(cg.getLongitude());
 		double y = (N + cg.getAltitude()) * Math.cos(cg.getLatitude()) * Math.sin(cg.getLongitude());
-		double z = ((N * (1 - Math.pow(e, 2))) + cg.getAltitude()) * Math.sin(cg.getLatitude());
+		double z = ((N * (1 - ee)) + cg.getAltitude()) * Math.sin(cg.getLatitude());
 
 		CartesianCoordinate3D cc = new CartesianCoordinate3D(x, y, z);
 
@@ -78,38 +78,31 @@ public class CoordinateFunction {
 	 * @param lambda
 	 *            (en radian)
 	 */
-	public static CartesianCoordinate3D transformECEFtoENU(double phi, double lambda, CartesianCoordinate3D satelite,
-			CartesianCoordinate3D station) {
-		Objects.requireNonNull(satelite, "CartesianCoordinate3D");
-		Objects.requireNonNull(station, "CartesianCoordinate3D");
+	public static CartesianCoordinate3D transformECEFtoENU(GeodeticCoordinate rotation,
+			CartesianCoordinate3D vector) {
+		Objects.requireNonNull(vector, "CartesianCoordinate3D");
 
-		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(satelite.normalized(),
-				station.normalized());
+		double u = vector.X();
+		double v = vector.Y();
+		double w = vector.Z();
+		// East
+		double E1 = -Math.sin(rotation.getLongitude()) * u;
+		double E2 = Math.cos(rotation.getLongitude()) * v;
+		double E4 = E1 + E2;
 
-		double[][] matriceData2 = new double[1][3];
-		matriceData2[0][0] = stationSatelite.X();
-		matriceData2[0][1] = stationSatelite.Y();
-		matriceData2[0][2] = stationSatelite.Z();
+		// North
+		double N1 = -Math.sin(rotation.getLatitude()) * Math.cos(rotation.getLongitude()) * u;
+		double N2 = -Math.sin(rotation.getLatitude()) * Math.sin(rotation.getLongitude()) * v;
+		double N3 = Math.cos(rotation.getLatitude()) * w;
+		double N4 = N1 + N2 + N3;
 
-		SimpleMatrix b = new SimpleMatrix(matriceData2);
+		// Up
+		double U1 = Math.cos(rotation.getLatitude()) * Math.cos(rotation.getLongitude()) * u;
+		double U2 = Math.cos(rotation.getLatitude()) * Math.sin(rotation.getLongitude()) * v;
+		double U3 = Math.sin(rotation.getLatitude()) * w;
+		double U4 = U1 + U2 + U3;
 
-		double[][] matriceData = new double[3][3];
-		matriceData[0][0] = -Math.sin(lambda);
-		matriceData[0][1] = Math.cos(lambda);
-		matriceData[0][2] = 0;
-
-		matriceData[1][0] = -Math.sin(phi) * Math.cos(lambda);
-		matriceData[1][1] = -Math.sin(phi) * Math.sin(lambda);
-		matriceData[1][2] = Math.cos(phi);
-
-		matriceData[2][0] = Math.cos(phi) * Math.cos(lambda);
-		matriceData[2][1] = Math.cos(phi) * Math.sin(lambda);
-		matriceData[2][2] = Math.sin(phi);
-		SimpleMatrix a = new SimpleMatrix(matriceData);
-
-		SimpleMatrix c = b.mult(a);
-
-		CartesianCoordinate3D res = new CartesianCoordinate3D(c.get(0), c.get(1), c.get(2));
+		CartesianCoordinate3D res = new CartesianCoordinate3D(E4, N4, U4);
 
 		return res;
 

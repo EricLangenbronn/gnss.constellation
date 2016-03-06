@@ -66,7 +66,7 @@ public class ParametersController {
 			try {
 				executionService.launchExecution();
 				parameterInError = null;
-				nextPage = "redirect:/display";
+				nextPage = "display";
 			} catch (TechnicalException e) {
 				String l_message = "Erreur technique lors de l'exécuion";
 				LOGGER.info(l_message, e);

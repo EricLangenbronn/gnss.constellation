@@ -76,21 +76,21 @@ public class CartesianCoordinate3D {
 	}
 
 	/**
-	 * Subtract a CartesianCoordinate3D from the other. (v2 - v1)
+	 * Subtract a CartesianCoordinate3D from the other. (v1 - v1)
 	 * 
 	 * @param v1
-	 *            - CartesianCoordinate3D to subtract
+	 *            - 
 	 * @param v2
-	 *            -
+	 *            - CartesianCoordinate3D to subtract
 	 * @return the specified new CartesianCoordinate3D
 	 */
 	public static CartesianCoordinate3D minus(CartesianCoordinate3D v1, CartesianCoordinate3D v2) {
 		Objects.requireNonNull(v1, "CartesianCoordinate3D");
 		Objects.requireNonNull(v2, "CartesianCoordinate3D");
 
-		double x = v2.X() - v1.X();
-		double y = v2.Y() - v1.Y();
-		double z = v2.Z() - v2.Z();
+		double x = v1.X() - v2.X();
+		double y = v1.Y() - v2.Y();
+		double z = v1.Z() - v2.Z();
 
 		return new CartesianCoordinate3D(x, y, z);
 	}

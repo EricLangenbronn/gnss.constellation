@@ -43,7 +43,7 @@ public class OuranosExecutionServiceImpl implements OuranosExecutionService {
 			List<Entry<LocalDateTime, List<Satelite>>> visibleSats = new ArrayList<>();
 
 			Sp3FileReader sp3FileParser = new Sp3FileReader(sp3File);
-			visibleSats = executionDao.getSateliteVisiblePeriod(sp3FileParser, parameters.getStartOfMeasure(),
+			visibleSats = executionDao.getSateliteVisiblePeriod(sp3FileParser, parameters.getRadElevationMask(), parameters.getStartOfMeasure(),
 					parameters.getEndOfMeasure(), parameters.getBaseCoordiante());
 			resultat.setVisibleSats(visibleSats);
 			LOGGER.debug("Fin de traitement du fichier sp3");

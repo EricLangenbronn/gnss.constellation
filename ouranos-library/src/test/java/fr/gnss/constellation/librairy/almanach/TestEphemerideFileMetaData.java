@@ -1,4 +1,4 @@
-package fr.gnss.contellation.librairy.almanach;
+package fr.gnss.constellation.librairy.almanach;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

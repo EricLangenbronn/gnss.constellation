@@ -21,14 +21,14 @@ public class TestTraitementPosition {
 
 	@Autowired
 	private ExecutionDao executionDao;
-
+	
 	@Test
 	public void testProcessElevationAzimut() {
 		GeodeticCoordinate stationGeo = new GeodeticCoordinate(Math.toRadians(38.889139), Math.toRadians(-77.049),
 				130.049);
 
 		CartesianCoordinate3D stationCar = new CartesianCoordinate3D(
-				CoordinateFunction.geodeticToCartesian(stationGeo));
+				CoordinateFunction.geodeticToCartesianWSG84(stationGeo));
 		CartesianCoordinate3D satelite = new CartesianCoordinate3D(-12110.343226, -13482.507392, -19488.380856);
 
 		SphericalCoordinate sphere = executionDao.processSphericalCoordinate(stationGeo, stationCar, satelite);

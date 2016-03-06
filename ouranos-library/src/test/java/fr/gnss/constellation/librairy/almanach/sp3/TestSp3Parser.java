@@ -1,4 +1,4 @@
-package fr.gnss.contellation.librairy.almanach.sp3;
+package fr.gnss.constellation.librairy.almanach.sp3;
 
 import java.io.File;
 

@@ -29,8 +29,9 @@ public class ExecutionDaoImpl implements ExecutionDao {
 	public SphericalCoordinate processSphericalCoordinate(GeodeticCoordinate gStation, CartesianCoordinate3D station,
 			CartesianCoordinate3D satelite) {
 
-		CartesianCoordinate3D enuStationSatelite = CoordinateFunction.transformECEFtoENU(gStation.getLatitude(),
-				gStation.getLongitude(), satelite, station);
+		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(station, satelite);
+
+		CartesianCoordinate3D enuStationSatelite = CoordinateFunction.transformECEFtoENU(gStation, stationSatelite);
 
 		double[] angles = new double[3];
 		double normeProjectionStaSat = Math
@@ -52,8 +53,8 @@ public class ExecutionDaoImpl implements ExecutionDao {
 		return new SphericalCoordinate(angles);
 	}
 
-	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisbleAll(Sp3FileReader sp3FileParser,
-			GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
+	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisibleAll(Sp3FileReader sp3FileParser,
+			double elevationMask, GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
 
 		List<Entry<LocalDateTime, List<Satelite>>> fileSatelite = sp3FileParser.getPositionAndClockRecordAll();
 		List<Entry<LocalDateTime, List<Satelite>>> sateliteVisible = new ArrayList<>();
@@ -61,20 +62,23 @@ public class ExecutionDaoImpl implements ExecutionDao {
 			List<Satelite> tmpSatVisible = new ArrayList<>();
 			for (Satelite p : e.getValue()) {
 				SphericalCoordinate sphCoord = this.processSphericalCoordinate(gStation,
-						CoordinateFunction.geodeticToCartesian(gStation), p.getPosition());
-				if ((sphCoord.getInclination() >= 0.2617) && (sphCoord.getInclination() < (3.1415 / 2))) {
-					tmpSatVisible.add(p);
+						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
+				if (sphCoord.getAzimuth() != -1) {
+					// 3.1415 / 2 rad = 90.0°
+					if ((sphCoord.getInclination() >= elevationMask) && (sphCoord.getInclination() < (3.1415 / 2))) {
+						tmpSatVisible.add(p);
+					}
 				}
 			}
 			sateliteVisible.add(new SimpleEntry<LocalDateTime, List<Satelite>>(e.getKey(), tmpSatVisible));
 		}
-
+		afficheSateliteVisible(sateliteVisible);
 		return sateliteVisible;
 
 	}
 
 	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(Sp3FileReader sp3FileParser,
-			LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
+			double elevationMask, LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
 					throws TechnicalException, BusinessException {
 
 		List<Entry<LocalDateTime, List<Satelite>>> fileSatelite = sp3FileParser.getPositionAndClockRecord(start, end);
@@ -83,14 +87,18 @@ public class ExecutionDaoImpl implements ExecutionDao {
 			List<Satelite> tmpSatVisible = new ArrayList<>();
 			for (Satelite p : e.getValue()) {
 				SphericalCoordinate sphCoord = this.processSphericalCoordinate(gStation,
-						CoordinateFunction.geodeticToCartesian(gStation), p.getPosition());
-				if ((sphCoord.getInclination() >= 0.2617) && (sphCoord.getInclination() < (3.1415 / 2))) {
-					tmpSatVisible.add(p);
+						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
+
+				if (sphCoord.getAzimuth() != -1) {
+					// 3.1415 / 2 rad = 90.0°
+					if ((sphCoord.getInclination() >= elevationMask) && (sphCoord.getInclination() < (3.1415 / 2))) {
+						tmpSatVisible.add(p);
+					}
 				}
 			}
 			sateliteVisible.add(new SimpleEntry<LocalDateTime, List<Satelite>>(e.getKey(), tmpSatVisible));
 		}
-
+		afficheSateliteVisible(sateliteVisible);
 		return sateliteVisible;
 
 	}
@@ -101,7 +109,7 @@ public class ExecutionDaoImpl implements ExecutionDao {
 			List<Satelite> lpos = e.getValue();
 			System.out.println("Satelite visible heure : " + e.getKey());
 			for (Satelite pos : lpos) {
-				System.out.println(pos.getVehicleId());
+				System.out.println(pos);
 			}
 		}
 		System.out.println("----------------------------------------------");

@@ -1,4 +1,4 @@
-package fr.gnss.contellation.librairy.almanach.parser.sp3;
+package fr.gnss.constellation.librairy.almanach.parser.sp3;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

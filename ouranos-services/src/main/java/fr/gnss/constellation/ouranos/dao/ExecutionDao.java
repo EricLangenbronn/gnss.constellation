@@ -18,6 +18,6 @@ public interface ExecutionDao {
 			CartesianCoordinate3D satelite);
 
 	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(Sp3FileReader sp3FileParser,
-			LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
+			double elevationMask, LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
 					throws TechnicalException, BusinessException;
 }

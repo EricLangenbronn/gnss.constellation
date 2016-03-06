@@ -15,13 +15,14 @@ public class WrapperParameters {
 
 		LocalDateTime endLocal = param.getEndOfMeasure();
 
+		double radElevationMask = Math.toRadians(param.getElevationMask());
 		double longitude = Math.toRadians(param.getLongitude());
 		double latitude = Math.toRadians(param.getLatitude());
 		double altitude = param.getAltitude();
 		GeodeticCoordinate base = new GeodeticCoordinate(longitude, latitude, altitude);
 
 		fr.gnss.constellation.ouranos.model.Parameters wrapParam = new fr.gnss.constellation.ouranos.model.Parameters(
-				base, startLocal, endLocal);
+				base, radElevationMask, startLocal, endLocal);
 
 		return wrapParam;
 	}
