@@ -9,12 +9,12 @@
 	<artifactId>ouranos-commons</artifactId>
 
 	<name>Ouranos - Commun</name>
-	
-	 <properties>
 
-        <!-- #### Dépendances externes #### -->
-        <slf4j.version>1.7.7</slf4j.version>
-    </properties>
+	<properties>
+
+		<!-- #### Dépendances externes #### -->
+		<slf4j.version>1.7.7</slf4j.version>
+	</properties>
 
 	<dependencies>
 		<!-- ########## common lib ########### -->
@@ -32,6 +32,10 @@
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
 		</dependency>
 	</dependencies>
 

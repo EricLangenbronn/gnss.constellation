@@ -22,12 +22,13 @@ public class OuranosValidationServiceImpl implements OuranosValidationService {
 	private static final Log LOGGER = LogFactory.getLog(OuranosValidationServiceImpl.class);
 
 	private Sp3Dao sp3Dao;
-
+	private OuranosPropertiesServiceImpl propertiesService;
+	
 	public File isDataForPeriod(LocalDateTime start, LocalDateTime end) throws TechnicalException, BusinessException {
 
 		File isDataForPeriod = null;
 
-		for (File sp3File : sp3Dao.getListSp3File()) {
+		for (File sp3File : sp3Dao.getListSp3File(propertiesService.getString("repertoire.sp3"))) {
 			Sp3FileNameFormat fileNameFormat = new Sp3FileNameFormat(sp3File.getName());
 
 			LocalDateTime startDay = Sp3FormatConst.firstEpochRecord.plusWeeks(fileNameFormat.getGpsWeek())
@@ -47,4 +48,9 @@ public class OuranosValidationServiceImpl implements OuranosValidationService {
 	public void setSp3Dao(Sp3Dao sp3Dao) {
 		this.sp3Dao = sp3Dao;
 	}
+	
+	public void setPropertiesService(OuranosPropertiesServiceImpl propertiesService) {
+		this.propertiesService = propertiesService;
+	}
+
 }

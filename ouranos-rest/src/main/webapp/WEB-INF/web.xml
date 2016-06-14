@@ -15,6 +15,11 @@
 		<param-value>WEB-INF/applicationContext.xml</param-value>
 	</context-param>
 
+	<!-- Le listener Spring -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<!-- rest -->
 	<servlet-mapping>
 		<servlet-name>rest-ws</servlet-name>
@@ -28,6 +33,19 @@
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 
+	<!-- Servlet pour initialiser les services utilisés par la webapp -->
+	<servlet>
+		<servlet-name>initWebapp</servlet-name>
+		<servlet-class>fr.gnss.constellation.ouranos.api.resource.servlet.InitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- la servlet about -->
+	<servlet>
+		<servlet-name>aboutServlet</servlet-name>
+		<servlet-class>fr.gnss.constellation.ouranos.api.resource.servlet.AboutServlet</servlet-class>
+	</servlet>
+
 	<!-- le rest -->
 	<servlet>
 		<servlet-name>rest-ws</servlet-name>
@@ -35,9 +53,10 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<!-- Le listener Spring -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	<!-- la about -->
+	<servlet-mapping>
+		<servlet-name>aboutServlet</servlet-name>
+		<url-pattern>/ouranos/about</url-pattern>
+	</servlet-mapping>
 
 </web-app>

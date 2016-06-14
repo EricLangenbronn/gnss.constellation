@@ -12,7 +12,6 @@ import org.apache.commons.logging.LogFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.dao.Sp3Dao;
-import fr.gnss.constellation.ouranos.util.ConfigurationLoader;
 
 public class Sp3DaoImpl implements Sp3Dao {
 
@@ -28,27 +27,21 @@ public class Sp3DaoImpl implements Sp3Dao {
 	};
 
 	@Override
-	public List<String> getListSp3FileName() throws TechnicalException, BusinessException {
-		String pathSp3Dir = ConfigurationLoader.getProperty("repertoire.sp3");
+	public List<String> getListSp3FileName(String pathSp3Dir) throws TechnicalException, BusinessException {
 		File fileSp3Dir = new File(pathSp3Dir);
+		//TODO tester l'existance du fichier fileSp3Dir
 		List<String> sp3FileNames = Arrays.asList(fileSp3Dir.list(filter));
-
-		/*
-		for (File sp3File : fileSp3Dir.listFiles(filter)) {
-			LOGGER.info("Chargement fichier : " + sp3File.getName());
-			sp3FileNames.add(sp3File.getName());
-		}*/
 
 		return sp3FileNames;
 	}
 
 	@Override
-	public List<File> getListSp3File() throws TechnicalException, BusinessException {
+	public List<File> getListSp3File(String pathSp3Dir) throws TechnicalException, BusinessException {
 
-		String pathSp3Dir = ConfigurationLoader.getProperty("repertoire.sp3");
 		File fileSp3Dir = new File(pathSp3Dir);
 		List<File> sp3FileNames = new ArrayList<>();
 
+		//TODO tester l'existance du fichier fileSp3Dir
 		for (File sp3File : fileSp3Dir.listFiles(filter)) {
 			LOGGER.info("Chargement fichier : " + sp3File.getName());
 			sp3FileNames.add(sp3File);

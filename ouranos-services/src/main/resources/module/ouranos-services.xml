@@ -4,6 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="propertiesService"
+		class="fr.gnss.constellation.ouranos.services.impl.OuranosPropertiesServiceImpl">
+	</bean>
+
 	<bean id="configurationService"
 		class="fr.gnss.constellation.ouranos.services.impl.OuranosConfigurationServiceImpl">
 		<property name="validationService" ref="validationService"></property>
@@ -18,6 +22,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="validationService"
 		class="fr.gnss.constellation.ouranos.services.impl.OuranosValidationServiceImpl">
 		<property name="sp3Dao" ref="sp3Dao"></property>
+		<property name="propertiesService" ref="propertiesService"></property>
 	</bean>
 
 </beans>

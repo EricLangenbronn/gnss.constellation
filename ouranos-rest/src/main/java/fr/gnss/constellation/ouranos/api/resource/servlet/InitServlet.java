@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.api.parameter.servlet;
+package fr.gnss.constellation.ouranos.api.resource.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,17 +10,17 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 
-public class InitServletParameter extends HttpServlet {
+public class InitServlet extends HttpServlet {
 
 	/**
      * Le logger de la classe.
      */
-	private static final Logger LOGGER = LoggerFactory.getLogger(InitServletParameter.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(InitServlet.class);
 
 	/**
     *
     */
-    public InitServletParameter()
+    public InitServlet()
     {
         super();
     }
