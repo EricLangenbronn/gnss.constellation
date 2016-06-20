@@ -9,27 +9,34 @@
 	<!-- on indique que la webapp est distribuable, i.e. clusterisable... -->
 	<distributable />
 
+	<!-- Le listener Spring -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<!-- Parametres pour Spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>WEB-INF/applicationContext.xml</param-value>
 	</context-param>
 
-	<!-- Le listener Spring -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	<!-- Nom du paramètre système qui va donner le nom du répertoire de configuration 
+		(par le service de paramétrage) -->
+	<context-param>
+		<param-name>app.conf.dir</param-name>
+		<param-value>OURANOS_REST_API_CONF</param-value>
+	</context-param>
 
-	<!-- rest -->
-	<servlet-mapping>
-		<servlet-name>rest-ws</servlet-name>
-		<url-pattern>/ouranos/*</url-pattern>
-	</servlet-mapping>
+	<!-- Nom du fichier de configuration utilise (par le service de paramétrage) -->
+	<context-param>
+		<param-name>app.conf.file</param-name>
+		<param-value>ouranos-rest-api.properties</param-value>
+	</context-param>
 
 	<!-- Servlet d'initialisation du paramétrage à décommenter dès que besoin -->
 	<servlet>
 		<servlet-name>initParametrage</servlet-name>
-		<servlet-class>fr.gnss.constellation.ouranos.api.parameter.servlet.InitServletParameter</servlet-class>
+		<servlet-class>fr.gnss.constellation.ouranos.api.parameter.servlet.InitParameterServlet</servlet-class>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 
@@ -38,6 +45,13 @@
 		<servlet-name>initWebapp</servlet-name>
 		<servlet-class>fr.gnss.constellation.ouranos.api.resource.servlet.InitServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Servlet accessible -->
+	<!-- Servlet de rechargement du paramètrage -->
+	<servlet>
+		<servlet-name>reloadConf</servlet-name>
+		<servlet-class>fr.gnss.constellation.ouranos.api.parameter.servlet.InitParameterServlet</servlet-class>
 	</servlet>
 
 	<!-- la servlet about -->
@@ -57,6 +71,18 @@
 	<servlet-mapping>
 		<servlet-name>aboutServlet</servlet-name>
 		<url-pattern>/ouranos/about</url-pattern>
+	</servlet-mapping>
+
+	<!-- la configuration -->
+	<servlet-mapping>
+		<servlet-name>reloadConf</servlet-name>
+		<url-pattern>/ouranos/reloadConf</url-pattern>
+	</servlet-mapping>
+
+	<!-- rest -->
+	<servlet-mapping>
+		<servlet-name>rest-ws</servlet-name>
+		<url-pattern>/ouranos/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>

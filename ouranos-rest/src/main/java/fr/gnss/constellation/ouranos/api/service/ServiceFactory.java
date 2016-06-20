@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.services.OuranosConfigurationService;
+import fr.gnss.constellation.ouranos.services.OuranosExecutionService;
 
 public class ServiceFactory {
 
@@ -18,6 +19,8 @@ public class ServiceFactory {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceFactory.class);
 
 	private OuranosConfigurationService ouranosConfigurationService = null;
+
+	private OuranosExecutionService ouranosExecutionService = null;
 
 	/**
 	 * Cette méthode permet de récupérer les informations de version dans le jar
@@ -96,6 +99,14 @@ public class ServiceFactory {
 
 	public void setOuranosConfigurationService(OuranosConfigurationService ouranosConfigurationService) {
 		this.ouranosConfigurationService = ouranosConfigurationService;
+	}
+
+	public OuranosExecutionService getOuranosExecutionService() {
+		return ouranosExecutionService;
+	}
+
+	public void setOuranosExecutionService(OuranosExecutionService ouranosExecutionService) {
+		this.ouranosExecutionService = ouranosExecutionService;
 	}
 
 }

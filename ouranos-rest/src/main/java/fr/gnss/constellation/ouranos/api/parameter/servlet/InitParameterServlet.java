@@ -3,6 +3,7 @@ package fr.gnss.constellation.ouranos.api.parameter.servlet;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,9 +27,9 @@ public class InitParameterServlet extends HttpServlet
     private static final Logger LOGGER = LoggerFactory.getLogger(InitParameterServlet.class);
 
     /**
-     * peivate static final String
+     * private static final String
      */
-    private static final String PARAMETRAGE_SERVICE_NAME = "parametreService";
+    private static final String PARAMETRAGE_SERVICE_NAME = "propertiesService";
 
     /**
     *
@@ -52,7 +53,8 @@ public class InitParameterServlet extends HttpServlet
         }
         catch (Exception e)
         {
-            LOGGER.error("Une erreur est intervenue au chargement de la configuration", e);
+        	String message = "Une erreur est intervenue au chargement de la configuration";
+            LOGGER.error(message, e);
         }
     }
 
@@ -64,38 +66,22 @@ public class InitParameterServlet extends HttpServlet
     @Override
     public void doGet(HttpServletRequest p_Request, HttpServletResponse p_Reponse) throws IOException, ServletException
     {
-        String res = "Rechargement Ok";
+    	PrintWriter writer = p_Reponse.getWriter();
+        String res = "";
 
         try
         {
             initialiserParametres();
+            res = "Rechargement Ok";
         }
         catch (Exception e)
         {
-            LOGGER.error("Une erreur est intervenue au chargement de la configuration", e);
+        	String message ="Une erreur est intervenue au chargement de la configuration";
+            LOGGER.error(message, e);
             res = "Rechargement Ko";
         }
-
-        BufferedOutputStream out = null;
-
-        try
-        {
-            out = new BufferedOutputStream(p_Reponse.getOutputStream());
-            p_Reponse.setContentType("text/plain");
-            // prepare output stream
-            out.write(res.getBytes());
-        }
-        catch (Exception e)
-        {
-            LOGGER.error("Une erreur est intervenue à l'affichage de la réponse", e);
-        }
-        finally
-        {
-            if (out != null)
-            {
-                out.close();
-            }
-        }
+        
+        writer.write(res);
     }
 
     /*
@@ -107,7 +93,7 @@ public class InitParameterServlet extends HttpServlet
         {
             LOGGER.info("Chargement de la configuration");
 
-            String nomParametrerepertoireconfiguration = getServletContext().getInitParameter("property.app.conf.dir");
+            String nomParametrerepertoireconfiguration = getServletContext().getInitParameter("app.conf.dir");
             String nomfichierconfiguration = getServletContext().getInitParameter("app.conf.file");
             
             String repertoireconfiguration = System.getProperty(nomParametrerepertoireconfiguration);
@@ -123,7 +109,8 @@ public class InitParameterServlet extends HttpServlet
         }
         catch (Exception e)
         {
-            LOGGER.error("Une erreur est intervenue au chargement de la configuration", e);
+        	String message = "Une erreur est intervenue au chargement de la configuration";
+            LOGGER.error(message, e);
             throw e;
         }
     }

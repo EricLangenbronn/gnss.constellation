@@ -42,13 +42,18 @@ public class Sp3DaoImpl implements Sp3Dao {
 		List<File> sp3FileNames = new ArrayList<>();
 
 		//TODO tester l'existance du fichier fileSp3Dir
-		for (File sp3File : fileSp3Dir.listFiles(filter)) {
-			LOGGER.info("Chargement fichier : " + sp3File.getName());
-			sp3FileNames.add(sp3File);
+		if(fileSp3Dir.listFiles(filter) == null || fileSp3Dir.listFiles(filter).length == 0) 
+		{
+			//on fait rien
+		} else 
+		{
+			for (File sp3File : fileSp3Dir.listFiles(filter)) {
+				LOGGER.info("Chargement fichier : " + sp3File.getName());
+				sp3FileNames.add(sp3File);
+			}
 		}
 
 		return sp3FileNames;
 	}
-
 }
 

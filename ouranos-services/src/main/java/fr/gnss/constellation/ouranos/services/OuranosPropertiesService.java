@@ -10,7 +10,7 @@ public interface OuranosPropertiesService
      * Réinitialise la configuration. Il faut commencer par cette méthode avant l'utilisation des obtenir.
      * 
      * @param p_CheminProperties
-     *            le chemin du properties, exemple : /domaines/fifi/properties/rosa-rest-api.properties
+     *            le chemin du properties, exemple : /domaines/ouranos/properties/ouranos-rest-api.properties
      * @throws BusinessException
      *             soucis applicatif
      * @throws TechnicalException

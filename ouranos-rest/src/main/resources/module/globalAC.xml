@@ -9,8 +9,13 @@
 	<bean id="ouranosServiceFactory"
 		class="fr.gnss.constellation.ouranos.api.service.ServiceFactory">
 		<property name="ouranosConfigurationService">
-			<ref bean="configurationService" />
+			<ref bean="configurationService" />           
 		</property>
+        <property name="ouranosExecutionService">
+			 <ref bean="executionService" />
+		</property>
+        
+       
 	</bean>
 
 </beans>

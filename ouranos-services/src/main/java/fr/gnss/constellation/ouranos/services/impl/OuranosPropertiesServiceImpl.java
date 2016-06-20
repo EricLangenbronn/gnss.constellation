@@ -30,11 +30,11 @@ public class OuranosPropertiesServiceImpl implements fr.gnss.constellation.ouran
     /**
      * nom du fichier de configuration
      */
-    private String m_configurationFileName = "services.properties";
+    private String m_configurationFileName = "ouranos-rest-api.properties";
 
     /*
      * (non-Javadoc)
-     * @see fr.gouv.finances.douane.referentiel.api.nomenclature.service.ParametreServiceInterface#initialiserConfiguration(java.lang.String)
+     * @see fr.gnss.constellation.ouranos.services.OuranosPropertiesService#initialiserConfiguration(java.lang.String)
      */
     @Override
     public void initConfiguration(String p_RepertoireConfiguration, String p_fichierProperties)
@@ -47,7 +47,7 @@ public class OuranosPropertiesServiceImpl implements fr.gnss.constellation.ouran
     }
 
     /* (non-Javadoc)
-     * @see fr.gouv.finances.douane.referentiel.api.nomenclature.service.ParametreServiceInterface#obtenirInteger(java.lang.String)
+     * @see fr.gnss.constellation.ouranos.services.OuranosPropertiesService#obtenirInteger(java.lang.String)
      */
     @Override
     public int getInteger(String p_Cle)
@@ -71,7 +71,7 @@ public class OuranosPropertiesServiceImpl implements fr.gnss.constellation.ouran
 
     /*
      * (non-Javadoc)
-     * @see fr.gouv.finances.douane.referentiel.api.parametre.service.ParametreServiceInterface#obtenirBoolean(java.lang.String)
+     * @see fr.gnss.constellation.ouranos.services.OuranosPropertiesService#obtenirBoolean(java.lang.String)
      */
     @Override
     public boolean getBoolean(String p_Cle)
@@ -95,7 +95,7 @@ public class OuranosPropertiesServiceImpl implements fr.gnss.constellation.ouran
 
     /*
      * (non-Javadoc)
-     * @see fr.gouv.finances.douane.referentiel.api.parametre.service.ParametreServiceInterface#obtenirString(java.lang.String)
+     * @see fr.gnss.constellation.ouranos.services.OuranosPropertiesService#obtenirString(java.lang.String)
      */
     @Override
     public String getString(String p_Cle)
@@ -119,7 +119,7 @@ public class OuranosPropertiesServiceImpl implements fr.gnss.constellation.ouran
 
     /*
      * (non-Javadoc)
-     * @see fr.gouv.finances.douane.referentiel.api.parametre.service.ParametreServiceInterface#exists(java.lang.String)
+     * @see fr.gnss.constellation.ouranos.services.OuranosPropertiesService#exists(java.lang.String)
      */
     @Override
     public boolean exists(String p_Cle)
@@ -166,7 +166,7 @@ public class OuranosPropertiesServiceImpl implements fr.gnss.constellation.ouran
     }
 
     /* (non-Javadoc)
-     * @see fr.gouv.finances.douane.referentiel.api.parametre.service.ParametreServiceInterface#getNomRepertoireConfig()
+     * @see fr.gnss.constellation.ouranos.services.OuranosPropertiesService#getNomRepertoireConfig()
      */
     @Override
     public String getNomRepertoireConfiguration()
@@ -175,7 +175,7 @@ public class OuranosPropertiesServiceImpl implements fr.gnss.constellation.ouran
     }
 
     /* (non-Javadoc)
-     * @see fr.gouv.finances.douane.referentiel.api.parametre.service.ParametreServiceInterface#getNomRepertoireConfig()
+     * @see fr.gnss.constellation.ouranos.services.OuranosPropertiesService#getNomRepertoireConfig()
      */
     @Override
     public String getNomFichierConfiguration()
