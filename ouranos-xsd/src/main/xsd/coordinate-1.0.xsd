@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.ouranos.fr/ouranos/data/v10/coordinate"
+	xmlns:tns="http://www.ouranos.fr/ouranos/data/v10/coordinate"
+	attributeFormDefault="unqualified" elementFormDefault="qualified">
+
+	<xs:complexType name="geodeticCoordinate">
+		<xs:annotation>
+			<xs:documentation>
+				<xs:documentation></xs:documentation>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="1" name="latitude" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>phi : radian</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" name="longitude" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>lambda : radian</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" name="altitude" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>altitude : meter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="cartesianCoordinate">
+		<xs:annotation>
+			<xs:documentation>
+				<xs:documentation></xs:documentation>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="1" name="abscisse" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>abscissa : meter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" name="ordonnee" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>ordinate : meter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" name="hauteur" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>height : meter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

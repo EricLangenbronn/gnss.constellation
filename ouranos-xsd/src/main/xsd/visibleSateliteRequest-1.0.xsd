@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest"
+	xmlns:tns="http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest"
+	xmlns:odt10="http://www.ouranos.fr/ouranos/data/v10/types" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate"
+	attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:import namespace="http://www.ouranos.fr/ouranos/data/v10/types"
+		schemaLocation="dataType-1.0.xsd" />
+	<xs:import namespace="http://www.ouranos.fr/ouranos/data/v10/coordinate"
+		schemaLocation="coordinate-1.0.xsd" />
+
+	<xs:element name="visibleSateliteRequest">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<xs:documentation></xs:documentation>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="groundStation" type="tns:coorindate">
+					<xs:annotation>
+						<xs:documentation></xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="startDateOfMeasure" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>UTC</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="endDateOfMeasure" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>UTC</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="coorindate">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="geodetic" type="oc10:geodeticCoordinate"></xs:element>
+				<xs:element name="cartesian" type="oc10:cartesianCoordinate"></xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

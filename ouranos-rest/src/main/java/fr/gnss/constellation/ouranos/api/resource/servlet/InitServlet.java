@@ -30,7 +30,6 @@ public class InitServlet extends HttpServlet {
 	 * 
 	 * @see javax.servlet.GenericServlet#init()
 	 */
-	@SuppressWarnings("unchecked")
 	public void init() throws ServletException {
 		super.init();
 
