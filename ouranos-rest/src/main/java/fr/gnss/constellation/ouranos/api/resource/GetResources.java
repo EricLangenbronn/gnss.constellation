@@ -1,25 +1,24 @@
 package fr.gnss.constellation.ouranos.api.resource;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.gnss.constellation.ouranos.api.service.ServiceFactory;
 import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
-import fr.gnss.constellation.ouranos.model.Parameters;
-import fr.gnss.constellation.ouranos.model.Resultats;
-import fr.gnss.constellation.ouranos.services.OuranosConfigurationService;
-import fr.gnss.constellation.ouranos.services.OuranosExecutionService;
+import fr.gnss.constellation.ouranos.services.impl.BindingXMLService;
+import fr.gnss.constellation.ouranos.xsd.VisibleSateliteRequest;
 
 @Path("/")
 public class GetResources {
@@ -37,26 +36,18 @@ public class GetResources {
 	}
 
 	@GET
-	@Path("/{param}")
-	public Response getMsg(@PathParam("param") String msg) throws BusinessException, TechnicalException {
-		LOGGER.info("param");
-		String output = "Jersey say : " + msg;
+	@Produces(MediaType.TEXT_XML + ";charset=UTF-8")
+	@Path("/{version}/visibleSat")
+	public Response getVisibleSatelite(@PathParam("version") final String version,
+			@QueryParam("requete") String p_contenu) throws BusinessException, TechnicalException {
 
-		LocalDateTime p_startOfMeasure = LocalDateTime.parse("2013-12-22T00:00", DateTimeFormatter.ISO_DATE_TIME);
-		LocalDateTime p_endOfMeasure = LocalDateTime.parse("2013-12-22T23:45", DateTimeFormatter.ISO_DATE_TIME);
+		BindingXMLService bindingXml = BindingXMLService.getInstance();
+		InputStream is = new ByteArrayInputStream(p_contenu.getBytes());
+		VisibleSateliteRequest request = bindingXml.mapXml2Object(is, VisibleSateliteRequest.class);
 
-		OuranosExecutionService ouranosExecService = ServiceLocator.getServiceFactory().getOuranosExecutionService();
-		GeodeticCoordinate stationGeo = new GeodeticCoordinate(Math.toRadians(38.889139), Math.toRadians(-77.049),
-				130.049);
+		ServiceLocator.getServiceFactory().getSateliteVisibleService().getSateliteVisible(request);
 
-		ouranosExecService.setParameters(new Parameters(stationGeo, 15, p_startOfMeasure, p_endOfMeasure));
-		ouranosExecService.launchExecution();
-		Resultats res = ouranosExecService.getResultats();
-		LOGGER.info(res.toString());
-		
-		
-		return Response.status(200).entity(output).build();
-
+		return null;
 	}
 
 }

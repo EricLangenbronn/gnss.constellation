@@ -3,7 +3,7 @@ package fr.gnss.constellation.ouranos.services;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
-public interface OuranosPropertiesService
+public interface IPropertiesService
 {
 
     /**

@@ -13,17 +13,16 @@ import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 public class InitServlet extends HttpServlet {
 
 	/**
-     * Le logger de la classe.
-     */
+	 * Le logger de la classe.
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(InitServlet.class);
 
 	/**
-    *
-    */
-    public InitServlet()
-    {
-        super();
-    }
+	*
+	*/
+	public InitServlet() {
+		super();
+	}
 
 	/**
 	 * {@inheritDoc}

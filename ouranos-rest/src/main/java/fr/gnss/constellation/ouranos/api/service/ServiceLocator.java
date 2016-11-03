@@ -1,10 +1,7 @@
 package fr.gnss.constellation.ouranos.api.service;
 
-import java.net.URL;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.jar.Manifest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

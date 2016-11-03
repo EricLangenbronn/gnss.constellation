@@ -12,12 +12,12 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 
-public interface ExecutionDao {
+public interface IExecutionDao {
 
 	public SphericalCoordinate processSphericalCoordinate(GeodeticCoordinate gStation, CartesianCoordinate3D station,
 			CartesianCoordinate3D satelite);
 
 	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(Sp3FileReader sp3FileParser,
 			double elevationMask, LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
-					throws TechnicalException, BusinessException;
+			throws TechnicalException, BusinessException;
 }

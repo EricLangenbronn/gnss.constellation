@@ -8,8 +8,8 @@ import java.util.jar.Manifest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.gnss.constellation.ouranos.services.OuranosConfigurationService;
-import fr.gnss.constellation.ouranos.services.OuranosExecutionService;
+import fr.gnss.constellation.ouranos.services.IConfigurationService;
+import fr.gnss.constellation.ouranos.services.satelite.visible.ISateliteVisibleService;
 
 public class ServiceFactory {
 
@@ -18,9 +18,9 @@ public class ServiceFactory {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceFactory.class);
 
-	private OuranosConfigurationService ouranosConfigurationService = null;
+	private IConfigurationService configurationService = null;
 
-	private OuranosExecutionService ouranosExecutionService = null;
+	private ISateliteVisibleService sateliteVisibleService = null;
 
 	/**
 	 * Cette méthode permet de récupérer les informations de version dans le jar
@@ -93,20 +93,19 @@ public class ServiceFactory {
 		return informations;
 	}
 
-	public OuranosConfigurationService getOuranosConfigurationService() {
-		return ouranosConfigurationService;
+	public IConfigurationService getConfigurationService() {
+		return configurationService;
 	}
 
-	public void setOuranosConfigurationService(OuranosConfigurationService ouranosConfigurationService) {
-		this.ouranosConfigurationService = ouranosConfigurationService;
+	public ISateliteVisibleService getSateliteVisibleService() {
+		return sateliteVisibleService;
 	}
 
-	public OuranosExecutionService getOuranosExecutionService() {
-		return ouranosExecutionService;
+	public void setConfigurationService(IConfigurationService configurationService) {
+		this.configurationService = configurationService;
 	}
 
-	public void setOuranosExecutionService(OuranosExecutionService ouranosExecutionService) {
-		this.ouranosExecutionService = ouranosExecutionService;
+	public void setSateliteVisibleService(ISateliteVisibleService sateliteVisibleService) {
+		this.sateliteVisibleService = sateliteVisibleService;
 	}
-
 }

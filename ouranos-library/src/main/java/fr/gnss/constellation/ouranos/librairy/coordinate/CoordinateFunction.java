@@ -2,8 +2,6 @@ package fr.gnss.constellation.ouranos.librairy.coordinate;
 
 import java.util.Objects;
 
-import org.ejml.simple.SimpleMatrix;
-
 public class CoordinateFunction {
 
 	/**
@@ -78,8 +76,7 @@ public class CoordinateFunction {
 	 * @param lambda
 	 *            (en radian)
 	 */
-	public static CartesianCoordinate3D transformECEFtoENU(GeodeticCoordinate rotation,
-			CartesianCoordinate3D vector) {
+	public static CartesianCoordinate3D transformECEFtoENU(GeodeticCoordinate rotation, CartesianCoordinate3D vector) {
 		Objects.requireNonNull(vector, "CartesianCoordinate3D");
 
 		double u = vector.X();

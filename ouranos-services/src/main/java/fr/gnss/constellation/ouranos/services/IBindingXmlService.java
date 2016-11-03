@@ -5,7 +5,7 @@ import java.io.OutputStream;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 
-public interface BindingXmlService {
+public interface IBindingXmlService {
 
 	/**
 	 * Map the XML to the object with type class

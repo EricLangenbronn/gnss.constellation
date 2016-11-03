@@ -11,13 +11,13 @@ import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.commons.utils.ParameterUtils;
 
-public class OuranosPropertiesServiceImpl implements fr.gnss.constellation.ouranos.services.OuranosPropertiesService
+public class PropertiesService implements fr.gnss.constellation.ouranos.services.IPropertiesService
 {
 
 	/**
      * Le logger de la classe.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(OuranosPropertiesServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesService.class);
 
     /** properties */
     private static Properties s_Properties = null;

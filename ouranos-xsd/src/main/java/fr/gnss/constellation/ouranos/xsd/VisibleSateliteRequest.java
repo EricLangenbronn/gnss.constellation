@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2016.07.27 à 08:14:59 PM CEST 
+// Généré le : 2016.11.03 à 10:32:56 PM CET 
 //
 
 
@@ -35,9 +35,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="groundStation" type="{http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest}coorindate"/&gt;
+ *         &lt;element name="groundStation" type="{http://www.ouranos.fr/ouranos/data/v10/coordinate}geodeticCoordinate"/&gt;
  *         &lt;element name="startDateOfMeasure" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
  *         &lt;element name="endDateOfMeasure" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
+ *         &lt;element name="elevationMask" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -50,29 +51,32 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlType(name = "", propOrder = {
     "groundStation",
     "startDateOfMeasure",
-    "endDateOfMeasure"
+    "endDateOfMeasure",
+    "elevationMask"
 })
-@XmlRootElement(name = "visibleSateliteRequest")
+@XmlRootElement(name = "visibleSateliteRequest", namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest")
 public class VisibleSateliteRequest {
 
-    @XmlElement(required = true)
-    protected Coorindate groundStation;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", required = true)
+    protected GeodeticCoordinate groundStation;
+    @XmlElement(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar startDateOfMeasure;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar endDateOfMeasure;
+    @XmlElement(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest")
+    protected double elevationMask;
 
     /**
      * Obtient la valeur de la propriété groundStation.
      * 
      * @return
      *     possible object is
-     *     {@link Coorindate }
+     *     {@link GeodeticCoordinate }
      *     
      */
-    public Coorindate getGroundStation() {
+    public GeodeticCoordinate getGroundStation() {
         return groundStation;
     }
 
@@ -81,10 +85,10 @@ public class VisibleSateliteRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link Coorindate }
+     *     {@link GeodeticCoordinate }
      *     
      */
-    public void setGroundStation(Coorindate value) {
+    public void setGroundStation(GeodeticCoordinate value) {
         this.groundStation = value;
     }
 
@@ -134,6 +138,22 @@ public class VisibleSateliteRequest {
      */
     public void setEndDateOfMeasure(XMLGregorianCalendar value) {
         this.endDateOfMeasure = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété elevationMask.
+     * 
+     */
+    public double getElevationMask() {
+        return elevationMask;
+    }
+
+    /**
+     * Définit la valeur de la propriété elevationMask.
+     * 
+     */
+    public void setElevationMask(double value) {
+        this.elevationMask = value;
     }
 
 }

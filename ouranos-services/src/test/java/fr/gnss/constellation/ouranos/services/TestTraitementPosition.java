@@ -1,4 +1,4 @@
-package fr.gnss.contellation.ouranos.services;
+package fr.gnss.constellation.ouranos.services;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -8,20 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.gnss.constellation.ouranos.dao.ExecutionDao;
+import fr.gnss.constellation.ouranos.dao.IExecutionDao;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
-import fr.gnss.constellation.ouranos.services.OuranosExecutionService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/ouranos-dao-test.xml", "/ouranos-services-test.xml" })
 public class TestTraitementPosition {
 
 	@Autowired
-	private ExecutionDao executionDao;
-	
+	private IExecutionDao executionDao;
+
 	@Test
 	public void testProcessElevationAzimut() {
 		GeodeticCoordinate stationGeo = new GeodeticCoordinate(Math.toRadians(38.889139), Math.toRadians(-77.049),
@@ -31,7 +30,8 @@ public class TestTraitementPosition {
 				CoordinateFunction.geodeticToCartesianWSG84(stationGeo));
 		CartesianCoordinate3D satelite = new CartesianCoordinate3D(-12110.343226, -13482.507392, -19488.380856);
 
-		SphericalCoordinate sphere = executionDao.processSphericalCoordinate(stationGeo, stationCar, satelite);
+		SphericalCoordinate sphere = null; // executionDao.processSphericalCoordinate(stationGeo,
+											// stationCar, satelite);
 		assertNotNull(sphere);
 
 		System.out.println("angle : " + sphere);
@@ -55,7 +55,7 @@ public class TestTraitementPosition {
 	 * System.out.println("end of file"); break; } } }
 	 */
 
-	public void setExecutionService(ExecutionDao executionDao) {
+	public void setExecutionService(IExecutionDao executionDao) {
 		this.executionDao = executionDao;
 	}
 }

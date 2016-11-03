@@ -1,4 +1,4 @@
-package fr.gnss.contellation.ouranos.services;
+package fr.gnss.constellation.ouranos.services;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -13,14 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.gnss.constellation.ouranos.services.OuranosValidationService;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/ouranos-dao-test.xml", "/ouranos-services-test.xml" })
 public class TestValidationService {
 
 	@Autowired
-	private OuranosValidationService validationService;
+	private IValidationService validationService;
 
 	@Test
 	public void testIsDataForPeriodSmall() throws Exception {
@@ -76,7 +74,7 @@ public class TestValidationService {
 		assertNull(sp3File);
 	}
 
-	public void setValidationService(OuranosValidationService validationService) {
+	public void setValidationService(IValidationService validationService) {
 		this.validationService = validationService;
 	}
 

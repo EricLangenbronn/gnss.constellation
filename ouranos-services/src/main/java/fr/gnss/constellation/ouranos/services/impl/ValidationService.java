@@ -3,27 +3,26 @@ package fr.gnss.constellation.ouranos.services.impl;
 import java.io.File;
 import java.time.LocalDateTime;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.dao.Sp3Dao;
+import fr.gnss.constellation.ouranos.dao.ISp3Dao;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileNameFormat;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FormatConst;
-import fr.gnss.constellation.ouranos.services.OuranosValidationService;
+import fr.gnss.constellation.ouranos.services.IValidationService;
 
-public class OuranosValidationServiceImpl implements OuranosValidationService {
+public class ValidationService implements IValidationService {
 
 	/**
 	 * Le logger de la classe.
 	 */
-	private static final Log LOGGER = LogFactory.getLog(OuranosValidationServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ValidationService.class);
 
-	private Sp3Dao sp3Dao;
-	private OuranosPropertiesServiceImpl propertiesService;
-	
+	private ISp3Dao sp3Dao;
+	private PropertiesService propertiesService;
+
 	public File isDataForPeriod(LocalDateTime start, LocalDateTime end) throws TechnicalException, BusinessException {
 
 		File isDataForPeriod = null;
@@ -45,11 +44,11 @@ public class OuranosValidationServiceImpl implements OuranosValidationService {
 		return isDataForPeriod;
 	}
 
-	public void setSp3Dao(Sp3Dao sp3Dao) {
+	public void setSp3Dao(ISp3Dao sp3Dao) {
 		this.sp3Dao = sp3Dao;
 	}
-	
-	public void setPropertiesService(OuranosPropertiesServiceImpl propertiesService) {
+
+	public void setPropertiesService(PropertiesService propertiesService) {
 		this.propertiesService = propertiesService;
 	}
 

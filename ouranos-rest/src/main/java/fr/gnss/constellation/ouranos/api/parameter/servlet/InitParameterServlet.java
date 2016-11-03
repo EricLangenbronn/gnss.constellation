@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import fr.gnss.constellation.ouranos.services.OuranosPropertiesService;
+import fr.gnss.constellation.ouranos.services.IPropertiesService;
 
 
 public class InitParameterServlet extends HttpServlet
@@ -101,7 +101,7 @@ public class InitParameterServlet extends HttpServlet
             LOGGER.info("Le fichier de configuration est  : " + nomfichierconfiguration);
 
             WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-            OuranosPropertiesService service = (OuranosPropertiesService) context.getBean(PARAMETRAGE_SERVICE_NAME);
+            IPropertiesService service = (IPropertiesService) context.getBean(PARAMETRAGE_SERVICE_NAME);
             service.initConfiguration(repertoireconfiguration, nomfichierconfiguration);
 
             LOGGER.info("Servlet : rechargement configuration : OK");

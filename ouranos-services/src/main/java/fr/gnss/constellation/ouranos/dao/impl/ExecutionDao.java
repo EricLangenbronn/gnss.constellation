@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.dao.ExecutionDao;
+import fr.gnss.constellation.ouranos.dao.IExecutionDao;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileReader;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
@@ -16,7 +19,12 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 
-public class ExecutionDaoImpl implements ExecutionDao {
+public class ExecutionDao implements IExecutionDao {
+
+	/**
+	 * Le logger de la classe.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExecutionDao.class);
 
 	/**
 	 * 
@@ -25,7 +33,6 @@ public class ExecutionDaoImpl implements ExecutionDao {
 	 * @param satelite
 	 * @return norme, élévation, azimut
 	 */
-
 	public SphericalCoordinate processSphericalCoordinate(GeodeticCoordinate gStation, CartesianCoordinate3D station,
 			CartesianCoordinate3D satelite) {
 
@@ -79,7 +86,7 @@ public class ExecutionDaoImpl implements ExecutionDao {
 
 	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(Sp3FileReader sp3FileParser,
 			double elevationMask, LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
-					throws TechnicalException, BusinessException {
+			throws TechnicalException, BusinessException {
 
 		List<Entry<LocalDateTime, List<Satelite>>> fileSatelite = sp3FileParser.getPositionAndClockRecord(start, end);
 		List<Entry<LocalDateTime, List<Satelite>>> sateliteVisible = new ArrayList<>();
