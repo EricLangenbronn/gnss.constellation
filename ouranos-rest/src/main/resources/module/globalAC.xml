@@ -6,16 +6,14 @@
 	<import resource="classpath:/module/ouranos-services.xml" />
 
 	<!-- Service Factory -->
-	<bean id="ouranosServiceFactory"
+	<bean id="serviceFactory"
 		class="fr.gnss.constellation.ouranos.api.service.ServiceFactory">
-		<property name="ouranosConfigurationService">
-			<ref bean="configurationService" />           
+		<property name="configurationService">
+			<ref bean="configurationService" />
 		</property>
-        <property name="ouranosExecutionService">
-			 <ref bean="executionService" />
+		<property name="sateliteVisibleService">
+			<ref bean="sateliteVisibleService" />
 		</property>
-        
-       
 	</bean>
 
 </beans>

@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Properties;
 
 import org.apache.commons.io.FilenameUtils;
@@ -89,8 +88,7 @@ public class ParameterUtils {
 		return l_prop;
 	}
 
-	public static Properties loadParametersFromClasspath(final String p_CheminFichierConfig)
-			throws TechnicalException {
+	public static Properties loadParametersFromClasspath(final String p_CheminFichierConfig) throws TechnicalException {
 		Properties l_prop = null;
 		LOGGER.info("Tentative de chargement de la configuration à partir du classpath dans :" + p_CheminFichierConfig);
 		InputStream l_confRepClassPath = null;

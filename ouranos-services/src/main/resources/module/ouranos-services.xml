@@ -5,22 +5,22 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="propertiesService"
-		class="fr.gnss.constellation.ouranos.services.impl.OuranosPropertiesServiceImpl">
+		class="fr.gnss.constellation.ouranos.services.impl.PropertiesService">
 	</bean>
 
 	<bean id="configurationService"
-		class="fr.gnss.constellation.ouranos.services.impl.OuranosConfigurationServiceImpl">
+		class="fr.gnss.constellation.ouranos.services.impl.ConfigurationService">
 		<property name="validationService" ref="validationService"></property>
 	</bean>
 
-	<bean id="executionService"
-		class="fr.gnss.constellation.ouranos.services.impl.OuranosExecutionServiceImpl">
+	<bean id="sateliteVisibleService"
+		class="fr.gnss.constellation.ouranos.services.satelite.visible.SateliteVisibleService">
 		<property name="configurationService" ref="configurationService"></property>
 		<property name="executionDao" ref="executionDao"></property>
 	</bean>
 
 	<bean id="validationService"
-		class="fr.gnss.constellation.ouranos.services.impl.OuranosValidationServiceImpl">
+		class="fr.gnss.constellation.ouranos.services.impl.ValidationService">
 		<property name="sp3Dao" ref="sp3Dao"></property>
 		<property name="propertiesService" ref="propertiesService"></property>
 	</bean>

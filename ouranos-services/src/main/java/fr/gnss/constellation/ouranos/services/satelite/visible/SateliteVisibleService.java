@@ -18,7 +18,7 @@ import fr.gnss.constellation.ouranos.services.IConfigurationService;
 import fr.gnss.constellation.ouranos.wrapper.XsdWrapper;
 import fr.gnss.constellation.ouranos.xsd.VisibleSateliteRequest;
 
-public class SateliteVisibleService {
+public class SateliteVisibleService implements ISateliteVisibleService {
 
 	/**
 	 * Le logger de la classe.

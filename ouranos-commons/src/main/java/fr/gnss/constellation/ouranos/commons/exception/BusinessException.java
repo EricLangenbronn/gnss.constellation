@@ -1,8 +1,7 @@
 package fr.gnss.constellation.ouranos.commons.exception;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BusinessException extends Exception {
 
@@ -14,7 +13,7 @@ public class BusinessException extends Exception {
 	/**
 	 * Le logger de la classe.
 	 */
-	private static final Log LOGGER = LogFactory.getLog(BusinessException.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BusinessException.class);
 
 	public BusinessException() {
 		super();
@@ -48,6 +47,6 @@ public class BusinessException extends Exception {
 	 */
 	public static void logAndThrow(final Logger p_logger, final String p_messageTechnique) throws BusinessException {
 		LOGGER.error("Erreur métier : " + p_messageTechnique);
-		throw new BusinessException( p_messageTechnique);
+		throw new BusinessException(p_messageTechnique);
 	}
 }

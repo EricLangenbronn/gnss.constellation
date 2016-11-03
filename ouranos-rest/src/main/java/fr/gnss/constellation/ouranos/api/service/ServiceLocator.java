@@ -102,7 +102,7 @@ public final class ServiceLocator {
 						LOGGER.info("Services spring : " + services);
 					}
 				}
-				serviceFactory = (ServiceFactory) p_Context.getBean("ouranosServiceFactory");
+				serviceFactory = (ServiceFactory) p_Context.getBean("serviceFactory");
 
 				// OK pour Tomcat
 				LOGGER.info("Version Services : " + serviceFactory.getInformationsVersion());

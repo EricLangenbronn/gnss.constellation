@@ -4,12 +4,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="executionDao"
-		class="fr.gnss.constellation.ouranos.dao.impl.ExecutionDaoImpl">
-	</bean>
-	
-	<bean id="sp3Dao"
-		class="fr.gnss.constellation.ouranos.dao.impl.Sp3DaoImpl">
-	</bean>
+	<bean id="executionDao" class="fr.gnss.constellation.ouranos.dao.impl.ExecutionDao" />
+
+	<bean id="sp3Dao" class="fr.gnss.constellation.ouranos.dao.impl.Sp3Dao" />
 
 </beans>
