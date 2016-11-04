@@ -8,18 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.gnss.constellation.ouranos.dao.IExecutionDao;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
+import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/ouranos-dao-test.xml", "/ouranos-services-test.xml" })
 public class TestTraitementPosition {
 
 	@Autowired
-	private IExecutionDao executionDao;
+	private IComputationService computationService;
 
 	@Test
 	public void testProcessElevationAzimut() {
@@ -30,8 +30,7 @@ public class TestTraitementPosition {
 				CoordinateFunction.geodeticToCartesianWSG84(stationGeo));
 		CartesianCoordinate3D satelite = new CartesianCoordinate3D(-12110.343226, -13482.507392, -19488.380856);
 
-		SphericalCoordinate sphere = null; // executionDao.processSphericalCoordinate(stationGeo,
-											// stationCar, satelite);
+		SphericalCoordinate sphere = computationService.processSphericalCoordinate(stationGeo, stationCar, satelite);
 		assertNotNull(sphere);
 
 		System.out.println("angle : " + sphere);
@@ -55,7 +54,7 @@ public class TestTraitementPosition {
 	 * System.out.println("end of file"); break; } } }
 	 */
 
-	public void setExecutionService(IExecutionDao executionDao) {
-		this.executionDao = executionDao;
+	public void setExecutionService(IComputationService executionDao) {
+		this.computationService = executionDao;
 	}
 }

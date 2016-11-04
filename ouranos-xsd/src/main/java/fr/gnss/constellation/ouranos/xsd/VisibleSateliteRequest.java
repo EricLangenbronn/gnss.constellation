@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2016.11.03 à 10:32:56 PM CET 
+// Généré le : 2016.11.04 à 09:04:36 PM CET 
 //
 
 
@@ -11,7 +11,6 @@ package fr.gnss.constellation.ouranos.xsd;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -19,19 +18,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * 
- * 					
+ * 				
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate" xmlns:odt10="http://www.ouranos.fr/ouranos/data/v10/types" xmlns:tns="http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest"/&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate"/&gt;
  * </pre>
  * 
- * 				
+ * 			
  * 
- * <p>Classe Java pour anonymous complex type.
+ * <p>Classe Java pour visibleSateliteRequest complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType&gt;
+ * &lt;complexType name="visibleSateliteRequest"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
@@ -48,24 +47,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "visibleSateliteRequest", namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", propOrder = {
     "groundStation",
     "startDateOfMeasure",
     "endDateOfMeasure",
     "elevationMask"
 })
-@XmlRootElement(name = "visibleSateliteRequest", namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest")
 public class VisibleSateliteRequest {
 
-    @XmlElement(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", required = true)
+    @XmlElement(required = true)
     protected GeodeticCoordinate groundStation;
-    @XmlElement(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", required = true)
+    @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar startDateOfMeasure;
-    @XmlElement(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", required = true)
+    @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar endDateOfMeasure;
-    @XmlElement(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest")
     protected double elevationMask;
 
     /**

@@ -13,8 +13,8 @@
 		<module>ouranos-library</module>
 		<module>ouranos-xsd</module>
 		<module>ouranos-services</module>
-		<module>ouranos-rest</module>
 		<module>ouranos-war</module>
+		<module>ouranos-livraison</module>
 	</modules>
 
 	<properties>

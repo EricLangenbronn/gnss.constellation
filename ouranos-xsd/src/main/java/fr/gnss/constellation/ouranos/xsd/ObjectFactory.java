@@ -2,13 +2,16 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2016.11.03 à 10:32:56 PM CET 
+// Généré le : 2016.11.04 à 09:04:36 PM CET 
 //
 
 
 package fr.gnss.constellation.ouranos.xsd;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
+import javax.xml.namespace.QName;
 
 
 /**
@@ -28,6 +31,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _VisibleSateliteRequest_QNAME = new QName("http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", "visibleSateliteRequest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: fr.gnss.constellation.ouranos.xsd
@@ -58,6 +62,15 @@ public class ObjectFactory {
      */
     public VisibleSateliteRequest createVisibleSateliteRequest() {
         return new VisibleSateliteRequest();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link VisibleSateliteRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", name = "visibleSateliteRequest")
+    public JAXBElement<VisibleSateliteRequest> createVisibleSateliteRequest(VisibleSateliteRequest value) {
+        return new JAXBElement<VisibleSateliteRequest>(_VisibleSateliteRequest_QNAME, VisibleSateliteRequest.class, null, value);
     }
 
 }

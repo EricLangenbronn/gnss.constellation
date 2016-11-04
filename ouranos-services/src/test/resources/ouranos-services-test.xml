@@ -4,25 +4,25 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="propertiesService"
-		class="fr.gnss.constellation.ouranos.services.impl.OuranosPropertiesServiceImpl">
-	</bean>
+	<bean id="propertiesService" class="fr.gnss.constellation.ouranos.service.PropertiesService" />
 
-	<bean id="configurationService"
-		class="fr.gnss.constellation.ouranos.services.impl.OuranosConfigurationServiceImpl">
-		<property name="validationService" ref="validationService"></property>
-	</bean>
+	<bean id="computationService"
+		class="fr.gnss.constellation.ouranos.service.computation.ComputationService" />
 
-	<bean id="executionService"
-		class="fr.gnss.constellation.ouranos.services.impl.OuranosExecutionServiceImpl">
-		<property name="configurationService" ref="configurationService"></property>
-		<property name="executionDao" ref="executionDao"></property>
-	</bean>
-
-	<bean id="validationService"
-		class="fr.gnss.constellation.ouranos.services.impl.OuranosValidationServiceImpl">
+	<bean id="orbitsDataService"
+		class="fr.gnss.constellation.ouranos.service.orbitdata.OrbitsDataService">
 		<property name="sp3Dao" ref="sp3Dao"></property>
 		<property name="propertiesService" ref="propertiesService"></property>
+	</bean>
+
+	<bean id="sateliteVisibleService"
+		class="fr.gnss.constellation.ouranos.service.satelitevisible.SateliteVisibleService">
+		<property name="orbitsDataService" ref="orbitsDataService"></property>
+		<property name="computationService" ref="computationService"></property>
+	</bean>
+
+	<bean id="fluxService" class="fr.gnss.constellation.ouranos.service.flux.FluxService">
+		<property name="sateliteVisibleService" ref="sateliteVisibleService"></property>
 	</bean>
 
 </beans>

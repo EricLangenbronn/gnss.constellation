@@ -14,4 +14,4 @@ content la ligne suivante :
 	- repertoire.sp3=C:\\Users\\...\\Documents\\workspace\\ouranos.prop
 	
 	
-http://127.0.1:8080/ouranos-war/ouranos/123
+http://127.0.1:8080/ouranos-war/ouranos/
