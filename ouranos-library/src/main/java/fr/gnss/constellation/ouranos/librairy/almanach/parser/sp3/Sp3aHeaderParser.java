@@ -4,12 +4,19 @@ import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.AbstractHeaderParser;
 
-public class Sp3aHeaderParser extends AbstractHeaderParser implements
-		Sp3IHeaderParser {
+public class Sp3aHeaderParser extends AbstractHeaderParser implements ISp3HeaderParser {
+
+	/**
+	 * Le logger de la classe.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3aHeaderParser.class);
 
 	private static int headerNbCol = 60;
 
@@ -31,10 +38,8 @@ public class Sp3aHeaderParser extends AbstractHeaderParser implements
 		String minute = super.read(17, 2).replaceFirst(" ", "0");
 		String sec = super.read(20, 11).replaceFirst(" ", "0");
 
-		String dateTime = year + "-" + month + "-" + day + "T" + hour + ":"
-				+ minute + ":" + sec + "Z";
-		LocalDateTime startDateTime = LocalDateTime.parse(dateTime,
-				DateTimeFormatter.ISO_INSTANT);
+		String dateTime = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + sec + "Z";
+		LocalDateTime startDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_INSTANT);
 
 		return startDateTime;
 	}

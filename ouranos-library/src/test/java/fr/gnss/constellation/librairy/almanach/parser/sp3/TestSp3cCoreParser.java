@@ -14,7 +14,7 @@ import org.junit.Test;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3cCoreParser;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 
 public class TestSp3cCoreParser {
 
@@ -36,7 +36,7 @@ public class TestSp3cCoreParser {
 
 	@Test
 	public void TestPositionAndClockRecord() throws TechnicalException, BusinessException {
-		List<Entry<LocalDateTime, List<Satelite>>> res = sp3cCP.getPeriodOfPosition(
+		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> res = sp3cCP.getPeriodOfPosition(
 				LocalDateTime.parse("2013-12-22T00:00", DateTimeFormatter.ISO_DATE_TIME),
 				LocalDateTime.parse("2013-12-22T23:45", DateTimeFormatter.ISO_DATE_TIME));
 		assertNotNull(res);

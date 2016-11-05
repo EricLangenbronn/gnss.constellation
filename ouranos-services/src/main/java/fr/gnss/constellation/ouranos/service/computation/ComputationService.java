@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileReader;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3FileParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
@@ -59,14 +59,15 @@ public class ComputationService implements IComputationService {
 		return new SphericalCoordinate(angles);
 	}
 
-	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisibleAll(Sp3FileReader sp3FileParser,
+	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getSateliteVisibleAll(Sp3FileParser sp3FileParser,
 			double elevationMask, GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
 
-		List<Entry<LocalDateTime, List<Satelite>>> fileSatelite = sp3FileParser.getPositionAndClockRecordAll();
-		List<Entry<LocalDateTime, List<Satelite>>> sateliteVisible = new ArrayList<>();
-		for (Entry<LocalDateTime, List<Satelite>> e : fileSatelite) {
-			List<Satelite> tmpSatVisible = new ArrayList<>();
-			for (Satelite p : e.getValue()) {
+		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> fileSatelite = sp3FileParser
+				.getPositionAndClockRecordAll();
+		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> sateliteVisible = new ArrayList<>();
+		for (Entry<LocalDateTime, List<Sp3SateliteInformation>> e : fileSatelite) {
+			List<Sp3SateliteInformation> tmpSatVisible = new ArrayList<>();
+			for (Sp3SateliteInformation p : e.getValue()) {
 				SphericalCoordinate sphCoord = this.processSphericalCoordinate(gStation,
 						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
 				if (sphCoord.getAzimuth() != -1) {
@@ -76,22 +77,24 @@ public class ComputationService implements IComputationService {
 					}
 				}
 			}
-			sateliteVisible.add(new SimpleEntry<LocalDateTime, List<Satelite>>(e.getKey(), tmpSatVisible));
+			sateliteVisible
+					.add(new SimpleEntry<LocalDateTime, List<Sp3SateliteInformation>>(e.getKey(), tmpSatVisible));
 		}
 		afficheSateliteVisible(sateliteVisible);
 		return sateliteVisible;
 
 	}
 
-	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisiblePeriod(Sp3FileReader sp3FileParser,
-			double elevationMask, LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
-			throws TechnicalException, BusinessException {
+	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getSateliteVisiblePeriod(
+			Sp3FileParser sp3FileParser, double elevationMask, LocalDateTime start, LocalDateTime end,
+			GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
 
-		List<Entry<LocalDateTime, List<Satelite>>> fileSatelite = sp3FileParser.getPositionAndClockRecord(start, end);
-		List<Entry<LocalDateTime, List<Satelite>>> sateliteVisible = new ArrayList<>();
-		for (Entry<LocalDateTime, List<Satelite>> e : fileSatelite) {
-			List<Satelite> tmpSatVisible = new ArrayList<>();
-			for (Satelite p : e.getValue()) {
+		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> fileSatelite = sp3FileParser
+				.getPositionAndClockRecord(start, end);
+		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> sateliteVisible = new ArrayList<>();
+		for (Entry<LocalDateTime, List<Sp3SateliteInformation>> e : fileSatelite) {
+			List<Sp3SateliteInformation> tmpSatVisible = new ArrayList<>();
+			for (Sp3SateliteInformation p : e.getValue()) {
 				SphericalCoordinate sphCoord = this.processSphericalCoordinate(gStation,
 						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
 
@@ -102,19 +105,20 @@ public class ComputationService implements IComputationService {
 					}
 				}
 			}
-			sateliteVisible.add(new SimpleEntry<LocalDateTime, List<Satelite>>(e.getKey(), tmpSatVisible));
+			sateliteVisible
+					.add(new SimpleEntry<LocalDateTime, List<Sp3SateliteInformation>>(e.getKey(), tmpSatVisible));
 		}
 		afficheSateliteVisible(sateliteVisible);
 		return sateliteVisible;
 
 	}
 
-	public void afficheSateliteVisible(List<Entry<LocalDateTime, List<Satelite>>> map) {
+	public void afficheSateliteVisible(List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> map) {
 
-		for (Entry<LocalDateTime, List<Satelite>> e : map) {
-			List<Satelite> lpos = e.getValue();
+		for (Entry<LocalDateTime, List<Sp3SateliteInformation>> e : map) {
+			List<Sp3SateliteInformation> lpos = e.getValue();
 			System.out.println("Satelite visible heure : " + e.getKey());
-			for (Satelite pos : lpos) {
+			for (Sp3SateliteInformation pos : lpos) {
 				System.out.println(pos);
 			}
 		}

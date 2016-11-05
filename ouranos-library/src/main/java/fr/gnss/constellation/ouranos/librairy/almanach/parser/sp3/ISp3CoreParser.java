@@ -6,15 +6,17 @@ import java.util.Map.Entry;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 
-public interface Sp3ICoreParser {
-	
+public interface ISp3CoreParser {
+
 	public static int NB_MIN_MEASURE = 15;
 
-	Entry<LocalDateTime, List<Satelite>> getPositionAndClockRecord()
+	void close();
+
+	Entry<LocalDateTime, List<Sp3SateliteInformation>> getPositionAndClockRecord()
 			throws TechnicalException, BusinessException;
-	
-	List<Entry<LocalDateTime, List<Satelite>>> getPeriodOfPosition(LocalDateTime start, LocalDateTime end)
+
+	List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getPeriodOfPosition(LocalDateTime start, LocalDateTime end)
 			throws TechnicalException, BusinessException;
 }

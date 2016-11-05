@@ -14,7 +14,7 @@ public enum OrbitType {
 	 * @return the string representation of the specified OrbitType
 	 * @throws BusinessException - if the string is null, empty or not references
 	 */
-	public static OrbitType stringToOrbitTypeType(String p_type) throws BusinessException {
+	public static OrbitType stringToOrbitType(String p_type) throws BusinessException {
 		if (StringUtils.isBlank(p_type)) {
 			String message = "Le type de l'orbite doit être renseigné. [type=" + p_type + "]";
 			throw new BusinessException(message);

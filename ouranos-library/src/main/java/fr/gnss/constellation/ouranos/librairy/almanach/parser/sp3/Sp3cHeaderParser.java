@@ -4,19 +4,19 @@ import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.AbstractHeaderParser;
 
-public class Sp3cHeaderParser extends AbstractHeaderParser implements Sp3IHeaderParser {
+public class Sp3cHeaderParser extends AbstractHeaderParser implements ISp3HeaderParser {
 
 	/**
 	 * Le logger de la classe.
 	 */
-	private static final Log LOGGER = LogFactory.getLog(Sp3cHeaderParser.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3cHeaderParser.class);
 
 	private static int headerNbCol = 60;
 

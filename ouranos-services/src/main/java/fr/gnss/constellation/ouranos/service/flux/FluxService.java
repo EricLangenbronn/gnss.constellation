@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.service.satelitevisible.ISateliteVisibleService;
 import fr.gnss.constellation.ouranos.wrapper.XsdWrapper;
@@ -43,7 +43,7 @@ public class FluxService implements IFluxService {
 
 		double elevationMask = request.getElevationMask();
 
-		List<Entry<LocalDateTime, List<Satelite>>> satelitesVisible = sateliteVisibleService
+		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> satelitesVisible = sateliteVisibleService
 				.getSateliteVisible(geodeticCoordinate, elevationMask, dateDebut, dateFin);
 
 	}

@@ -1,73 +1,58 @@
 package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
 
-import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
+import fr.gnss.constellation.ouranos.librairy.almanach.Sp3FileType;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 
-public class Sp3Parser {
+public class Sp3FileParser implements ISp3FileParser {
 
 	/**
 	 * Le logger de la classe.
 	 */
-	private static final Log LOGGER = LogFactory.getLog(Sp3Parser.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3FileParser.class);
 
-	private Sp3IHeaderParser sp3HeaderParser;
-	private Sp3ICoreParser sp3CoreParser;
+	private ISp3HeaderParser sp3HeaderParser;
+	private ISp3CoreParser sp3CoreParser;
 
-	public Sp3Parser(File sp3File) throws TechnicalException, BusinessException {
+	public Sp3FileParser(Sp3File sp3File) throws TechnicalException, BusinessException {
 		this.loadParser(sp3File);
 	}
 
-	private void loadParser(File sp3File) throws TechnicalException, BusinessException {
+	private void loadParser(Sp3File sp3File) throws TechnicalException, BusinessException {
+		Sp3FileType sp3FileType = sp3File.getSp3FileType();
 
-		if (sp3File.exists() && sp3File.isFile()) {
-			try {
-				RandomAccessFile sp3HeaderReader = new RandomAccessFile(sp3File, "r");
-				FileReader sp3CoreReader = new FileReader(sp3File);
-				byte[] cbuf = new byte[2];
-
-				sp3HeaderReader.read(cbuf);
-				if (cbuf[0] == '#' && (cbuf[1] == 'c' || cbuf[1] == 'a')) {
-					if (cbuf[1] == 'c') {
-						sp3HeaderParser = new Sp3cHeaderParser(sp3HeaderReader);
-						sp3CoreParser = new Sp3cCoreParser(sp3CoreReader, sp3HeaderParser.getStartEpochRecord(),
-								sp3HeaderParser.getNumber0fSats());
-						if (LOGGER.isDebugEnabled()) {
-							LOGGER.debug("Parser type c. [cbuf=" + cbuf + "]");
-						}
-					}
-					if (cbuf[1] == 'a') {
-						sp3HeaderParser = new Sp3aHeaderParser(sp3HeaderReader);
-						sp3CoreParser = new Sp3aCoreParser(sp3CoreReader);
-						if (LOGGER.isDebugEnabled()) {
-							LOGGER.debug("Parser type a. [cbuf=" + cbuf + "]");
-						}
-					}
-				} else {
-					String message = "La version n'est pas reconnu. [version=" + cbuf.toString() + "]";
-					throw new BusinessException(message);
-				}
-
-			} catch (IOException e) {
-				String message = "Impossible de lire les deux premiers caractères du fichier.";
-				throw new TechnicalException(message);
+		try {
+			RandomAccessFile accessFileHeader = new RandomAccessFile(sp3File.getFile(), "r");
+			FileReader fileReaderCore = new FileReader(sp3File.getFile());
+			switch (sp3FileType) {
+			case a:
+				this.sp3HeaderParser = new Sp3aHeaderParser(accessFileHeader);
+				this.sp3CoreParser = new Sp3aCoreParser(fileReaderCore);
+			case b:
+				throw new TechnicalException("NotImplement");
+			case c:
+				this.sp3HeaderParser = new Sp3cHeaderParser(accessFileHeader);
+				this.sp3CoreParser = new Sp3cCoreParser(fileReaderCore, sp3HeaderParser.getStartEpochRecord(),
+						sp3HeaderParser.getNumber0fSats());
+				break;
+			case d:
+				throw new TechnicalException("NotImplement");
 			}
-		} else {
-			String message = "Impossible d'acceder au fichier [sp3File=" + sp3File.getAbsolutePath() + "] [exists="
-					+ sp3File.exists() + ", isFile=" + sp3File.isFile() + "]";
-			throw new BusinessException(message);
+		} catch (Exception e) {
+			String message = "Impossible de créer le parser";
+			throw new TechnicalException(message, e);
 		}
+
 	}
 
 	public String getVersionSymbol() throws TechnicalException {
@@ -138,13 +123,20 @@ public class Sp3Parser {
 		return sp3HeaderParser.getTimeSystem();
 	}
 
-	public List<Entry<LocalDateTime, List<Satelite>>> getPositionAndClockRecordAll()
+	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getPositionAndClockRecordAll()
 			throws TechnicalException, BusinessException {
 		return null; // sp3CoreParser.getPositionAndClockRecord();
 	}
 
-	public List<Entry<LocalDateTime, List<Satelite>>> getPositionAndClockRecord(LocalDateTime start,
+	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getPositionAndClockRecord(LocalDateTime start,
 			LocalDateTime end) throws TechnicalException, BusinessException {
 		return sp3CoreParser.getPeriodOfPosition(start, end);
+	}
+
+	@Override
+	public void close() {
+		this.sp3HeaderParser.close();
+		this.sp3CoreParser.close();
+
 	}
 }

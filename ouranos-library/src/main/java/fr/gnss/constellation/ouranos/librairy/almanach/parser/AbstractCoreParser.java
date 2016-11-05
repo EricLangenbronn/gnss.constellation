@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
@@ -16,8 +17,7 @@ public abstract class AbstractCoreParser {
 	/**
 	 * Le logger de la classe.
 	 */
-	private static final Log LOGGER = LogFactory
-			.getLog(AbstractCoreParser.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCoreParser.class);
 
 	private FileReader fileToParse;
 	protected BufferedReader sp3Buffer;
@@ -34,8 +34,7 @@ public abstract class AbstractCoreParser {
 	 * @throws TechnicalException
 	 * @throws NoSuchElementException
 	 */
-	public abstract void initParser() throws TechnicalException,
-			NoSuchElementException;
+	public abstract void initParser() throws TechnicalException, NoSuchElementException;
 
 	/**
 	 * Reads a line of text. A line is considered to be terminated by any one of
@@ -68,12 +67,7 @@ public abstract class AbstractCoreParser {
 	 * 
 	 * @throws TechnicalException
 	 */
-	public void close() throws TechnicalException {
-		try {
-			fileToParse.close();
-		} catch (IOException e) {
-			String message = "";
-			throw new TechnicalException(message, e);
-		}
+	public void close() {
+		IOUtils.closeQuietly(fileToParse);
 	}
 }

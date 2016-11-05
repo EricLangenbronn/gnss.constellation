@@ -2,7 +2,7 @@ package fr.gnss.constellation.ouranos.librairy.almanach.sp3;
 
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
-public class Satelite {
+public class Sp3SateliteInformation {
 
 	private String vehicleId;
 
@@ -20,7 +20,7 @@ public class Satelite {
 	 * @param p_zCoordinate
 	 *            - z coordinate
 	 */
-	public Satelite(String p_vehicleId, double p_xCoordinate, double p_yCoordinate, double p_zCoordinate) {
+	public Sp3SateliteInformation(String p_vehicleId, double p_xCoordinate, double p_yCoordinate, double p_zCoordinate) {
 		vehicleId = p_vehicleId;
 		position = new CartesianCoordinate3D(p_xCoordinate, p_yCoordinate, p_zCoordinate);
 	}

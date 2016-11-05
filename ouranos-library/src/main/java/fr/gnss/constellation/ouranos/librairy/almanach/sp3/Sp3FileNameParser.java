@@ -6,7 +6,7 @@ import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 
-public class Sp3FileNameFormat {
+public class Sp3FileNameParser {
 
 	private EphemerideType ephemerideType; // igs, igr, igu
 	private int gpsWeek; // GPS Week, week 0000 is Jan. 6-12, 1980
@@ -22,7 +22,7 @@ public class Sp3FileNameFormat {
 	 *            - A file name string.
 	 * @throws BusinessException
 	 */
-	public Sp3FileNameFormat(String p_fileName) throws BusinessException {
+	public Sp3FileNameParser(String p_fileName) throws BusinessException {
 		this.valueOf(p_fileName);
 	}
 
@@ -52,7 +52,7 @@ public class Sp3FileNameFormat {
 				hour = -1;
 			}
 
-			orbitType = OrbitType.stringToOrbitTypeType(l_fileName[1]);
+			orbitType = OrbitType.stringToOrbitType(l_fileName[1]);
 
 			if (l_fileName.length > 2) {
 				compressType = l_fileName[2];

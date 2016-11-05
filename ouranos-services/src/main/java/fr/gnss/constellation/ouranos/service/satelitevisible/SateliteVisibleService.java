@@ -10,13 +10,12 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Satelite;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileReader;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3File;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3FileParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
-import fr.gnss.constellation.ouranos.wrapper.XsdWrapper;
-import fr.gnss.constellation.ouranos.xsd.VisibleSateliteRequest;
 
 public class SateliteVisibleService implements ISateliteVisibleService {
 
@@ -29,16 +28,16 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 	private IComputationService computationService;
 
 	@Override
-	public List<Entry<LocalDateTime, List<Satelite>>> getSateliteVisible(GeodeticCoordinate groundStation,
+	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getSateliteVisible(GeodeticCoordinate groundStation,
 			double elevationMask, LocalDateTime dateDebut, LocalDateTime dateFin)
 			throws TechnicalException, BusinessException {
-		List<Entry<LocalDateTime, List<Satelite>>> l_satelitesVisible = null;
+		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> l_satelitesVisible = null;
 
 		File sp3File = orbitsDataService.isDataForPeriod(dateDebut, dateFin);
 		if (sp3File != null) {
 			LOGGER.debug("Début du traitement du fichier sp3");
 
-			Sp3FileReader sp3FileParser = new Sp3FileReader(sp3File);
+			Sp3FileParser sp3FileParser = new Sp3FileParser(new Sp3File(sp3File));
 
 			l_satelitesVisible = computationService.getSateliteVisiblePeriod(sp3FileParser, elevationMask, dateDebut,
 					dateFin, groundStation);
