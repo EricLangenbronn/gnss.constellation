@@ -2,6 +2,7 @@ package fr.gnss.constellation.ouranos.service.flux;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map.Entry;
@@ -32,7 +33,7 @@ public class FluxService implements IFluxService {
 	public void sateliteVisible(String version, String requete) throws TechnicalException, BusinessException {
 
 		this.bindingXmlService = BindingXMLService.getInstance();
-		InputStream is = new ByteArrayInputStream(requete.getBytes());
+		InputStream is = new ByteArrayInputStream(requete.getBytes(Charset.forName("UTF-8")));
 		VisibleSateliteRequest request = this.bindingXmlService.mapXml2Object(is, VisibleSateliteRequest.class);
 
 		LocalDateTime dateDebut = request.getStartDateOfMeasure().toGregorianCalendar().toZonedDateTime()

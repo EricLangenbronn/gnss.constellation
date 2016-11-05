@@ -1,8 +1,5 @@
 package fr.gnss.constellation.ouranos.api.resource;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,8 +14,6 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.service.flux.BindingXMLService;
-import fr.gnss.constellation.ouranos.xsd.VisibleSateliteRequest;
 
 @Path("/")
 public class GetResources {
@@ -41,7 +36,7 @@ public class GetResources {
 	public Response getVisibleSatelite(@PathParam("version") final String version,
 			@QueryParam("requete") String p_contenu) throws BusinessException, TechnicalException {
 
-		ServiceLocator.getServiceFactory().getFluxService().sateliteVisible(p_contenu, version);
+		ServiceLocator.getServiceFactory().getFluxService().sateliteVisible(version, p_contenu);
 
 		return null;
 	}

@@ -28,6 +28,7 @@
 					<packageName>fr.gnss.constellation.ouranos.xsd</packageName>
 					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
 					<encoding>${project.build.sourceEncoding}</encoding>
+					<addGeneratedAnnotation>true</addGeneratedAnnotation>
 				</configuration>
 			</plugin>
 		</plugins>

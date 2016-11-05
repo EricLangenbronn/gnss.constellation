@@ -2,12 +2,13 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2016.11.04 à 09:04:36 PM CET 
+// Généré le : 2016.11.05 à 11:02:54 PM CET 
 //
 
 
 package fr.gnss.constellation.ouranos.xsd;
 
+import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -17,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 				
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate"/&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/&gt;
  * </pre>
  * 
  * 			
@@ -48,16 +49,21 @@ import javax.xml.bind.annotation.XmlType;
     "longitude",
     "altitude"
 })
+@Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
 public class GeodeticCoordinate {
 
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     protected double latitude;
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     protected double longitude;
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     protected double altitude;
 
     /**
      * Obtient la valeur de la propriété latitude.
      * 
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     public double getLatitude() {
         return latitude;
     }
@@ -66,6 +72,7 @@ public class GeodeticCoordinate {
      * Définit la valeur de la propriété latitude.
      * 
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     public void setLatitude(double value) {
         this.latitude = value;
     }
@@ -74,6 +81,7 @@ public class GeodeticCoordinate {
      * Obtient la valeur de la propriété longitude.
      * 
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     public double getLongitude() {
         return longitude;
     }
@@ -82,6 +90,7 @@ public class GeodeticCoordinate {
      * Définit la valeur de la propriété longitude.
      * 
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     public void setLongitude(double value) {
         this.longitude = value;
     }
@@ -90,6 +99,7 @@ public class GeodeticCoordinate {
      * Obtient la valeur de la propriété altitude.
      * 
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     public double getAltitude() {
         return altitude;
     }
@@ -98,6 +108,7 @@ public class GeodeticCoordinate {
      * Définit la valeur de la propriété altitude.
      * 
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
     public void setAltitude(double value) {
         this.altitude = value;
     }

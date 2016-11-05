@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -21,20 +22,10 @@ public class BindingXMLService {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(BindingXMLService.class);
 
-	private static final String PACKAGE_XSD = "fr.gnss.constellation.ouranos.xsd";
-
 	private static BindingXMLService INSTANCE = null;
 
-	private JAXBContext jaxbContext = null;
-
 	private BindingXMLService() throws TechnicalException {
-		try {
-			jaxbContext = JAXBContext.newInstance(PACKAGE_XSD);
-		} catch (JAXBException l_e) {
-			String l_message = "Impossible de trouver le package : " + PACKAGE_XSD;
-			LOGGER.info(l_message, l_e);
-			throw new TechnicalException(l_message, l_e);
-		}
+
 	}
 
 	public static BindingXMLService getInstance() throws TechnicalException {
@@ -50,10 +41,10 @@ public class BindingXMLService {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(p_class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			jaxbUnmarshaller.setValidating(true);
+			// jaxbUnmarshaller.setValidating(true);
 			l_objet = (T) jaxbUnmarshaller.unmarshal(p_xml);
 		} catch (JAXBException l_e) {
-			String l_message = "Impossible de transoformer le flux en objet de type : " + p_class.getName();
+			String l_message = "Impossible de transformer le flux en objet de type : " + p_class.getName();
 			LOGGER.error(l_message, l_e);
 			throw new BusinessException(l_message, l_e);
 		}
@@ -67,7 +58,7 @@ public class BindingXMLService {
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			jaxbMarshaller.marshal(p_object, p_output);
 		} catch (JAXBException l_e) {
-			String l_message = "Impossible de transoformer l'ojet en flux de sortie : " + p_object.getClass();
+			String l_message = "Impossible de transformer l'ojet en flux de sortie : " + p_object.getClass();
 			LOGGER.error(l_message, l_e);
 			throw new BusinessException(l_message, l_e);
 		}
