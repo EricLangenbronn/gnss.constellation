@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/ouranos-dao-test.xml", "/ouranos-services-test.xml" })
+@ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
 public class TestValidationService {
 
 	@Autowired

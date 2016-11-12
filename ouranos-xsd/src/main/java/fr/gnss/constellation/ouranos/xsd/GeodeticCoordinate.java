@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2016.11.12 à 03:11:39 PM CET 
+// Généré le : 2016.11.12 à 07:46:49 PM CET 
 //
 
 
@@ -49,21 +49,21 @@ import javax.xml.bind.annotation.XmlType;
     "longitude",
     "altitude"
 })
-@Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+@Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
 public class GeodeticCoordinate {
 
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     protected double latitude;
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     protected double longitude;
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     protected double altitude;
 
     /**
      * Obtient la valeur de la propriété latitude.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     public double getLatitude() {
         return latitude;
     }
@@ -72,7 +72,7 @@ public class GeodeticCoordinate {
      * Définit la valeur de la propriété latitude.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     public void setLatitude(double value) {
         this.latitude = value;
     }
@@ -81,7 +81,7 @@ public class GeodeticCoordinate {
      * Obtient la valeur de la propriété longitude.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     public double getLongitude() {
         return longitude;
     }
@@ -90,7 +90,7 @@ public class GeodeticCoordinate {
      * Définit la valeur de la propriété longitude.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     public void setLongitude(double value) {
         this.longitude = value;
     }
@@ -99,7 +99,7 @@ public class GeodeticCoordinate {
      * Obtient la valeur de la propriété altitude.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     public double getAltitude() {
         return altitude;
     }
@@ -108,7 +108,7 @@ public class GeodeticCoordinate {
      * Définit la valeur de la propriété altitude.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T07:46:49+01:00", comments = "JAXB RI v2.2.11")
     public void setAltitude(double value) {
         this.altitude = value;
     }
