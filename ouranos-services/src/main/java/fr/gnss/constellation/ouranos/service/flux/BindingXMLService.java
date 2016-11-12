@@ -4,11 +4,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,18 +37,20 @@ public class BindingXMLService {
 	}
 
 	public <T> T mapXml2Object(final InputStream p_xml, final Class<T> p_class) throws BusinessException {
-		T l_objet = null;
+		T l_Request = null;
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(p_class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			// jaxbUnmarshaller.setValidating(true);
-			l_objet = (T) jaxbUnmarshaller.unmarshal(p_xml);
+			Object oRequest = jaxbUnmarshaller.unmarshal(p_xml);
+			l_Request = (T) oRequest;
+
+			IOUtils.closeQuietly(p_xml);
 		} catch (JAXBException l_e) {
 			String l_message = "Impossible de transformer le flux en objet de type : " + p_class.getName();
 			LOGGER.error(l_message, l_e);
 			throw new BusinessException(l_message, l_e);
 		}
-		return l_objet;
+		return l_Request;
 	}
 
 	public void mapObject2Xml(Object p_object, OutputStream p_output) throws BusinessException {
@@ -57,6 +59,8 @@ public class BindingXMLService {
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			jaxbMarshaller.marshal(p_object, p_output);
+
+			// TODO : pense à fermer le outputStream
 		} catch (JAXBException l_e) {
 			String l_message = "Impossible de transformer l'ojet en flux de sortie : " + p_object.getClass();
 			LOGGER.error(l_message, l_e);

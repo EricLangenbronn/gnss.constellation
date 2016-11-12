@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2016.11.05 à 11:02:54 PM CET 
+// Généré le : 2016.11.12 à 03:11:39 PM CET 
 //
 
 
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 				
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate" xmlns:tns="http://www.ouranos.fr/ouranos/data/v10/coordinate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/&gt;
  * </pre>
  * 
  * 			
@@ -49,21 +49,21 @@ import javax.xml.bind.annotation.XmlType;
     "ordonnee",
     "hauteur"
 })
-@Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+@Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
 public class CartesianCoordinate {
 
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     protected double abscisse;
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     protected double ordonnee;
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     protected double hauteur;
 
     /**
      * Obtient la valeur de la propriété abscisse.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public double getAbscisse() {
         return abscisse;
     }
@@ -72,7 +72,7 @@ public class CartesianCoordinate {
      * Définit la valeur de la propriété abscisse.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public void setAbscisse(double value) {
         this.abscisse = value;
     }
@@ -81,7 +81,7 @@ public class CartesianCoordinate {
      * Obtient la valeur de la propriété ordonnee.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public double getOrdonnee() {
         return ordonnee;
     }
@@ -90,7 +90,7 @@ public class CartesianCoordinate {
      * Définit la valeur de la propriété ordonnee.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public void setOrdonnee(double value) {
         this.ordonnee = value;
     }
@@ -99,7 +99,7 @@ public class CartesianCoordinate {
      * Obtient la valeur de la propriété hauteur.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public double getHauteur() {
         return hauteur;
     }
@@ -108,7 +108,7 @@ public class CartesianCoordinate {
      * Définit la valeur de la propriété hauteur.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public void setHauteur(double value) {
         this.hauteur = value;
     }

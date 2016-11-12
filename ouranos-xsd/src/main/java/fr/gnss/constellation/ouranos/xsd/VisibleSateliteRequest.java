@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2016.11.05 à 11:02:54 PM CET 
+// Généré le : 2016.11.12 à 03:11:39 PM CET 
 //
 
 
@@ -12,6 +12,7 @@ import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -19,19 +20,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * 
- * 				
+ * 					
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;xs:documentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate" xmlns:tns="http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/&gt;
  * </pre>
  * 
- * 			
+ * 				
  * 
- * <p>Classe Java pour visibleSateliteRequest complex type.
+ * <p>Classe Java pour anonymous complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="visibleSateliteRequest"&gt;
+ * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
@@ -48,27 +49,28 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "visibleSateliteRequest", namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest", propOrder = {
+@XmlType(name = "", propOrder = {
     "groundStation",
     "startDateOfMeasure",
     "endDateOfMeasure",
     "elevationMask"
 })
-@Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+@XmlRootElement(name = "visibleSateliteRequest", namespace = "http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest")
+@Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
 public class VisibleSateliteRequest {
 
     @XmlElement(required = true)
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     protected GeodeticCoordinate groundStation;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     protected XMLGregorianCalendar startDateOfMeasure;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     protected XMLGregorianCalendar endDateOfMeasure;
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     protected double elevationMask;
 
     /**
@@ -79,7 +81,7 @@ public class VisibleSateliteRequest {
      *     {@link GeodeticCoordinate }
      *     
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public GeodeticCoordinate getGroundStation() {
         return groundStation;
     }
@@ -92,7 +94,7 @@ public class VisibleSateliteRequest {
      *     {@link GeodeticCoordinate }
      *     
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public void setGroundStation(GeodeticCoordinate value) {
         this.groundStation = value;
     }
@@ -105,7 +107,7 @@ public class VisibleSateliteRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public XMLGregorianCalendar getStartDateOfMeasure() {
         return startDateOfMeasure;
     }
@@ -118,7 +120,7 @@ public class VisibleSateliteRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public void setStartDateOfMeasure(XMLGregorianCalendar value) {
         this.startDateOfMeasure = value;
     }
@@ -131,7 +133,7 @@ public class VisibleSateliteRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public XMLGregorianCalendar getEndDateOfMeasure() {
         return endDateOfMeasure;
     }
@@ -144,7 +146,7 @@ public class VisibleSateliteRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public void setEndDateOfMeasure(XMLGregorianCalendar value) {
         this.endDateOfMeasure = value;
     }
@@ -153,7 +155,7 @@ public class VisibleSateliteRequest {
      * Obtient la valeur de la propriété elevationMask.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public double getElevationMask() {
         return elevationMask;
     }
@@ -162,7 +164,7 @@ public class VisibleSateliteRequest {
      * Définit la valeur de la propriété elevationMask.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-05T11:02:54+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2016-11-12T03:11:39+01:00", comments = "JAXB RI v2.2.11")
     public void setElevationMask(double value) {
         this.elevationMask = value;
     }

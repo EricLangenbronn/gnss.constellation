@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ouranos.fr/ouranos/data/v10/coordinate"
-	xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate"
-	attributeFormDefault="unqualified" elementFormDefault="unqualified">
+<xs:schema
+	xmlns:tns="http://www.ouranos.fr/ouranos/data/v10/coordinate"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.ouranos.fr/ouranos/data/v10/coordinate"
+	xmlns:oc10="http://www.ouranos.fr/ouranos/data/v10/coordinate">
 
 	<xs:complexType name="geodeticCoordinate">
 		<xs:annotation>

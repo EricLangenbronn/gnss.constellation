@@ -29,6 +29,7 @@
 					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<addGeneratedAnnotation>true</addGeneratedAnnotation>
+					<xsdPathWithinArtifact>resources/xsd</xsdPathWithinArtifact>
 				</configuration>
 			</plugin>
 		</plugins>

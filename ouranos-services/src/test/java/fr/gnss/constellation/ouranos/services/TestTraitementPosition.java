@@ -15,7 +15,7 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/ouranos-dao-test.xml", "/ouranos-services-test.xml" })
+@ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
 public class TestTraitementPosition {
 
 	@Autowired

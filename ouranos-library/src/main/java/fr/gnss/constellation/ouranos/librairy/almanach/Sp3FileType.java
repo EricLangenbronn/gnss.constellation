@@ -18,7 +18,7 @@ public enum Sp3FileType {
 	 *             - if the string is null, empty or not references
 	 */
 	public static Sp3FileType stringToSp3FileType(Character p_type) throws BusinessException {
-		if (CharUtils.isAscii(p_type)) {
+		if (p_type == null) {
 			String message = "Le type de l'orbite doit être renseigné. [type=" + p_type + "]";
 			throw new BusinessException(message);
 		}
