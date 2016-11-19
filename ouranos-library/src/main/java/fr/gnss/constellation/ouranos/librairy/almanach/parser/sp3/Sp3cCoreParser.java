@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.AbstractCoreParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 
 public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser {
@@ -90,30 +91,32 @@ public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser
 		return clock;
 	}
 
-	public Entry<LocalDateTime, List<Sp3SateliteInformation>> getPositionAndClockRecord()
-			throws TechnicalException, BusinessException {
-		List<Sp3SateliteInformation> lstPositionAndClockRecord = new ArrayList<>();
+	@Override
+	public SateliteTimeCoordinate getPositionAndClockRecord() throws TechnicalException, BusinessException {
+		SateliteTimeCoordinate sateliteByTime = null;
 
-		LocalDateTime clock = null;
+		LocalDateTime epochHeaderRecord = null;
 		try {
-			clock = splitClockLine(readLine()); // On passe la clock
+			epochHeaderRecord = splitClockLine(readLine()); // On passe la clock
+			sateliteByTime = new SateliteTimeCoordinate(epochHeaderRecord);
 			for (int i = 0; i < numberOfSat; ++i) {
-				lstPositionAndClockRecord.add(splitSateliteLine(readLine()));
+				sateliteByTime.addSatellite(splitSateliteLine(readLine()));
 			}
 		} catch (NoSuchElementException e) {
-			String message = "";
+			String message = "Fin du fichier, impossible de lire plus";
 			throw new BusinessException(message, e);
 		}
 
-		return new SimpleEntry<LocalDateTime, List<Sp3SateliteInformation>>(clock, lstPositionAndClockRecord);
+		return sateliteByTime;
 	}
 
 	@Override
-	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getPeriodOfPosition(final LocalDateTime start,
+	public List<SateliteTimeCoordinate> getPeriodOfPosition(final LocalDateTime start,
 			final LocalDateTime end) throws TechnicalException, BusinessException {
 
-		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> res = new ArrayList<>();
+		List<SateliteTimeCoordinate> satelitesByTime = new ArrayList<>();
 
+		// on se de place jusqu'a la bonne epoch
 		LocalDateTime wrapStartMeasure = startMeasure.plusSeconds(0);
 		while (wrapStartMeasure.compareTo(start) < 0) {
 			for (int i = 0; i < numberOfSat; ++i) {
@@ -122,14 +125,15 @@ public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser
 			readLine();// position de la clock
 			wrapStartMeasure = wrapStartMeasure.plusMinutes(NB_MIN_MEASURE);
 		}
+
 		// debut acquisition des données
 		LocalDateTime wrapStart = start.plusSeconds(0); // tips to copy date
 		while (wrapStart.compareTo(end) < 0) {
-			res.add(getPositionAndClockRecord());
+			satelitesByTime.add(getPositionAndClockRecord());
 
 			wrapStart = wrapStart.plusMinutes(NB_MIN_MEASURE);
 		}
 
-		return res;
+		return satelitesByTime;
 	}
 }

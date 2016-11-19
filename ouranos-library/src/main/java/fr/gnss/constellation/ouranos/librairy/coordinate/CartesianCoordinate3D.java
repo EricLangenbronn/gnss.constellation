@@ -76,7 +76,7 @@ public class CartesianCoordinate3D {
 	}
 
 	/**
-	 * Subtract a CartesianCoordinate3D from the other. (v1 - v1)
+	 * Subtract a CartesianCoordinate3D from the other. (v1 - v2)
 	 * 
 	 * @param v1
 	 *            - 

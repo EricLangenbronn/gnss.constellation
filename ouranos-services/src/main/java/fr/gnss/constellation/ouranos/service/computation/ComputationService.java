@@ -1,10 +1,10 @@
 package fr.gnss.constellation.ouranos.service.computation;
 
 import java.time.LocalDateTime;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3FileParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateFunction;
@@ -35,9 +36,10 @@ public class ComputationService implements IComputationService {
 	public SphericalCoordinate processSphericalCoordinate(GeodeticCoordinate gStation, CartesianCoordinate3D station,
 			CartesianCoordinate3D satelite) {
 
-		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(station, satelite);
+		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(satelite, station);
+		CartesianCoordinate3D stationSateliteNorm = stationSatelite.normalized();
 
-		CartesianCoordinate3D enuStationSatelite = CoordinateFunction.transformECEFtoENU(gStation, stationSatelite);
+		CartesianCoordinate3D enuStationSatelite = CoordinateFunction.transformECEFtoENU(gStation, stationSateliteNorm);
 
 		double[] angles = new double[3];
 		double normeProjectionStaSat = Math
@@ -54,73 +56,62 @@ public class ComputationService implements IComputationService {
 			angles[0] = -1;
 			angles[1] = -1;
 			angles[2] = -1;
+		} else {
+			System.out.println("angle : " + Arrays.toString(angles));
 		}
 
 		return new SphericalCoordinate(angles);
 	}
 
-	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getSateliteVisibleAll(Sp3FileParser sp3FileParser,
-			double elevationMask, GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
+	@Override
+	public List<SateliteTimeCoordinate> getSateliteVisiblePeriod(Sp3FileParser sp3FileParser, double elevationMask,
+			LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
+			throws TechnicalException, BusinessException {
 
-		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> fileSatelite = sp3FileParser
-				.getPositionAndClockRecordAll();
-		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> sateliteVisible = new ArrayList<>();
-		for (Entry<LocalDateTime, List<Sp3SateliteInformation>> e : fileSatelite) {
-			List<Sp3SateliteInformation> tmpSatVisible = new ArrayList<>();
-			for (Sp3SateliteInformation p : e.getValue()) {
-				SphericalCoordinate sphCoord = this.processSphericalCoordinate(gStation,
-						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
-				if (sphCoord.getAzimuth() != -1) {
-					// 3.1415 / 2 rad = 90.0°
-					if ((sphCoord.getInclination() >= elevationMask) && (sphCoord.getInclination() < (3.1415 / 2))) {
-						tmpSatVisible.add(p);
-					}
-				}
-			}
-			sateliteVisible
-					.add(new SimpleEntry<LocalDateTime, List<Sp3SateliteInformation>>(e.getKey(), tmpSatVisible));
-		}
-		afficheSateliteVisible(sateliteVisible);
-		return sateliteVisible;
+		List<SateliteTimeCoordinate> fileSatelite = sp3FileParser.getPositionAndClockRecord(start, end);
+		List<SateliteTimeCoordinate> sateliteVisible = new ArrayList<>();
+		for (SateliteTimeCoordinate e : fileSatelite) {
 
-	}
-
-	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getSateliteVisiblePeriod(
-			Sp3FileParser sp3FileParser, double elevationMask, LocalDateTime start, LocalDateTime end,
-			GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
-
-		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> fileSatelite = sp3FileParser
-				.getPositionAndClockRecord(start, end);
-		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> sateliteVisible = new ArrayList<>();
-		for (Entry<LocalDateTime, List<Sp3SateliteInformation>> e : fileSatelite) {
-			List<Sp3SateliteInformation> tmpSatVisible = new ArrayList<>();
-			for (Sp3SateliteInformation p : e.getValue()) {
+			SateliteTimeCoordinate sateliteTimeVisible = new SateliteTimeCoordinate(e.getEpochHeaderRecord());
+			for (Sp3SateliteInformation p : e.getSatelites().values()) {
 				SphericalCoordinate sphCoord = this.processSphericalCoordinate(gStation,
 						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
 
 				if (sphCoord.getAzimuth() != -1) {
+//					System.out.println("azimuth 2, " + sphCoord);
 					// 3.1415 / 2 rad = 90.0°
 					if ((sphCoord.getInclination() >= elevationMask) && (sphCoord.getInclination() < (3.1415 / 2))) {
-						tmpSatVisible.add(p);
+						sateliteTimeVisible.addSatellite(p);
 					}
 				}
 			}
-			sateliteVisible
-					.add(new SimpleEntry<LocalDateTime, List<Sp3SateliteInformation>>(e.getKey(), tmpSatVisible));
+			sateliteVisible.add(sateliteTimeVisible);
 		}
-		afficheSateliteVisible(sateliteVisible);
-		return sateliteVisible;
+		afficheSateliteVisibleCount(sateliteVisible);
 
+		return sateliteVisible;
 	}
 
-	public void afficheSateliteVisible(List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> map) {
+	public void afficheSateliteVisible(List<SateliteTimeCoordinate> satelitesVisible) {
 
-		for (Entry<LocalDateTime, List<Sp3SateliteInformation>> e : map) {
-			List<Sp3SateliteInformation> lpos = e.getValue();
-			System.out.println("Satelite visible heure : " + e.getKey());
-			for (Sp3SateliteInformation pos : lpos) {
+		for (SateliteTimeCoordinate e : satelitesVisible) {
+			Map<String, Sp3SateliteInformation> lpos = e.getSatelites();
+			System.out.println("Satelite visible heure : " + e.getEpochHeaderRecord());
+			for (Sp3SateliteInformation pos : lpos.values()) {
 				System.out.println(pos);
 			}
+		}
+		System.out.println("----------------------------------------------");
+
+	}
+
+	public void afficheSateliteVisibleCount(List<SateliteTimeCoordinate> satelitesVisible) {
+
+		for (SateliteTimeCoordinate e : satelitesVisible) {
+			System.out.println("Satelite visible heure : " + e.getEpochHeaderRecord());
+
+			int nbSat = e.getSatelites().values().size();
+			System.out.print(" : " + nbSat + "\n");
 		}
 		System.out.println("----------------------------------------------");
 

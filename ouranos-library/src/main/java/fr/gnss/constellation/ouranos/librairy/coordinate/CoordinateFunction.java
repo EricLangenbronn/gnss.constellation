@@ -106,6 +106,6 @@ public class CoordinateFunction {
 	}
 
 	public static double getAzimut(double x, double y) {
-		return Math.atan2(y, x);
+		return Math.atan2(x, y);
 	}
 }

@@ -3,6 +3,7 @@ package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
 import java.io.FileReader;
 import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -12,9 +13,10 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.Sp3FileType;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 
-public class Sp3FileParser implements ISp3FileParser {
+public class Sp3FileParser implements ISp3FileParser, Iterable<SateliteTimeCoordinate> {
 
 	/**
 	 * Le logger de la classe.
@@ -55,80 +57,93 @@ public class Sp3FileParser implements ISp3FileParser {
 
 	}
 
+	@Override
 	public String getVersionSymbol() throws TechnicalException {
 		return sp3HeaderParser.getVersionSymbol();
 	}
 
+	@Override
 	public LocalDateTime getStartEpochRecord() throws TechnicalException {
 		return sp3HeaderParser.getStartEpochRecord();
 	}
 
+	@Override
 	public int getNumberOfEpoch() throws TechnicalException {
 		return sp3HeaderParser.getNumberOfEpoch();
 	}
 
+	@Override
 	public String getDataUsed() throws TechnicalException {
 		return sp3HeaderParser.getDataUsed();
 	}
 
+	@Override
 	public String getCoordinateSystem() throws TechnicalException {
 		return sp3HeaderParser.getCoordinateSystem();
 	}
 
+	@Override
 	public String getOrbitType() throws TechnicalException {
 		return sp3HeaderParser.getOrbitType();
 	}
 
+	@Override
 	public String getAgency() throws TechnicalException {
 		return sp3HeaderParser.getAgency();
 	}
 
+	@Override
 	public int getGPSWeek() throws TechnicalException {
 		return sp3HeaderParser.getGPSWeek();
 	}
 
+	@Override
 	public double getSecondsOfWeek() throws TechnicalException {
 		return sp3HeaderParser.getSecondsOfWeek();
 	}
 
+	@Override
 	public double getEpochInterval() throws TechnicalException {
 		return sp3HeaderParser.getEpochInterval();
 	}
 
+	@Override
 	public int getModJulDaySt() throws TechnicalException {
 		return sp3HeaderParser.getModJulDaySt();
 	}
 
+	@Override
 	public double getFractionalDay() throws TechnicalException {
 		return sp3HeaderParser.getFractionalDay();
 	}
 
+	@Override
 	public int getNumber0fSats() throws TechnicalException {
 		return sp3HeaderParser.getNumber0fSats();
 	}
 
+	@Override
 	public String[] getSatId() throws TechnicalException, BusinessException {
 		return sp3HeaderParser.getSatId();
 	}
 
+	@Override
 	public int[] getSatAccuracy() throws TechnicalException, BusinessException {
 		return sp3HeaderParser.getSatAccuracy();
 	}
 
+	@Override
 	public String getFileType() throws TechnicalException {
 		return sp3HeaderParser.getFileType();
 	}
 
+	@Override
 	public String getTimeSystem() throws TechnicalException {
 		return sp3HeaderParser.getTimeSystem();
 	}
 
-	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getPositionAndClockRecordAll()
-			throws TechnicalException, BusinessException {
-		return null; // sp3CoreParser.getPositionAndClockRecord();
-	}
-
-	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getPositionAndClockRecord(LocalDateTime start,
+	@Override
+	public List<SateliteTimeCoordinate> getPositionAndClockRecord(LocalDateTime start,
 			LocalDateTime end) throws TechnicalException, BusinessException {
 		return sp3CoreParser.getPeriodOfPosition(start, end);
 	}
@@ -138,5 +153,31 @@ public class Sp3FileParser implements ISp3FileParser {
 		this.sp3HeaderParser.close();
 		this.sp3CoreParser.close();
 
+	}
+
+	@Override
+	public Iterator<SateliteTimeCoordinate> iterator() {
+		Iterator<SateliteTimeCoordinate> it = new Iterator<SateliteTimeCoordinate>() {
+
+			private int currentIndex = 0;
+
+			@Override
+			public boolean hasNext() {
+//				return currentIndex < currentSize && arrayList[currentIndex] != null;
+				return true;
+			}
+
+			@Override
+			public SateliteTimeCoordinate next() {
+//				return arrayList[currentIndex++];
+				return null;
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+		};
+		return it;
 	}
 }

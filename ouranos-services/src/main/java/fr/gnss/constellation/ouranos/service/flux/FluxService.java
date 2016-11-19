@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.service.satelitevisible.ISateliteVisibleService;
@@ -30,7 +31,8 @@ public class FluxService implements IFluxService {
 	private ISateliteVisibleService sateliteVisibleService;
 
 	@Override
-	public void sateliteVisible(String version, String requete) throws TechnicalException, BusinessException {
+	public List<SateliteTimeCoordinate> sateliteVisible(String version, String requete)
+			throws TechnicalException, BusinessException {
 
 		this.bindingXmlService = BindingXMLService.getInstance();
 		InputStream is = new ByteArrayInputStream(requete.getBytes(Charset.forName("UTF-8")));
@@ -44,8 +46,10 @@ public class FluxService implements IFluxService {
 
 		double elevationMask = request.getElevationMask();
 
-		List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> satelitesVisible = sateliteVisibleService
+		List<SateliteTimeCoordinate> satelitesVisible = sateliteVisibleService
 				.getSateliteVisible(geodeticCoordinate, elevationMask, dateDebut, dateFin);
+
+		return satelitesVisible;
 
 	}
 

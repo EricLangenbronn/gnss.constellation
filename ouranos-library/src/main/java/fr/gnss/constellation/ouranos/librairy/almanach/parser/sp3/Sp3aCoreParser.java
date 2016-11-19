@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.AbstractCoreParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 
 public class Sp3aCoreParser extends AbstractCoreParser implements ISp3CoreParser {
@@ -31,15 +32,14 @@ public class Sp3aCoreParser extends AbstractCoreParser implements ISp3CoreParser
 	}
 
 	@Override
-	public Entry<LocalDateTime, List<Sp3SateliteInformation>> getPositionAndClockRecord()
-			throws TechnicalException, BusinessException {
+	public SateliteTimeCoordinate getPositionAndClockRecord() throws TechnicalException, BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Entry<LocalDateTime, List<Sp3SateliteInformation>>> getPeriodOfPosition(LocalDateTime start,
-			LocalDateTime end) throws TechnicalException, BusinessException {
+	public List<SateliteTimeCoordinate> getPeriodOfPosition(LocalDateTime start, LocalDateTime end)
+			throws TechnicalException, BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}

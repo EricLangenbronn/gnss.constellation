@@ -45,7 +45,7 @@ public class Sp3SateliteInformation {
 
 	@Override
 	public String toString() {
-		return "PositionAndClockRecord [vehicleId=" + vehicleId + ", position=" + position + "]";
+		return "Sp3SateliteInformation [vehicleId=" + vehicleId + ", position=" + position + "]";
 	}
 
 }
