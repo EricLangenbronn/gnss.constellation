@@ -83,19 +83,19 @@ public class CoordinateFunction {
 		double v = vector.Y();
 		double w = vector.Z();
 		// East
-		double E1 = -Math.sin(rotation.getLongitude()) * u;
+		double E1 = -(Math.sin(rotation.getLongitude())) * u;
 		double E2 = Math.cos(rotation.getLongitude()) * v;
 		double E4 = E1 + E2;
 
 		// North
-		double N1 = -Math.sin(rotation.getLatitude()) * Math.cos(rotation.getLongitude()) * u;
-		double N2 = -Math.sin(rotation.getLatitude()) * Math.sin(rotation.getLongitude()) * v;
+		double N1 = (-(Math.sin(rotation.getLatitude())) * Math.cos(rotation.getLongitude())) * u;
+		double N2 = (-(Math.sin(rotation.getLatitude())) * Math.sin(rotation.getLongitude())) * v;
 		double N3 = Math.cos(rotation.getLatitude()) * w;
 		double N4 = N1 + N2 + N3;
 
 		// Up
-		double U1 = Math.cos(rotation.getLatitude()) * Math.cos(rotation.getLongitude()) * u;
-		double U2 = Math.cos(rotation.getLatitude()) * Math.sin(rotation.getLongitude()) * v;
+		double U1 = (Math.cos(rotation.getLatitude()) * Math.cos(rotation.getLongitude())) * u;
+		double U2 = (Math.cos(rotation.getLatitude()) * Math.sin(rotation.getLongitude())) * v;
 		double U3 = Math.sin(rotation.getLatitude()) * w;
 		double U4 = U1 + U2 + U3;
 
@@ -103,9 +103,5 @@ public class CoordinateFunction {
 
 		return res;
 
-	}
-
-	public static double getAzimut(double x, double y) {
-		return Math.atan2(x, y);
 	}
 }

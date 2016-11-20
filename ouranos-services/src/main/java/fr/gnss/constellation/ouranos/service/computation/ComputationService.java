@@ -42,15 +42,14 @@ public class ComputationService implements IComputationService {
 		CartesianCoordinate3D enuStationSatelite = CoordinateFunction.transformECEFtoENU(gStation, stationSateliteNorm);
 
 		double[] angles = new double[3];
-		double normeProjectionStaSat = Math
-				.sqrt(Math.pow(enuStationSatelite.X(), 2) + Math.pow(enuStationSatelite.Y(), 2));
+		double normeStaSat = enuStationSatelite.magnitude();
 
-		angles[0] = normeProjectionStaSat;
+		angles[0] = normeStaSat;
 		// Angle d'élévation
-		angles[1] = Math.atan(normeProjectionStaSat / enuStationSatelite.Z());
+		angles[1] = Math.asin(enuStationSatelite.Z() / normeStaSat);
 
 		// Angle azimute
-		angles[2] = CoordinateFunction.getAzimut(enuStationSatelite.X(), enuStationSatelite.Y());
+		angles[2] = Math.atan2(enuStationSatelite.X() / normeStaSat, enuStationSatelite.Y() / normeStaSat);
 
 		if (angles[1] < 0) {
 			angles[0] = -1;
@@ -78,7 +77,7 @@ public class ComputationService implements IComputationService {
 						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
 
 				if (sphCoord.getAzimuth() != -1) {
-//					System.out.println("azimuth 2, " + sphCoord);
+					// System.out.println("azimuth 2, " + sphCoord);
 					// 3.1415 / 2 rad = 90.0°
 					if ((sphCoord.getInclination() >= elevationMask) && (sphCoord.getInclination() < (3.1415 / 2))) {
 						sateliteTimeVisible.addSatellite(p);

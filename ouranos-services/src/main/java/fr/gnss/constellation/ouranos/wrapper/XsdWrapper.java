@@ -8,7 +8,7 @@ public class XsdWrapper {
 		fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate geodeticCoordinate;
 
 		geodeticCoordinate = new fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate(
-				xsdGeodetic.getLatitude(), xsdGeodetic.getLongitude(), xsdGeodetic.getAltitude());
+				Math.toRadians(xsdGeodetic.getLatitude()), Math.toRadians(xsdGeodetic.getLongitude()),xsdGeodetic.getAltitude());
 
 		return geodeticCoordinate;
 	}
