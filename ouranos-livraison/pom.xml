@@ -15,7 +15,8 @@
 		<!-- ########## Ouranos ########### -->
 		<dependency>
 			<groupId>fr.gnss.constellation.ouranos</groupId>
-			<artifactId>ouranos-rest</artifactId>
+			<artifactId>ouranos-war</artifactId>
+			<version>${project.version}</version>
 			<type>war</type>
 			<scope>runtime</scope>
 		</dependency>
@@ -26,6 +27,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+                	<failOnMissingWebXml>false</failOnMissingWebXml>
+            	</configuration>
 			</plugin>
 		</plugins>
 	</build>
