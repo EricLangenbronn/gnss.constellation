@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileNameParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3Const;
 import fr.gnss.constellation.ouranos.service.IPropertiesService;
-import fr.gnss.constellation.ouranos.service.orbitdata.dao.ISp3Dao;
+import fr.gnss.constellation.ouranos.service.orbitdata.dao.ISp3FileDao;
 
 public class OrbitsDataService implements IOrbitsDataService {
 
@@ -20,7 +20,7 @@ public class OrbitsDataService implements IOrbitsDataService {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrbitsDataService.class);
 
-	private ISp3Dao sp3Dao;
+	private ISp3FileDao sp3Dao;
 	private IPropertiesService propertiesService;
 
 	@Override
@@ -29,7 +29,7 @@ public class OrbitsDataService implements IOrbitsDataService {
 		File isDataForPeriod = null;
 
 		for (File sp3File : sp3Dao.getListSp3File(propertiesService.getString("repertoire.sp3"))) {
-			Sp3FileNameParser fileNameFormat = new Sp3FileNameParser(sp3File.getName());
+			Sp3FileName fileNameFormat = new Sp3FileName(sp3File.getName());
 
 			LocalDateTime startDay = Sp3Const.FIRST_EPOCH_RECORD.plusWeeks(fileNameFormat.getGpsWeek())
 					.plusDays(fileNameFormat.getDay()).atTime(0, 0);
@@ -45,7 +45,7 @@ public class OrbitsDataService implements IOrbitsDataService {
 		return isDataForPeriod;
 	}
 
-	public void setSp3Dao(ISp3Dao sp3Dao) {
+	public void setSp3Dao(ISp3FileDao sp3Dao) {
 		this.sp3Dao = sp3Dao;
 	}
 

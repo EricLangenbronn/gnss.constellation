@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
-public class Sp3Dao implements ISp3Dao {
+public class Sp3FileDao implements ISp3FileDao {
 
 	/**
 	 * Le logger de la classe.
 	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3Dao.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3FileDao.class);
 
 	private static FilenameFilter filter = new FilenameFilter() {
 		public boolean accept(File directory, String fileName) {

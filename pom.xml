@@ -23,7 +23,7 @@
 		<commons.lang3.version>3.4</commons.lang3.version>
 		<commons.io.version>2.4</commons.io.version>
 		<commons.logging.version>1.2</commons.logging.version>
-		<ejml.version>0.27</ejml.version>
+		<commons.net.version>3.5</commons.net.version>
 
 		<servlet.api.version>3.0.1</servlet.api.version>
 		<spring.version>4.2.5.RELEASE</spring.version>
@@ -90,6 +90,12 @@
 				<artifactId>commons-io</artifactId>
 				<version>${commons.io.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>commons-net</groupId>
+				<artifactId>commons-net</artifactId>
+				<version>${commons.net.version}</version>
+			</dependency>
+
 
 			<!-- ########## Spring ########### -->
 			<dependency>
