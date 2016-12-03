@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -26,7 +26,7 @@ public class TestOrbitDataUtils {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = formatter.parse("04/08/2004");
 
-		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDateTime localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
 		long res = OrbitDataUtils.getGpsWeek(localDate);
 		assertEquals(1282, res);

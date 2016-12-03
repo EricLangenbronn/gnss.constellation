@@ -17,7 +17,9 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
  * @author eric
  *
  */
-public class ClientFtpSp3File {
+public class ClientFtpSp3File implements IConnection {
+
+	// FIXME est ce qu'il doit sauvegarder son état ou non ? pour le moment oui
 
 	/**
 	 * Le logger de la classe.
@@ -29,15 +31,15 @@ public class ClientFtpSp3File {
 
 	private ClientFtp clientFtp;
 	private String ipServer = "";
-	private boolean isReachableServer = false;
+	private boolean isOpenConnection = false;
 
 	public ClientFtpSp3File() {
-		this.tryConnectionFtpServer();
 	}
 
-	private void tryConnectionFtpServer() {
+	@Override
+	public void openConnection() {
 
-		this.isReachableServer = false;
+		this.isOpenConnection = false;
 		if (this.clientFtp != null) {
 			this.clientFtp.logoutAndCloseConnection();
 		}
@@ -47,7 +49,7 @@ public class ClientFtpSp3File {
 			this.ipServer = address.getHostAddress();
 
 			this.clientFtp = new ClientFtp(this.ipServer);
-			this.isReachableServer = this.clientFtp.openConnection();
+			this.isOpenConnection = this.clientFtp.openConnection();
 		} catch (UnknownHostException e) {
 			// c'est pas tout à fait vrai, mais on s'en contente :)
 			String message = "Impossible d'acceder à internet.";
@@ -55,18 +57,13 @@ public class ClientFtpSp3File {
 		}
 	}
 
-	public boolean reloadClientFtp() {
-		this.tryConnectionFtpServer();
-		return this.isReachableServer;
+	@Override
+	public boolean isConnectionOpen() {
+		return this.isOpenConnection;
 	}
 
-	public boolean isFtpServerReachable() {
-		return this.isReachableServer;
-	}
-
-	public void downloadSp3File(long epoch, Sp3FileName sp3fileName, Path destinationSp3File)
-			throws TechnicalException {
-		String sp3UrlFileName = this.EPOCH_DIRECTORY + "/" + epoch + "/" + sp3fileName.toString();
+	public void downloadSp3File(Sp3FileName sp3fileName, Path destinationSp3File) throws TechnicalException {
+		String sp3UrlFileName = EPOCH_DIRECTORY + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
 
 		boolean isOpenConnection = this.clientFtp.openConnection();
 		String message = "";
@@ -83,13 +80,14 @@ public class ClientFtpSp3File {
 				throw new TechnicalException(message);
 			}
 		} else {
-			message = "Connection au serveur ftp impossible. [serveur=" + this.FTP_SERVER + "]";
+			message = "Connection au serveur ftp impossible. [serveur=" + FTP_SERVER + "]";
 			LOGGER.error(message);
 
 			throw new TechnicalException(message);
 		}
 	}
 
+	@Override
 	public void closeConnection() {
 		this.clientFtp.logoutAndCloseConnection();
 	}

@@ -5,6 +5,6 @@
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<bean id="sp3Dao"
-		class="fr.gnss.constellation.ouranos.service.orbitdata.dao.Sp3Dao" />
+		class="fr.gnss.constellation.ouranos.service.orbitdata.dao.Sp3FileDao" />
 
 </beans>

@@ -1,7 +1,5 @@
 package fr.gnss.constellation.ouranos.librairy.almanach;
 
-import org.apache.commons.lang3.CharUtils;
-
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 
 public enum Sp3FileType {

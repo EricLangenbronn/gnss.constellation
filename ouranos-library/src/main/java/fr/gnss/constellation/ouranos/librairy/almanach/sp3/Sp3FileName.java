@@ -26,7 +26,7 @@ public class Sp3FileName {
 		this.valueOf(p_fileName);
 	}
 
-	private String igsIgrFileName() {
+	private String igsIgrIglFileName(boolean withCompressType) {
 		// sssnnnnx.aaa.Z pour igs et igr
 		StringBuilder fileName = new StringBuilder();
 		fileName.append(this.ephemerideType.toString());
@@ -34,13 +34,15 @@ public class Sp3FileName {
 		fileName.append(this.day);
 		fileName.append(".");
 		fileName.append(this.orbitType.toString());
-		fileName.append(".");
-		fileName.append(this.compressType);
+		if (withCompressType) {
+			fileName.append(".");
+			fileName.append(this.compressType);
+		}
 
 		return fileName.toString();
 	}
 
-	private String iguFileName() {
+	private String iguFileName(boolean withCompressType) {
 		// sssnnnnx_hr.aaa.Z pour igu
 		StringBuilder fileName = new StringBuilder();
 		fileName.append(this.ephemerideType.toString());
@@ -54,32 +56,12 @@ public class Sp3FileName {
 		}
 		fileName.append(".");
 		fileName.append(this.orbitType.toString());
-		fileName.append(".");
-		fileName.append(this.compressType);
+		if (withCompressType) {
+			fileName.append(".");
+			fileName.append(this.compressType);
+		}
 
 		return fileName.toString();
-	}
-
-	/**
-	 * Initializes a newly created Sp3FileName igs, igr object with given
-	 * parameters.
-	 * 
-	 * @param ephemerideType
-	 *            - Ephemerid type
-	 * @param gpsWeek
-	 *            - Number of week since 1980-01-06
-	 * @param day
-	 *            - Number of the day in the week
-	 * @param orbitType
-	 *            - Orbit type
-	 */
-	public Sp3FileName(EphemerideType ephemerideType, long gpsWeek, int day, OrbitType orbitType) {
-		this.ephemerideType = ephemerideType;
-		this.gpsWeek = gpsWeek;
-		this.day = day;
-		this.orbitType = orbitType;
-		this.hour = 0;
-		this.compressType = "Z";
 	}
 
 	/**
@@ -92,7 +74,8 @@ public class Sp3FileName {
 	 * @param day
 	 *            - Number of the day in the week
 	 * @param hour
-	 *            - Number of hour in the day (0-23)
+	 *            - Number of hour in the day (0-23), -1 if igs or igu ephemerid
+	 *            type
 	 * @param orbitType
 	 *            - Orbit type
 	 */
@@ -140,6 +123,30 @@ public class Sp3FileName {
 			String l_message = "Impossible de parser le nom du fichier. [fileName=" + p_fileName + "]";
 			throw new BusinessException(l_message, e);
 		}
+	}
+
+	public String getFileName(boolean withCompressType) {
+		String fileName = "";
+
+		switch (this.ephemerideType) {
+		case igl:
+			fileName = this.igsIgrIglFileName(withCompressType);
+			break;
+		case igs:
+			fileName = this.igsIgrIglFileName(withCompressType);
+			break;
+		case igr:
+			fileName = this.igsIgrIglFileName(withCompressType);
+			break;
+		case igu:
+			fileName = this.iguFileName(withCompressType);
+			break;
+		default:
+			break;
+		}
+
+		return fileName.toString();
+
 	}
 
 	/**
@@ -207,26 +214,5 @@ public class Sp3FileName {
 		} else {
 			return true;
 		}
-	}
-
-	@Override
-	public String toString() {
-		String fileName = "";
-
-		switch (this.ephemerideType) {
-		case igs:
-			fileName = this.igsIgrFileName();
-			break;
-		case igr:
-			fileName = this.igsIgrFileName();
-			break;
-		case igu:
-			fileName = this.iguFileName();
-			break;
-		default:
-			break;
-		}
-
-		return fileName.toString();
 	}
 }

@@ -45,6 +45,8 @@ public class TestDownloadSp3File {
 		client.downloadBinaryFile(URL_FTP_SP3_DIRECTORY + "/1282/igs12821.sp3.Z", accessOutputFile);
 
 		client.logoutAndCloseConnection();
+		assertTrue(accessOutputFile.toFile().exists());
+		assertTrue(accessOutputFile.toFile().length() != 0);
 	}
 
 }
