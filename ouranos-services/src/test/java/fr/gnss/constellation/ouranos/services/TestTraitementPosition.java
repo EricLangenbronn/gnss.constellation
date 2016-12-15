@@ -30,7 +30,7 @@ public class TestTraitementPosition {
 				CoordinateFunction.geodeticToCartesianWSG84(stationGeo));
 		CartesianCoordinate3D satelite = new CartesianCoordinate3D(-12110.343226, -13482.507392, -19488.380856);
 
-		SphericalCoordinate sphere = computationService.processSphericalCoordinate(stationGeo, stationCar, satelite);
+		SphericalCoordinate sphere = computationService.processElevationAzimuth(stationGeo, stationCar, satelite);
 		assertNotNull(sphere);
 
 		System.out.println("angle : " + sphere);

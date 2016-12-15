@@ -33,7 +33,7 @@ public class ComputationService implements IComputationService {
 	 * @param satelite
 	 * @return norme, élévation, azimut
 	 */
-	public SphericalCoordinate processSphericalCoordinate(GeodeticCoordinate gStation, CartesianCoordinate3D station,
+	public SphericalCoordinate processElevationAzimuth(GeodeticCoordinate gStation, CartesianCoordinate3D station,
 			CartesianCoordinate3D satelite) {
 
 		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(satelite, station);
@@ -73,7 +73,7 @@ public class ComputationService implements IComputationService {
 
 			SateliteTimeCoordinate sateliteTimeVisible = new SateliteTimeCoordinate(e.getEpochHeaderRecord());
 			for (Sp3SateliteInformation p : e.getSatelites().values()) {
-				SphericalCoordinate sphCoord = this.processSphericalCoordinate(gStation,
+				SphericalCoordinate sphCoord = this.processElevationAzimuth(gStation,
 						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
 
 				if (sphCoord.getAzimuth() != -1) {

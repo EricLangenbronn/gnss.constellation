@@ -15,7 +15,7 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 
 public interface IComputationService {
 
-	public SphericalCoordinate processSphericalCoordinate(GeodeticCoordinate gStation, CartesianCoordinate3D station,
+	public SphericalCoordinate processElevationAzimuth(GeodeticCoordinate gStation, CartesianCoordinate3D station,
 			CartesianCoordinate3D satelite);
 
 	public List<SateliteTimeCoordinate> getSateliteVisiblePeriod(

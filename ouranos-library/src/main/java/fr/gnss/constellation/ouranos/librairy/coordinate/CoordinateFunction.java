@@ -39,10 +39,11 @@ public class CoordinateFunction {
 	}
 
 	/**
-	 * Aussi appelé geodetic to ECEF transformation
+	 * Convert geodetic to geocentric (ECEF) coordinates.
 	 * 
 	 * @param cg
-	 * @return
+	 *            - GeodeticCoordinate in radian
+	 * @return A Cartesian coordinate, that is a 3D vector
 	 */
 	public static CartesianCoordinate3D geodeticToCartesianWSG84(GeodeticCoordinate cg) {
 		Objects.requireNonNull(cg, "GeodeticCoordinate");
