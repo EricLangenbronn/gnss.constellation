@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.librairy.coordinate;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class CoordinateFunction {
@@ -104,5 +105,33 @@ public class CoordinateFunction {
 
 		return res;
 
+	}
+
+	/**
+	 * 
+	 * @param gStation
+	 * @param station
+	 * @param satelite
+	 * @return norme, élévation, azimut
+	 */
+	public static double[] processElevationAzimuth(GeodeticCoordinate gStation, CartesianCoordinate3D station,
+			CartesianCoordinate3D satelite) {
+
+		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(satelite, station);
+		CartesianCoordinate3D stationSateliteNorm = stationSatelite.normalized();
+
+		CartesianCoordinate3D enuStationSatelite = CoordinateFunction.transformECEFtoENU(gStation, stationSateliteNorm);
+
+		double[] angles = new double[3];
+		double normeStaSat = enuStationSatelite.magnitude();
+
+		angles[0] = normeStaSat;
+		// Angle d'élévation
+		angles[1] = Math.asin(enuStationSatelite.Z() / normeStaSat);
+
+		// Angle azimute
+		angles[2] = Math.atan2(enuStationSatelite.X() / normeStaSat, enuStationSatelite.Y() / normeStaSat);
+
+		return angles;
 	}
 }

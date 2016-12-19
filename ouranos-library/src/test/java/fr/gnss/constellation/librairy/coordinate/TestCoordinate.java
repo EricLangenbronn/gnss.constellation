@@ -55,39 +55,11 @@ public class TestCoordinate {
 	}
 
 	@Test
-	public void testCalcElevationAzimuth() throws Exception {
-
-		GeodeticCoordinate station = new GeodeticCoordinate(Math.toRadians(48.5839200), Math.toRadians(7.7455300),
-				120.0);
-		CartesianCoordinate3D cartesianStation = CoordinateFunction.geodeticToCartesianWSG84(station);
-		// [5441.177312, -25836.148765, -2502.546747];
-		CartesianCoordinate3D satelite = new CartesianCoordinate3D(5441.177312, -25836.148765, -2502.546747);
-
-		CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(satelite, cartesianStation);
-		CartesianCoordinate3D stationSateliteNorm = stationSatelite.normalized();
-		CartesianCoordinate3D enuStationSatelite = CoordinateFunction.transformECEFtoENU(station, stationSateliteNorm);
-
-		double[] angles = new double[3];
-		double normeStaSat = enuStationSatelite.magnitude();
-
-		angles[0] = normeStaSat;
-		// Angle d'élévation
-		angles[1] = Math.asin(enuStationSatelite.Z() / normeStaSat);
-		System.out.println("elevation : " + angles[1]);
-
-		// Angle azimute
-		angles[2] = Math.atan2(enuStationSatelite.X() / normeStaSat, enuStationSatelite.Y() / normeStaSat);
-		System.out.println("azimute : " + angles[2]);
-
-	}
-
-	@Test
 	public void testCalcElevationAzimuth32Sat() throws Exception {
 
 		GeodeticCoordinate station = new GeodeticCoordinate(Math.toRadians(48.5839200), Math.toRadians(7.7455300),
 				120.0);
 		CartesianCoordinate3D cartesianStation = CoordinateFunction.geodeticToCartesianWSG84(station);
-		// [5441.177312, -25836.148765, -2502.546747];
 
 		double[][] satelites = { { 5441.177312, -25836.148765, -2502.546747 },
 				{ 22512.943525, 11279.067086, -8259.910943 }, { 5441.177312, -25836.148765, -2502.546747 },
@@ -108,8 +80,19 @@ public class TestCoordinate {
 
 		};
 
+		double[][] resultatAttendu = { { -1.5657744454, -0.9677346359 }, { -1.5694731115, 1.8244954536 },
+				{ -1.5657744454, -0.9677346359 }, { -1.5658881470, -0.6882757188 }, { -1.5653443260, 0.2104571106 },
+				{ -1.5679001878, 1.3984193789 }, { -1.5660975837, 0.7378873084 }, { -1.5678395402, 0.0437239957 },
+				{ -1.5633302561, 0.0136507869 }, { -1.5674266260, 1.0288078080 }, { -1.5637316576, 0.2424203636 },
+				{ -1.5675452966, -1.1730848923 }, { -1.5639195874, -0.4372118281 }, { -1.5700857561, 2.9316756509 },
+				{ -1.5691999564, -0.6963858145 }, { -1.5670366860, -0.3120904080 }, { -1.5638034791, 0.3977306209 },
+				{ -1.5681258175, 1.1528952535 }, { -1.5655237409, -0.8946745754 }, { -1.5667102665, -0.7839383362 },
+				{ -1.5672988690, 0.2948733417 }, { -1.5694731115, 1.8244954536 }, { -1.5650783113, -0.8026881830 },
+				{ -1.5640430430, 0.3566982510 }, { -1.5688344518, -1.4953690206 }, { -1.5647153996, 0.6874713972 },
+				{ -1.5633416710, -0.1452242353 }, { -1.5653396997, -0.2094400311 }, { -1.5642801472, 0.5733380124 },
+				{ -1.5681461045, 1.4931495250 }, { -1.5676091400, -0.3219728438 }, };
+
 		for (int i = 0; i < satelites.length; ++i) {
-			System.out.println(i + "  #################################");
 			CartesianCoordinate3D satelite = new CartesianCoordinate3D(satelites[i]);
 			CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(satelite, cartesianStation);
 			CartesianCoordinate3D stationSateliteNorm = stationSatelite.normalized();
@@ -122,11 +105,11 @@ public class TestCoordinate {
 			angles[0] = normeStaSat;
 			// Angle d'élévation
 			angles[1] = Math.asin(enuStationSatelite.Z() / normeStaSat);
-			System.out.println("elevation : " + angles[1]);
+			assertEquals(resultatAttendu[i][0], angles[1], 0.0001);
 
 			// Angle azimute
 			angles[2] = Math.atan2(enuStationSatelite.X() / normeStaSat, enuStationSatelite.Y() / normeStaSat);
-			System.out.println("azimute : " + angles[2]);
+			assertEquals(resultatAttendu[i][1], angles[2], 0.0001);
 		}
 
 	}

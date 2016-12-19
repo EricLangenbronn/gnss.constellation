@@ -15,10 +15,7 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 
 public interface IComputationService {
 
-	public SphericalCoordinate processElevationAzimuth(GeodeticCoordinate gStation, CartesianCoordinate3D station,
-			CartesianCoordinate3D satelite);
-
-	public List<SateliteTimeCoordinate> getSateliteVisiblePeriod(
-			Sp3FileParser sp3FileParser, double elevationMask, LocalDateTime start, LocalDateTime end,
-			GeodeticCoordinate gStation) throws TechnicalException, BusinessException;
+	public List<SateliteTimeCoordinate> getSateliteVisiblePeriod(Sp3FileParser sp3FileParser, double elevationMask,
+			LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
+			throws TechnicalException, BusinessException;
 }
