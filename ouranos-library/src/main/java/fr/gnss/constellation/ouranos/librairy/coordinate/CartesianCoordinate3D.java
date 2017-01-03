@@ -9,7 +9,7 @@ import java.util.Objects;
 public class CartesianCoordinate3D {
 
 	/**
-	 * [0] - Abscissa. [1] - Ordinate. [2] - Height.
+	 * [0] - Abscissa (X). [1] - Ordinate (Y). [2] - Height (Z).
 	 */
 	private double[] position;
 
@@ -79,7 +79,7 @@ public class CartesianCoordinate3D {
 	 * Subtract a CartesianCoordinate3D from the other. (v1 - v2)
 	 * 
 	 * @param v1
-	 *            - 
+	 *            -
 	 * @param v2
 	 *            - CartesianCoordinate3D to subtract
 	 * @return the specified new CartesianCoordinate3D
@@ -178,6 +178,15 @@ public class CartesianCoordinate3D {
 	 */
 	public double Z() {
 		return position[2];
+	}
+
+	/**
+	 * Get the vector3D
+	 * 
+	 * @return vector size 3
+	 */
+	public double[] getVector() {
+		return this.position;
 	}
 
 	@Override

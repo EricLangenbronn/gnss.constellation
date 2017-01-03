@@ -27,12 +27,12 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 	private IComputationService computationService;
 
 	@Override
-	public List<SateliteTimeCoordinate> getSateliteVisible(GeodeticCoordinate groundStation,
-			double elevationMask, LocalDateTime dateDebut, LocalDateTime dateFin)
-			throws TechnicalException, BusinessException {
+	public List<SateliteTimeCoordinate> getSateliteVisible(GeodeticCoordinate groundStation, double elevationMask,
+			LocalDateTime dateDebut, LocalDateTime dateFin) throws TechnicalException, BusinessException {
 		List<SateliteTimeCoordinate> l_satelitesVisible = null;
 
 		File sp3File = orbitsDataService.isDataForPeriod(dateDebut, dateFin);
+		double elevationMaskRad = Math.toRadians(elevationMask);
 		if (sp3File != null) {
 			LOGGER.debug("Début du traitement du fichier sp3");
 
@@ -40,7 +40,7 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 			try {
 				sp3FileParser = new Sp3FileParser(new Sp3File(sp3File));
 
-				l_satelitesVisible = computationService.getSateliteVisiblePeriod(sp3FileParser, elevationMask,
+				l_satelitesVisible = computationService.getSateliteVisiblePeriod(sp3FileParser, elevationMaskRad,
 						dateDebut, dateFin, groundStation);
 			} catch (TechnicalException e) {
 				String message = "Impossible de recuperer la liste de satelite";

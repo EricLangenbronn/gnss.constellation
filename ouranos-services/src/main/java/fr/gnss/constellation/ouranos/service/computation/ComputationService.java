@@ -2,7 +2,6 @@ package fr.gnss.constellation.ouranos.service.computation;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +13,8 @@ import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3FileParser;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
-import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateFunction;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
-import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
+import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticTransformation;
 
 public class ComputationService implements IComputationService {
 
@@ -37,12 +34,13 @@ public class ComputationService implements IComputationService {
 
 			SateliteTimeCoordinate sateliteTimeVisible = new SateliteTimeCoordinate(e.getEpochHeaderRecord());
 			for (Sp3SateliteInformation p : e.getSatelites().values()) {
-				double[] sphCoord = CoordinateFunction.processElevationAzimuth(gStation,
-						CoordinateFunction.geodeticToCartesianWSG84(gStation), p.getPosition());
+				double[] sphCoord = GeodeticTransformation.processElevationAzimuth(gStation, p.getPosition());
 
-				if (sphCoord[2] <= -1) {
+				// sphCoord[2] = azimuth, azimuth doit être positif sinon c'est que le satelite est pas
+				// du bon coté de la terre
+				if (sphCoord[2] >= 0) {
 					// 3.1415 / 2 rad = 90.0°
-					if ((sphCoord[1] >= elevationMask) && (sphCoord[1] < (3.14159 / 2))) {
+					if ((sphCoord[1] >= elevationMask) && (sphCoord[1] < (3.141592 / 2))) {
 						sateliteTimeVisible.addSatellite(p);
 					}
 				}

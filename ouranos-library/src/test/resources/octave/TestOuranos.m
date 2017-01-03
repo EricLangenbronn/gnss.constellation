@@ -14,19 +14,16 @@ formatSortie = '%0.10f';
 
 ####### Début des tests #######
 
-# ell2xyz - Ellipsoidal (lat,long) to Cartesian (x,y,z) coodinates
 # testGeodeticToCartesianStrasbourg
+# ell2xyz - Ellipsoidal (lat,long) to Cartesian (x,y,z) coodinates
 lat = deg2rad(48.5839200);
 lon = deg2rad(7.7455300);
 h = 120.0;
 
 [x,y,z]=ell2xyz(lat,lon,h,a,e2);
 
-res = ['1.1 testGeodeticToCartesianStrasbourg : (x=', sprintf(formatSortie, x) , ', y=', sprintf(formatSortie,y), ', z=', sprintf(formatSortie,z), ')'];
-disp(res);
-
-
-# xyz2ell - Cartesian (x,y,z) to ellipsoidal (lat,long,ht) coordinates 
+disp('1.1 testGeodeticToCartesianStrasbourg :');
+disp(['    (x=', sprintf(formatSortie, x) , ', y=', sprintf(formatSortie,y), ', z=', sprintf(formatSortie,z), ')']);
 
 
 # testGeodeticToCartesianParis
@@ -37,8 +34,8 @@ h = 120.0;
 
 [x,y,z]=ell2xyz(lat,lon,h,a,e2);
 
-res = ['1.2 testGeodeticToCartesianParis : (x=', sprintf(formatSortie, x) , ', y=', sprintf(formatSortie,y), ', z=', sprintf(formatSortie,z), ')'];
-disp(res);
+disp('1.2 testGeodeticToCartesianParis :');
+disp(['    (x=', sprintf(formatSortie, x) , ', y=', sprintf(formatSortie,y), ', z=', sprintf(formatSortie,z), ')']);
 
 
 # testTransformECEFtoENUStrasbourg
@@ -51,5 +48,29 @@ lon = deg2rad(7.7455300);
 
 [dx,dy,dz]=ct2lg(dX,dY,dZ,lat,lon);
 
-res = ['1.3 testTransformECEFtoENUStrasbourg : (dx=', sprintf(formatSortie, dx) , ', dy=', sprintf(formatSortie,dy), ', dz=', sprintf(formatSortie,dz), ')'];
-disp(res);
+disp('1.3 testTransformECEFtoENUStrasbourg :');
+disp(['    (dx=', sprintf(formatSortie, dx) , ', dy=', sprintf(formatSortie,dy), ', dz=', sprintf(formatSortie,dz), ')']);
+
+
+# testCalcElevationAzimuthSat
+lat = deg2rad(48.5839200);
+lon = deg2rad(7.7455300);
+h = 120.0;
+
+[x,y,z] = ell2xyz(lat,lon,h,a,e2);
+disp('1.4 testCalcElevationAzimuthSat :');
+disp(['    Cartesian station position : (x=', sprintf(formatSortie, x) , ', y=', sprintf(formatSortie,y), ', z=', sprintf(formatSortie,z), ')']);
+
+satelitePositionECEF = [5441177.312, -25836148.765, -2502546.747];
+stationPositionECEF = [x, y, z];
+
+VStationSatelite = satelitePositionECEF - stationPositionECEF;
+disp(['    Vecteur station/satelite : (x=', sprintf(formatSortie, VStationSatelite(1)) , ', y=', sprintf(formatSortie,VStationSatelite(2)), ', z=', sprintf(formatSortie,VStationSatelite(3)), ')']);
+
+# /!\ ct2lg retourne : north, east, up
+[vStaSatNEUX, vStaSatNEUY, vStaSatNEUZ]  = ct2lg(VStationSatelite(1),VStationSatelite(2),VStationSatelite(3),lat,lon);
+vStaSatNEU = [vStaSatNEUY, vStaSatNEUX, vStaSatNEUZ];
+disp(['    Vecteur station/satelite NEU : (x=', sprintf(formatSortie, vStaSatNEU(1)) , ', y=', sprintf(formatSortie,vStaSatNEU(2)), ', z=', sprintf(formatSortie,vStaSatNEU(3)), ')']);
+disp(['    Elavation : ', sprintf(formatSortie, asin(vStaSatNEU(3)/norm(vStaSatNEU))) ]);
+disp(['    Azimuth : ', sprintf(formatSortie, atan2(vStaSatNEU(1)/norm(vStaSatNEU),vStaSatNEU(2)/norm(vStaSatNEU))) ]);
+

@@ -1,8 +1,6 @@
 package fr.gnss.constellation.ouranos.api.resource;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -21,7 +19,6 @@ import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
 
 @Path("/")
 public class GetResources {

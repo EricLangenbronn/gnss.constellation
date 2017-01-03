@@ -70,9 +70,9 @@ public class GeodeticCoordinate {
 	 */
 	public GeodeticCoordinate(GeodeticCoordinate p) {
 		this();
-		
+
 		Objects.requireNonNull(p, "GeodeticCoordinate");
-		
+
 		position[0] = p.getLatitude();
 		position[1] = p.getLongitude();
 		position[2] = p.getAltitude();
@@ -103,6 +103,15 @@ public class GeodeticCoordinate {
 	 */
 	public double getAltitude() {
 		return position[2];
+	}
+
+	/**
+	 * Get the vector3D
+	 * 
+	 * @return vector size 3
+	 */
+	public double[] getVector() {
+		return this.position;
 	}
 
 	@Override
