@@ -2,11 +2,11 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2017.01.03 à 08:11:47 PM CET 
+// Généré le : 2017.01.29 à 08:56:36 PM CET 
 //
 
 
-package fr.gnss.constellation.ouranos.xsd;
+package fr.gnss.constellation.ouranos.xsd.request;
 
 import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlEnum;
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "coordinateType", namespace = "http://www.ouranos.fr/ouranos/data/v10/types")
 @XmlEnum
-@Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-03T08:11:47+01:00", comments = "JAXB RI v2.2.11")
+@Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
 public enum CoordinateType {
 
     @XmlEnumValue("Cartesian")

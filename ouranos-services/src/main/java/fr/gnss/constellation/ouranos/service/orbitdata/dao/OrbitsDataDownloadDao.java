@@ -7,9 +7,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.gnss.constellation.ouranos.bean.orbitdata.OrbitDataBean;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
+import fr.gnss.constellation.ouranos.service.orbitdata.bean.OrbitDataBean;
 import fr.gnss.constellation.ouranos.toolbox.ClientFtpSp3File;
 import fr.gnss.constellation.ouranos.toolbox.ManagedConnection;
 

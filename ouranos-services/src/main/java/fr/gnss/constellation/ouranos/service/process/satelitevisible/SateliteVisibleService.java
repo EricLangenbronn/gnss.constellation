@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.service.satelitevisible;
+package fr.gnss.constellation.ouranos.service.process.satelitevisible;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -15,6 +15,8 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinat
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
+import fr.gnss.constellation.ouranos.wrapper.XsdWrapper;
+import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
 public class SateliteVisibleService implements ISateliteVisibleService {
 
@@ -27,8 +29,17 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 	private IComputationService computationService;
 
 	@Override
-	public List<SateliteTimeCoordinate> getSateliteVisible(GeodeticCoordinate groundStation, double elevationMask,
-			LocalDateTime dateDebut, LocalDateTime dateFin) throws TechnicalException, BusinessException {
+	public List<SateliteTimeCoordinate> getSateliteVisible(VisibleSateliteRequest p_request)
+			throws TechnicalException, BusinessException {
+
+		LocalDateTime dateDebut = p_request.getStartDateOfMeasure().toGregorianCalendar().toZonedDateTime()
+				.toLocalDateTime();
+		LocalDateTime dateFin = p_request.getEndDateOfMeasure().toGregorianCalendar().toZonedDateTime()
+				.toLocalDateTime();
+		GeodeticCoordinate geodeticCoordinate = XsdWrapper.wrapGeodeticCoordindate(p_request.getGroundStation());
+
+		double elevationMask = p_request.getElevationMask();
+
 		List<SateliteTimeCoordinate> l_satelitesVisible = null;
 
 		File sp3File = orbitsDataService.isDataForPeriod(dateDebut, dateFin);
@@ -41,7 +52,7 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 				sp3FileParser = new Sp3FileParser(new Sp3File(sp3File));
 
 				l_satelitesVisible = computationService.getSateliteVisiblePeriod(sp3FileParser, elevationMaskRad,
-						dateDebut, dateFin, groundStation);
+						dateDebut, dateFin, geodeticCoordinate);
 			} catch (TechnicalException e) {
 				String message = "Impossible de recuperer la liste de satelite";
 				LOGGER.error(message, e);

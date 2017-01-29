@@ -2,11 +2,11 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2017.01.03 à 08:11:47 PM CET 
+// Généré le : 2017.01.29 à 08:56:36 PM CET 
 //
 
 
-package fr.gnss.constellation.ouranos.xsd;
+package fr.gnss.constellation.ouranos.xsd.request;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the fr.gnss.constellation.ouranos.xsd package. 
+ * generated in the fr.gnss.constellation.ouranos.xsd.request package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,7 +30,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: fr.gnss.constellation.ouranos.xsd
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: fr.gnss.constellation.ouranos.xsd.request
      * 
      */
     public ObjectFactory() {

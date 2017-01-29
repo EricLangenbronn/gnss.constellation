@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.service.flux;
+package fr.gnss.constellation.ouranos.service.resource.utils;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,34 +15,33 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
-public class BindingXMLService {
+public class BindingXMLUtils {
 
 	/**
 	 * Le logger de la classe.
 	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(BindingXMLService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BindingXMLUtils.class);
 
-	private static BindingXMLService INSTANCE = null;
+	private static BindingXMLUtils INSTANCE = null;
 
-	private BindingXMLService() throws TechnicalException {
+	private BindingXMLUtils() {
 
 	}
 
-	public static BindingXMLService getInstance() throws TechnicalException {
+	public static BindingXMLUtils getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new BindingXMLService();
+			INSTANCE = new BindingXMLUtils();
 		}
 
 		return INSTANCE;
 	}
 
-	public <T> T mapXml2Object(final InputStream p_xml, final Class<T> p_class) throws BusinessException {
-		T l_Request = null;
+	public <T> Object mapXml2Object(final InputStream p_xml, final Class<T> p_class) throws BusinessException {
+		Object l_Request = null;
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(p_class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			Object oRequest = jaxbUnmarshaller.unmarshal(p_xml);
-			l_Request = (T) oRequest;
+			l_Request = jaxbUnmarshaller.unmarshal(p_xml);
 
 			IOUtils.closeQuietly(p_xml);
 		} catch (JAXBException l_e) {

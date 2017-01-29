@@ -22,15 +22,15 @@
 						<goals>
 							<goal>xjc</goal>
 						</goals>
+						<configuration>
+							<packageName>fr.gnss.constellation.ouranos.xsd.request</packageName>
+							<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+							<encoding>${project.build.sourceEncoding}</encoding>
+							<addGeneratedAnnotation>true</addGeneratedAnnotation>
+							<xsdPathWithinArtifact>resources/xsd/request/</xsdPathWithinArtifact>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<packageName>fr.gnss.constellation.ouranos.xsd</packageName>
-					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-					<encoding>${project.build.sourceEncoding}</encoding>
-					<addGeneratedAnnotation>true</addGeneratedAnnotation>
-					<xsdPathWithinArtifact>resources/xsd</xsdPathWithinArtifact>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

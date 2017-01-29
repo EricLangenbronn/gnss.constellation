@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.gnss.constellation.ouranos.api.service.ServiceFactory;
+import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 
 /**
  * @author thomas
@@ -33,8 +33,8 @@ public class AboutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest p_Req, HttpServletResponse p_Resp) throws ServletException, IOException {
 		PrintWriter writer = p_Resp.getWriter();
 
-		String versionService = "Version Services : " + ServiceFactory.getInformationsVersion();
-		String versionWebapp = "Version Webapps : " + ServiceFactory
+		String versionService = "Version Services : " + ServiceLocator.getInformationsVersion();
+		String versionWebapp = "Version Webapps : " + ServiceLocator
 				.getInformationsVersionWebapp(getServletContext().getResourceAsStream("/META-INF/MANIFEST.MF"));
 
 		writer.println(versionService + "\n" + versionWebapp);

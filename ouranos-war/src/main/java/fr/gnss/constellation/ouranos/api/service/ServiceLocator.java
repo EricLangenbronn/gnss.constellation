@@ -1,125 +1,103 @@
 package fr.gnss.constellation.ouranos.api.service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
-public final class ServiceLocator {
+import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
+
+public final class ServiceLocator implements ApplicationContextAware {
 
 	/**
 	 * le logger...
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceLocator.class);
 
-	/**
-	 * Contexte d'application Spring.
-	 */
-	private static ServiceFactory serviceFactory = null;
+	// -------------------- Constantes --------------------
 
-	/** Le fichier de configuration Spring globale */
-	public static String GLOBAL_AC = "/module/globalAC.xml";
+	private static final String ATTRIBUTE_BUILD_TAG = "Build-Tag";
 
-	/** Map des fichiers spring d'initialisation */
-	private static Map<String, String> mapFichiersSpring = null;
+	// -------------------- Attributs --------------------
 
-	private ServiceLocator() {
+	private static ApplicationContext CONTEXTE;
 
+	// -------------------- Getters & Setters --------------------
+
+	public static ApplicationContext getContexte() {
+		return CONTEXTE;
 	}
 
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		CONTEXTE = applicationContext;
+	}
+
+	// -------------------- Méthodes --------------------
+
 	/**
-	 * Permet de retourner la factory proprement
+	 * Cette méthode permet de récupérer les informations de version dans le jar
+	 * de l'application.
 	 * 
-	 * @param p_Cle
-	 *            la clé du globalAC
-	 * @return la factory
+	 * @param p_WebappManifest
+	 *            path vers la racine de la webapp
+	 * @return les informations de version de Delia sous forme de String
 	 */
-	public static ServiceFactory getServiceFactory(String p_Cle) {
-		if (null == serviceFactory) {
-			serviceFactory = initialiserServiceFactory(p_Cle);
+	public static String getInformationsVersionWebapp(InputStream p_WebappManifest) {
+		String informations = "Aucune information de version.";
+		try {
+			Manifest manifest = new Manifest(p_WebappManifest);
+			Attributes mainAttribs = manifest.getMainAttributes();
+			String version = mainAttribs.getValue(ATTRIBUTE_BUILD_TAG);
+			if (version != null) {
+				return version;
+			}
+		} catch (Throwable t) {
+			t.printStackTrace();
+			informations = "Erreur lors de la lecture des informations de version de l'application (" + t.getMessage()
+					+ ")";
 		}
-
-		return serviceFactory;
+		return informations;
 	}
 
 	/**
-	 * Permet de retourner la factory proprement
+	 * Liste les versions des différentes librairies du projet.
 	 * 
-	 * @param p_Cle
-	 *            la clé du globalAC
-	 * @return la factory
+	 * @return une map nom-de-la-librairie => version
+	 * @throws TechnicalException
 	 */
-	public static ServiceFactory getServiceFactory(ApplicationContext p_Context) {
-		if (null == serviceFactory) {
-			serviceFactory = initialiserServiceFactory(p_Context);
-		}
+	public static Map<String, String> getInformationsVersion() throws IOException {
+		Map<String, String> result = new HashMap<String, String>();
 
-		return serviceFactory;
-	}
-
-	/**
-	 * @param p_Cle
-	 *            la clé de la factory
-	 * @return la factory
-	 */
-	public synchronized static ServiceFactory initialiserServiceFactory(String p_Cle) {
-		if (null == serviceFactory) {
-			try {
-				mapFichiersSpring = new HashMap<String, String>();
-
-				String fichierConf = mapFichiersSpring.get(p_Cle);
-				if (null == fichierConf) {
-					fichierConf = GLOBAL_AC;
-				}
-
-				ApplicationContext springContext;
-				springContext = new ClassPathXmlApplicationContext(fichierConf);
-				initialiserServiceFactory(springContext);
-			} catch (Exception e) {
-				throw new RuntimeException("Erreur lors de l'initialisation de la factory", e);
+		ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver(CONTEXTE);
+		Resource[] resources = resourceResolver.getResources("classpath*:META-INF/MANIFEST.MF");
+		for (Resource resource : resources) {
+			Manifest manifest = new Manifest(resource.getInputStream());
+			Attributes mainAttribs = manifest.getMainAttributes();
+			String version = mainAttribs.getValue(ATTRIBUTE_BUILD_TAG);
+			if (version != null) {
+				result.put(getNomJarFromUri(resource.getURI().toString()), version);
 			}
 		}
-		return serviceFactory;
+
+		return result;
 	}
 
-	/**
-	 * @param p_Cle
-	 *            la clé de la factory
-	 * @return la factory
-	 */
-	public synchronized static ServiceFactory initialiserServiceFactory(ApplicationContext p_Context) {
-		if (null == serviceFactory) {
-			try {
-				if (LOGGER.isInfoEnabled()) {
-					String[] beans = p_Context.getBeanDefinitionNames();
-
-					if (beans != null && beans.length > 0) {
-						String services = StringUtils.join(beans, ", ");
-						LOGGER.info("Services spring : " + services);
-					}
-				}
-				serviceFactory = (ServiceFactory) p_Context.getBean("serviceFactory");
-
-				// OK pour Tomcat
-				LOGGER.info("Version Services : " + serviceFactory.getInformationsVersion());
-			} catch (Exception e) {
-				String l_msg = "Erreur lors de l'initialisation de la factory";
-				LOGGER.error(l_msg, e);
-				throw new RuntimeException(l_msg, e);
-			}
-		}
-		return serviceFactory;
+	private static String getNomJarFromUri(String uri) {
+		String uriJar = uri.substring(0, uri.indexOf('!'));
+		String jar = uriJar.substring(uriJar.lastIndexOf('/') + 1);
+		return jar;
 	}
 
-	/**
-	 * @return la factory
-	 */
-	public static ServiceFactory getServiceFactory() {
-		// par défaut, on initialise tout
-		return getServiceFactory(GLOBAL_AC);
-	}
 }

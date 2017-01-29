@@ -5,18 +5,11 @@
 	<import resource="classpath:/module/ouranos-dao.xml" />
 	<import resource="classpath:/module/ouranos-services.xml" />
 
-	<!-- Service Factory -->
-	<bean id="serviceFactory"
-		class="fr.gnss.constellation.ouranos.api.service.ServiceFactory">
-		<property name="orbitsDataService">
-			<ref bean="orbitsDataService" />
-		</property>
-		<property name="sateliteVisibleService">
-			<ref bean="sateliteVisibleService" />
-		</property>
-		<property name="fluxService">
-			<ref bean="fluxService" />
-		</property>
-	</bean>
+	<bean id="serviceLocator"
+		class="fr.gnss.constellation.ouranos.api.service.ServiceLocator" />
+
+	<bean id="startupListener"
+		class="fr.gnss.constellation.ouranos.api.service.StartupListener"
+		autowire="byType" />
 
 </beans>

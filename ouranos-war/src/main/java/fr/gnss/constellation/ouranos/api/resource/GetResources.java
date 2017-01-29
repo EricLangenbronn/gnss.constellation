@@ -1,7 +1,6 @@
 package fr.gnss.constellation.ouranos.api.resource;
 
-import java.util.List;
-
+import javax.annotation.PostConstruct;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -18,7 +17,8 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.service.resource.HttpHeaderType;
+import fr.gnss.constellation.ouranos.service.resource.IProcessResourceService;
 
 @Path("/")
 public class GetResources {
@@ -28,37 +28,49 @@ public class GetResources {
 	 */
 	private final static Logger LOGGER = LoggerFactory.getLogger(GetResources.class);
 
-	/**
-	 * Creates a new instance of RelationResource
-	 */
-	public GetResources() {
-		LOGGER.info("charger");
+	private IProcessResourceService processResourceService;
+
+	@PostConstruct
+	public void init() {
+		processResourceService = ServiceLocator.getContexte().getBean(IProcessResourceService.class);
 	}
 
-	private String getHeaderParamAccept(String accept) {
-		if (accept != null && accept.contains(MediaType.APPLICATION_XML)) {
-			accept = MediaType.APPLICATION_XML;
+	private HttpHeaderType getHeaderParamType(String accept) {
+		HttpHeaderType mediaType = null;
+
+		if (accept == null || accept.contains(MediaType.APPLICATION_XML)) {
+			mediaType = HttpHeaderType.xml;
 		} else {
-			accept = MediaType.APPLICATION_JSON;
+			mediaType = HttpHeaderType.json;
 		}
 
-		return accept;
-
+		return mediaType;
 	}
 
 	@GET
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.TEXT_XML + ";charset=UTF-8", MediaType.APPLICATION_JSON + ";charset=UTF-8" })
 	@Path("/{version}/visibleSat")
-	public Response getVisibleSatelite(@HeaderParam("Accept") String accept, @PathParam("version") final String version,
+	public Response getVisibleSatelite(@HeaderParam("Content-Type") String contentType,
+			@HeaderParam("Accept") String accept, @PathParam("version") final String version,
 			@QueryParam("requete") String p_contenu) throws BusinessException, TechnicalException {
+		HttpHeaderType acceptContentType = this.getHeaderParamType(contentType);
+		HttpHeaderType acceptMediaType = this.getHeaderParamType(accept);
 
-		accept = this.getHeaderParamAccept(accept);
+		String response = processResourceService.processSateliteVisible(acceptContentType, acceptMediaType, p_contenu,
+				version);
 
-		List<SateliteTimeCoordinate> satelitesVisible = ServiceLocator.getServiceFactory().getFluxService()
-				.sateliteVisible(version, p_contenu);
+		// TODO : a revoir
+		String returnAccept = "";
+		switch (acceptMediaType) {
+		case json:
+			returnAccept = MediaType.APPLICATION_JSON;
+		case xml:
+			returnAccept = MediaType.APPLICATION_XML;
+		default:
+			returnAccept = MediaType.APPLICATION_XML;
+		}
 
-		return Response.ok(satelitesVisible, accept).build();
+		return Response.ok(response, returnAccept).build();
 	}
-
 }
