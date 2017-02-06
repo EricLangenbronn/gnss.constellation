@@ -54,23 +54,13 @@ public class GetResources {
 	public Response getVisibleSatelite(@HeaderParam("Content-Type") String contentType,
 			@HeaderParam("Accept") String accept, @PathParam("version") final String version,
 			@QueryParam("requete") String p_contenu) throws BusinessException, TechnicalException {
+		
 		HttpHeaderType acceptContentType = this.getHeaderParamType(contentType);
 		HttpHeaderType acceptMediaType = this.getHeaderParamType(accept);
 
 		String response = processResourceService.processSateliteVisible(acceptContentType, acceptMediaType, p_contenu,
 				version);
 
-		// TODO : a revoir
-		String returnAccept = "";
-		switch (acceptMediaType) {
-		case json:
-			returnAccept = MediaType.APPLICATION_JSON;
-		case xml:
-			returnAccept = MediaType.APPLICATION_XML;
-		default:
-			returnAccept = MediaType.APPLICATION_XML;
-		}
-
-		return Response.ok(response, returnAccept).build();
+		return Response.ok(response, acceptMediaType.getType()).build();
 	}
 }

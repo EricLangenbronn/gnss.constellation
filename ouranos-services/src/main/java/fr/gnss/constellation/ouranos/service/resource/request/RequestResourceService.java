@@ -53,7 +53,9 @@ public class RequestResourceService implements IRequestResourceService {
 		case json:
 			break;
 		default:
-			throw new BusinessException("contentType non reconnu");
+			String message = "contentType non reconnu";
+			LOGGER.debug(message);
+			throw new BusinessException(message);
 		}
 
 		return request;

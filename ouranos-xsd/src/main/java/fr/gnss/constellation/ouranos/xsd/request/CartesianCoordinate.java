@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2017.01.29 à 08:56:36 PM CET 
+// Généré le : 2017.02.06 à 09:18:55 PM CET 
 //
 
 
@@ -49,21 +49,21 @@ import javax.xml.bind.annotation.XmlType;
     "ordonnee",
     "hauteur"
 })
-@Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+@Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
 public class CartesianCoordinate {
 
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     protected double abscisse;
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     protected double ordonnee;
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     protected double hauteur;
 
     /**
      * Obtient la valeur de la propriété abscisse.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     public double getAbscisse() {
         return abscisse;
     }
@@ -72,7 +72,7 @@ public class CartesianCoordinate {
      * Définit la valeur de la propriété abscisse.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     public void setAbscisse(double value) {
         this.abscisse = value;
     }
@@ -81,7 +81,7 @@ public class CartesianCoordinate {
      * Obtient la valeur de la propriété ordonnee.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     public double getOrdonnee() {
         return ordonnee;
     }
@@ -90,7 +90,7 @@ public class CartesianCoordinate {
      * Définit la valeur de la propriété ordonnee.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     public void setOrdonnee(double value) {
         this.ordonnee = value;
     }
@@ -99,7 +99,7 @@ public class CartesianCoordinate {
      * Obtient la valeur de la propriété hauteur.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     public double getHauteur() {
         return hauteur;
     }
@@ -108,7 +108,7 @@ public class CartesianCoordinate {
      * Définit la valeur de la propriété hauteur.
      * 
      */
-    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-01-29T08:56:36+01:00", comments = "JAXB RI v2.2.11")
+    @Generated(value = "com.sun.tools.xjc.Driver", date = "2017-02-06T09:18:55+01:00", comments = "JAXB RI v2.2.11")
     public void setHauteur(double value) {
         this.hauteur = value;
     }

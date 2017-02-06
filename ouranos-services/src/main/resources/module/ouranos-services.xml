@@ -4,6 +4,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<import resource="velocity-conf.xml" />
+
 	<bean id="propertiesService" class="fr.gnss.constellation.ouranos.service.PropertiesService" />
 
 	<bean id="configurationService"
@@ -37,6 +39,11 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 		<property name="requestResourceService" ref="requestResourceService"></property>
 		<property name="responseResourceService" ref="responseResourceService"></property>
 		<property name="sateliteVisibleService" ref="sateliteVisibleService"></property>
+	</bean>
+
+	<bean id="templateService"
+		class="fr.gnss.constellation.ouranos.service.template.TemplateService">
+		<property name="velocityEngine" ref="velocityEngine"></property>
 	</bean>
 
 </beans>
