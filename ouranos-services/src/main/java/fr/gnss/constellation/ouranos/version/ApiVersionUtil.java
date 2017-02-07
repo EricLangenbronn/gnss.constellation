@@ -1,5 +1,7 @@
 package fr.gnss.constellation.ouranos.version;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
+import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
 public class ApiVersionUtil {
 
@@ -72,5 +75,28 @@ public class ApiVersionUtil {
 			previousVersion = new Version(version - 1);
 		}
 		return previousVersion;
+	}
+
+	public Version checkIfVersionOrPreviousIsContains(Version requestedVersion, List<Version> availabelVersion)
+			throws BusinessException {
+
+		availabelVersion.add(requestedVersion);
+		Collections.sort(availabelVersion);
+
+		int index = availabelVersion.lastIndexOf(requestedVersion);
+
+		Version version;
+		if (index >= 1) {
+			// TODO: point d'intérêt :)
+			/* :D drôle comme manière de faire, non ? :D */
+			version = availabelVersion.get(index - 1);
+		} else {
+			String message = "Aucun numéro de version valide n'est présent dans la liste pour cette version [requestedVersion="
+					+ requestedVersion + "]";
+			LOGGER.error(message);
+			throw new BusinessException(message);
+		}
+
+		return version;
 	}
 }

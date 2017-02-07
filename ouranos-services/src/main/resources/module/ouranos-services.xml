@@ -20,30 +20,32 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 		class="fr.gnss.constellation.ouranos.service.resource.request.RequestResourceService" />
 
 	<bean id="responseResourceService"
-		class="fr.gnss.constellation.ouranos.service.resource.response.ResponseResourceService" />
+		class="fr.gnss.constellation.ouranos.service.resource.response.ResponseResourceService">
+		<property name="templateService" ref="templateService" />
+	</bean>
 
 	<bean id="orbitsDataService"
 		class="fr.gnss.constellation.ouranos.service.orbitdata.OrbitsDataService">
-		<property name="sp3Dao" ref="sp3Dao"></property>
-		<property name="propertiesService" ref="propertiesService"></property>
+		<property name="sp3Dao" ref="sp3Dao" />
+		<property name="propertiesService" ref="propertiesService" />
 	</bean>
 
 	<bean id="sateliteVisibleService"
 		class="fr.gnss.constellation.ouranos.service.process.satelitevisible.SateliteVisibleService">
-		<property name="orbitsDataService" ref="orbitsDataService"></property>
-		<property name="computationService" ref="computationService"></property>
+		<property name="orbitsDataService" ref="orbitsDataService" />
+		<property name="computationService" ref="computationService" />
 	</bean>
 
 	<bean id="processResourceService"
 		class="fr.gnss.constellation.ouranos.service.resource.ProcessResourceService">
-		<property name="requestResourceService" ref="requestResourceService"></property>
-		<property name="responseResourceService" ref="responseResourceService"></property>
-		<property name="sateliteVisibleService" ref="sateliteVisibleService"></property>
+		<property name="requestResourceService" ref="requestResourceService" />
+		<property name="responseResourceService" ref="responseResourceService" />
+		<property name="sateliteVisibleService" ref="sateliteVisibleService" />
 	</bean>
 
 	<bean id="templateService"
 		class="fr.gnss.constellation.ouranos.service.template.TemplateService">
-		<property name="velocityEngine" ref="velocityEngine"></property>
+		<property name="velocityEngine" ref="velocityEngine" />
 	</bean>
 
 </beans>

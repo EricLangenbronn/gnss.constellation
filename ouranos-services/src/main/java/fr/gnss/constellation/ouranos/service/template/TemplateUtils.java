@@ -1,10 +1,8 @@
 package fr.gnss.constellation.ouranos.service.template;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
@@ -30,8 +28,12 @@ public class TemplateUtils {
 	private static final ApiVersionUtil API_VERSION_UTIL = ApiVersionUtil.getInstance();
 
 	public String getPathTemplateRootDirectory(String resource, Version version) {
+
+		// Pour le moment on peut charger les templates qu'a partir du jar lui
+		// même a voir si les "/" sont tjs ok si on passe sur un répertoire
+		// windows
 		StringBuilder pathTemplate = new StringBuilder();
-		pathTemplate.append(ROOT_DIRECTORY).append(resource).append(version).append(EXTENSION);
+		pathTemplate.append(ROOT_DIRECTORY).append("/").append(resource).append("/").append(version).append(EXTENSION);
 		return pathTemplate.toString();
 	}
 
@@ -48,8 +50,9 @@ public class TemplateUtils {
 			for (int i = 0; i < templates.length; ++i) {
 
 				try {
-					Version version = API_VERSION_UTIL
-							.getVersion(FilenameUtils.getBaseName(templates[i].getFilename()));
+					String fileName = FilenameUtils.getBaseName(templates[i].getFilename());
+					// String strVersion = fileName.split("-")[0];
+					Version version = API_VERSION_UTIL.getVersion(fileName);
 					availabelResources.add(version);
 				} catch (BusinessException e) {
 					String message = "Impossible de transformer le nom du template en numéro de version";
@@ -65,35 +68,12 @@ public class TemplateUtils {
 		return availabelResources;
 	}
 
-	public Version resolveTemplateVersionInTermsOf(String resource, Version requestedVersion)
-			throws TechnicalException, BusinessException {
-
-		List<Version> availabelVersion = this.getAvailableVersionForResource(resource);
-		availabelVersion.add(requestedVersion);
-		Collections.sort(availabelVersion);
-
-		int index = availabelVersion.lastIndexOf(requestedVersion);
-
-		Version version;
-		if (index >= 1) {
-			// TODO: point d'intérêt :)
-			/* :D drôle comme manière de faire, non ? :D */
-			version = availabelVersion.get(index - 1);
-		} else {
-			String message = "Aucun numéro de version n'existe pour ce template et cette version [resource=" + resource
-					+ ", requestedVersion=" + requestedVersion + "]";
-			LOGGER.error(message);
-			throw new BusinessException(message);
-		}
-
-		return version;
-	}
-
-	public String findTemplate(String resource, Version requestedVersion) throws BusinessException {
+	public String resolveTemplateVersionInTermsOf(String resource, Version requestedVersion) throws BusinessException {
 		String templatePath = "";
 
 		try {
-			Version version = resolveTemplateVersionInTermsOf(resource, requestedVersion);
+			List<Version> availabelVersions = this.getAvailableVersionForResource(resource);
+			Version version = API_VERSION_UTIL.checkIfVersionOrPreviousIsContains(requestedVersion, availabelVersions);
 			templatePath = this.getPathTemplateRootDirectory(resource, version);
 
 		} catch (TechnicalException e) {
