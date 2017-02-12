@@ -1,7 +1,9 @@
 package fr.gnss.constellation.ouranos.service.template;
 
 import java.io.StringWriter;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.Map.Entry;
 
 import org.apache.velocity.Template;
@@ -9,6 +11,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.apache.velocity.tools.generic.DateTool;
+import org.apache.velocity.tools.generic.NumberTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +35,12 @@ public class TemplateService implements ITemplateService {
 		for (Entry<String, Object> info : informations.entrySet()) {
 			context.put(info.getKey(), info.getValue());
 		}
+
+		// ajout lib pour formatage nombre + date
+		context.put("numberTool", new NumberTool());
+		context.put("dateTool", new DateTool());
+		context.put("dateToolLocale", Locale.ENGLISH);
+		context.put("dateToolTimezone", TimeZone.getTimeZone("UTC"));
 
 		StringBuffer generetedFlux = null;
 		try {

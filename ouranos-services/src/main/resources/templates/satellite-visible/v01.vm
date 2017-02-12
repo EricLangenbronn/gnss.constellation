@@ -1,3 +1,29 @@
-<root>
-<balise>yolo</balise>
-</root>
+#####################################################################################################
+######################## Template velocity de satelitesVisible ######################################
+#####################################################################################################
+#set( $dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" )
+#set($mediaTypeXml = "xml")
+#set($mediaTypeJson = "json")
+#if($mediaType.toString() == $mediaTypeXml)
+<?xml version="1.0" encoding="UTF-8"?>
+<satelitesVisible>
+    #foreach($sateliteTimeCoordinate in $satelitesVisible)
+        <epochHeader>$sateliteTimeCoordinate.epochHeaderRecord</epochHeader>
+        <satelites>
+            #foreach($satelite in $sateliteTimeCoordinate.satelites.entrySet())
+                <satelite>
+                    <id>$satelite.key</id>
+                    <position>
+                        <X>$numberTool.format("number",$satelite.value.position.X())</X>
+                        <Y>$numberTool.format("number",$satelite.value.position.Y())</Y>
+                        <Z>$numberTool.format("number",$satelite.value.position.Z())</Z>
+                    </position>
+                </satelite>
+            #end
+        </satelites>
+    #end
+</satelitesVisible>
+#end
+#if($mediaType.toString() == $mediaTypeJson)
+{"flux":"json"}
+#end
