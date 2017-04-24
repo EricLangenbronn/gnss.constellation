@@ -29,21 +29,21 @@ public class ProcessResourceService implements IProcessResourceService {
 	private ISateliteVisibleService sateliteVisibleService;
 
 	@Override
-	public String processSateliteVisible(HttpHeaderType contentType, HttpHeaderType mediaType, String request,
-			String version) throws TechnicalException, BusinessException {
+	public String processSateliteVisible(ResourceType resourceType, String request, String version)
+			throws TechnicalException, BusinessException {
 
 		VisibleSateliteRequest visibleSateliteRequeste = this.requestResourceService
-				.getRequestSateliteVisible(contentType, version, request);
+				.getRequestSateliteVisible(resourceType, version, request);
 
 		List<SateliteTimeCoordinate> sateliteVisible = this.sateliteVisibleService
 				.getSateliteVisible(visibleSateliteRequeste);
 
 		Map<String, Object> fluxInformations = new HashMap<String, Object>();
 		fluxInformations.put("satelitesVisible", sateliteVisible);
-		fluxInformations.put("mediaType", mediaType);
 
 		Version v = ApiVersionUtil.getInstance().getVersion(version);
-		String response = this.responseResourceService.getSateliteVisible("satellite-visible", v, fluxInformations);
+		String response = this.responseResourceService.getFluxSateliteVisible("satellite-visible", resourceType, v,
+				fluxInformations);
 
 		return response;
 	}

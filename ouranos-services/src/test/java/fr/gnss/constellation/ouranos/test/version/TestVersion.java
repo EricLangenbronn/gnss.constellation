@@ -1,10 +1,12 @@
-package fr.gnss.constellation.ouranos.version;
+package fr.gnss.constellation.ouranos.test.version;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import fr.gnss.constellation.ouranos.version.Version;
 
 public class TestVersion {
 

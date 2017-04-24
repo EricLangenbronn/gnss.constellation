@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.version;
+package fr.gnss.constellation.ouranos.test.version;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
+import fr.gnss.constellation.ouranos.version.ApiVersionUtil;
+import fr.gnss.constellation.ouranos.version.Version;
 
 public class TestApiVersion {
 

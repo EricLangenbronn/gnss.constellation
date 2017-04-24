@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.services;
+package fr.gnss.constellation.ouranos.test.services;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;

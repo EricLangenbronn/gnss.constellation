@@ -1,6 +1,7 @@
-http://127.0.0.1:8080/ouranos-war/ouranos/v01/visibleSat?requete=<?xml version="1.0" encoding="UTF-8" ?><vs:visibleSateliteRequest xmlns:vs="http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><groundStation><latitude>38.889139</latitude><longitude>-77.049</longitude><altitude>130.049</altitude></groundStation><startDateOfMeasure>2013-12-22T00:00:00</startDateOfMeasure><endDateOfMeasure>2013-12-22T23:45:00</endDateOfMeasure><elevationMask>15.0</elevationMask></vs:visibleSateliteRequest>
+/* Appel de l'api XML */
+http://127.0.0.1:8080/ouranos-war/ouranos/api/v01/visibleSat?requete=<?xml version="1.0" encoding="UTF-8" ?><vs:visibleSateliteRequest xmlns:vs="http://www.ouranos.fr/ouranos/request/v10/visibleSateliteRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><groundStation><latitude>38.889139</latitude><longitude>-77.049</longitude><altitude>130.049</altitude></groundStation><startDateOfMeasure>2013-12-22T00:00:00</startDateOfMeasure><endDateOfMeasure>2013-12-22T23:45:00</endDateOfMeasure><elevationMask>15.0</elevationMask></vs:visibleSateliteRequest>
 
-Xml correctement formaté
+XML correctement formaté
 
 <?xml version="1.0" encoding="UTF-8" ?>
 <vs:visibleSateliteRequest
@@ -17,3 +18,19 @@ Xml correctement formaté
 	<elevationMask>15.0</elevationMask>
 
 </vs:visibleSateliteRequest>
+
+/* Appel de l'api JSON */
+http://127.0.0.1:8080/ouranos-war/ouranos/api/v01/visibleSat?requete={"groundStation":{"latitude":"38.889139","longitude":"-77.049","altitude":"130.049"}, "startDateOfMeasure":"2013-12-22T00:00:00","endDateOfMeasure":"2013-12-22T23:45:00","elevationMask":"15.0"}
+
+JSON correctement formaté
+
+{
+    "groundStation": {
+        "latitude":"38.889139",
+        "longitude":"-77.049",
+        "altitude":"130.049"
+    },
+    "startDateOfMeasure":"2013-12-22T00:00:00",
+    "endDateOfMeasure":"2013-12-22T23:45:00",
+    "elevationMask":"15.0"
+}

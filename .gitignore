@@ -42,6 +42,35 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+#Angular 2
+
+#node install
+ouranos-ihm/temp
+
+# compiled output
+ouranos-ihm/src/main/ngapp/dist
+ouranos-ihm/src/main/ngapp/tmp
+
+# dependencies
+ouranos-ihm/src/main/ngapp/node_modules
+ouranos-ihm/src/main/ngapp/bower_components
+
+# misc
+ouranos-ihm/src/main/ngapp/.sass-cache
+ouranos-ihm/src/main/ngapp/connect.lock
+ouranos-ihm/src/main/ngapp/coverage/*
+ouranos-ihm/src/main/ngapp/libpeerconnection.log
+ouranos-ihm/src/main/ngapp/npm-debug.log
+ouranos-ihm/src/main/ngapp/testem.log
+ouranos-ihm/src/main/ngapp/typings
+
+# e2e
+ouranos-ihm/src/main/ngapp/e2e/*.js
+ouranos-ihm/src/main/ngapp/e2e/*.map
+
+#System Files
+.DS_Store
+Thumbs.db
 
 # Perso
 

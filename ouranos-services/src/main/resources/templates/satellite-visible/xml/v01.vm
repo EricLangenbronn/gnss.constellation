@@ -2,9 +2,6 @@
 ######################## Template velocity de satelitesVisible ######################################
 #####################################################################################################
 #set( $dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" )
-#set($mediaTypeXml = "xml")
-#set($mediaTypeJson = "json")
-#if($mediaType.toString() == $mediaTypeXml)
 <?xml version="1.0" encoding="UTF-8"?>
 <satelitesVisible>
     #foreach($sateliteTimeCoordinate in $satelitesVisible)
@@ -23,7 +20,3 @@
         </satelites>
     #end
 </satelitesVisible>
-#end
-#if($mediaType.toString() == $mediaTypeJson)
-{"flux":"json"}
-#end

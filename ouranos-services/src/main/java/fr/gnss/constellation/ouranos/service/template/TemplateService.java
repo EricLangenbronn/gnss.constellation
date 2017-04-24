@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.service.Constante;
+import fr.gnss.constellation.ouranos.service.resource.ResourceType;
 import fr.gnss.constellation.ouranos.version.Version;
 
 public class TemplateService implements ITemplateService {
@@ -61,8 +62,8 @@ public class TemplateService implements ITemplateService {
 		return generetedFlux;
 	}
 
-	public String getTemplate(String resource, Version version) throws BusinessException {
-		return this.templateUtils.resolveTemplateVersionInTermsOf(resource, version);
+	public String getTemplate(String resource, ResourceType resourceType, Version version) throws BusinessException {
+		return this.templateUtils.resolveTemplateVersionInTermsOf(resource, resourceType, version);
 	}
 
 	public void setVelocityEngine(VelocityEngine velocityEngine) {

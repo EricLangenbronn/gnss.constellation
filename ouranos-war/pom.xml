@@ -31,6 +31,41 @@
 					</configuration>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<configuration>
+					<apiSources>
+						<apiSource>
+							<info>
+								<title>Ouranos Swagger Maven Plugin Sample</title>
+								<version>${project.version}</version>
+							</info>
+							<springmvc>false</springmvc>
+							<locations>
+								<location>fr.gnss.constellation.ouranos.api.resource</location>
+							</locations>
+							<schemes>
+								<scheme>http</scheme>
+								<scheme>https</scheme>
+							</schemes>
+							<host>localhost:8080</host>
+							<basePath>/api</basePath>
+							<outputPath>${basedir}/generated/document.html</outputPath>
+							<swaggerDirectory>${basedir}/generated/swagger-ui</swaggerDirectory>
+							<attachSwaggerArtifact>true</attachSwaggerArtifact>
+						</apiSource>
+					</apiSources>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -75,6 +110,12 @@
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>jsr311-api</artifactId>
 			<scope>provided</scope>
+		</dependency>
+
+		<!-- swagger -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jaxrs</artifactId>
 		</dependency>
 
 		<!-- jersey -->

@@ -1,0 +1,23 @@
+#####################################################################################################
+######################## Template velocity de satelitesVisible ######################################
+#####################################################################################################
+#set( $dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" )
+{
+"satelitesVisible":{
+     #foreach($sateliteTimeCoordinate in $satelitesVisible)
+        "epochHeader":"$sateliteTimeCoordinate.epochHeaderRecord",
+        "satelites": {
+            #foreach($satelite in $sateliteTimeCoordinate.satelites.entrySet())
+                "satelite": {
+                    "id":$satelite.key,
+                    "position":{
+                        "X":$numberTool.format("number",$satelite.value.position.X()),
+                        "Y":$numberTool.format("number",$satelite.value.position.Y()),
+                        "Z":$numberTool.format("number",$satelite.value.position.Z())
+                    }
+                } #if($foreach.hasNext ),#end
+            #end
+        }
+    #end
+}
+}

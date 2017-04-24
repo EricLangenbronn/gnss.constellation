@@ -2,8 +2,10 @@ package fr.gnss.constellation.ouranos.api.resource;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.Encoded;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,10 +19,12 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.service.resource.HttpHeaderType;
 import fr.gnss.constellation.ouranos.service.resource.IProcessResourceService;
+import fr.gnss.constellation.ouranos.service.resource.ResourceType;
+import io.swagger.annotations.*;
 
-@Path("/")
+@Path("/api")
+@Api(value = "/api", description = "Operations about visible satelite", consumes = "application/json, application/xml")
 public class GetResources {
 
 	/**
@@ -35,32 +39,35 @@ public class GetResources {
 		processResourceService = ServiceLocator.getContexte().getBean(IProcessResourceService.class);
 	}
 
-	private HttpHeaderType getHeaderParamType(String accept) {
-		HttpHeaderType mediaType = null;
+	@GET
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML + ";charset=UTF-8")
+	@Path("/{version}/visibleSat")
+	@ApiOperation(value = "Finds visible satelite", httpMethod = "GET", notes = "", responseContainer = "List")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satelite found on xml") })
+	public Response getVisibleSateliteXml(
+			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+			@ApiParam(value = "submission request on xml", required = true) @QueryParam("requete") String p_contenu)
+			throws BusinessException, TechnicalException {
 
-		if (accept == null || accept.contains(MediaType.APPLICATION_XML)) {
-			mediaType = HttpHeaderType.xml;
-		} else {
-			mediaType = HttpHeaderType.json;
-		}
+		String response = processResourceService.processSateliteVisible(ResourceType.xml, p_contenu, version);
 
-		return mediaType;
+		return Response.ok(response).build();
 	}
 
-	@GET
-	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.TEXT_XML + ";charset=UTF-8", MediaType.APPLICATION_JSON + ";charset=UTF-8" })
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	@Path("/{version}/visibleSat")
-	public Response getVisibleSatelite(@HeaderParam("Content-Type") String contentType,
-			@HeaderParam("Accept") String accept, @PathParam("version") final String version,
-			@QueryParam("requete") String p_contenu) throws BusinessException, TechnicalException {
-		
-		HttpHeaderType acceptContentType = this.getHeaderParamType(contentType);
-		HttpHeaderType acceptMediaType = this.getHeaderParamType(accept);
+	@ApiOperation(value = "Finds visible satelite", httpMethod = "POST", notes = "", responseContainer = "List")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satelite found on json") })
+	public Response getVisibleSateliteJson(
+			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+			@ApiParam(value = "submission request on json", required = true) @FormParam("requete") String p_contenu)
+			throws BusinessException, TechnicalException {
 
-		String response = processResourceService.processSateliteVisible(acceptContentType, acceptMediaType, p_contenu,
-				version);
+		String response = processResourceService.processSateliteVisible(ResourceType.json, p_contenu, version);
 
-		return Response.ok(response, acceptMediaType.getType()).build();
+		return Response.ok(response).build();
 	}
 }

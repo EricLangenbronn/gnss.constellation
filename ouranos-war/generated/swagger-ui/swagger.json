@@ -1,0 +1,42 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "0.0.0-SNAPSHOT",
+    "title" : "Ouranos Swagger Maven Plugin Sample"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/api",
+  "tags" : [ {
+    "name" : "api",
+    "description" : "Operations about visible satelite"
+  } ],
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/api/{version}/visibleSat" : {
+      "post" : {
+        "tags" : [ "api" ],
+        "summary" : "Finds visible satelite",
+        "description" : "Multiple status values can be provided with comma seperated strings",
+        "operationId" : "getVisibleSateliteJson",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json;charset=UTF-8" ],
+        "parameters" : [ {
+          "name" : "version",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "requete",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Given visible satelite found"
+          }
+        }
+      }
+    }
+  }
+}

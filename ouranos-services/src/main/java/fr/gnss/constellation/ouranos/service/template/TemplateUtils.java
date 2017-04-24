@@ -13,6 +13,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
+import fr.gnss.constellation.ouranos.service.resource.ResourceType;
 import fr.gnss.constellation.ouranos.version.ApiVersionUtil;
 import fr.gnss.constellation.ouranos.version.Version;
 
@@ -27,25 +28,29 @@ public class TemplateUtils {
 	private static final String ROOT_DIRECTORY = "templates";
 	private static final ApiVersionUtil API_VERSION_UTIL = ApiVersionUtil.getInstance();
 
-	public String getPathTemplateRootDirectory(String resource, Version version) {
+	public String getPathTemplateRootDirectory(String resource, String resourceType, Version version) {
 
 		// Pour le moment on peut charger les templates qu'a partir du jar lui
 		// même a voir si les "/" sont tjs ok si on passe sur un répertoire
 		// windows
 		StringBuilder pathTemplate = new StringBuilder();
-		pathTemplate.append(ROOT_DIRECTORY).append("/").append(resource).append("/").append(version).append(EXTENSION);
+		pathTemplate.append(ROOT_DIRECTORY).append("/").append(resource).append("/").append(resourceType).append("/")
+				.append(version).append(EXTENSION);
 		return pathTemplate.toString();
 	}
 
-	public List<Version> getAvailableVersionForResource(String resource) throws TechnicalException {
+	public List<Version> getAvailableVersionForResource(String resource, String resourceType)
+			throws TechnicalException {
 		List<Version> availabelResources = new ArrayList<Version>();
 
 		ClassLoader cl = this.getClass().getClassLoader();
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cl);
 
 		try {
-			Resource[] templates = resolver
-					.getResources("classpath*:" + ROOT_DIRECTORY + "/" + resource + "/*" + EXTENSION);
+			// TODO : pas propre : voir pour réutiliser
+			// getPathTemplateRootDirecotry
+			Resource[] templates = resolver.getResources(
+					"classpath*:" + ROOT_DIRECTORY + "/" + resource + "/" + resourceType + "/*" + EXTENSION);
 
 			for (int i = 0; i < templates.length; ++i) {
 
@@ -68,13 +73,14 @@ public class TemplateUtils {
 		return availabelResources;
 	}
 
-	public String resolveTemplateVersionInTermsOf(String resource, Version requestedVersion) throws BusinessException {
+	public String resolveTemplateVersionInTermsOf(String resource, ResourceType resourceType, Version requestedVersion)
+			throws BusinessException {
 		String templatePath = "";
 
 		try {
-			List<Version> availabelVersions = this.getAvailableVersionForResource(resource);
+			List<Version> availabelVersions = this.getAvailableVersionForResource(resource, resourceType.toString());
 			Version version = API_VERSION_UTIL.checkIfVersionOrPreviousIsContains(requestedVersion, availabelVersions);
-			templatePath = this.getPathTemplateRootDirectory(resource, version);
+			templatePath = this.getPathTemplateRootDirectory(resource, resourceType.toString(), version);
 
 		} catch (TechnicalException e) {
 			String message = "Impossible de trouver le template demandé [resource=" + resource + ", requestedVersion="
