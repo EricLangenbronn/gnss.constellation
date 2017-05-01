@@ -15,9 +15,6 @@ public interface IOrbitsDataService {
 	public List<SateliteTimeCoordinate> getDatasForPeriod(LocalDateTime start, LocalDateTime end,
 			EphemerideType ephemerideType, OrbitType orbitType) throws TechnicalException, BusinessException;
 
-	public List<File> downloadAndGetFileForPeriod(LocalDateTime start, LocalDateTime end, EphemerideType ephemerideType,
-			OrbitType orbitType) throws TechnicalException, BusinessException;
-
 	public List<SateliteTimeCoordinate> readDatasForPeriod(List<File> sp3Files, LocalDateTime start, LocalDateTime end)
 			throws TechnicalException, BusinessException;
 }

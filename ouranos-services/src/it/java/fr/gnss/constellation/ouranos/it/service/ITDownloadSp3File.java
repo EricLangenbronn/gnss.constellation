@@ -41,7 +41,7 @@ public class ITDownloadSp3File {
 		boolean isOpen = client.openConnection();
 		assertTrue(isOpen);
 
-		Path accessOutputFile = Paths.get(".", "src/test/resources/Sp3File/igs12821.sp3.Z");
+		Path accessOutputFile = Paths.get(".", "src/it/resources/Sp3File/igs12821.sp3.Z");
 		client.downloadBinaryFile(URL_FTP_SP3_DIRECTORY + "/1282/igs12821.sp3.Z", accessOutputFile);
 
 		client.logoutAndCloseConnection();

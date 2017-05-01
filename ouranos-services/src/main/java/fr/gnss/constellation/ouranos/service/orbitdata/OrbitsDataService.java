@@ -31,8 +31,7 @@ public class OrbitsDataService implements IOrbitsDataService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrbitsDataService.class);
 
 	private ISp3FileDao sp3Dao;
-	private IOrbitsDataDownloadDao orbitsDataDownloadDao;
-	private IPropertiesService propertiesService;
+	private IOrbitsDataDownloadService orbitsDataDownloadService;
 
 	@Override
 	public List<SateliteTimeCoordinate> getDatasForPeriod(LocalDateTime start, LocalDateTime end,
@@ -40,7 +39,8 @@ public class OrbitsDataService implements IOrbitsDataService {
 
 		List<SateliteTimeCoordinate> allSatelitesForPeriod = new ArrayList<>();
 		try {
-			List<File> sp3Files = this.downloadAndGetFileForPeriod(start, end, ephemerideType, orbitType);
+			List<File> sp3Files = this.orbitsDataDownloadService.downloadAndGetFileForPeriod(start, end, ephemerideType,
+					orbitType);
 			allSatelitesForPeriod = this.readDatasForPeriod(sp3Files, start, end);
 		} catch (TechnicalException e) {
 			String message = "Impossible d'obtenir les données pour cette période. [start=" + start + ", end=" + end
@@ -55,34 +55,6 @@ public class OrbitsDataService implements IOrbitsDataService {
 		}
 
 		return allSatelitesForPeriod;
-	}
-
-	@Override
-	public List<File> downloadAndGetFileForPeriod(LocalDateTime start, LocalDateTime end, EphemerideType ephemerideType,
-			OrbitType orbitType) throws TechnicalException, BusinessException {
-
-		List<Sp3FileName> allSp3FileBetweenStartEnd = OrbitDataUtils.getAllSp3FileNameBetween2Date(ephemerideType,
-				start, end, orbitType);
-		List<File> sp3Files = new ArrayList<>();
-		try {
-			for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
-				File sp3File = sp3Dao.getFile(propertiesService.getString("repertoire.sp3"), sp3FileName);
-				if (sp3File == null) {
-					OrbitDataBean orbitDataBean = new OrbitDataBean(sp3FileName);
-					List<OrbitDataBean> orbitDataBeans = new ArrayList<>();
-					orbitDataBeans.add(orbitDataBean);
-					this.orbitsDataDownloadDao.downloadAndStoreSp3File(orbitDataBeans,
-							Paths.get(propertiesService.getString("repertoire.sp3")));
-				}
-				sp3Files.add(sp3File);
-			}
-		} catch (TechnicalException e) {
-			String message = "Impossible de téléchargé le fichier, arret du traitement.";
-			LOGGER.error(message, e);
-			throw new BusinessException(message);
-		}
-
-		return sp3Files;
 	}
 
 	@Override
@@ -116,12 +88,8 @@ public class OrbitsDataService implements IOrbitsDataService {
 		this.sp3Dao = sp3Dao;
 	}
 
-	public void setPropertiesService(IPropertiesService propertiesService) {
-		this.propertiesService = propertiesService;
-	}
-
-	public void setOrbitsDataDownloadDao(IOrbitsDataDownloadDao orbitsDataDownloadDao) {
-		this.orbitsDataDownloadDao = orbitsDataDownloadDao;
+	public void setOrbitsDataDownloadService(IOrbitsDataDownloadService orbitsDataDownloadService) {
+		this.orbitsDataDownloadService = orbitsDataDownloadService;
 	}
 
 }

@@ -15,11 +15,17 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="responseResourceService"
 		class="fr.gnss.constellation.ouranos.service.resource.response.ResponseResourceService" />
 
-	<bean id="orbitsDataService"
-		class="fr.gnss.constellation.ouranos.service.orbitdata.OrbitsDataService">
+	<bean id="orbitsDataDownloadService"
+		class="fr.gnss.constellation.ouranos.service.orbitdata.OrbitsDataDownloadService">
 		<property name="sp3Dao" ref="sp3Dao" />
 		<property name="orbitsDataDownloadDao" ref="orbitsDataDownloadDao" />
 		<property name="propertiesService" ref="propertiesService" />
+	</bean>
+
+	<bean id="orbitsDataService"
+		class="fr.gnss.constellation.ouranos.service.orbitdata.OrbitsDataService">
+		<property name="sp3Dao" ref="sp3Dao" />
+		<property name="orbitsDataDownloadService" ref="orbitsDataDownloadService" />
 	</bean>
 
 

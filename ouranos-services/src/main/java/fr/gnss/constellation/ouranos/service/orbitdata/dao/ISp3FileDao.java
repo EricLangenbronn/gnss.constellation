@@ -13,5 +13,5 @@ public interface ISp3FileDao {
 
 	public List<File> getListSp3File(String pathSp3Dir) throws TechnicalException, BusinessException;
 
-	public File getFile(String sp3Repertoire, Sp3FileName sp3FileName) throws BusinessException;
+	public File getFile(String sp3Repertoire, Sp3FileName sp3FileName);
 }

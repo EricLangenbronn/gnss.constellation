@@ -17,9 +17,9 @@
         "tags" : [ "api" ],
         "summary" : "Finds visible satelite",
         "description" : "",
-        "operationId" : "getVisibleSateliteJson",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json;charset=UTF-8" ],
+        "operationId" : "getVisibleSateliteXml",
+        "consumes" : [ "application/xml" ],
+        "produces" : [ "application/xml;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
@@ -29,13 +29,13 @@
         }, {
           "name" : "requete",
           "in" : "formData",
-          "description" : "submission request on json",
+          "description" : "submission request on xml",
           "required" : true,
           "type" : "string"
         } ],
         "responses" : {
           "200" : {
-            "description" : "Given visible satelite found on json"
+            "description" : "Given visible satelite found on xml"
           }
         }
       }
