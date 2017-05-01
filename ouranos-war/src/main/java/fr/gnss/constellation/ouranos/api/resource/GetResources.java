@@ -39,15 +39,15 @@ public class GetResources {
 		processResourceService = ServiceLocator.getContexte().getBean(IProcessResourceService.class);
 	}
 
-	@GET
+	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML + ";charset=UTF-8")
 	@Path("/{version}/visibleSat")
-	@ApiOperation(value = "Finds visible satelite", httpMethod = "GET", notes = "", responseContainer = "List")
+	@ApiOperation(value = "Finds visible satelite", httpMethod = "POST", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satelite found on xml") })
 	public Response getVisibleSateliteXml(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on xml", required = true) @QueryParam("requete") String p_contenu)
+			@ApiParam(value = "submission request on xml", required = true) @FormParam("requete") String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = processResourceService.processSateliteVisible(ResourceType.xml, p_contenu, version);

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Path;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -82,7 +83,7 @@ public class ClientFtp {
 	public boolean downloadBinaryFile(String remoteFileName, Path outputFile) {
 
 		boolean isSuccessFullDownload = false;
-
+		OutputStream outputStream1 = null;
 		try {
 			this.ftp.setFileType(FTP.BINARY_FILE_TYPE);
 			// this method switches data connection mode from server-to-client
@@ -90,9 +91,8 @@ public class ClientFtp {
 			// firewall.
 			this.ftp.enterLocalPassiveMode();
 
-			OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(outputFile.toFile()));
+			outputStream1 = new BufferedOutputStream(new FileOutputStream(outputFile.toFile()));
 			isSuccessFullDownload = this.ftp.retrieveFile(remoteFileName, outputStream1);
-			outputStream1.close();
 
 			if (isSuccessFullDownload) {
 				LOGGER.debug("Téléchargement effectué avec success.");
@@ -102,6 +102,8 @@ public class ClientFtp {
 			String message = "Impossible de télécharger le fichier. [remoteFileName=" + remoteFileName + ", outputFile="
 					+ outputFile.getFileName() + "]";
 			LOGGER.error(message, e);
+		} finally {
+			IOUtils.closeQuietly(outputStream1);
 		}
 
 		return isSuccessFullDownload;

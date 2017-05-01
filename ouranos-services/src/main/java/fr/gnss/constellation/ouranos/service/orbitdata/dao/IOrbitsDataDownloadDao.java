@@ -8,5 +8,8 @@ import fr.gnss.constellation.ouranos.service.orbitdata.bean.OrbitDataBean;
 
 public interface IOrbitsDataDownloadDao {
 
-	void downloadFile(List<OrbitDataBean> orbitsData, Path destinationDir) throws TechnicalException;
+	void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir) throws TechnicalException;
+
+	void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir, String ftpServerName)
+			throws TechnicalException;
 }

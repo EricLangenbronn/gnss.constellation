@@ -1,6 +1,5 @@
 package fr.gnss.constellation.ouranos.service.process.satelitevisible;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,8 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3File;
-import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3FileParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
+import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
@@ -42,38 +41,15 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 
 		List<SateliteTimeCoordinate> l_satelitesVisible = null;
 
-		File sp3File = orbitsDataService.isDataForPeriod(dateDebut, dateFin);
-		double elevationMaskRad = Math.toRadians(elevationMask);
-		if (sp3File != null) {
-			LOGGER.debug("Début du traitement du fichier sp3");
+		LOGGER.debug("Début de la récupération des fichiers sp3");
+		List<SateliteTimeCoordinate> sateliteForPeriod = this.orbitsDataService.getDatasForPeriod(dateDebut, dateFin,
+				EphemerideType.igs, OrbitType.sp3);
+		LOGGER.debug("Fin de la récupération des fichiers sp3");
 
-			Sp3FileParser sp3FileParser = null;
-			try {
-				sp3FileParser = new Sp3FileParser(new Sp3File(sp3File));
-
-				l_satelitesVisible = computationService.getSateliteVisiblePeriod(sp3FileParser, elevationMaskRad,
-						dateDebut, dateFin, geodeticCoordinate);
-			} catch (TechnicalException e) {
-				String message = "Impossible de recuperer la liste de satelite";
-				LOGGER.error(message, e);
-				throw new TechnicalException(message, e);
-
-			} catch (BusinessException e) {
-				String message = "Impossible d'initialiser le parser de fichier";
-				LOGGER.error(message, e);
-				throw new BusinessException(message, e);
-			} finally {
-				sp3FileParser.close();
-			}
-
-			LOGGER.debug("Fin de traitement du fichier sp3");
-		} else {
-
-			String message = "Il n'existe pas de données pour la période séléctionnée. [start=" + dateDebut + ", end="
-					+ dateFin + "]";
-			LOGGER.info(message);
-			throw new BusinessException(message);
-		}
+		LOGGER.debug("Début du traitement du fichier sp3");
+		l_satelitesVisible = computationService.getSateliteVisiblePeriod(sateliteForPeriod, elevationMask, dateDebut,
+				dateFin, geodeticCoordinate);
+		LOGGER.debug("Fin de traitement du fichier sp3");
 
 		return l_satelitesVisible;
 	}

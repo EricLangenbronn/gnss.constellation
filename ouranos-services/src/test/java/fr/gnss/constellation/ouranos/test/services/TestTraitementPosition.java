@@ -9,9 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticTransformation;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
-import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
+import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticTransformation;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)

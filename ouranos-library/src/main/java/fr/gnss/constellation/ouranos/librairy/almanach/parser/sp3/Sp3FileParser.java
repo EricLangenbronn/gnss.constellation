@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
 
+import java.io.Closeable;
 import java.io.FileReader;
 import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
@@ -49,10 +50,12 @@ public class Sp3FileParser implements ISp3FileParser, Iterable<SateliteTimeCoord
 				break;
 			case d:
 				throw new TechnicalException("NotImplement");
+			default:
+				throw new TechnicalException("unknow value for sp3 file type");
 			}
 		} catch (Exception e) {
-			String message = "Impossible de créer le parser";
-			throw new TechnicalException(message, e);
+			String message = "Impossible de créer le parser.";
+			throw new TechnicalException(message);
 		}
 
 	}
@@ -143,8 +146,8 @@ public class Sp3FileParser implements ISp3FileParser, Iterable<SateliteTimeCoord
 	}
 
 	@Override
-	public List<SateliteTimeCoordinate> getPositionAndClockRecord(LocalDateTime start,
-			LocalDateTime end) throws TechnicalException, BusinessException {
+	public List<SateliteTimeCoordinate> getPositionAndClockRecord(LocalDateTime start, LocalDateTime end)
+			throws TechnicalException, BusinessException {
 		return sp3CoreParser.getPeriodOfPosition(start, end);
 	}
 
@@ -163,13 +166,14 @@ public class Sp3FileParser implements ISp3FileParser, Iterable<SateliteTimeCoord
 
 			@Override
 			public boolean hasNext() {
-//				return currentIndex < currentSize && arrayList[currentIndex] != null;
+				// return currentIndex < currentSize && arrayList[currentIndex]
+				// != null;
 				return true;
 			}
 
 			@Override
 			public SateliteTimeCoordinate next() {
-//				return arrayList[currentIndex++];
+				// return arrayList[currentIndex++];
 				return null;
 			}
 

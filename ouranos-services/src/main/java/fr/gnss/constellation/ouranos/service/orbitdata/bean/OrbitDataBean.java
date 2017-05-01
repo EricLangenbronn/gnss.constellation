@@ -2,6 +2,7 @@ package fr.gnss.constellation.ouranos.service.orbitdata.bean;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 
 public class OrbitDataBean {
 
@@ -32,6 +33,14 @@ public class OrbitDataBean {
 		this.dayInWeek = dayInWeek;
 		this.hour = hour;
 		this.orbitType = orbitType;
+	}
+
+	public OrbitDataBean(Sp3FileName sp3FileName) {
+		this.ephemeride = sp3FileName.getEphemerideType();
+		this.epoch = sp3FileName.getGpsWeek();
+		this.dayInWeek = sp3FileName.getDay();
+		this.hour = sp3FileName.getHour();
+		this.orbitType = sp3FileName.getOrbitType();
 	}
 
 	public EphemerideType getEphemeride() {

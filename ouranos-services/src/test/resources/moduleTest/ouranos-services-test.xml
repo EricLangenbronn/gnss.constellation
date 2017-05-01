@@ -17,9 +17,11 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="orbitsDataService"
 		class="fr.gnss.constellation.ouranos.service.orbitdata.OrbitsDataService">
-		<property name="sp3Dao" ref="sp3Dao"></property>
-		<property name="propertiesService" ref="propertiesService"></property>
+		<property name="sp3Dao" ref="sp3Dao" />
+		<property name="orbitsDataDownloadDao" ref="orbitsDataDownloadDao" />
+		<property name="propertiesService" ref="propertiesService" />
 	</bean>
+
 
 	<bean id="sateliteVisibleService"
 		class="fr.gnss.constellation.ouranos.service.process.satelitevisible.SateliteVisibleService">

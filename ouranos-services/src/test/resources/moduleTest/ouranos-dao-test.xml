@@ -7,4 +7,7 @@
 	<bean id="sp3Dao"
 		class="fr.gnss.constellation.ouranos.service.orbitdata.dao.Sp3FileDao" />
 
+	<bean id="orbitsDataDownloadDao"
+		class="fr.gnss.constellation.ouranos.service.orbitdata.dao.OrbitsDataDownloadDao" />
+
 </beans>

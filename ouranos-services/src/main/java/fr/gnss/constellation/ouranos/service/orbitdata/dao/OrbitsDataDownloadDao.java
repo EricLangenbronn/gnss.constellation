@@ -23,30 +23,49 @@ public class OrbitsDataDownloadDao implements IOrbitsDataDownloadDao {
 	private ClientFtpSp3File clientFtpSp3File;
 
 	@Override
-	public void downloadFile(List<OrbitDataBean> orbitsData, Path destinationDir) throws TechnicalException {
+	public void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir) throws TechnicalException {
 
 		this.clientFtpSp3File = new ClientFtpSp3File();
+		this.downloadAndStoreSp3File(this.clientFtpSp3File, orbitsData, destinationDir);
+	}
+
+	@Override
+	public void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir, String ftpServerName)
+			throws TechnicalException {
+
+		this.clientFtpSp3File = new ClientFtpSp3File(ftpServerName);
+		this.downloadAndStoreSp3File(this.clientFtpSp3File, orbitsData, destinationDir);
+	}
+
+	private void downloadAndStoreSp3File(ClientFtpSp3File clientFtpSp3File, List<OrbitDataBean> orbitsData,
+			Path destinationDir) throws TechnicalException {
 
 		ManagedConnection<ClientFtpSp3File> managedConnection = new ManagedConnection<>();
 		this.clientFtpSp3File = managedConnection.initConnection(this.clientFtpSp3File);
 
-		if (this.clientFtpSp3File == null) {
+		if (clientFtpSp3File == null) {
 			String message = "Impossible d'établir une connexion au serveur FTP.";
 			LOGGER.error(message);
 			throw new TechnicalException(message);
 		} else {
-			Sp3FileName sp3FileName;
-			Path pathToSaveSp3;
-			for (OrbitDataBean orbitData : orbitsData) {
-				sp3FileName = new Sp3FileName(orbitData.getEphemeride(), orbitData.getEpoch(), orbitData.getHour(),
-						orbitData.getDayInWeek(), orbitData.getOrbitType());
-				pathToSaveSp3 = Paths.get(destinationDir.toString(), sp3FileName.toString());
-				this.clientFtpSp3File.downloadSp3File(sp3FileName, pathToSaveSp3);
+			Sp3FileName sp3FileName = null;
+			Path pathToSaveSp3 = null;
+			try {
+				for (OrbitDataBean orbitData : orbitsData) {
+					sp3FileName = new Sp3FileName(orbitData.getEphemeride(), orbitData.getEpoch(),
+							orbitData.getDayInWeek(), orbitData.getHour(), orbitData.getOrbitType());
+					pathToSaveSp3 = Paths.get(destinationDir.toString(), sp3FileName.getFileName(true));
+					clientFtpSp3File.downloadAndStoreSp3File(sp3FileName, pathToSaveSp3);
+				}
+			} catch (TechnicalException e) {
+				String message = "Impossible de télécharger ou de stocker le fichier SP3. [sp3FileName="
+						+ sp3FileName.toString() + ",pathToSaveSp3=" + pathToSaveSp3 + "]";
+				LOGGER.error(message);
+				throw new TechnicalException(message);
+			} finally {
+				this.clientFtpSp3File.closeConnection();
 			}
-
-			this.clientFtpSp3File.closeConnection();
 		}
-
 	}
 
 }

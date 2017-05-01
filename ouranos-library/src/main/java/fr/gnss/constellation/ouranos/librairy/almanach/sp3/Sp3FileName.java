@@ -10,7 +10,8 @@ public class Sp3FileName {
 
 	private EphemerideType ephemerideType; // igs, igr, igu
 	private long gpsWeek; // GPS Week, week 0000 is Jan. 6-12, 1980
-	private int day; // Day of week (Sun=0 --> Sat=6, Full Week=7)
+	private int day; // Day of week (Sun=0 --> Sat=6, Full Week=7 TODO : not yet
+						// implemented)
 	private int hour; // Start hour (00,06,12,18)
 	private OrbitType orbitType; // Orbit, other extensions are clk,cls,erp,sum
 	private String compressType; // Z Files are Unix compressed
@@ -215,4 +216,38 @@ public class Sp3FileName {
 			return true;
 		}
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sp3FileName other = (Sp3FileName) obj;
+		if (compressType == null) {
+			if (other.compressType != null)
+				return false;
+		} else if (!compressType.equals(other.compressType))
+			return false;
+		if (day != other.day)
+			return false;
+		if (ephemerideType != other.ephemerideType)
+			return false;
+		if (gpsWeek != other.gpsWeek)
+			return false;
+		if (hour != other.hour)
+			return false;
+		if (orbitType != other.orbitType)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Sp3FileName [ephemerideType=" + ephemerideType + ", gpsWeek=" + gpsWeek + ", day=" + day + ", hour="
+				+ hour + ", orbitType=" + orbitType + ", compressType=" + compressType + "]";
+	}
+
 }

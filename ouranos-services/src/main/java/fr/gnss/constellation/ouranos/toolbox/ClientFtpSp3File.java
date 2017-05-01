@@ -26,14 +26,20 @@ public class ClientFtpSp3File implements IConnection {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientFtpSp3File.class);
 
-	private static final String FTP_SERVER = "igs.ensg.ign.fr";
+	private static final String FTP_SERVER_NAME = "igs.ensg.ign.fr";
 	private static final String EPOCH_DIRECTORY = "/pub/igs/products";
 
 	private ClientFtp clientFtp;
 	private String ipServer = "";
+	private String ftpServerName = "";
 	private boolean isOpenConnection = false;
 
 	public ClientFtpSp3File() {
+		this.ftpServerName = FTP_SERVER_NAME;
+	}
+
+	public ClientFtpSp3File(String ftpServerName) {
+		this.ftpServerName = ftpServerName;
 	}
 
 	@Override
@@ -45,7 +51,7 @@ public class ClientFtpSp3File implements IConnection {
 		}
 
 		try {
-			InetAddress address = InetAddress.getByName(FTP_SERVER);
+			InetAddress address = InetAddress.getByName(this.ftpServerName);
 			this.ipServer = address.getHostAddress();
 
 			this.clientFtp = new ClientFtp(this.ipServer);
@@ -62,7 +68,7 @@ public class ClientFtpSp3File implements IConnection {
 		return this.isOpenConnection;
 	}
 
-	public void downloadSp3File(Sp3FileName sp3fileName, Path destinationSp3File) throws TechnicalException {
+	public void downloadAndStoreSp3File(Sp3FileName sp3fileName, Path destinationSp3File) throws TechnicalException {
 		String sp3UrlFileName = EPOCH_DIRECTORY + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
 
 		boolean isOpenConnection = this.clientFtp.openConnection();
@@ -80,7 +86,7 @@ public class ClientFtpSp3File implements IConnection {
 				throw new TechnicalException(message);
 			}
 		} else {
-			message = "Connection au serveur ftp impossible. [serveur=" + FTP_SERVER + "]";
+			message = "Connection au serveur ftp impossible. [serveur=" + this.ftpServerName + "]";
 			LOGGER.error(message);
 
 			throw new TechnicalException(message);
