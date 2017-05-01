@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="propertiesService" class="fr.gnss.constellation.ouranos.service.PropertiesService" />
+
+	<bean id="computationService"
+		class="fr.gnss.constellation.ouranos.service.computation.ComputationService" />
+
+	<bean id="requestResourceService"
+		class="fr.gnss.constellation.ouranos.service.resource.request.RequestResourceService" />
+
+	<bean id="responseResourceService"
+		class="fr.gnss.constellation.ouranos.service.resource.response.ResponseResourceService" />
+
+	<bean id="orbitsDataService"
+		class="fr.gnss.constellation.ouranos.service.orbitdata.OrbitsDataService">
+		<property name="sp3Dao" ref="sp3Dao" />
+		<property name="orbitsDataDownloadDao" ref="orbitsDataDownloadDao" />
+		<property name="propertiesService" ref="propertiesService" />
+	</bean>
+
+
+	<bean id="sateliteVisibleService"
+		class="fr.gnss.constellation.ouranos.service.process.satelitevisible.SateliteVisibleService">
+		<property name="orbitsDataService" ref="orbitsDataService"></property>
+		<property name="computationService" ref="computationService"></property>
+	</bean>
+
+	<bean id="processResourceService"
+		class="fr.gnss.constellation.ouranos.service.resource.ProcessResourceService">
+		<property name="requestResourceService" ref="requestResourceService"></property>
+		<property name="responseResourceService" ref="responseResourceService"></property>
+		<property name="sateliteVisibleService" ref="sateliteVisibleService"></property>
+	</bean>
+
+</beans>

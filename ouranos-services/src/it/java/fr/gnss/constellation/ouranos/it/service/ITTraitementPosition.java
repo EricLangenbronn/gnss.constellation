@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.test.services;
+package fr.gnss.constellation.ouranos.it.service;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -15,7 +15,7 @@ import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
-public class TestTraitementPosition {
+public class ITTraitementPosition {
 
 	@Autowired
 	private IComputationService computationService;

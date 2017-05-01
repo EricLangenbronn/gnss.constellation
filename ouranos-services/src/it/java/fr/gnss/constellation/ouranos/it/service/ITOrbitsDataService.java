@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.test.services;
+package fr.gnss.constellation.ouranos.it.service;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +21,7 @@ import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
-public class TestOrbitsDataService {
+public class ITOrbitsDataService {
 
 	@Autowired
 	private IOrbitsDataService orbitsDataService;

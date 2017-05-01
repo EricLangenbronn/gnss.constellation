@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.test.services;
+package fr.gnss.constellation.ouranos.it.service;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +15,7 @@ import fr.gnss.constellation.ouranos.toolbox.ClientFtp;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
-public class TestDownloadSp3File {
+public class ITDownloadSp3File {
 
 	private static final String URL_FTP_SP3 = "igs.ensg.ign.fr";
 	private static final String URL_FTP_SP3_DIRECTORY = "/pub/igs/products";

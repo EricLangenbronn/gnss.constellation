@@ -10,17 +10,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.service.orbitdata.OrbitDataUtils;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
 public class TestOrbitDataUtils {
 
 	@Test
