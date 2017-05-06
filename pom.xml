@@ -14,7 +14,7 @@
 		<module>ouranos-xsd</module>
 		<module>ouranos-services</module>
 		<module>ouranos-war</module>
-		<!-- <module>ouranos-ihm</module> -->
+		<module>ouranos-ihm</module>
 		<module>ouranos-livraison</module>
 	</modules>
 
@@ -81,6 +81,11 @@
 			<dependency>
 				<groupId>fr.gnss.constellation.ouranos</groupId>
 				<artifactId>ouranos-services</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.gnss.constellation.ouranos</groupId>
+				<artifactId>ouranos-ihm</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

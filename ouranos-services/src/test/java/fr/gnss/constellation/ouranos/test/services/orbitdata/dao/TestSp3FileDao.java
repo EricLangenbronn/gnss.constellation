@@ -10,6 +10,7 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.Sp3FileDao;
 
 public class TestSp3FileDao {
+	//http://www.vogella.com/tutorials/Mockito/article.html
 
 	@Test
 	public void testGetFile() throws Exception {

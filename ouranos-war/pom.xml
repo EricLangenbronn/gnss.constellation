@@ -69,10 +69,13 @@
 	</build>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>fr.gnss.constellation.ouranos</groupId>
+			<artifactId>ouranos-ihm</artifactId>
 		</dependency>
 
 		<dependency>

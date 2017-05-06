@@ -1,115 +1,105 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>fr.gnss.constellation.ouranos</groupId>
-        <artifactId>ouranos-parent</artifactId>
-        <version>0.0.0-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>fr.gnss.constellation.ouranos</groupId>
+		<artifactId>ouranos-parent</artifactId>
+		<version>0.0.0-SNAPSHOT</version>
+	</parent>
 
-    <artifactId>ouranos-ihm</artifactId>
-    <name>Ouranos - IHM Web</name>
+	<artifactId>ouranos-ihm</artifactId>
+	<name>Ouranos - IHM Web</name>
+	<packaging>war</packaging>
 
-    <dependencies>
-    </dependencies>
+	<dependencies>
+	</dependencies>
 
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/ngapp/</directory>
-                <includes>
-                    <include>package.json</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/ngapp/</directory>
-                <includes>
-                    <include>.angular-cli.json</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/ngapp/</directory>
+				<includes>
+					<include>package.json</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/ngapp/</directory>
+				<includes>
+					<include>.angular-cli.json</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-            </plugin>
-            <!-- Plugin to execute command "npm install" and "npm run build" inside 
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>src/main/ngapp/dist</directory>
+							<includes>
+								<include>**/*.html</include>
+								<include>**/*.js</include>
+								<include>**/*.css</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<!-- Plugin to execute command "npm install" and "npm run build" inside 
 				/angular directory -->
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <configuration>
-                    <workingDirectory>src/main/ngapp</workingDirectory>
-                    <installDirectory>temp</installDirectory>
-                </configuration>
-                <executions>
-                    <!-- It will install nodejs and npm -->
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>${node.version}</nodeVersion>
-                            <npmVersion>${npm.version}</npmVersion>
-                        </configuration>
-                    </execution>
-                    <!-- It will execute command "npm install" inside "/angular" directory -->
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
-                    <!-- It will execute command "npm build" inside "/angular" directory 
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<configuration>
+					<workingDirectory>src/main/ngapp</workingDirectory>
+					<installDirectory>temp</installDirectory>
+				</configuration>
+				<executions>
+					<!-- It will install nodejs and npm -->
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>${node.version}</nodeVersion>
+							<npmVersion>${npm.version}</npmVersion>
+						</configuration>
+					</execution>
+					<!-- It will execute command "npm install" inside "/angular" directory -->
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<!-- It will execute command "npm build" inside "/angular" directory 
 						to clean and create "/dist" directory -->
-                    <execution>
-                        <id>npm build</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run build</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Plugin to copy the content of /angular/dist/ directory to output 
-				directory (ie/ /target/transactionManager-1.0/) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>                
-                <executions>
-                    <execution>
-                        <id>default-copy-resources</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <overwrite>true</overwrite>
-                            <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}/src/main/ngapp/dist</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+					<execution>
+						<id>npm build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
