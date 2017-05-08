@@ -7,15 +7,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 
-/**
- * @author thomas
- */
 public class AboutServlet extends HttpServlet {
 	/**
 	 * Le logger de la classe.

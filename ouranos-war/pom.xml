@@ -73,10 +73,6 @@
 			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-services</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>fr.gnss.constellation.ouranos</groupId>
-			<artifactId>ouranos-ihm</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -101,7 +97,6 @@
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -122,12 +117,12 @@
 
 		<!-- jersey -->
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-servlet</artifactId>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
 		</dependency>
 
 		<!-- tests -->

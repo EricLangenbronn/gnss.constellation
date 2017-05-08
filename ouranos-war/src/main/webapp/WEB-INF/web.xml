@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
-	
+
 	<display-name>Ouranos</display-name>
 	<distributable />
 
@@ -37,7 +37,16 @@
 	</servlet>
 	<servlet>
 		<servlet-name>rest-ws</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>fr.gnss.constellation.ouranos.api.resource;fr.gnss.constellation.ouranos.api.resource.exception;fr.gnss.constellation.ouranos.api.resource.filter.response</param-value>
+		</init-param>
+		<!-- Enable Tracing support. -->
+		<init-param>
+			<param-name>jersey.config.server.tracing</param-name>
+			<param-value>ALL</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 

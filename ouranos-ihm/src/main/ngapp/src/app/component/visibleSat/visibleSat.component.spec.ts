@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { ParamComponent } from './parameter.component';
+import { ParamComponent } from './visibleSat.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

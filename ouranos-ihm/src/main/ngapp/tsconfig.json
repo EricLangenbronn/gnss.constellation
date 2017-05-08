@@ -1,5 +1,5 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "baseUrl": "src",
@@ -8,13 +8,20 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "removeComments": false,
     "target": "es5",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "watch": true,
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
       "es2016",
       "dom"
+    ],
+    "exclude": [
+      "node_modules"
     ]
   }
 }
