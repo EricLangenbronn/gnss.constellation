@@ -26,5 +26,4 @@ public class ResponseResourceService implements IResponseResourceService {
 	public void setTemplateService(TemplateService templateService) {
 		this.templateService = templateService;
 	}
-
 }

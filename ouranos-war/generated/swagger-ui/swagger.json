@@ -7,19 +7,45 @@
   "host" : "localhost:8080",
   "basePath" : "/api",
   "tags" : [ {
-    "name" : "api",
+    "name" : "visibleSat",
     "description" : "Operations about visible satelite"
   } ],
   "schemes" : [ "http", "https" ],
   "paths" : {
-    "/api/{version}/visibleSat" : {
-      "post" : {
-        "tags" : [ "api" ],
+    "/visibleSat/{version}" : {
+      "get" : {
+        "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satelite",
         "description" : "",
-        "operationId" : "getVisibleSateliteXml",
-        "consumes" : [ "application/xml" ],
-        "produces" : [ "application/xml;charset=UTF-8" ],
+        "operationId" : "getVisibleSateliteJson",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json;charset=UTF-8" ],
+        "parameters" : [ {
+          "name" : "version",
+          "in" : "path",
+          "description" : "version of the api",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "requete",
+          "in" : "query",
+          "description" : "submission request on json",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Given visible satelite found on json"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "visibleSat" ],
+        "summary" : "Finds visible satelite",
+        "description" : "",
+        "operationId" : "postVisibleSateliteJson",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
@@ -29,13 +55,13 @@
         }, {
           "name" : "requete",
           "in" : "formData",
-          "description" : "submission request on xml",
+          "description" : "submission request on json",
           "required" : true,
           "type" : "string"
         } ],
         "responses" : {
           "200" : {
-            "description" : "Given visible satelite found on xml"
+            "description" : "Given visible satelite found on json"
           }
         }
       }
