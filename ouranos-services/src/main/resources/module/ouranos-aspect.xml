@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="fr.gnss.constellation.ouranos" /> <!-- est ce qu'on peu descendre dans aop ??? -->
+
+	<aop:config>
+		<aop:aspect id="monitoreAspect" ref="monitorer">
+			<!-- Only on root service not on sub package -->
+			<!-- <aop:pointcut id="methodeService" expression="execution(* fr.gnss.constellation.ouranos.service.*Service.*(..))" 
+				/> -->
+			<aop:pointcut id="methodeService"
+				expression="within(fr.gnss.constellation.ouranos.service..*)" />
+			<aop:around method="executer" pointcut-ref="methodeService" />
+		</aop:aspect>
+		<aop:aspect id="traceInvocationAspect" ref="tracerInvocation">
+			<aop:pointcut id="traceInvocationPointcut"
+				expression="execution(* fr.gnss.constellation.ouranos.service.*Service.*(..))" />
+			<aop:before pointcut-ref="traceInvocationPointcut" method="afficherDebutTrace" />
+			<aop:around pointcut-ref="traceInvocationPointcut" method="afficherTrace" />
+			<aop:after-returning pointcut-ref="traceInvocationPointcut"
+				method="afficherFinTrace" returning="result" />
+		</aop:aspect>
+	</aop:config>
+
+	<bean id="monitorer" class="fr.gnss.constellation.ouranos.aspect.Monitore">
+		<property name="order" value="1" />
+	</bean>
+
+	<bean id="tracerInvocation" class="fr.gnss.constellation.ouranos.aspect.TraceInvocation">
+		<property name="order" value="2" />
+	</bean>
+
+
+</beans>

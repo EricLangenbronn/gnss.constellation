@@ -5,12 +5,12 @@ import java.util.Map;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.service.resource.ResourceType;
-import fr.gnss.constellation.ouranos.service.template.TemplateService;
+import fr.gnss.constellation.ouranos.service.template.ITemplateService;
 import fr.gnss.constellation.ouranos.version.Version;
 
 public class ResponseResourceService implements IResponseResourceService {
 
-	private TemplateService templateService;
+	private ITemplateService templateService;
 
 	@Override
 	public String getFluxSateliteVisible(String resource, ResourceType resourceType, Version version,
@@ -23,7 +23,8 @@ public class ResponseResourceService implements IResponseResourceService {
 		return fluxGenereted.toString();
 	}
 
-	public void setTemplateService(TemplateService templateService) {
+	public void setTemplateService(ITemplateService templateService) {
 		this.templateService = templateService;
 	}
+
 }

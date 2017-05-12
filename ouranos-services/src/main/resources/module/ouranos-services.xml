@@ -5,6 +5,7 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<import resource="velocity-conf.xml" />
+	<import resource="ouranos-aspect.xml" />
 
 	<bean id="propertiesService" class="fr.gnss.constellation.ouranos.service.PropertiesService" />
 

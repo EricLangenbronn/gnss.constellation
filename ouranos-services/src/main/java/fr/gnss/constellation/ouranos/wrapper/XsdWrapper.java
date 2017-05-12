@@ -1,8 +1,5 @@
 package fr.gnss.constellation.ouranos.wrapper;
 
-import java.time.LocalDateTime;
-
-import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 

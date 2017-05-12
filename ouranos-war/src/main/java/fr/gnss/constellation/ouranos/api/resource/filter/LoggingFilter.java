@@ -14,40 +14,41 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
-import fr.gnss.constellation.ouranos.api.resource.filter.response.ResponseHeaderFilter;
-
 @Provider
 public class LoggingFilter implements ContainerRequestFilter, ContainerResponseFilter {
 
 	/**
 	 * Le logger de la classe.
 	 */
-	private final static Logger LOGGER = LoggerFactory.getLogger(ResponseHeaderFilter.class);
+	private final static Logger LOGGER_AUDIT = LoggerFactory.getLogger("OURANOS_AUDIT");
+	private final static Logger LOGGER = LoggerFactory.getLogger(LoggingFilter.class);
 
 	@Context
 	private ResourceInfo resourceInfo;
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		MDC.put("start-time", String.valueOf(System.currentTimeMillis()));
 
-		LOGGER.debug("Entering in Resource : /{} ", requestContext.getUriInfo().getPath());
-		LOGGER.debug("Method Name : {} ", resourceInfo.getResourceMethod().getName());
-		LOGGER.debug("Class : {} ", resourceInfo.getResourceClass().getCanonicalName());
-
+		MDC.put("start_time", String.valueOf(System.currentTimeMillis()));
+		MDC.put("url", requestContext.getUriInfo().getAbsolutePath().toString());
+		MDC.put("method", requestContext.getMethod());
 	}
 
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
 			throws IOException {
 
-		String stTime = MDC.get("start-time");
+		String stTime = MDC.get("start_time");
 		if (null == stTime || stTime.length() == 0) {
 			return;
 		}
 		long startTime = Long.parseLong(stTime);
 		long executionTime = System.currentTimeMillis() - startTime;
+		MDC.put("execution_time", String.valueOf(executionTime));
+		MDC.put("http_status", String.valueOf(responseContext.getStatus()));
+
 		LOGGER.debug("Total request execution time : {} milliseconds", executionTime);
+		LOGGER_AUDIT.info("");
 
 		// clear the context on exit
 		MDC.clear();

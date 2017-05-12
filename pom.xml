@@ -39,6 +39,8 @@
 
 		<swagger.version>1.5.13</swagger.version>
 
+		<aspectj.version>1.8.10</aspectj.version>
+
 		<!-- angular -->
 		<node.version>v7.3.0</node.version>
 		<npm.version>3.9.5</npm.version>
@@ -158,6 +160,13 @@
 				<version>${spring.version}</version>
 			</dependency>
 
+			<!-- AOP -->
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+
 			<!-- Jackson -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
@@ -178,7 +187,7 @@
 			</dependency>
 
 
-			<!-- Servlet & Jsp -->
+			<!-- Servlet -->
 			<dependency>
 				<groupId>javax.ws.rs</groupId>
 				<artifactId>javax.ws.rs-api</artifactId>
