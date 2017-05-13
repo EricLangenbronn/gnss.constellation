@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 import { VisibleSatService } from '../../service/visibleSat.service';
+import { VisibleSat } from '../../model/visibleSat';
 
 @Component({
     selector: 'visibleSat',
@@ -11,6 +13,8 @@ import { VisibleSatService } from '../../service/visibleSat.service';
 
 export class VisibleSatComponent implements OnInit {
 
+    visibleSats: VisibleSat;
+
     constructor(private visibleSatService: VisibleSatService) {
     }
 
@@ -20,6 +24,16 @@ export class VisibleSatComponent implements OnInit {
 
 
     getSateliteVisible(): void {
-        this.visibleSatService.getSateliteVisible();
+        this.visibleSatService.getSateliteVisible().subscribe(
+            visibleSats => {
+                // Emit list event
+                this.visibleSats = visibleSats;
+                console.log("component");
+                console.log(visibleSats);
+            },
+            err => {
+                // Log errors if any
+                console.log(err);
+            });;
     }
 }

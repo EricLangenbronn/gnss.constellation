@@ -2,7 +2,6 @@ package fr.gnss.constellation.ouranos.api.resource;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,6 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,14 +50,21 @@ public class GetResourcesVisibleSat {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satelite found on xml") })
 	public Response postVisibleSateliteXml(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on xml", required = true) @FormParam("requete") String p_contenu)
+			@ApiParam(value = "submission request on xml", required = true) String p_contenu)
 			throws BusinessException, TechnicalException {
 
-		String response = processResourceService.processSateliteVisible(ResourceType.xml, p_contenu, version);
+		String response = "";
+		if (StringUtils.isNotBlank(p_contenu)) {
+			response = processResourceService.processSateliteVisible(ResourceType.xml, p_contenu, version);
+		} else {
+			String message = "La requête doit être présente.";
+			LOGGER.error(message);
+			throw new BusinessException(message);
+		}
 
 		return Response.ok(response).build();
 	}
-	
+
 	@GET
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML + ";charset=UTF-8")
@@ -69,7 +76,14 @@ public class GetResourcesVisibleSat {
 			@ApiParam(value = "submission request on xml", required = true) @QueryParam("requete") String p_contenu)
 			throws BusinessException, TechnicalException {
 
-		String response = processResourceService.processSateliteVisible(ResourceType.xml, p_contenu, version);
+		String response = "";
+		if (StringUtils.isNotBlank(p_contenu)) {
+			response = processResourceService.processSateliteVisible(ResourceType.xml, p_contenu, version);
+		} else {
+			String message = "La requête doit être présente.";
+			LOGGER.error(message);
+			throw new BusinessException(message);
+		}
 
 		return Response.ok(response).build();
 	}
@@ -82,14 +96,21 @@ public class GetResourcesVisibleSat {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satelite found on json") })
 	public Response postVisibleSateliteJson(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on json", required = true) @FormParam("requete") String p_contenu)
+			@ApiParam(value = "submission request on json", required = true) String p_contenu)
 			throws BusinessException, TechnicalException {
 
-		String response = processResourceService.processSateliteVisible(ResourceType.json, p_contenu, version);
+		String response = "";
+		if (StringUtils.isNotBlank(p_contenu)) {
+			response = processResourceService.processSateliteVisible(ResourceType.json, p_contenu, version);
+		} else {
+			String message = "La requête doit être présente.";
+			LOGGER.error(message);
+			throw new BusinessException(message);
+		}
 
 		return Response.ok(response).build();
 	}
-	
+
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
@@ -101,7 +122,14 @@ public class GetResourcesVisibleSat {
 			@ApiParam(value = "submission request on json", required = true) @QueryParam("requete") String p_contenu)
 			throws BusinessException, TechnicalException {
 
-		String response = processResourceService.processSateliteVisible(ResourceType.json, p_contenu, version);
+		String response = "";
+		if (StringUtils.isNotBlank(p_contenu)) {
+			response = processResourceService.processSateliteVisible(ResourceType.json, p_contenu, version);
+		} else {
+			String message = "La requête doit être présente.";
+			LOGGER.error(message);
+			throw new BusinessException(message);
+		}
 
 		return Response.ok(response).build();
 	}
