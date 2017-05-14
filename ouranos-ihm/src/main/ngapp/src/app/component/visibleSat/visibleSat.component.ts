@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { VisibleSatService } from '../../service/visibleSat.service';
-import { VisibleSat } from '../../model/visibleSat';
+import { VisibleSats } from '../../model/VisibleSats';
 
 @Component({
     selector: 'visibleSat',
@@ -13,10 +13,12 @@ import { VisibleSat } from '../../model/visibleSat';
 
 export class VisibleSatComponent implements OnInit {
 
-    visibleSats: VisibleSat;
+    private visibleSats: VisibleSats;
+    public ouranosCategories = [];
+    public ouranosSeries = [];
+    public chartOptions = {};
 
-    constructor(private visibleSatService: VisibleSatService) {
-    }
+    constructor(private visibleSatService: VisibleSatService) { }
 
     ngOnInit() {
         this.getSateliteVisible();
@@ -28,12 +30,47 @@ export class VisibleSatComponent implements OnInit {
             visibleSats => {
                 // Emit list event
                 this.visibleSats = visibleSats;
-                console.log("component");
-                console.log(visibleSats);
+                this.afficherGraphe();
             },
             err => {
                 // Log errors if any
                 console.log(err);
-            });;
+            });
     }
+
+    afficherGraphe() {
+        for (let VisibleSat of this.visibleSats.satelitesVisible) {
+            this.ouranosCategories.push(VisibleSat.epochHeader);
+            this.ouranosSeries.push(VisibleSat.satelites.length);
+        }
+
+        this.chartOptions = {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Visibility'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: this.ouranosCategories, // Times
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Number of satelites'
+                }
+            },
+            series: [{
+                name: 'Satelite(s)',
+                data: this.ouranosSeries
+            }]
+        };
+
+        console.log(this.chartOptions);
+    }
+
 }
