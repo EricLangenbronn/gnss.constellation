@@ -1,7 +1,7 @@
 export class Position {
     constructor(
-        public X: string,
-        public Y: string,
-        public Z: string
+        public X: number,
+        public Y: number,
+        public Z: number
     ) { }
 }

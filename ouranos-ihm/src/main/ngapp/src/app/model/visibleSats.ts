@@ -7,6 +7,6 @@ import { VisibleSat } from './visibleSat';
  */
 export class VisibleSats {
     constructor(
-        public satelitesVisible: VisibleSat[]
+        public satellitesVisible: VisibleSat[]
     ) { }
 }

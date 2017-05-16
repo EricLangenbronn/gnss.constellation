@@ -46,34 +46,8 @@ public class ComputationService implements IComputationService {
 			}
 			sateliteVisible.add(sateliteTimeVisible);
 		}
-		afficheSateliteVisibleCount(sateliteVisible);
 
 		return sateliteVisible;
-	}
-
-	public void afficheSateliteVisible(List<SateliteTimeCoordinate> satelitesVisible) {
-
-		for (SateliteTimeCoordinate e : satelitesVisible) {
-			Map<String, Sp3SateliteInformation> lpos = e.getSatelites();
-			System.out.println("Satelite visible heure : " + e.getEpochHeaderRecord());
-			for (Sp3SateliteInformation pos : lpos.values()) {
-				System.out.println(pos);
-			}
-		}
-		System.out.println("----------------------------------------------");
-
-	}
-
-	public void afficheSateliteVisibleCount(List<SateliteTimeCoordinate> satelitesVisible) {
-
-		for (SateliteTimeCoordinate e : satelitesVisible) {
-			System.out.println("Satelite visible heure : " + e.getEpochHeaderRecord());
-
-			int nbSat = e.getSatelites().values().size();
-			System.out.print(" : " + nbSat + "\n");
-		}
-		System.out.println("----------------------------------------------");
-
 	}
 
 }

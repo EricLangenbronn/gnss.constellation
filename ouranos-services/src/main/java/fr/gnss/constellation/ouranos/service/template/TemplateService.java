@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.service.Constante;
 import fr.gnss.constellation.ouranos.service.resource.ResourceType;
+import fr.gnss.constellation.ouranos.service.template.velocity.LocalDateTimeTool;
+import fr.gnss.constellation.ouranos.service.template.velocity.SatellitePositionTool;
 import fr.gnss.constellation.ouranos.version.Version;
 
 public class TemplateService implements ITemplateService {
@@ -38,8 +40,8 @@ public class TemplateService implements ITemplateService {
 		}
 
 		// ajout lib pour formatage nombre + date
-		context.put("numberTool", new NumberTool());
-		context.put("dateTool", new DateTool());
+		context.put("localDateTimeTool", new LocalDateTimeTool());
+		context.put("satellitePositionTool", new SatellitePositionTool());
 		context.put("dateToolLocale", Locale.ENGLISH);
 		context.put("dateToolTimezone", TimeZone.getTimeZone("UTC"));
 

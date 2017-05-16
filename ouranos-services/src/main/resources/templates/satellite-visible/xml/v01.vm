@@ -1,19 +1,19 @@
 #####################################################################################################
 ######################## Template velocity de satelitesVisible ######################################
 #####################################################################################################
-#set( $dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" )
+#set( $dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" )
 <?xml version="1.0" encoding="UTF-8"?>
 <satelitesVisible>
     #foreach($sateliteTimeCoordinate in $satelitesVisible)
-        <epochHeader>$sateliteTimeCoordinate.epochHeaderRecord</epochHeader>
+        <epochHeader>$localDateTimeTool.format($sateliteTimeCoordinate.epochHeaderRecord, $dateFormat)</epochHeader>
         <satelites>
             #foreach($satelite in $sateliteTimeCoordinate.satelites.entrySet())
                 <satelite>
                     <id>$satelite.key</id>
                     <position>
-                        <X>$numberTool.format("number",$satelite.value.position.X())</X>
-                        <Y>$numberTool.format("number",$satelite.value.position.Y())</Y>
-                        <Z>$numberTool.format("number",$satelite.value.position.Z())</Z>
+                        <X>$satellitePositionTool.format($satelite.value.position.X())</X>
+                        <Y>$satellitePositionTool.format($satelite.value.position.Y())</Y>
+                        <Z>$satellitePositionTool.format($satelite.value.position.Z())</Z>
                     </position>
                 </satelite>
             #end

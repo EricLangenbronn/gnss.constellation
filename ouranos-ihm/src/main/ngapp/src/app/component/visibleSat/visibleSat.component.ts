@@ -30,6 +30,7 @@ export class VisibleSatComponent implements OnInit {
             visibleSats => {
                 // Emit list event
                 this.visibleSats = visibleSats;
+                console.log(visibleSats);
                 this.afficherGraphe();
             },
             err => {
@@ -39,9 +40,11 @@ export class VisibleSatComponent implements OnInit {
     }
 
     afficherGraphe() {
-        for (let VisibleSat of this.visibleSats.satelitesVisible) {
+        console.log("afficherGraphe");
+        for (let VisibleSat of this.visibleSats.satellitesVisible) {
+            console.log(VisibleSat);
             this.ouranosCategories.push(VisibleSat.epochHeader);
-            this.ouranosSeries.push(VisibleSat.satelites.length);
+            this.ouranosSeries.push(VisibleSat.satellites.length);
         }
 
         this.chartOptions = {
