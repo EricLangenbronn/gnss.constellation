@@ -1,112 +1,131 @@
-<form method="post" action="parameters/register">
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title" align="center">Temporal and spatial parameters
-      </h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title" align="center">Temporal and spatial parameters
+    </h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3>
+        <label class="col-sm-2 label label-default" for="startDateTime">Start Time : </label>
+      </h3>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label class="sr-only" for="startDateTime">Start time of measurement</label>
+          <div class="input-group date" id="startDateTime">
+            <input [(ngModel)]="parameters.startDateOfMeasure" type="text" class="form-control" name="startOfMeasure" placeholder="Start time of measurement"
+              required /> <span class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"> </span>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-      <div class="row">
+    <div class="row">
+      <div class="form-group">
         <h3>
-          <label class="col-sm-2 label label-default" for="startDateTime">Start
-									Time : </label>
+          <label class="col-sm-2 label label-default" for="endDateTime">End
+										Time : </label>
         </h3>
         <div class="col-sm-4">
           <div class="form-group">
-            <label class="sr-only" for="startDateTime">Start time
-										of measurement</label>
-            <div class="input-group date" id="startDateTime">
-              <input type="text" class="form-control" name="startOfMeasure" placeholder="Start time of measurement" required />              <span class="input-group-addon"> <span
-											class="glyphicon glyphicon-calendar"> </span>
+            <label class="sr-only" for="endDateTime">End time of
+											measurement</label>
+            <div class='input-group date' id='endDateTime'>
+              <input [(ngModel)]="parameters.endDateOfMeasure" type='text' class="form-control" name="endOfMeasure" placeholder="End time of measurement"
+                required /> <span class="input-group-addon"> <span
+												class="glyphicon glyphicon-calendar"></span>
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group">
-          <h3>
-            <label class="col-sm-2 label label-default" for="endDateTime">End
-										Time : </label>
-          </h3>
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label class="sr-only" for="endDateTime">End time of
-											measurement</label>
-              <div class='input-group date' id='endDateTime'>
-                <input type='text' class="form-control" name="endOfMeasure" placeholder="End time of measurement" required />                <span class="input-group-addon"> <span
-												class="glyphicon glyphicon-calendar"></span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <h3>
-            <label class="col-sm-2 label label-default" for="elevationMask">Elevation
-										mask : </label>
-          </h3>
-          <div class="col-sm-4">
-            <div class="input-group">
-              <div class="input-group-addon">°</div>
-              <input class="form-control" type="text" id="elevationMask" name="elevationMask" placeholder="Elevation mask in degrees" required
-              />
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title" align="center">Synthetic Measurement Generator
-      </h2>
-    </div>
-    <div class="panel-body">
-      <div class="row">
+    <div class="row">
+      <div class="form-group">
         <h3>
-          <label class="col-sm-3 label label-default">Base
-									position : LLA : </label>
+          <label class="col-sm-2 label label-default" for="elevationMask">Elevation
+										mask : </label>
         </h3>
-        <div class="form-group">
-          <div class="col-sm-3">
-            <div class="input-group">
-              <label class="sr-only" for="longitude">Base position,
-											longitude in degrees</label>
-              <div class="input-group-addon">°</div>
-              <input class="form-control" type="text" id="longitude" name="longitude" placeholder="Longitude in degrees" required />
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-3">
-            <div class="input-group">
-              <label class="sr-only" for="latitude">Base position,
-											latitude in degrees</label>
-              <div class="input-group-addon">°</div>
-              <input class="form-control" type="text" id="latitude" name="latitude" placeholder="Latitude in degrees" required />
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-3">
-            <div class="input-group">
-              <label class="sr-only" for="altitude">Base position,
-											altitude in meters</label>
-              <div class="input-group-addon">m</div>
-              <input class="form-control" type="text" id="altitude" name="altitude" placeholder="Altitude in meters" required />
-            </div>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <div class="input-group-addon">°</div>
+            <input [(ngModel)]="parameters.elevationMask" class="form-control" type="text" id="elevationMask" name="elevationMask" placeholder="Elevation mask in degrees"
+              required />
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div>
-    <button type="submit" class="btn btn-lg btn-primary">Execute</button>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title" align="center">Synthetic Measurement Generator
+    </h2>
   </div>
-</form>
+  <div class="panel-body">
+    <div class="row">
+      <h3>
+        <label class="col-sm-3 label label-default">Base
+									position : LLA : </label>
+      </h3>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <div class="input-group">
+            <label class="sr-only" for="longitude">Base position,
+											longitude in degrees</label>
+            <div class="input-group-addon">°</div>
+            <input [(ngModel)]="parameters.groundStation.longitude" class="form-control" type="text" id="longitude" name="longitude" placeholder="Longitude in degrees"
+              required />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <div class="input-group">
+            <label class="sr-only" for="latitude">Base position,
+											latitude in degrees</label>
+            <div class="input-group-addon">°</div>
+            <input [(ngModel)]="parameters.groundStation.latitude" class="form-control" type="text" id="latitude" name="latitude" placeholder="Latitude in degrees"
+              required />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <div class="input-group">
+            <label class="sr-only" for="altitude">Base position,
+											altitude in meters</label>
+            <div class="input-group-addon">m</div>
+            <input [(ngModel)]="parameters.groundStation.altitude" class="form-control" type="text" id="altitude" name="altitude" placeholder="Altitude in meters"
+              required />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel-body">
+  <div class="row">
+    <div>
+      <button (click)="onClickMe()" type="submit" class="btn btn-lg btn-primary">Execute</button>
+    </div>
+  </div>
+</div>
 
 
-<div [ng2-highcharts]="chartOptions"></div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title" align="center">Graphic visible satellite
+    </h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <div [ng2-highcharts]="chartOptions"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

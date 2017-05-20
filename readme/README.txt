@@ -15,3 +15,10 @@ content la ligne suivante :
 	
 	
 http://127.0.1:8080/ouranos-war/ouranos/
+
+
+IHM Angular
+L'ihm angular cherche l'api à l'addresse suivante : 
+http://127.0.1:8080/ouranos-war/ouranos/
+
+Il faut donc lancer ouranos.war sur le serveur Tomcat à partir d'eclipse 

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { VisibleSatService } from '../../service/visibleSat.service';
 import { VisibleSats } from '../../model/VisibleSats';
+import { Parameters } from '../../model/Parameters';
 
 @Component({
     selector: 'visibleSat',
@@ -17,20 +18,26 @@ export class VisibleSatComponent implements OnInit {
     public ouranosCategories = [];
     public ouranosSeries = [];
     public chartOptions = {};
+    public parameters: Parameters;
 
-    constructor(private visibleSatService: VisibleSatService) { }
-
-    ngOnInit() {
-        this.getSateliteVisible();
+    constructor(private visibleSatService: VisibleSatService) { 
+        this.parameters = new Parameters();
     }
 
+    ngOnInit() {
+       // do something
+    }
+
+    onClickMe() {
+        console.log(this.parameters);
+         this.getSateliteVisible();
+    }
 
     getSateliteVisible(): void {
-        this.visibleSatService.getSateliteVisible().subscribe(
+        this.visibleSatService.getSateliteVisible(this.parameters).subscribe(
             visibleSats => {
                 // Emit list event
                 this.visibleSats = visibleSats;
-                console.log(visibleSats);
                 this.afficherGraphe();
             },
             err => {
@@ -41,8 +48,8 @@ export class VisibleSatComponent implements OnInit {
 
     afficherGraphe() {
         console.log("afficherGraphe");
+        console.log(this.visibleSats);
         for (let VisibleSat of this.visibleSats.satellitesVisible) {
-            console.log(VisibleSat);
             this.ouranosCategories.push(VisibleSat.epochHeader);
             this.ouranosSeries.push(VisibleSat.satellites.length);
         }
@@ -72,8 +79,6 @@ export class VisibleSatComponent implements OnInit {
                 data: this.ouranosSeries
             }]
         };
-
-        console.log(this.chartOptions);
     }
 
 }

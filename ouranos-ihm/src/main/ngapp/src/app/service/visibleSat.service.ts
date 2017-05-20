@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { HttpService } from './http.service';
 
 import { VisibleSats } from '../model/VisibleSats';
+import { Parameters } from '../model/parameters';
 
 
 @Injectable()
@@ -17,10 +18,10 @@ export class VisibleSatService {
          this.httpService = new HttpService(this.http);
     }
 
-    getSateliteVisible(): Observable<VisibleSats> {
+    getSateliteVisible(parameters : Parameters): Observable<VisibleSats> {
 
         let params = new URLSearchParams();
-        params.set("requete", this.defaultQuestion);
+        params.set("requete", JSON.stringify(parameters));
         let sateliteVisible = this.httpService.httpGet("ouranos/api/visibleSat/v01", params);
 
         return sateliteVisible;

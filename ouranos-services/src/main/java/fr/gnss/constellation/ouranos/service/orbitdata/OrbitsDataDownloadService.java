@@ -18,6 +18,7 @@ import fr.gnss.constellation.ouranos.service.IPropertiesService;
 import fr.gnss.constellation.ouranos.service.orbitdata.bean.OrbitDataBean;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.IOrbitsDataDownloadDao;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.ISp3FileDao;
+import fr.gnss.constellation.ouranos.toolbox.UnCompress;
 
 /**
  * Classe de téléchargement des fichiers sp3 via FTP
@@ -52,6 +53,9 @@ public class OrbitsDataDownloadService implements IOrbitsDataDownloadService {
 					orbitDataBeans.add(orbitDataBean);
 					this.orbitsDataDownloadDao.downloadAndStoreSp3File(orbitDataBeans,
 							Paths.get(propertiesService.getString("repertoire.sp3")));
+					// uncompress
+					UnCompress.unCompressZFile(Paths.get(propertiesService.getString("repertoire.sp3")), sp3FileName.getFileName(true), sp3FileName.getFileName(false));
+					sp3File = sp3Dao.getFile(propertiesService.getString("repertoire.sp3"), sp3FileName);
 				}
 				sp3Files.add(sp3File);
 			}

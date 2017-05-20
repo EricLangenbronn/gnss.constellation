@@ -36,10 +36,10 @@ public class Sp3File {
 
 	public Sp3FileType getSp3FileType() throws TechnicalException, BusinessException {
 		Sp3FileType sp3TypeFile = null;
-		if (sp3File.exists() && sp3File.isFile() && sp3File.canRead()) {
+		if (this.sp3File.exists() && this.sp3File.isFile() && this.sp3File.canRead()) {
 			RandomAccessFile sp3HeaderReader = null;
 			try {
-				sp3HeaderReader = new RandomAccessFile(sp3File, "r");
+				sp3HeaderReader = new RandomAccessFile(this.sp3File, "r");
 				byte[] cbuf = new byte[2];
 
 				sp3HeaderReader.read(cbuf);
@@ -58,8 +58,8 @@ public class Sp3File {
 				IOUtils.closeQuietly(sp3HeaderReader);
 			}
 		} else {
-			String message = "Impossible d'acceder au fichier [sp3File=" + sp3File.getAbsolutePath() + "] [exists="
-					+ sp3File.exists() + ", isFile=" + sp3File.isFile() + "]";
+			String message = "Impossible d'acceder au fichier [sp3File=" + this.sp3File.getAbsolutePath() + "] [exists="
+					+ this.sp3File.exists() + ", isFile=" + this.sp3File.isFile() + "]";
 			throw new TechnicalException(message);
 		}
 
