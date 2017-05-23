@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Path;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +27,8 @@ public class ClientFtpSp3File implements IConnection {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientFtpSp3File.class);
 
-	private static final String FTP_SERVER_NAME = "igs.ensg.ign.fr";
-	private static final String EPOCH_DIRECTORY = "/pub/igs/products";
+	private static final String FTP_SERVER_NAME = "ftp.igs.org";
+	private static final String EPOCH_DIRECTORY = "/pub/product";
 
 	private ClientFtp clientFtp;
 	private String ipServer = "";
@@ -79,6 +80,7 @@ public class ClientFtpSp3File implements IConnection {
 			if (isFileDownload) {
 				LOGGER.debug("Téléchargement réussi : " + destinationSp3File.toString());
 			} else {
+				FileUtils.deleteQuietly(destinationSp3File.toFile());
 				message = "Impossible de télécharger le fichier. [source=" + sp3UrlFileName + ", destination="
 						+ destinationSp3File.toString() + "]";
 				LOGGER.error(message);
