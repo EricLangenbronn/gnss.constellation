@@ -36,7 +36,7 @@
 		<servlet-class>fr.gnss.constellation.ouranos.api.resource.servlet.AboutServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>rest-ws</servlet-name>
+		<servlet-name>api-rest</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
@@ -54,11 +54,11 @@
 
 	<servlet-mapping>
 		<servlet-name>aboutServlet</servlet-name>
-		<url-pattern>/ouranos/about</url-pattern>
+		<url-pattern>/about</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>rest-ws</servlet-name>
-		<url-pattern>/ouranos/api/*</url-pattern>
+		<servlet-name>api-rest</servlet-name>
+		<url-pattern>/api-rest/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- ======================================== Listeners ======================================== -->

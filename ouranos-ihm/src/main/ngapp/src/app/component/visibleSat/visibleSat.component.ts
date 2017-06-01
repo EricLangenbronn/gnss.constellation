@@ -35,6 +35,8 @@ export class VisibleSatComponent implements OnInit {
 
     onClickMe() {
 
+        this.highchartsComponent.clearGraphe();
+
         this.apiRequest.elevationMask = this.tempAndSpat.getElevationMask();
         this.apiRequest.startDateOfMeasure = this.tempAndSpat.getDateStartMeasureISO();
         this.apiRequest.endDateOfMeasure = this.tempAndSpat.getDateEndMeasureISO();

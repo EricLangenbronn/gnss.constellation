@@ -12,12 +12,12 @@
   } ],
   "schemes" : [ "http", "https" ],
   "paths" : {
-    "/visibleSat/{version}" : {
+    "/visibleSat/{version}/byPeriod" : {
       "get" : {
         "tags" : [ "visibleSat" ],
-        "summary" : "Finds visible satellite",
+        "summary" : "Finds visible satellite order by period",
         "description" : "",
-        "operationId" : "getVisiblesatelliteJson",
+        "operationId" : "getVisiblesatelliteByPeriodJson",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json;charset=UTF-8" ],
         "parameters" : [ {
@@ -41,9 +41,67 @@
       },
       "post" : {
         "tags" : [ "visibleSat" ],
-        "summary" : "Finds visible satellite",
+        "summary" : "Finds visible satellite order by period",
         "description" : "",
-        "operationId" : "postVisiblesatelliteXml",
+        "operationId" : "postVisiblesatelliteByPeriodJson",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json;charset=UTF-8" ],
+        "parameters" : [ {
+          "name" : "version",
+          "in" : "path",
+          "description" : "version of the api",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "submission request on json",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Given visible satellite found"
+          }
+        }
+      }
+    },
+    "/visibleSat/{version}/bySatellite" : {
+      "get" : {
+        "tags" : [ "visibleSat" ],
+        "summary" : "Finds visible satellite order by satellite id",
+        "description" : "",
+        "operationId" : "getVisiblesatelliteBySatelliteJson",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json;charset=UTF-8" ],
+        "parameters" : [ {
+          "name" : "version",
+          "in" : "path",
+          "description" : "version of the api",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "submission request on json",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Given visible satellite found"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "visibleSat" ],
+        "summary" : "Finds visible satellite order by satellite id",
+        "description" : "",
+        "operationId" : "postVisiblesatelliteBySatelliteXml",
         "consumes" : [ "application/xml" ],
         "produces" : [ "application/xml;charset=UTF-8" ],
         "parameters" : [ {
@@ -64,62 +122,6 @@
         "responses" : {
           "200" : {
             "description" : "Given visible satellite found"
-          }
-        }
-      }
-    },
-    "/visibleSat/{version}/count" : {
-      "get" : {
-        "tags" : [ "visibleSat" ],
-        "summary" : "Finds visible satellite and count them",
-        "description" : "",
-        "operationId" : "getVisiblesatelliteCountXml",
-        "consumes" : [ "application/xml" ],
-        "produces" : [ "application/xml;charset=UTF-8" ],
-        "parameters" : [ {
-          "name" : "version",
-          "in" : "path",
-          "description" : "version of the api",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "requete",
-          "in" : "query",
-          "description" : "submission request on xml",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Given visible satellites"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "visibleSat" ],
-        "summary" : "Finds visible satellite and count them",
-        "description" : "",
-        "operationId" : "postVisiblesatelliteCountXml",
-        "consumes" : [ "application/xml" ],
-        "produces" : [ "application/xml;charset=UTF-8" ],
-        "parameters" : [ {
-          "name" : "version",
-          "in" : "path",
-          "description" : "version of the api",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "description" : "submission request on xml",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Given the number of visible satellites"
           }
         }
       }

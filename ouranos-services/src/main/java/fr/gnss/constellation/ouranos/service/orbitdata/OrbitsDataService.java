@@ -16,8 +16,9 @@ import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3FileParser;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.service.IPropertiesService;
 import fr.gnss.constellation.ouranos.service.orbitdata.bean.OrbitDataBean;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.IOrbitsDataDownloadDao;
@@ -34,10 +35,10 @@ public class OrbitsDataService implements IOrbitsDataService {
 	private IOrbitsDataDownloadService orbitsDataDownloadService;
 
 	@Override
-	public List<SateliteTimeCoordinate> getDatasForPeriod(LocalDateTime start, LocalDateTime end,
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getDatasForPeriod(LocalDateTime start, LocalDateTime end,
 			EphemerideType ephemerideType, OrbitType orbitType) throws TechnicalException, BusinessException {
 
-		List<SateliteTimeCoordinate> allSatelitesForPeriod = new ArrayList<>();
+		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> allSatelitesForPeriod = new ArrayList<>();
 		try {
 			List<File> sp3Files = this.orbitsDataDownloadService.downloadAndGetFileForPeriod(start, end, ephemerideType,
 					orbitType);
@@ -58,10 +59,10 @@ public class OrbitsDataService implements IOrbitsDataService {
 	}
 
 	@Override
-	public List<SateliteTimeCoordinate> readDatasForPeriod(List<File> sp3Files, LocalDateTime start, LocalDateTime end)
-			throws TechnicalException, BusinessException {
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> readDatasForPeriod(List<File> sp3Files,
+			LocalDateTime start, LocalDateTime end) throws TechnicalException, BusinessException {
 
-		List<SateliteTimeCoordinate> allSatelitesForPeriod = new ArrayList<>();
+		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> allSatelitesForPeriod = new ArrayList<>();
 		Sp3FileParser sp3FileParser = null;
 		try {
 			for (File sp3File : sp3Files) {

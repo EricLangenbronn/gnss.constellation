@@ -1,12 +1,11 @@
 package fr.gnss.constellation.ouranos.librairy.coordinate;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class SphericalCoordinate {
+public class SphericalCoordinate implements ICoordinate {
 
 	/**
 	 * Le logger de la classe.
@@ -14,17 +13,27 @@ public class SphericalCoordinate {
 	private static final Log LOGGER = LogFactory.getLog(SphericalCoordinate.class);
 
 	/**
-	 * Position est représenté par un vecteur 3
-	 * 
-	 * r : radial distance θ : polar angle (theta) φ : azimuthal angle (phi)
+	 * r : radial distance
 	 */
-	private double[] position;
+	private double distance;
+
+	/**
+	 * θ : polar angle (theta)
+	 */
+	private double longitude;
+
+	/**
+	 * φ : azimuthal angle
+	 */
+	private double latitude;
 
 	/**
 	 * Initializes a newly created SphericalCoordinate object.
 	 */
 	public SphericalCoordinate() {
-		position = new double[3];
+		this.distance = 0;
+		this.longitude = 0;
+		this.latitude = 0;
 	}
 
 	/**
@@ -34,15 +43,14 @@ public class SphericalCoordinate {
 	 * @param radiusDistance
 	 *            - radial distance
 	 * @param theta
-	 *            - polar angle
+	 *            - longitude
 	 * @param phi
-	 *            - azimuthal angle
+	 *            - latitude
 	 */
 	public SphericalCoordinate(double radiusDistance, double theta, double phi) {
-		this();
-		position[0] = radiusDistance;
-		position[1] = theta;
-		position[2] = phi;
+		this.distance = radiusDistance;
+		this.longitude = theta;
+		this.latitude = phi;
 
 		// validate();
 	}
@@ -61,9 +69,9 @@ public class SphericalCoordinate {
 					"Une position doit posséder trois valeurs (radial distance, polar, azimuth)");
 		}
 
-		position = Arrays.copyOf(p, 3);
-
-		// validate();
+		this.distance = p[0];
+		this.longitude = p[1];
+		this.latitude = p[2];
 	}
 
 	/**
@@ -80,9 +88,9 @@ public class SphericalCoordinate {
 
 		Objects.requireNonNull(p, "SphericalCoordinate");
 
-		position[0] = p.getRadiusDistance();
-		position[1] = p.getInclination();
-		position[2] = p.getAzimuth();
+		this.distance = p.getRadiusDistance();
+		this.longitude = p.getAzimuth();
+		this.latitude = p.getInclination();
 
 		// validate();
 	}
@@ -91,17 +99,17 @@ public class SphericalCoordinate {
 	 * r ≥ 0 0° ≤ θ ≤ 180° (π rad) 0° ≤ φ < 360° (2π rad)
 	 */
 	private void validate() {
-		if (position[0] < 0) {
+		if (this.distance < 0) {
 			LOGGER.info("Attention la distance radial est inférieur à zéro");
 		}
 
 		/** inclinaison compris entre -90 et 90 degrée */
-		if ((position[1] < -(Math.PI / 2)) || (position[1] > (Math.PI / 2))) {
-			LOGGER.info("L'inclinaison doit être compris entre -90 et 90 degrée");
+		if ((this.latitude < -(Math.PI / 2)) || (this.latitude > (Math.PI / 2))) {
+			LOGGER.info("L'inclinaison (latitude) doit être compris entre -90 et 90 degrée");
 		}
 
-		if ((position[2] < -(Math.PI)) || (position[2]) > (Math.PI)) {
-			LOGGER.info("L'azimuth doit être compris entre -180 et 180 degrée");
+		if ((this.longitude < -(Math.PI)) || (this.longitude) > (Math.PI)) {
+			LOGGER.info("L'azimuth (longitude) doit être compris entre -180 et 180 degrée");
 		}
 	}
 
@@ -112,7 +120,7 @@ public class SphericalCoordinate {
 	 * @return the radius or radial
 	 */
 	public double getRadiusDistance() {
-		return position[0];
+		return this.distance;
 	}
 
 	/**
@@ -122,7 +130,7 @@ public class SphericalCoordinate {
 	 * @return the polar angle
 	 */
 	public double getInclination() {
-		return position[1];
+		return this.latitude;
 	}
 
 	/**
@@ -133,12 +141,28 @@ public class SphericalCoordinate {
 	 * @return the azimuthal angle
 	 */
 	public double getAzimuth() {
-		return position[2];
+		return this.longitude;
+	}
+
+	@Override
+	public double[] getPosition() {
+		double[] position = new double[3];
+		position[0] = distance;
+		position[1] = longitude;
+		position[2] = latitude;
+
+		return position;
+	}
+
+	@Override
+	public int getDimensions() {
+		return 3;
 	}
 
 	@Override
 	public String toString() {
-		return "SphericalCoordinate [position=" + Arrays.toString(position) + "]";
+		return "SphericalCoordinate [distance=" + distance + ", longitude=" + longitude + ", latitude=" + latitude
+				+ "]";
 	}
 
 }

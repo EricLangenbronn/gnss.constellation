@@ -1,0 +1,27 @@
+#####################################################################################################
+######################## Template velocity de satelitesVisible ######################################
+#####################################################################################################
+#set( $dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" )
+<?xml version="1.0" encoding="UTF-8"?>
+<satellitesVisible:satellitesVisible 
+    xmlns:satellitesVisible="http://www.ouranos.fr/ouranos/response/visibleSatelite/v10/byPeriod"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    #foreach($satelliteTimeCoordinate in $satellitesVisible)
+        <period>
+            <epochHeader>$localDateTimeTool.format($satelliteTimeCoordinate.epochHeaderRecord, $dateFormat)</epochHeader>
+            <satellites>
+                #foreach($satellite in $satelliteTimeCoordinate.satellites.entrySet())
+                    <satellite>
+                        <id>$satellite.key</id>
+                        <sphericalCoordinate>
+                            <radialDirection>$satellitePositionTool.format($satellite.value.position.getRadiusDistance())</radialDirection>
+                            <longitude>$satellitePositionTool.format($satellite.value.position.getAzimuth())</longitude>
+                            <latitude>$satellitePositionTool.format($satellite.value.position.getInclination())</latitude>
+                        </sphericalCoordinate>
+                    </satellite>
+                #end
+            </satellites>
+        </period>
+    #end
+</satellitesVisible:satellitesVisible>

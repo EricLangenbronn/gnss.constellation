@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  */
 
-public class GeodeticCoordinate {
+public class GeodeticCoordinate implements ICoordinate {
 
 	/**
 	 * Position est représenté par un vecteur 3
@@ -112,6 +112,16 @@ public class GeodeticCoordinate {
 	 */
 	public double[] getVector() {
 		return this.position;
+	}
+
+	@Override
+	public double[] getPosition() {
+		return this.position;
+	}
+
+	@Override
+	public int getDimensions() {
+		return this.position.length;
 	}
 
 	@Override

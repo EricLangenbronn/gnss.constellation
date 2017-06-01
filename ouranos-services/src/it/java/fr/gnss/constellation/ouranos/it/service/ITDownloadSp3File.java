@@ -17,8 +17,8 @@ import fr.gnss.constellation.ouranos.toolbox.ClientFtp;
 @ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
 public class ITDownloadSp3File {
 
-	private static final String URL_FTP_SP3 = "igs.ensg.ign.fr";
-	private static final String URL_FTP_SP3_DIRECTORY = "/pub/igs/products";
+	private static final String URL_FTP_SP3 = "ftp.igs.org";
+	private static final String URL_FTP_SP3_DIRECTORY = "/pub/product";
 
 	@Test
 	public void testConnexion() throws Exception {
@@ -47,6 +47,17 @@ public class ITDownloadSp3File {
 		client.logoutAndCloseConnection();
 		assertTrue(accessOutputFile.toFile().exists());
 		assertTrue(accessOutputFile.toFile().length() != 0);
+	}
+
+	@Test
+	public void testConnexionCheckTimeOut() throws Exception {
+		InetAddress address = InetAddress.getByName(URL_FTP_SP3);
+
+		ClientFtp client = new ClientFtp(address.getHostAddress());
+		client.setTimeOut(10); // 10 milliseconde
+
+		boolean isOpen = client.openConnection();
+		assertFalse(isOpen);
 	}
 
 }

@@ -5,11 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
 public class Sp3CFormat {
 
-	public static Sp3SateliteInformation formatSatelitePosition(String line) throws BusinessException {
+	public static SatellitePosition<CartesianCoordinate3D> formatSatelitePosition(String line)
+			throws BusinessException {
 		if (line.charAt(0) != 'P') {
 			String message = "Ligne mal formatée, P attendu [line=" + line + "]";
 			throw new BusinessException(message);
@@ -22,7 +24,8 @@ public class Sp3CFormat {
 		double clock = Double.parseDouble(line.substring(46, 60).trim());
 
 		// the position values are in km and have to be converted to m
-		Sp3SateliteInformation res = new Sp3SateliteInformation(vehicleId, x * 1000, y * 1000, z * 1000);
+		CartesianCoordinate3D position = new CartesianCoordinate3D(x * 1000, y * 1000, z * 1000);
+		SatellitePosition<CartesianCoordinate3D> res = new SatellitePosition<>(vehicleId, position);
 
 		return res;
 	}

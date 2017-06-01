@@ -15,8 +15,9 @@ import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.AbstractCoreParser;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.format.Sp3CFormat;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
 
 public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser {
 
@@ -47,7 +48,7 @@ public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser
 		}
 	}
 
-	private Sp3SateliteInformation splitSateliteLine(String line) throws BusinessException {
+	private SatellitePosition<CartesianCoordinate3D> splitSateliteLine(String line) throws BusinessException {
 		Objects.requireNonNull(line);
 
 		return Sp3CFormat.formatSatelitePosition(line);
@@ -60,15 +61,17 @@ public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser
 	}
 
 	@Override
-	public SateliteTimeCoordinate getPositionAndClockRecord() throws TechnicalException, BusinessException {
-		SateliteTimeCoordinate sateliteByTime = null;
+	public SatelliteTimeCoordinate<CartesianCoordinate3D> getPositionAndClockRecord()
+			throws TechnicalException, BusinessException {
+		SatelliteTimeCoordinate<CartesianCoordinate3D> sateliteByTime = null;
 
 		LocalDateTime epochHeaderRecord = null;
 		try {
 			epochHeaderRecord = splitClockLine(readLine()); // On passe la clock
-			sateliteByTime = new SateliteTimeCoordinate(epochHeaderRecord);
+			sateliteByTime = new SatelliteTimeCoordinate<CartesianCoordinate3D>(epochHeaderRecord);
 			for (int i = 0; i < numberOfSat; ++i) {
-				sateliteByTime.addSatellite(splitSateliteLine(readLine()));
+				SatellitePosition<CartesianCoordinate3D> satellite = splitSateliteLine(readLine());
+				sateliteByTime.addSatellite(satellite.getVehicleId(), satellite);
 			}
 		} catch (NoSuchElementException e) {
 			String message = "Fin du fichier, impossible de lire plus";
@@ -79,10 +82,10 @@ public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser
 	}
 
 	@Override
-	public List<SateliteTimeCoordinate> getPeriodOfPosition(final LocalDateTime start,
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPeriodOfPosition(final LocalDateTime start,
 			final LocalDateTime end) throws TechnicalException, BusinessException {
 
-		List<SateliteTimeCoordinate> satelitesByTime = new ArrayList<>();
+		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> satelitesByTime = new ArrayList<>();
 
 		// on se de place jusqu'a la bonne epoch
 		LocalDateTime wrapStartMeasure = startMeasure.plusSeconds(0);

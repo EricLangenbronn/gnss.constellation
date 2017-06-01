@@ -5,10 +5,10 @@ import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
 public interface IProcessResourceService {
 
-	String processSatelliteVisible(ResourceType contentType, String request, String version)
-			throws TechnicalException, BusinessException;
+	String processSatelliteVisibleByPeriod(ResourceType contentType, String request, String version)
+			throws TechnicalException, BusinessException;	
 	
-	String processSatelliteVisibleCount(ResourceType contentType, String request, String version)
+	String processSatelliteVisibleBySatellite(ResourceType contentType, String request, String version)
 			throws TechnicalException, BusinessException;
 
 }

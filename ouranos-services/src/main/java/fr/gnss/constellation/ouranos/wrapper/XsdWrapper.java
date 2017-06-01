@@ -6,7 +6,7 @@ import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 public class XsdWrapper {
 
 	public static fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate wrapGeodeticCoordindate(
-			fr.gnss.constellation.ouranos.xsd.request.GeodeticCoordinate xsdGeodetic) {
+			fr.gnss.constellation.ouranos.xsd.data.GeodeticCoordinate xsdGeodetic) {
 
 		fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate geodeticCoordinate;
 

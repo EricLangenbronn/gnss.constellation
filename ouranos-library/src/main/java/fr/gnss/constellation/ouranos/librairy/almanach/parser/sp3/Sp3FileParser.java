@@ -14,10 +14,11 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.Sp3FileType;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
 
-public class Sp3FileParser implements ISp3FileParser, Iterable<SateliteTimeCoordinate> {
+public class Sp3FileParser implements ISp3FileParser, Iterable<SatelliteTimeCoordinate<CartesianCoordinate3D>> {
 
 	/**
 	 * Le logger de la classe.
@@ -146,8 +147,8 @@ public class Sp3FileParser implements ISp3FileParser, Iterable<SateliteTimeCoord
 	}
 
 	@Override
-	public List<SateliteTimeCoordinate> getPositionAndClockRecord(LocalDateTime start, LocalDateTime end)
-			throws TechnicalException, BusinessException {
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPositionAndClockRecord(LocalDateTime start,
+			LocalDateTime end) throws TechnicalException, BusinessException {
 		return sp3CoreParser.getPeriodOfPosition(start, end);
 	}
 
@@ -159,8 +160,8 @@ public class Sp3FileParser implements ISp3FileParser, Iterable<SateliteTimeCoord
 	}
 
 	@Override
-	public Iterator<SateliteTimeCoordinate> iterator() {
-		Iterator<SateliteTimeCoordinate> it = new Iterator<SateliteTimeCoordinate>() {
+	public Iterator<SatelliteTimeCoordinate<CartesianCoordinate3D>> iterator() {
+		Iterator<SatelliteTimeCoordinate<CartesianCoordinate3D>> it = new Iterator<SatelliteTimeCoordinate<CartesianCoordinate3D>>() {
 
 			private int currentIndex = 0;
 
@@ -172,7 +173,7 @@ public class Sp3FileParser implements ISp3FileParser, Iterable<SateliteTimeCoord
 			}
 
 			@Override
-			public SateliteTimeCoordinate next() {
+			public SatelliteTimeCoordinate next() {
 				// return arrayList[currentIndex++];
 				return null;
 			}

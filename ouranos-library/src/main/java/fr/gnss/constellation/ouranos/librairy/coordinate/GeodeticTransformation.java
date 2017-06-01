@@ -141,10 +141,10 @@ public class GeodeticTransformation {
 				+ Math.pow(enuStationSatelite[2], 2));
 
 		angles[0] = normeStaSat;
-		// Angle d'élévation
+		// Angle d'élévation (latitude)
 		angles[1] = Math.asin(enuStationSatelite[2] / normeStaSat);
 
-		// Angle azimute
+		// Angle azimute (longitude)
 		angles[2] = Math.atan2(enuStationSatelite[0] / normeStaSat, enuStationSatelite[1] / normeStaSat);
 
 		return angles;

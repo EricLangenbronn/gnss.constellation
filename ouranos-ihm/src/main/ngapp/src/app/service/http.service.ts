@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
+import {environment} from '../../environments/environment';
+
 @Injectable()
 export class HttpService {
 
-    private baseUrl = "http://127.0.0.1:8080/ouranos-war";
+    private baseUrl = `${environment.urlServer}`;    
 
     constructor(private http: Http) { }
 

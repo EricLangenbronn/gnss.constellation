@@ -3,7 +3,6 @@ package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
 import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.AbstractCoreParser;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3SateliteInformation;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
 public class Sp3aCoreParser extends AbstractCoreParser implements ISp3CoreParser {
 
@@ -32,14 +31,15 @@ public class Sp3aCoreParser extends AbstractCoreParser implements ISp3CoreParser
 	}
 
 	@Override
-	public SateliteTimeCoordinate getPositionAndClockRecord() throws TechnicalException, BusinessException {
+	public SatelliteTimeCoordinate<CartesianCoordinate3D> getPositionAndClockRecord()
+			throws TechnicalException, BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SateliteTimeCoordinate> getPeriodOfPosition(LocalDateTime start, LocalDateTime end)
-			throws TechnicalException, BusinessException {
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPeriodOfPosition(LocalDateTime start,
+			LocalDateTime end) throws TechnicalException, BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}

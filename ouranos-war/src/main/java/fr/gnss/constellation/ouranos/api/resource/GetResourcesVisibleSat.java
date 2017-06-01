@@ -45,17 +45,17 @@ public class GetResourcesVisibleSat {
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML + ";charset=UTF-8")
-	@Path("/{version}")
-	@ApiOperation(value = "Finds visible satellite", httpMethod = "POST", notes = "", responseContainer = "List")
+	@Path("/{version}/byPeriod")
+	@ApiOperation(value = "Finds visible satellite order by period", httpMethod = "POST", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response postVisiblesatelliteXml(
+	public Response postVisiblesatelliteByPeriodXml(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
 			@ApiParam(value = "submission request on xml", required = true) String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
-			response = processResourceService.processSatelliteVisible(ResourceType.xml, p_contenu, version);
+			response = processResourceService.processSatelliteVisibleByPeriod(ResourceType.xml, p_contenu, version);
 		} else {
 			String message = "La requête doit être présente.";
 			LOGGER.error(message);
@@ -68,17 +68,17 @@ public class GetResourcesVisibleSat {
 	@GET
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML + ";charset=UTF-8")
-	@Path("/{version}")
-	@ApiOperation(value = "Finds visible satellite", httpMethod = "GET", notes = "", responseContainer = "List")
+	@Path("/{version}/byPeriod")
+	@ApiOperation(value = "Finds visible satellite order by period", httpMethod = "GET", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response getVisiblesatelliteXml(
+	public Response getVisiblesatelliteByPeriodXml(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
 			@ApiParam(value = "submission request on xml", required = true) @QueryParam("requete") String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
-			response = processResourceService.processSatelliteVisible(ResourceType.xml, p_contenu, version);
+			response = processResourceService.processSatelliteVisibleByPeriod(ResourceType.xml, p_contenu, version);
 		} else {
 			String message = "La requête doit être présente.";
 			LOGGER.error(message);
@@ -91,17 +91,17 @@ public class GetResourcesVisibleSat {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-	@Path("/{version}")
-	@ApiOperation(value = "Finds visible satellite", httpMethod = "POST", notes = "", responseContainer = "List")
+	@Path("/{version}/byPeriod")
+	@ApiOperation(value = "Finds visible satellite order by period", httpMethod = "POST", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response postVisiblesatelliteJson(
+	public Response postVisiblesatelliteByPeriodJson(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
 			@ApiParam(value = "submission request on json", required = true) String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
-			response = processResourceService.processSatelliteVisible(ResourceType.json, p_contenu, version);
+			response = processResourceService.processSatelliteVisibleByPeriod(ResourceType.json, p_contenu, version);
 		} else {
 			String message = "La requête doit être présente.";
 			LOGGER.error(message);
@@ -114,17 +114,17 @@ public class GetResourcesVisibleSat {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-	@Path("/{version}")
-	@ApiOperation(value = "Finds visible satellite", httpMethod = "GET", notes = "", responseContainer = "List")
+	@Path("/{version}/byPeriod")
+	@ApiOperation(value = "Finds visible satellite order by period", httpMethod = "GET", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found on json") })
-	public Response getVisiblesatelliteJson(
+	public Response getVisiblesatelliteByPeriodJson(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
 			@ApiParam(value = "submission request on json", required = true) @QueryParam("requete") String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
-			response = processResourceService.processSatelliteVisible(ResourceType.json, p_contenu, version);
+			response = processResourceService.processSatelliteVisibleByPeriod(ResourceType.json, p_contenu, version);
 		} else {
 			String message = "La requête doit être présente.";
 			LOGGER.error(message);
@@ -137,17 +137,17 @@ public class GetResourcesVisibleSat {
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML + ";charset=UTF-8")
-	@Path("/{version}/count")
-	@ApiOperation(value = "Finds visible satellite and count them", httpMethod = "POST", notes = "", responseContainer = "List")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given the number of visible satellites") })
-	public Response postVisiblesatelliteCountXml(
+	@Path("/{version}/bySatellite")
+	@ApiOperation(value = "Finds visible satellite order by satellite id", httpMethod = "POST", notes = "", responseContainer = "List")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
+	public Response postVisiblesatelliteBySatelliteXml(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
 			@ApiParam(value = "submission request on xml", required = true) String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
-			response = processResourceService.processSatelliteVisibleCount(ResourceType.xml, p_contenu, version);
+			response = processResourceService.processSatelliteVisibleBySatellite(ResourceType.xml, p_contenu, version);
 		} else {
 			String message = "La requête doit être présente.";
 			LOGGER.error(message);
@@ -160,17 +160,17 @@ public class GetResourcesVisibleSat {
 	@GET
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML + ";charset=UTF-8")
-	@Path("/{version}/count")
-	@ApiOperation(value = "Finds visible satellite and count them", httpMethod = "GET", notes = "", responseContainer = "List")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellites") })
-	public Response getVisiblesatelliteCountXml(
+	@Path("/{version}/bySatellite")
+	@ApiOperation(value = "Finds visible satellite order by satellite id", httpMethod = "GET", notes = "", responseContainer = "List")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
+	public Response getVisiblesatelliteBySatelliteXml(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on xml", required = true) @QueryParam("requete") String p_contenu)
+			@ApiParam(value = "submission request on xml", required = true) String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
-			response = processResourceService.processSatelliteVisibleCount(ResourceType.xml, p_contenu, version);
+			response = processResourceService.processSatelliteVisibleBySatellite(ResourceType.xml, p_contenu, version);
 		} else {
 			String message = "La requête doit être présente.";
 			LOGGER.error(message);
@@ -183,17 +183,17 @@ public class GetResourcesVisibleSat {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-	@Path("/{version}/count")
-	@ApiOperation(value = "Finds visible satellite and count them", httpMethod = "POST", notes = "", responseContainer = "List")
+	@Path("/{version}/bySatellite")
+	@ApiOperation(value = "Finds visible satellite order by satellite id", httpMethod = "POST", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response postVisiblesatelliteCountJson(
+	public Response postVisiblesatelliteBySatelliteJson(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
 			@ApiParam(value = "submission request on json", required = true) String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
-			response = processResourceService.processSatelliteVisibleCount(ResourceType.json, p_contenu, version);
+			response = processResourceService.processSatelliteVisibleBySatellite(ResourceType.json, p_contenu, version);
 		} else {
 			String message = "La requête doit être présente.";
 			LOGGER.error(message);
@@ -206,17 +206,17 @@ public class GetResourcesVisibleSat {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-	@Path("/{version}/count")
-	@ApiOperation(value = "Finds visible satellite and count them", httpMethod = "GET", notes = "", responseContainer = "List")
+	@Path("/{version}/bySatellite")
+	@ApiOperation(value = "Finds visible satellite order by satellite id", httpMethod = "GET", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response getVisiblesatelliteCountJson(
+	public Response getVisiblesatelliteBySatelliteJson(
 			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on json", required = true) @QueryParam("requete") String p_contenu)
+			@ApiParam(value = "submission request on json", required = true) String p_contenu)
 			throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
-			response = processResourceService.processSatelliteVisibleCount(ResourceType.json, p_contenu, version);
+			response = processResourceService.processSatelliteVisibleBySatellite(ResourceType.json, p_contenu, version);
 		} else {
 			String message = "La requête doit être présente.";
 			LOGGER.error(message);

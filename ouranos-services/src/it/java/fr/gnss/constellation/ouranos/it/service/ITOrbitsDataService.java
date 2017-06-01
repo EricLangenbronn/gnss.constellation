@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,7 +35,8 @@ public class ITOrbitsDataService {
 		List<File> files = new ArrayList<>();
 		files.add(new File("./src/it/resources/Sp3File/igs17720.sp3"));
 
-		List<SateliteTimeCoordinate> datas = orbitsDataService.readDatasForPeriod(files, start, end);
+		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> datas = orbitsDataService.readDatasForPeriod(files, start,
+				end);
 
 		assertNotNull(datas);
 		assertEquals(20, datas.size());

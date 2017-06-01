@@ -14,7 +14,7 @@ public class SatellitePositionTool extends FormatConfig {
 
 		DecimalFormatSymbols decimalFormatSymbols = DecimalFormatSymbols.getInstance();
 		decimalFormatSymbols.setDecimalSeparator('.');
-		DecimalFormat decimalFormat = new DecimalFormat("#.000");
+		DecimalFormat decimalFormat = new DecimalFormat("#0.000");
 		decimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
 
 		return decimalFormat.format(value);

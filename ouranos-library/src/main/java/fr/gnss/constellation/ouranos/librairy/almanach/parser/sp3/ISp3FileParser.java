@@ -6,7 +6,8 @@ import java.util.List;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SateliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
 public interface ISp3FileParser extends Closeable {
 
@@ -46,6 +47,6 @@ public interface ISp3FileParser extends Closeable {
 
 	public String getTimeSystem() throws TechnicalException;
 
-	public List<SateliteTimeCoordinate> getPositionAndClockRecord(LocalDateTime start, LocalDateTime end)
-			throws TechnicalException, BusinessException;
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPositionAndClockRecord(LocalDateTime start,
+			LocalDateTime end) throws TechnicalException, BusinessException;
 }

@@ -17,7 +17,7 @@ import org.junit.Test;
 
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
 import fr.gnss.constellation.ouranos.wrapper.XsdWrapper;
-import fr.gnss.constellation.ouranos.xsd.request.GeodeticCoordinate;
+import fr.gnss.constellation.ouranos.xsd.data.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
 public class TestXsdWrapper {

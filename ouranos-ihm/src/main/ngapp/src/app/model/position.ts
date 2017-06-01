@@ -1,7 +1,7 @@
 export class Position {
     constructor(
-        public X: number,
-        public Y: number,
-        public Z: number
+        public radialDirection: number,
+        public longitude: number,
+        public latitude: number
     ) { }
 }

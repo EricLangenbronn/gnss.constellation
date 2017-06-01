@@ -22,7 +22,7 @@ export class VisibleSatService {
 
         let params = new URLSearchParams();
         params.set("requete", JSON.stringify(parameters));
-        let sateliteVisible = this.httpService.httpGet("ouranos/api/visibleSat/v01", params);
+        let sateliteVisible = this.httpService.httpGet("api-rest/visibleSat/v01/byPeriod", params);
 
         return sateliteVisible;
     }

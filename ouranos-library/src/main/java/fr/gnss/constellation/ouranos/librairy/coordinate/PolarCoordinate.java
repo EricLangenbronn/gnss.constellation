@@ -2,9 +2,17 @@ package fr.gnss.constellation.ouranos.librairy.coordinate;
 
 import java.util.Objects;
 
-public class PolarCoordinate {
+public class PolarCoordinate implements ICoordinate {
 
+	/**
+	 * distance
+	 */
 	private double r;
+
+	/**
+	 * angle
+	 *
+	 */
 	private double theta;
 
 	/**
@@ -13,6 +21,14 @@ public class PolarCoordinate {
 	public PolarCoordinate() {
 		r = 0;
 		theta = 0;
+	}
+
+	/**
+	 * Build a PolarCoordinate transformer from values.
+	 */
+	public PolarCoordinate(double r, double theta) {
+		this.r = r;
+		this.theta = theta;
 	}
 
 	/**
@@ -37,6 +53,20 @@ public class PolarCoordinate {
 	 */
 	public double getR() {
 		return r;
+	}
+
+	@Override
+	public double[] getPosition() {
+		double[] position = new double[2];
+		position[0] = this.r;
+		position[1] = this.theta;
+
+		return position;
+	}
+
+	@Override
+	public int getDimensions() {
+		return 2;
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.SocketException;
 import java.nio.file.Path;
 
 import org.apache.commons.io.IOUtils;
@@ -34,12 +35,23 @@ public class ClientFtp {
 
 	public ClientFtp(String serverName) {
 		this.serverName = serverName;
+		this.ftp.setConnectTimeout(300000); // 300seconde
 	}
 
 	public ClientFtp(String serverName, String user, String password) {
 		this(serverName);
 		this.user = user;
 		this.password = password;
+	}
+
+	/**
+	 * Set timeout on the open connection
+	 * 
+	 * @param timeout
+	 *            - in milliseconde
+	 */
+	public void setTimeOut(int timeout) {
+		this.ftp.setConnectTimeout(timeout);
 	}
 
 	public boolean openConnection() {
@@ -61,6 +73,10 @@ public class ClientFtp {
 						StringUtils.isBlank(this.password) ? DEFAULT_PASSWORD : this.password);
 			}
 
+		} catch (SocketException e) {
+			String message = "Connection au serveur timeout : " + this.serverName;
+			LOGGER.error(message, e);
+			isConnected = false;
 		} catch (IOException e) {
 			String message = "Impossible d'établire la connection au serveur : " + this.serverName;
 			LOGGER.error(message, e);

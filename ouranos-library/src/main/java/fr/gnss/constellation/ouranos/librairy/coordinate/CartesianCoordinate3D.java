@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * This class implements vectors in a three-dimensional space.
  */
-public class CartesianCoordinate3D {
+public class CartesianCoordinate3D implements ICoordinate {
 
 	/**
 	 * [0] - Abscissa (X). [1] - Ordinate (Y). [2] - Height (Z).
@@ -187,6 +187,16 @@ public class CartesianCoordinate3D {
 	 */
 	public double[] getVector() {
 		return this.position;
+	}
+
+	@Override
+	public double[] getPosition() {
+		return this.position;
+	}
+
+	@Override
+	public int getDimensions() {
+		return this.position.length;
 	}
 
 	@Override

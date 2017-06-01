@@ -16,7 +16,7 @@ public class TestTemplateUtils {
 	@Test
 	public void testGetAvailableVersionForResource() throws Exception {
 		TemplateUtils templateUtils = new TemplateUtils();
-		List<Version> availabelVersion = templateUtils.getAvailableVersionForResource("satellite-visible", "xml");
+		List<Version> availabelVersion = templateUtils.getAvailableVersionForResource("satellite-visible-bysatellite", "xml");
 
 		assertNotNull(availabelVersion);
 		// il va chercher dans deux répertoire différent, je sais pas trop pk
@@ -26,11 +26,11 @@ public class TestTemplateUtils {
 	@Test
 	public void testResolveTemplateVersionInTermsOf() throws Exception {
 		TemplateUtils templateUtils = new TemplateUtils();
-		String templatePath = templateUtils.resolveTemplateVersionInTermsOf("satellite-visible", ResourceType.xml,
+		String templatePath = templateUtils.resolveTemplateVersionInTermsOf("satellite-visible-bysatellite", ResourceType.xml,
 				new Version(1));
 
 		assertNotNull(templatePath);
-		assertEquals("templates/satellite-visible/xml/v01.vm", templatePath);
+		assertEquals("templates/satellite-visible-bysatellite/xml/v01.vm", templatePath);
 
 	}
 

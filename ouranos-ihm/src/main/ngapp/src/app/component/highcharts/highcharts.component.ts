@@ -24,6 +24,12 @@ export class HighchartsComponent implements OnInit {
         // do something
     }
 
+    clearGraphe(): void {
+        this.ouranosCategories = [];
+        this.ouranosSeries = [];
+        this.chartOptions = {};
+    }
+
     afficherGraphe(visibleSats: VisibleSats): void {
         for (let VisibleSat of visibleSats.satellitesVisible) {
             this.ouranosCategories.push(VisibleSat.epochHeader);
