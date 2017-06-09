@@ -1,4 +1,4 @@
-export class Position {
+export class Coordinate {
     constructor(
         public radialDirection: number,
         public longitude: number,

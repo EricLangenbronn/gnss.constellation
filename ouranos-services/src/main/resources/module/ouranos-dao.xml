@@ -10,4 +10,9 @@
 	<bean id="orbitsDataDownloadDao"
 		class="fr.gnss.constellation.ouranos.service.orbitdata.dao.OrbitsDataDownloadDao" />
 
+	<bean id="orbitsDataDao"
+		class="fr.gnss.constellation.ouranos.service.orbitdata.dao.OrbitsDataDao">
+		<property name="sp3Dao" ref="sp3Dao" />
+	</bean>
+
 </beans>

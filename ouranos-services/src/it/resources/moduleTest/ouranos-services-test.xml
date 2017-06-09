@@ -24,8 +24,9 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="orbitsDataService"
 		class="fr.gnss.constellation.ouranos.service.orbitdata.OrbitsDataService">
-		<property name="sp3Dao" ref="sp3Dao" />
+		<property name="orbitsDataDao" ref="orbitsDataDao" />
 		<property name="orbitsDataDownloadService" ref="orbitsDataDownloadService" />
+		<property name="propertiesService" ref="propertiesService" />
 	</bean>
 
 

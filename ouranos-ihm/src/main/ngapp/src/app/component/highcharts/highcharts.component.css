@@ -1,0 +1,17 @@
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.radio-group {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.radio-button {
+  margin: 5px;
+}
+
+.selected-value {
+  margin: 15px 0;
+}

@@ -99,7 +99,7 @@ public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser
 
 		// debut acquisition des données
 		LocalDateTime wrapStart = start.plusSeconds(0); // tips to copy date
-		while (wrapStart.compareTo(end) < 0) {
+		while (wrapStart.compareTo(end) <= 0) {
 			satelitesByTime.add(getPositionAndClockRecord());
 
 			wrapStart = wrapStart.plusMinutes(NB_MIN_MEASURE);

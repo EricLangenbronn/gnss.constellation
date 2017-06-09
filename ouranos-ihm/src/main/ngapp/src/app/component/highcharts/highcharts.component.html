@@ -3,10 +3,21 @@
         <h2 class="panel-title" align="center">Graphic visible satellite
         </h2>
     </div>
+
     <div class="panel-body">
         <div class="row">
+            <div class="col-sm-1 col-centered">
+                <md-radio-group [(ngModel)]="favoritChoise" class="radio-group">
+                    <md-radio-button *ngFor="let value of graphicChoises" [checked]="idx === 0" [value]="value" (change)="displayGraphe(value)"
+                        class="radio-button">
+                        {{value}}
+                    </md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-12">
-                <div [ng2-highcharts]="chartOptions"></div>
+                <div [ng2-highcharts]="currentChartOptions"></div>
             </div>
         </div>
     </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MdRadioModule } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 
-import { VisibleSats } from '../../model/VisibleSats';
+import { ByPeriod } from '../../model/api/response/visibleSats/byPeriod/byPeriod';
 
 @Component({
     selector: 'highcharts',
@@ -12,10 +13,11 @@ import { VisibleSats } from '../../model/VisibleSats';
 
 export class HighchartsComponent implements OnInit {
 
+    public currentChartOptions = {};
+    public chartsOptions = [];
+    public graphicChoises = ['barre', 'skyplot'];
+    public favoritChoise: string;
 
-    public ouranosCategories = [];
-    public ouranosSeries = [];
-    public chartOptions = {};
 
     constructor() {
     }
@@ -25,42 +27,22 @@ export class HighchartsComponent implements OnInit {
     }
 
     clearGraphe(): void {
-        this.ouranosCategories = [];
-        this.ouranosSeries = [];
-        this.chartOptions = {};
+        this.chartsOptions = [];
     }
 
-    afficherGraphe(visibleSats: VisibleSats): void {
-        for (let VisibleSat of visibleSats.satellitesVisible) {
-            this.ouranosCategories.push(VisibleSat.epochHeader);
-            this.ouranosSeries.push(VisibleSat.satellites.length);
-        }
+    afficherGraphe(key: string, chartOptions: any): void {
+        this.chartsOptions[key] = chartOptions;
+        this.changeGraphe(key);
+    }
 
-        this.chartOptions = {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Visibility'
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                categories: this.ouranosCategories, // Times
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Number of satelites'
-                }
-            },
-            series: [{
-                name: 'Satelite(s)',
-                data: this.ouranosSeries
-            }]
-        };
+    changeGraphe(key: string): void {
+        this.currentChartOptions = this.chartsOptions[key];
+        console.log(this.currentChartOptions);
+    }
+
+    displayGraphe(value: string): void {
+        console.log(value);
+        this.changeGraphe(value);
     }
 
 }

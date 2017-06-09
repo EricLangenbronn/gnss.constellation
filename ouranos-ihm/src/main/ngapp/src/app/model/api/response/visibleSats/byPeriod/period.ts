@@ -1,6 +1,6 @@
 import { Satellite } from './satellite';
 
-export class VisibleSat {
+export class Period {
     constructor(
         public epochHeader: Date,
         public satellites: Satellite[]

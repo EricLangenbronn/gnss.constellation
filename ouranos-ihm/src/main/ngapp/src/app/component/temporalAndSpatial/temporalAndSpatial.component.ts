@@ -25,7 +25,7 @@ export class TemporalAndSpatialComponent implements OnInit {
     constructor() {
         this.elevationMask = 15.0;
         this.startDate = new Date(Date.UTC(2015, 1, 1, 0, 0, 0, 0));
-        this.endDate = new Date(Date.UTC(2015, 1, 1, 23, 0, 0, 0));
+        this.endDate = new Date(Date.UTC(2015, 1, 2, 0, 0, 0, 0));
     }
 
     ngOnInit() {
@@ -37,12 +37,10 @@ export class TemporalAndSpatialComponent implements OnInit {
     }
 
     getDateStartMeasureISO(): string {
-        //return this.datepickerStartTime._selected.toISOString();
         return this.startDate.toISOString();
     }
 
     getDateEndMeasureISO(): string {
-        //return this.datepickerEndTime._selected.toISOString();
         return this.endDate.toISOString();
     }
 }

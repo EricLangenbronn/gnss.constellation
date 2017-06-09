@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { Ng2HighchartsModule } from 'ng2-highcharts';
-import { MdDatepickerModule, MdNativeDateModule, MdInputModule } from '@angular/material';
+import { MdDatepickerModule, MdNativeDateModule, MdInputModule, MdRadioModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { VisibleSatComponent } from './component/visibleSat/visibleSat.component';
@@ -29,7 +29,8 @@ import { HighchartsComponent } from './component/highcharts/highcharts.component
     Ng2HighchartsModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    MdInputModule
+    MdInputModule,
+    MdRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

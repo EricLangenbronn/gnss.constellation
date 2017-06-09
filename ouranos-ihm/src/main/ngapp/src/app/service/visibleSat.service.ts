@@ -4,8 +4,9 @@ import { Observable } from 'rxjs/Rx';
 
 import { HttpService } from './http.service';
 
-import { VisibleSats } from '../model/VisibleSats';
-import { Parameters } from '../model/parameters';
+import { ByPeriod } from '../model/api/response/visibleSats/byPeriod/byPeriod';
+import { BySatellite } from '../model/api/response/visibleSats/bySatellite/bySatellite';
+import { Parameters } from '../model/api/request/parameters';
 
 
 @Injectable()
@@ -18,11 +19,20 @@ export class VisibleSatService {
          this.httpService = new HttpService(this.http);
     }
 
-    getSateliteVisible(parameters : Parameters): Observable<VisibleSats> {
+    getSateliteVisibleByPeriod(parameters : Parameters): Observable<ByPeriod> {
 
         let params = new URLSearchParams();
         params.set("requete", JSON.stringify(parameters));
         let sateliteVisible = this.httpService.httpGet("api-rest/visibleSat/v01/byPeriod", params);
+
+        return sateliteVisible;
+    }
+
+    getSateliteVisibleBySatellite(parameters : Parameters): Observable<BySatellite> {
+
+        let params = new URLSearchParams();
+        params.set("requete", JSON.stringify(parameters));
+        let sateliteVisible = this.httpService.httpGet("api-rest/visibleSat/v01/bySatellite", params);
 
         return sateliteVisible;
     }

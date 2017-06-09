@@ -1,6 +1,5 @@
 package fr.gnss.constellation.ouranos.service.orbitdata;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,9 +12,8 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
 public interface IOrbitsDataService {
 
-	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getDatasForPeriod(LocalDateTime start, LocalDateTime end,
-			EphemerideType ephemerideType, OrbitType orbitType) throws TechnicalException, BusinessException;
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getDatasForPeriod(LocalDateTime start,
+			LocalDateTime end, EphemerideType ephemerideType, OrbitType orbitType)
+			throws TechnicalException, BusinessException;
 
-	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> readDatasForPeriod(List<File> sp3Files,
-			LocalDateTime start, LocalDateTime end) throws TechnicalException, BusinessException;
 }
