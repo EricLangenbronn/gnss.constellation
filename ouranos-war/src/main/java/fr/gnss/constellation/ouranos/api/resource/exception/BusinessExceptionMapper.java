@@ -5,10 +5,12 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
+import fr.gnss.constellation.ouranos.xsd.response.error.Error;
 
 @Provider
 public class BusinessExceptionMapper implements ExceptionMapper<BusinessException> {
@@ -21,7 +23,13 @@ public class BusinessExceptionMapper implements ExceptionMapper<BusinessExceptio
 	@Override
 	public Response toResponse(BusinessException p_exception) {
 
-		ResponseBuilder responseBuilder = Response.status(500);
+		Error l_erreur = new Error();
+		l_erreur.setCode(520);
+		l_erreur.setMessage(p_exception.getMessage());
+		l_erreur.setTechnicalMessage(null);
+		l_erreur.setStackTrace(ExceptionUtils.getFullStackTrace(p_exception));
+
+		ResponseBuilder responseBuilder = Response.status(520).entity(l_erreur);
 		return responseBuilder.build();
 	}
 

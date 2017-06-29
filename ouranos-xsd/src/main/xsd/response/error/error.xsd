@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.ouranos.fr/ouranos/response/error"
+	xmlns="http://www.ouranos.fr/ouranos/response/error" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+	<xs:element name="error">
+		<xs:annotation>
+			<xs:documentation>API Error</xs:documentation>
+		</xs:annotation>
+
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="xs:int" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Statut http de l'erreur.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="code" type="xs:int">
+					<xs:annotation>
+						<xs:documentation>Code interne de l'erreur.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="message" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>Message métier décrivant l'erreur
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="fonctionnalErrors" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Liste des erreurs fonctionnelles
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="fonctionnalError" type="fonctionnalError"
+								minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Erreur fonctionnelle</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="technicalMessage" type="xs:string"
+					minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Message décrivant l'erreur</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="stackTrace" type="xs:string" minOccurs="0">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="fonctionnalError">
+		<xs:sequence>
+			<xs:element name="code" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Code de l'erreur</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Message décrivant l'erreur</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="field" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Champ concerné par l'erreur</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>      

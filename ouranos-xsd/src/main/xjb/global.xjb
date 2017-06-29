@@ -34,14 +34,24 @@
 	<jaxb:bindings schemaLocation="../xsd/response/visibleSat/v10/bySatellite.xsd"
 		node="//xs:schema">
 		<jaxb:schemaBindings>
-			<jaxb:package name="fr.gnss.constellation.ouranos.xsd.response.visibleSat.bySatellite" />
+			<jaxb:package
+				name="fr.gnss.constellation.ouranos.xsd.response.visibleSat.bySatellite" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
 
 	<jaxb:bindings schemaLocation="../xsd/response/visibleSat/v10/byPeriod.xsd"
 		node="//xs:schema">
 		<jaxb:schemaBindings>
-			<jaxb:package name="fr.gnss.constellation.ouranos.xsd.response.visibleSat.byPeriod" />
+			<jaxb:package
+				name="fr.gnss.constellation.ouranos.xsd.response.visibleSat.byPeriod" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+
+	<jaxb:bindings schemaLocation="../xsd/response/error/error.xsd"
+		node="//xs:schema">
+		<jaxb:schemaBindings>
+			<jaxb:package
+				name="fr.gnss.constellation.ouranos.xsd.response.error" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
 

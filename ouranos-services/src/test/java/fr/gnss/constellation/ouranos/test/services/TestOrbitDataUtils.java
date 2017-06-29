@@ -59,10 +59,25 @@ public class TestOrbitDataUtils {
 	}
 
 	@Test
-	public void testOrbitDataUtilsGetAllSp3FileNameBetween2Date() throws Exception {
+	public void testOrbitDataUtilsGetAllSp3FileNameBetween2Date2Day() throws Exception {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateDebut = formatter.parse("04/08/2004");
 		Date dateFin = formatter.parse("06/08/2004");
+
+		LocalDateTime localDateDebut = dateDebut.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime localDateFin = dateFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+		List<Sp3FileName> res = OrbitDataUtils.getAllSp3FileNameBetween2Date(EphemerideType.igs, localDateDebut,
+				localDateFin, OrbitType.sp3);
+
+		assertEquals(3, res.size());
+	}
+	
+	@Test
+	public void testOrbitDataUtilsGetAllSp3FileNameBetween2Date1Day() throws Exception {
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date dateDebut = formatter.parse("03/04/2004");
+		Date dateFin = formatter.parse("04/04/2004");
 
 		LocalDateTime localDateDebut = dateDebut.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 		LocalDateTime localDateFin = dateFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();

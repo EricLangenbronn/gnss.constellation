@@ -43,9 +43,9 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by period",
         "description" : "",
-        "operationId" : "postVisiblesatelliteByPeriodJson",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json;charset=UTF-8" ],
+        "operationId" : "postVisiblesatelliteByPeriodXml",
+        "consumes" : [ "application/xml" ],
+        "produces" : [ "application/xml;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
@@ -55,7 +55,7 @@
         }, {
           "in" : "body",
           "name" : "body",
-          "description" : "submission request on json",
+          "description" : "submission request on xml",
           "required" : true,
           "schema" : {
             "type" : "string"
@@ -73,9 +73,9 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by satellite id",
         "description" : "",
-        "operationId" : "getVisiblesatelliteBySatelliteXml",
-        "consumes" : [ "application/xml" ],
-        "produces" : [ "application/xml;charset=UTF-8" ],
+        "operationId" : "getVisiblesatelliteBySatelliteJson",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
@@ -85,7 +85,7 @@
         }, {
           "in" : "body",
           "name" : "body",
-          "description" : "submission request on xml",
+          "description" : "submission request on json",
           "required" : true,
           "schema" : {
             "type" : "string"

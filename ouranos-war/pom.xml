@@ -72,6 +72,10 @@
 			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-services</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>fr.gnss.constellation.ouranos</groupId>
+			<artifactId>ouranos-xsd</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-logging</groupId>

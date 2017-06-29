@@ -59,7 +59,7 @@ public class BindingXMLUtils {
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			jaxbMarshaller.marshal(p_object, p_output);
 
-			// TODO : pense à fermer le outputStream
+			IOUtils.closeQuietly(p_output);
 		} catch (JAXBException l_e) {
 			String l_message = "Impossible de transformer l'ojet en flux de sortie : " + p_object.getClass();
 			LOGGER.error(l_message, l_e);
