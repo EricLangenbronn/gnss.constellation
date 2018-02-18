@@ -1,6 +1,8 @@
 package fr.gnss.constellation.ouranos.api.resource.exception;
 
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -13,11 +15,9 @@ import org.slf4j.LoggerFactory;
 import fr.gnss.constellation.ouranos.xsd.response.error.Error;
 
 @Provider
+@Produces({ MediaType.APPLICATION_XML + "; charset=UTF-8", MediaType.APPLICATION_JSON + "; charset=UTF-8" })
 public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplicationException> {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private final static Logger LOGGER = LoggerFactory.getLogger(WebApplicationExceptionMapper.class);
 
 	@Override
@@ -30,6 +30,7 @@ public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplica
 		l_erreur.setStackTrace(ExceptionUtils.getFullStackTrace(p_exception));
 
 		ResponseBuilder responseBuilder = Response.status(520).entity(l_erreur);
+		
 		return responseBuilder.build();
 	}
 }

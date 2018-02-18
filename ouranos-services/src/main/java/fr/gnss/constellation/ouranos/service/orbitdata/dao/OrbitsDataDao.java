@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
@@ -17,13 +19,12 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordina
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
+@Repository("orbitsDataDao")
 public class OrbitsDataDao implements IOrbitsDataDao {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrbitsDataDao.class);
 
+	@Autowired
 	private ISp3FileDao sp3Dao;
 
 	@Override
@@ -52,9 +53,5 @@ public class OrbitsDataDao implements IOrbitsDataDao {
 		}
 
 		return allSatelitesForPeriod;
-	}
-
-	public void setSp3Dao(ISp3FileDao sp3Dao) {
-		this.sp3Dao = sp3Dao;
 	}
 }

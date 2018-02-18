@@ -107,3 +107,6 @@ Thumbs.db
 
 # sbteclipse plugin
 .target
+
+# sbteclipse plugin
+.gitignore

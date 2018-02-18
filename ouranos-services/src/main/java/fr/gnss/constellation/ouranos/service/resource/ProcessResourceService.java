@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
@@ -19,15 +21,18 @@ import fr.gnss.constellation.ouranos.version.ApiVersionUtil;
 import fr.gnss.constellation.ouranos.version.Version;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
+@Service("processResourceService")
 public class ProcessResourceService implements IProcessResourceService {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProcessResourceService.class);
 
+	@Autowired
 	private IRequestResourceService requestResourceService;
+	
+	@Autowired
 	private IResponseResourceService responseResourceService;
+	
+	@Autowired
 	private ISateliteVisibleService sateliteVisibleService;
 
 	@Override
@@ -68,18 +73,6 @@ public class ProcessResourceService implements IProcessResourceService {
 				contentType, v, fluxInformations);
 
 		return response;
-	}
-
-	public void setSateliteVisibleService(ISateliteVisibleService sateliteVisibleService) {
-		this.sateliteVisibleService = sateliteVisibleService;
-	}
-
-	public void setRequestResourceService(IRequestResourceService requestResourceService) {
-		this.requestResourceService = requestResourceService;
-	}
-
-	public void setResponseResourceService(IResponseResourceService responseResourceService) {
-		this.responseResourceService = responseResourceService;
 	}
 
 }

@@ -22,9 +22,6 @@ public class ClientFtpSp3File implements IConnection {
 
 	// FIXME est ce qu'il doit sauvegarder son état ou non ? pour le moment oui
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientFtpSp3File.class);
 
 	private static final String FTP_SERVER_NAME = "ftp.igs.org";

@@ -18,9 +18,6 @@ import org.slf4j.LoggerFactory;
 
 public class ClientFtp {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientFtp.class);
 
 	private static final String DEFAULT_USER = "anonymous";

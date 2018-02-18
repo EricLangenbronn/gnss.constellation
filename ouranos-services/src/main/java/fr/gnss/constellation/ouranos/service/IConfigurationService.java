@@ -1,5 +1,8 @@
 package fr.gnss.constellation.ouranos.service;
 
+import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
+import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
+
 /**
  * Service d'accès à la configuration du module.
  * 
@@ -14,7 +17,7 @@ public interface IConfigurationService {
 	 * <p>
 	 * <strong>Le parametreService doit être initialisé avant !!</strong>
 	 */
-	void init();
+	void init() throws TechnicalException, BusinessException;
 
 	/**
 	 * 

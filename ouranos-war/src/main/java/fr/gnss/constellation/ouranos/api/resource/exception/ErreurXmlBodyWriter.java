@@ -24,10 +24,9 @@ import fr.gnss.constellation.ouranos.service.resource.utils.BindingXMLUtils;
 import fr.gnss.constellation.ouranos.xsd.response.error.Error;
 
 @Provider
-@Produces(MediaType.APPLICATION_XML)
+@Produces(MediaType.APPLICATION_XML + "; charset=UTF-8")
 public class ErreurXmlBodyWriter implements MessageBodyWriter<Error> {
 
-	/** le logger */
 	private final static Logger LOGGER = LoggerFactory.getLogger(ErreurXmlBodyWriter.class);
 
 	@Override
@@ -41,9 +40,8 @@ public class ErreurXmlBodyWriter implements MessageBodyWriter<Error> {
 	}
 
 	@Override
-	public void writeTo(Error error, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType,
-			MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream)
-			throws IOException, WebApplicationException {
+	public void writeTo(Error error, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders,
+			OutputStream entityStream) throws IOException, WebApplicationException {
 
 		String l_resultatXml = "";
 
@@ -54,8 +52,8 @@ public class ErreurXmlBodyWriter implements MessageBodyWriter<Error> {
 			l_resultatXml = new String(l_outs.toString("UTF-8"));
 			IOUtils.closeQuietly(l_outs);
 		} catch (BusinessException l_e) {
-			String l_message = "Erreur lors de la génération du xml d'erreur code=[" + error.getCode() + "], message=["
-					+ error.getMessage() + "], status=[" + error.getStatus() + "]";
+			String l_message = "Erreur lors de la génération du xml d'erreur code=[" + error.getCode() + "], message=[" + error.getMessage() + "], status=["
+					+ error.getStatus() + "]";
 			LOGGER.error(l_message, l_e);
 		}
 

@@ -12,9 +12,6 @@ import org.slf4j.LoggerFactory;
  */
 public class ManagedConnection<E extends IConnection> {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ManagedConnection.class);
 
 	private static final int NB_TENTATIVE_CONNECTION = 3;

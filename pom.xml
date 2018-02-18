@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.gnss.constellation.ouranos</groupId>
 	<artifactId>ouranos-parent</artifactId>
@@ -33,6 +32,7 @@
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<javax.ws.rs-api.version>2.0</javax.ws.rs-api.version>
 		<jsr311-api.version>1.1.1</jsr311-api.version>
+		<cxf.version>2.7.18</cxf.version>
 
 		<jersey.version>2.25.1</jersey.version>
 		<jackson.version>2.8.8</jackson.version>
@@ -215,6 +215,14 @@
 				<version>${servlet.api.version}</version>
 			</dependency>
 
+			<!-- CXF -->
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-bundle-jaxrs</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+
+
 			<!-- jersey -->
 			<dependency>
 				<groupId>org.glassfish.jersey.containers</groupId>
@@ -297,7 +305,7 @@
 				<plugin>
 					<groupId>com.github.kongchen</groupId>
 					<artifactId>swagger-maven-plugin</artifactId>
-					<version>3.1.4</version>
+					<version>3.1.6</version>
 				</plugin>
 				<plugin>
 					<groupId>com.github.eirslett</groupId>
@@ -315,8 +323,7 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
-					<!-- <compilerArguments> <Xlint /> </compilerArguments> <verbose>true</verbose> 
-						<showWarnings>true</showWarnings> -->
+					<!-- <compilerArguments> <Xlint /> </compilerArguments> <verbose>true</verbose> <showWarnings>true</showWarnings> -->
 				</configuration>
 			</plugin>
 			<plugin>

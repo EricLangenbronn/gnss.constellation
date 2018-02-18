@@ -15,9 +15,6 @@ import fr.gnss.constellation.ouranos.xsd.response.error.Error;
 @Provider
 public class BusinessExceptionMapper implements ExceptionMapper<BusinessException> {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private final static Logger LOGGER = LoggerFactory.getLogger(BusinessExceptionMapper.class);
 
 	@Override

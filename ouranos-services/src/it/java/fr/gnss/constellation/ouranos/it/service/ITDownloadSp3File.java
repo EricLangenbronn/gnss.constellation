@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import fr.gnss.constellation.ouranos.toolbox.ClientFtp;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
+@ContextConfiguration(locations = {"/moduleTest/ouranos-services-test.xml" })
 public class ITDownloadSp3File {
 
 	private static final String URL_FTP_SP3 = "ftp.igs.org";

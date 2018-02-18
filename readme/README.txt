@@ -32,3 +32,7 @@ ouranos-ihm\src\main\ngapp\package.json
 "build": "ng build --env=dev",
 mettre
 "build": "ng build --env=prod",
+
+
+URL de  test pour l'api WAR
+/ouranos-war/src/test/resources/api/url/*

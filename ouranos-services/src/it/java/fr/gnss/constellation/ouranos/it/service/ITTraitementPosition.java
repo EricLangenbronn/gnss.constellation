@@ -14,7 +14,7 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticTransformation;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
+@ContextConfiguration(locations = {"/moduleTest/ouranos-services-test.xml" })
 public class ITTraitementPosition {
 
 	@Autowired

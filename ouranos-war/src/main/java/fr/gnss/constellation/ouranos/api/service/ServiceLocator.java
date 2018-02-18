@@ -15,14 +15,11 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.stereotype.Component;
 
-import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-
+@Component("ouranosServiceLocator")
 public final class ServiceLocator implements ApplicationContextAware {
 
-	/**
-	 * le logger...
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceLocator.class);
 
 	// -------------------- Constantes --------------------
@@ -47,8 +44,8 @@ public final class ServiceLocator implements ApplicationContextAware {
 	// -------------------- Méthodes --------------------
 
 	/**
-	 * Cette méthode permet de récupérer les informations de version dans le jar
-	 * de l'application.
+	 * Cette méthode permet de récupérer les informations de version dans le jar de
+	 * l'application.
 	 * 
 	 * @param p_WebappManifest
 	 *            path vers la racine de la webapp
@@ -65,8 +62,7 @@ public final class ServiceLocator implements ApplicationContextAware {
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();
-			informations = "Erreur lors de la lecture des informations de version de l'application (" + t.getMessage()
-					+ ")";
+			informations = "Erreur lors de la lecture des informations de version de l'application (" + t.getMessage() + ")";
 		}
 		return informations;
 	}

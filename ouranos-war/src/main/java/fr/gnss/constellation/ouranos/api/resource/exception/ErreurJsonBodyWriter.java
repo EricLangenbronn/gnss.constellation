@@ -19,7 +19,7 @@ import javax.ws.rs.ext.Provider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Provider
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class ErreurJsonBodyWriter implements MessageBodyWriter<Error> {
 
 	@Override
@@ -33,9 +33,8 @@ public class ErreurJsonBodyWriter implements MessageBodyWriter<Error> {
 	}
 
 	@Override
-	public void writeTo(Error error, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType,
-			MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream)
-			throws IOException, WebApplicationException {
+	public void writeTo(Error error, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders,
+			OutputStream entityStream) throws IOException, WebApplicationException {
 		String l_resultatJson = null;
 
 		ObjectMapper mapper = new ObjectMapper();

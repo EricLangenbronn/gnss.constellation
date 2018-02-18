@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
@@ -19,14 +21,15 @@ import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.Visibl
 import fr.gnss.constellation.ouranos.wrapper.XsdWrapper;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
+@Service("sateliteVisibleService")
 public class SateliteVisibleService implements ISateliteVisibleService {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(SateliteVisibleService.class);
 
+	@Autowired
 	private IOrbitsDataService orbitsDataService;
+	
+	@Autowired
 	private IComputationService computationService;
 
 	@Override
@@ -72,14 +75,6 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 
 		return l_satelitesVisible;
 
-	}
-
-	public void setOrbitsDataService(IOrbitsDataService orbitsDataService) {
-		this.orbitsDataService = orbitsDataService;
-	}
-
-	public void setComputationService(IComputationService computationService) {
-		this.computationService = computationService;
 	}
 
 }

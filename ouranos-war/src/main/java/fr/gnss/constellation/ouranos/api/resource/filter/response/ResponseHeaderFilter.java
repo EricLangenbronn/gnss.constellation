@@ -16,9 +16,6 @@ import org.slf4j.LoggerFactory;
 @Provider
 public class ResponseHeaderFilter implements ContainerResponseFilter {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private final static Logger LOGGER = LoggerFactory.getLogger(ResponseHeaderFilter.class);
 
 	@Context

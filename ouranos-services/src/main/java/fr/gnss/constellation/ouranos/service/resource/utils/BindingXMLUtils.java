@@ -13,13 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
-import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
 public class BindingXMLUtils {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(BindingXMLUtils.class);
 
 	private static BindingXMLUtils INSTANCE = null;

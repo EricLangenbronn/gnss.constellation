@@ -10,16 +10,15 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 
+@Repository("Sp3FileDao")
 public class Sp3FileDao implements ISp3FileDao {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3FileDao.class);
 
 	private static FilenameFilter filter = new FilenameFilter() {

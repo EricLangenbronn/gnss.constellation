@@ -22,7 +22,7 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
+@ContextConfiguration(locations = {"/moduleTest/ouranos-services-test.xml" })
 public class ITOrbitsDataService {
 
 	@Autowired

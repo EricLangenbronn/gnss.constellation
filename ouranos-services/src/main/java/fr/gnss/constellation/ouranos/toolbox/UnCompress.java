@@ -12,9 +12,6 @@ import org.slf4j.LoggerFactory;
 
 public class UnCompress {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(UnCompress.class);
 
 	public static void unCompressZFile(Path pathDir, String fileNameIn, String fileNameOut) {

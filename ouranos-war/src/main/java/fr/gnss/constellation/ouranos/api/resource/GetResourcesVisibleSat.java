@@ -14,6 +14,8 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import fr.gnss.constellation.ouranos.api.service.ServiceLocator;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
@@ -30,11 +32,10 @@ import io.swagger.annotations.ApiResponses;
 @Api(value = "/visibleSat", description = "Operations about visible satellite", consumes = "application/json, application/xml")
 public class GetResourcesVisibleSat {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private final static Logger LOGGER = LoggerFactory.getLogger(GetResourcesVisibleSat.class);
 
+	@Autowired
+	@Qualifier("processResourceService")
 	private IProcessResourceService processResourceService;
 
 	@PostConstruct
@@ -48,10 +49,8 @@ public class GetResourcesVisibleSat {
 	@Path("/{version}/byPeriod")
 	@ApiOperation(value = "Finds visible satellite order by period", httpMethod = "POST", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response postVisiblesatelliteByPeriodXml(
-			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on xml", required = true) String p_contenu)
-			throws BusinessException, TechnicalException {
+	public Response postVisiblesatelliteByPeriodXml(@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+			@ApiParam(value = "submission request on xml", required = true) String p_contenu) throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
@@ -71,8 +70,7 @@ public class GetResourcesVisibleSat {
 	@Path("/{version}/byPeriod")
 	@ApiOperation(value = "Finds visible satellite order by period", httpMethod = "GET", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response getVisiblesatelliteByPeriodXml(
-			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+	public Response getVisiblesatelliteByPeriodXml(@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
 			@ApiParam(value = "submission request on xml", required = true) @QueryParam("requete") String p_contenu)
 			throws BusinessException, TechnicalException {
 
@@ -94,10 +92,8 @@ public class GetResourcesVisibleSat {
 	@Path("/{version}/byPeriod")
 	@ApiOperation(value = "Finds visible satellite order by period", httpMethod = "POST", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response postVisiblesatelliteByPeriodJson(
-			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on json", required = true) String p_contenu)
-			throws BusinessException, TechnicalException {
+	public Response postVisiblesatelliteByPeriodJson(@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+			@ApiParam(value = "submission request on json", required = true) String p_contenu) throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
@@ -117,8 +113,7 @@ public class GetResourcesVisibleSat {
 	@Path("/{version}/byPeriod")
 	@ApiOperation(value = "Finds visible satellite order by period", httpMethod = "GET", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found on json") })
-	public Response getVisiblesatelliteByPeriodJson(
-			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+	public Response getVisiblesatelliteByPeriodJson(@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
 			@ApiParam(value = "submission request on json", required = true) @QueryParam("requete") String p_contenu)
 			throws BusinessException, TechnicalException {
 
@@ -140,10 +135,8 @@ public class GetResourcesVisibleSat {
 	@Path("/{version}/bySatellite")
 	@ApiOperation(value = "Finds visible satellite order by satellite id", httpMethod = "POST", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response postVisiblesatelliteBySatelliteXml(
-			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on xml", required = true) String p_contenu)
-			throws BusinessException, TechnicalException {
+	public Response postVisiblesatelliteBySatelliteXml(@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+			@ApiParam(value = "submission request on xml", required = true) String p_contenu) throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
@@ -163,10 +156,8 @@ public class GetResourcesVisibleSat {
 	@Path("/{version}/bySatellite")
 	@ApiOperation(value = "Finds visible satellite order by satellite id", httpMethod = "GET", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response getVisiblesatelliteBySatelliteXml(
-			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on xml", required = true) String p_contenu)
-			throws BusinessException, TechnicalException {
+	public Response getVisiblesatelliteBySatelliteXml(@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+			@ApiParam(value = "submission request on xml", required = true) String p_contenu) throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
@@ -186,10 +177,8 @@ public class GetResourcesVisibleSat {
 	@Path("/{version}/bySatellite")
 	@ApiOperation(value = "Finds visible satellite order by satellite id", httpMethod = "POST", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response postVisiblesatelliteBySatelliteJson(
-			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on json", required = true) String p_contenu)
-			throws BusinessException, TechnicalException {
+	public Response postVisiblesatelliteBySatelliteJson(@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+			@ApiParam(value = "submission request on json", required = true) String p_contenu) throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {
@@ -209,10 +198,8 @@ public class GetResourcesVisibleSat {
 	@Path("/{version}/bySatellite")
 	@ApiOperation(value = "Finds visible satellite order by satellite id", httpMethod = "GET", notes = "", responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Given visible satellite found") })
-	public Response getVisiblesatelliteBySatelliteJson(
-			@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
-			@ApiParam(value = "submission request on json", required = true) String p_contenu)
-			throws BusinessException, TechnicalException {
+	public Response getVisiblesatelliteBySatelliteJson(@ApiParam(value = "version of the api", required = true) @PathParam("version") final String version,
+			@ApiParam(value = "submission request on json", required = true) String p_contenu) throws BusinessException, TechnicalException {
 
 		String response = "";
 		if (StringUtils.isNotBlank(p_contenu)) {

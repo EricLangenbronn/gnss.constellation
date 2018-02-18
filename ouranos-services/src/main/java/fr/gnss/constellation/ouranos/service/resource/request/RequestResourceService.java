@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,11 +18,9 @@ import fr.gnss.constellation.ouranos.service.resource.ResourceType;
 import fr.gnss.constellation.ouranos.service.resource.utils.BindingXMLUtils;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
+@Service("requestResourceService")
 public class RequestResourceService implements IRequestResourceService {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(RequestResourceService.class);
 
 	private BindingXMLUtils bindingXmlService;

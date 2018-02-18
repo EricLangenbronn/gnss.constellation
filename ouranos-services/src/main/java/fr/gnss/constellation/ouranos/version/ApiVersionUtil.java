@@ -9,13 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
-import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
 public class ApiVersionUtil {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ApiVersionUtil.class);
 
 	private String regex = "v[0-9][0-9]";
@@ -77,8 +73,7 @@ public class ApiVersionUtil {
 		return previousVersion;
 	}
 
-	public Version checkIfVersionOrPreviousIsContains(Version requestedVersion, List<Version> availabelVersion)
-			throws BusinessException {
+	public Version checkIfVersionOrPreviousIsContains(Version requestedVersion, List<Version> availabelVersion) throws BusinessException {
 
 		availabelVersion.add(requestedVersion);
 		Collections.sort(availabelVersion);
@@ -91,8 +86,7 @@ public class ApiVersionUtil {
 			/* :D drôle comme manière de faire, non ? :D */
 			version = availabelVersion.get(index - 1);
 		} else {
-			String message = "Aucun numéro de version valide n'est présent dans la liste pour cette version [requestedVersion="
-					+ requestedVersion + "]";
+			String message = "Aucun numéro de version valide n'est présent dans la liste pour cette version [requestedVersion=" + requestedVersion + "]";
 			LOGGER.error(message);
 			throw new BusinessException(message);
 		}

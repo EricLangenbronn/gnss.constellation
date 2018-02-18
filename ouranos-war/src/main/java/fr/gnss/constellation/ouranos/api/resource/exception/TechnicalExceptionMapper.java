@@ -15,9 +15,6 @@ import fr.gnss.constellation.ouranos.xsd.response.error.Error;
 @Provider
 public class TechnicalExceptionMapper implements ExceptionMapper<TechnicalException> {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private final static Logger LOGGER = LoggerFactory.getLogger(TechnicalExceptionMapper.class);
 
 	@Override

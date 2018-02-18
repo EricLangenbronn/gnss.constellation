@@ -27,7 +27,7 @@ import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataDownloadServic
 import fr.gnss.constellation.ouranos.service.orbitdata.OrbitDataUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/moduleTest/ouranos-dao-test.xml", "/moduleTest/ouranos-services-test.xml" })
+@ContextConfiguration(locations = {"/moduleTest/ouranos-services-test.xml" })
 public class ITOrbitsDataDownloadService {
 
 	@Autowired
