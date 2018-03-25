@@ -29,10 +29,12 @@ public class UnCompress {
 			while (-1 != (n = zIn.read(buffer))) {
 				out.write(buffer, 0, n);
 			}
+			out.flush();
 			out.close();
+			in.close();
 		} catch (Exception e) {
-			String message = "Impossible de décompresser le fichier. [pathDir=" + pathDir.toString() + ", fileNameIn="
-					+ fileNameIn + ", fileNameOut=" + fileNameOut + "]";
+			String message = "Impossible de décompresser le fichier. [pathDir=" + pathDir.toString() + ", fileNameIn=" + fileNameIn + ", fileNameOut="
+					+ fileNameOut + "]";
 			LOGGER.error(message);
 		}
 	}

@@ -15,6 +15,7 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
+import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
@@ -26,52 +27,55 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SateliteVisibleService.class);
 
+	// -------------------- Services --------------------
+
+	@Autowired
+	private IConfigurationLogMessageService configurationLogMessageService;
+
 	@Autowired
 	private IOrbitsDataService orbitsDataService;
-	
+
 	@Autowired
 	private IComputationService computationService;
 
+	// -------------------- Methodes de l'interface --------------------
+
 	@Override
-	public List<SatelliteTimeCoordinate<SphericalCoordinate>> getSatelliteVisibleByPeriod(
-			VisibleSateliteRequest p_request) throws TechnicalException, BusinessException {
+	public List<SatelliteTimeCoordinate<SphericalCoordinate>> getSatelliteVisibleByPeriod(VisibleSateliteRequest p_request)
+			throws TechnicalException, BusinessException {
 
 		VisibleSateliteRequestBean visibleSatBean = XsdWrapper.wrapVisibleSateliteRequest(p_request);
 
-		LOGGER.debug("Début de la récupération des fichiers sp3");
-		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> sateliteForPeriod = this.orbitsDataService
-				.getDatasForPeriod(visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(), EphemerideType.igs,
-						OrbitType.sp3);
-		LOGGER.debug("Fin de la récupération des fichiers sp3");
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.DRF"));
+		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> sateliteForPeriod = this.orbitsDataService.getDatasForPeriod(visibleSatBean.getDateDebut(),
+				visibleSatBean.getDateFin(), EphemerideType.igs, OrbitType.sp3);
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.FRF"));
 
-		LOGGER.debug("Début du traitement du fichier sp3");
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.DTF"));
 		List<SatelliteTimeCoordinate<SphericalCoordinate>> l_satelitesVisible = null;
-		l_satelitesVisible = computationService.getSateliteVisibleByPeriod(sateliteForPeriod,
-				visibleSatBean.getRadElevationMask(), visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(),
-				visibleSatBean.getGeodeticCoordinate());
-		LOGGER.debug("Fin de traitement du fichier sp3");
+		l_satelitesVisible = computationService.getSateliteVisibleByPeriod(sateliteForPeriod, visibleSatBean.getRadElevationMask(),
+				visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(), visibleSatBean.getGeodeticCoordinate());
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.FTF"));
 
 		return l_satelitesVisible;
 	}
 
 	@Override
-	public List<SatelliteCoordinate<SphericalCoordinate>> getSatelliteVisibleBySatellite(
-			VisibleSateliteRequest p_request) throws TechnicalException, BusinessException {
+	public List<SatelliteCoordinate<SphericalCoordinate>> getSatelliteVisibleBySatellite(VisibleSateliteRequest p_request)
+			throws TechnicalException, BusinessException {
 
 		VisibleSateliteRequestBean visibleSatBean = XsdWrapper.wrapVisibleSateliteRequest(p_request);
 
-		LOGGER.debug("Début de la récupération des fichiers sp3");
-		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> sateliteForPeriod = this.orbitsDataService
-				.getDatasForPeriod(visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(), EphemerideType.igs,
-						OrbitType.sp3);
-		LOGGER.debug("Fin de la récupération des fichiers sp3");
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DRF"));
+		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> sateliteForPeriod = this.orbitsDataService.getDatasForPeriod(visibleSatBean.getDateDebut(),
+				visibleSatBean.getDateFin(), EphemerideType.igs, OrbitType.sp3);
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.FRF"));
 
-		LOGGER.debug("Début du traitement du fichier sp3");
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DTF"));
 		List<SatelliteCoordinate<SphericalCoordinate>> l_satelitesVisible = null;
-		l_satelitesVisible = computationService.getSateliteVisibleBySatellite(sateliteForPeriod,
-				visibleSatBean.getRadElevationMask(), visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(),
-				visibleSatBean.getGeodeticCoordinate());
-		LOGGER.debug("Fin de traitement du fichier sp3");
+		l_satelitesVisible = computationService.getSateliteVisibleBySatellite(sateliteForPeriod, visibleSatBean.getRadElevationMask(),
+				visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(), visibleSatBean.getGeodeticCoordinate());
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.FTF"));
 
 		return l_satelitesVisible;
 

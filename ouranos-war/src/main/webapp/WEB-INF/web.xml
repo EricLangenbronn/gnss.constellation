@@ -7,14 +7,14 @@
 
 	<!-- ======================================== Paramètres ======================================== -->
 
-	<init-param>
-		<param-name>
-			javax.ws.rs.Application
-		</param-name>
-		<param-value>
-			ApplicationSubclassName
-		</param-value>
-	</init-param>
+	<!-- <init-param> -->
+	<!-- <param-name> -->
+	<!-- javax.ws.rs.Application -->
+	<!-- </param-name> -->
+	<!-- <param-value> -->
+	<!-- ApplicationSubclassName -->
+	<!-- </param-value> -->
+	<!-- </init-param> -->
 
 	<!-- Contexte Spring -->
 	<context-param>

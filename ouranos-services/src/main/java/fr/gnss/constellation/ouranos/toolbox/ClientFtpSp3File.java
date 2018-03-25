@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.toolbox;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Path;
@@ -8,7 +9,6 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 
 /**
@@ -24,13 +24,19 @@ public class ClientFtpSp3File implements IConnection {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientFtpSp3File.class);
 
+	// -------------------- Valeurs par défaut des propriétés --------------------
+
 	private static final String FTP_SERVER_NAME = "ftp.igs.org";
 	private static final String EPOCH_DIRECTORY = "/pub/product";
+
+	// -------------------- Propriétés de la classe --------------------
 
 	private ClientFtp clientFtp;
 	private String ipServer = "";
 	private String ftpServerName = "";
 	private boolean isOpenConnection = false;
+
+	// -------------------- Constructeurs --------------------
 
 	public ClientFtpSp3File() {
 		this.ftpServerName = FTP_SERVER_NAME;
@@ -39,6 +45,8 @@ public class ClientFtpSp3File implements IConnection {
 	public ClientFtpSp3File(String ftpServerName) {
 		this.ftpServerName = ftpServerName;
 	}
+
+	// -------------------- Methodes de l'interface --------------------
 
 	@Override
 	public void openConnection() {
@@ -66,7 +74,14 @@ public class ClientFtpSp3File implements IConnection {
 		return this.isOpenConnection;
 	}
 
-	public void downloadAndStoreSp3File(Sp3FileName sp3fileName, Path destinationSp3File) throws TechnicalException {
+	@Override
+	public void closeConnection() {
+		this.clientFtp.logoutAndCloseConnection();
+	}
+
+	// -------------------- Methodes internes --------------------
+
+	public void downloadAndStoreSp3File(Sp3FileName sp3fileName, Path destinationSp3File) throws IOException {
 		String sp3UrlFileName = EPOCH_DIRECTORY + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
 
 		boolean isOpenConnection = this.clientFtp.openConnection();
@@ -78,22 +93,21 @@ public class ClientFtpSp3File implements IConnection {
 				LOGGER.debug("Téléchargement réussi : " + destinationSp3File.toString());
 			} else {
 				FileUtils.deleteQuietly(destinationSp3File.toFile());
-				message = "Impossible de télécharger le fichier. [source=" + sp3UrlFileName + ", destination="
-						+ destinationSp3File.toString() + "]";
+				message = "Impossible de télécharger le fichier. [source=" + sp3UrlFileName + ", destination=" + destinationSp3File.toString() + "]";
 				LOGGER.error(message);
 
-				throw new TechnicalException(message);
+				throw new IOException(message);
 			}
 		} else {
 			message = "Connection au serveur ftp impossible. [serveur=" + this.ftpServerName + "]";
 			LOGGER.error(message);
 
-			throw new TechnicalException(message);
+			throw new IOException(message);
 		}
 	}
 
-	@Override
-	public void closeConnection() {
-		this.clientFtp.logoutAndCloseConnection();
+	public String getFtpServerName() {
+		return ftpServerName;
 	}
+
 }

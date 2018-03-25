@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.service.Constante;
+import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
 import fr.gnss.constellation.ouranos.service.resource.ResourceType;
 import fr.gnss.constellation.ouranos.service.template.velocity.LocalDateTimeTool;
 import fr.gnss.constellation.ouranos.service.template.velocity.SatellitePositionTool;
@@ -28,10 +29,19 @@ public class TemplateService implements ITemplateService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TemplateService.class);
 
+	// -------------------- Services --------------------
+
 	@Autowired
 	private VelocityEngine velocityEngine;
 
+	@Autowired
+	private IConfigurationLogMessageService configurationLogMessageService;
+
+	// -------------------- Propriétés de la classe --------------------
+
 	private TemplateUtils templateUtils = new TemplateUtils();
+
+	// -------------------- Methodes de l'interface --------------------
 
 	@Override
 	public StringBuffer generateFlux(String templatePath, Map<String, Object> informations) throws BusinessException {
@@ -53,13 +63,11 @@ public class TemplateService implements ITemplateService {
 			t.merge(context, writer);
 			generetedFlux = writer.getBuffer();
 		} catch (ResourceNotFoundException e) {
-			String message = "Impossible de trouver le template à travers la configuration de velocity.";
-			LOGGER.info(message);
-			throw new BusinessException(message);
+			LOGGER.info(configurationLogMessageService.getDefautErrorMessage("TS.GF.RNFE"));
+			throw new BusinessException(configurationLogMessageService.getDefautErrorMessage("TS.GF.RNFE"), e);
 		} catch (ParseErrorException e) {
-			String message = "Impossible de parser le template à travers la configuration de velocity.";
-			LOGGER.info(message);
-			throw new BusinessException(message);
+			LOGGER.info(configurationLogMessageService.getDefautErrorMessage("TS.GF.PEE"));
+			throw new BusinessException(configurationLogMessageService.getDefautErrorMessage("TS.GF.PEE"), e);
 		}
 
 		return generetedFlux;

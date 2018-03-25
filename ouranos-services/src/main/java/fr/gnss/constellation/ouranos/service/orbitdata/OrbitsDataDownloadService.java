@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
+import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
 import fr.gnss.constellation.ouranos.service.IConfigurationService;
 import fr.gnss.constellation.ouranos.service.orbitdata.bean.OrbitDataBean;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.IOrbitsDataDownloadDao;
@@ -30,6 +31,8 @@ public class OrbitsDataDownloadService implements IOrbitsDataDownloadService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrbitsDataDownloadService.class);
 
+	// -------------------- Services --------------------
+
 	@Autowired
 	private IOrbitsDataDownloadDao orbitsDataDownloadDao;
 
@@ -38,6 +41,11 @@ public class OrbitsDataDownloadService implements IOrbitsDataDownloadService {
 
 	@Autowired
 	private IConfigurationService configurationService;
+
+	@Autowired
+	private IConfigurationLogMessageService configurationErrorMessageService;
+
+	// -------------------- Methodes de l'interface --------------------
 
 	@Override
 	public void downloadAndGetFileForPeriod(List<Sp3FileName> allSp3FileBetweenStartEnd) throws TechnicalException, BusinessException {
@@ -56,14 +64,9 @@ public class OrbitsDataDownloadService implements IOrbitsDataDownloadService {
 				}
 			}
 		} catch (TechnicalException e) {
-			String message = "Impossible de téléchargé le fichier, arret du traitement.";
-			LOGGER.error(message, e);
-			throw new BusinessException(message);
+			LOGGER.error(configurationErrorMessageService.getDefautErrorMessage("ODS.GDFP.TE"));
+			throw new BusinessException(configurationErrorMessageService.getDefautErrorMessage("ODS.GDFP.TE"), e);
 		}
-	}
-
-	public void setSp3Dao(ISp3FileDao sp3Dao) {
-		this.sp3Dao = sp3Dao;
 	}
 
 }

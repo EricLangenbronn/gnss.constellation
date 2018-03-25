@@ -4,28 +4,32 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
+import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
 
 @Repository("Sp3FileDao")
 public class Sp3FileDao implements ISp3FileDao {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3FileDao.class);
 
-	private static FilenameFilter filter = new FilenameFilter() {
-		public boolean accept(File directory, String fileName) {
-			return fileName.endsWith(".sp3") || fileName.endsWith(".sp3.Z");
-		}
-	};
+	// -------------------- Services --------------------
+
+	@Autowired
+	private IConfigurationLogMessageService configurationLogMessageService;
+
+	// -------------------- Methodes de l'interface --------------------
 
 	@Override
 	public List<String> getListSp3FileName(String pathSp3Dir) throws TechnicalException, BusinessException {
@@ -48,17 +52,15 @@ public class Sp3FileDao implements ISp3FileDao {
 				// on fait rien
 			} else {
 				for (File sp3File : fileSp3Dir.listFiles(filter)) {
-					LOGGER.info("Chargement fichier : " + sp3File.getName());
+					LOGGER.info(configurationLogMessageService.getDefautErrorMessage("SFD.GLSF.LSF"), sp3File.getName());
 					sp3FileNames.add(sp3File);
 				}
 			}
 
 			return sp3FileNames;
 		} else {
-			String message = "Impossible d'accéder au répertoire contenantles fichiers Sp3. [pathSp3Dir=" + pathSp3Dir
-					+ "]";
-			LOGGER.error(message);
-			throw new TechnicalException(message);
+			LOGGER.error(configurationLogMessageService.getDefautErrorMessage("SFD.GLSF.TE.DNE"), pathSp3Dir);
+			throw new TechnicalException(MessageFormat.format(configurationLogMessageService.getDefautErrorMessage("SFD.GLSF.TE.DNE"), pathSp3Dir));
 		}
 
 	}
@@ -76,4 +78,12 @@ public class Sp3FileDao implements ISp3FileDao {
 
 		return sp3File;
 	}
+
+	// -------------------- Methodes internes --------------------
+
+	private static FilenameFilter filter = new FilenameFilter() {
+		public boolean accept(File directory, String fileName) {
+			return fileName.endsWith(".sp3") || fileName.endsWith(".sp3.Z");
+		}
+	};
 }

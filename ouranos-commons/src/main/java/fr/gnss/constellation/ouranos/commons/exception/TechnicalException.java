@@ -5,14 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class TechnicalException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4294507265833396757L;
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(TechnicalException.class);
 
 	public TechnicalException() {

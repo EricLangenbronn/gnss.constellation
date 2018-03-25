@@ -18,9 +18,6 @@ import fr.gnss.constellation.ouranos.version.Version;
 
 public class TemplateUtils {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(TemplateUtils.class);
 
 	private static final String EXTENSION = ".vm";

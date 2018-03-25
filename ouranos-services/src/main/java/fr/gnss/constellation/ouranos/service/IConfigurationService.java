@@ -26,8 +26,8 @@ public interface IConfigurationService {
 	String getDirectorySp3();
 
 	/**
-	 * @return <code>true</code> si on autorise la connexion au serveur de
-	 *         fichier SP3
+	 * @return <code>true</code> si on autorise la connexion au serveur de fichier
+	 *         SP3
 	 */
-	boolean isaccessFtpSp3();
+	Boolean isaccessFtpSp3();
 }
