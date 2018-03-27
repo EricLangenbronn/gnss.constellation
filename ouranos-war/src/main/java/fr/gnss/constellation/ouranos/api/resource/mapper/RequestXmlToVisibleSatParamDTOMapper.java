@@ -5,22 +5,22 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
-import fr.gnss.constellation.ouranos.service.resource.request.bean.VisibleSatParamDTO;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
 public class RequestXmlToVisibleSatParamDTOMapper {
 
-	public static VisibleSatParamDTO beanVisibleSateliteRequestToDTO(VisibleSateliteRequest source) {
+	public static VisibleSateliteRequestBean beanVisibleSateliteRequestToDTO(VisibleSateliteRequest source) {
 		return createBeanVisibleSateliteRequestToDTO(source);
 	}
 
 	// -------------------- Methodes internes --------------------
 
-	private static VisibleSatParamDTO createBeanVisibleSateliteRequestToDTO(VisibleSateliteRequest source) {
-		VisibleSatParamDTO dto = null;
+	private static VisibleSateliteRequestBean createBeanVisibleSateliteRequestToDTO(VisibleSateliteRequest source) {
+		VisibleSateliteRequestBean dto = null;
 
 		if (source != null) {
-			dto = new VisibleSatParamDTO();
+			dto = new VisibleSateliteRequestBean();
 
 			if (source.getStartDateOfMeasure() != null) {
 				Instant start = Instant.ofEpochMilli(source.getStartDateOfMeasure().toGregorianCalendar().getTimeInMillis());
@@ -35,8 +35,8 @@ public class RequestXmlToVisibleSatParamDTOMapper {
 			dto.setRadElevationMask(source.getElevationMask());
 
 			if (source.getGroundStation() != null) {
-				GeodeticCoordinate geoDTO = new GeodeticCoordinate(source.getGroundStation().getLatitude(), source.getGroundStation().getLongitude(),
-						source.getGroundStation().getAltitude());
+				GeodeticCoordinate geoDTO = new GeodeticCoordinate(source.getGroundStation().getLatitude(),
+						source.getGroundStation().getLongitude(), source.getGroundStation().getAltitude());
 				dto.setGeodeticCoordinate(geoDTO);
 			}
 		}

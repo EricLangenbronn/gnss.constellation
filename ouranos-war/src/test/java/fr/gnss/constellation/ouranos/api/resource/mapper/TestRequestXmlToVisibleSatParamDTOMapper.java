@@ -12,7 +12,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Test;
 
-import fr.gnss.constellation.ouranos.service.resource.request.bean.VisibleSatParamDTO;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
 public class TestRequestXmlToVisibleSatParamDTOMapper {
@@ -20,7 +20,7 @@ public class TestRequestXmlToVisibleSatParamDTOMapper {
 	@Test
 	public void testBeanVisibleSatParamToDTONull() {
 		VisibleSateliteRequest source = null;
-		VisibleSatParamDTO dto = RequestXmlToVisibleSatParamDTOMapper.beanVisibleSateliteRequestToDTO(source);
+		VisibleSateliteRequestBean dto = RequestXmlToVisibleSatParamDTOMapper.beanVisibleSateliteRequestToDTO(source);
 
 		assertNull(dto);
 	}
@@ -28,7 +28,7 @@ public class TestRequestXmlToVisibleSatParamDTOMapper {
 	@Test
 	public void testBeanVisibleSatParamToDTOWithoutParam() {
 		VisibleSateliteRequest source = new VisibleSateliteRequest();
-		VisibleSatParamDTO dto = RequestXmlToVisibleSatParamDTOMapper.beanVisibleSateliteRequestToDTO(source);
+		VisibleSateliteRequestBean dto = RequestXmlToVisibleSatParamDTOMapper.beanVisibleSateliteRequestToDTO(source);
 
 		assertNotNull(dto);
 		assertNull(dto.getGeodeticCoordinate());
@@ -40,7 +40,7 @@ public class TestRequestXmlToVisibleSatParamDTOMapper {
 
 		XMLGregorianCalendar start = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
 		source.setStartDateOfMeasure(start);
-		VisibleSatParamDTO dto = RequestXmlToVisibleSatParamDTOMapper.beanVisibleSateliteRequestToDTO(source);
+		VisibleSateliteRequestBean dto = RequestXmlToVisibleSatParamDTOMapper.beanVisibleSateliteRequestToDTO(source);
 
 		assertNotNull(dto);
 		assertNotNull(dto.getDateDebut());

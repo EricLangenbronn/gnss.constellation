@@ -2,7 +2,7 @@ package fr.gnss.constellation.ouranos.service.resource;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.service.resource.request.bean.VisibleSatParamDTO;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
 
 public interface IProcessResourceService {
 
@@ -10,6 +10,6 @@ public interface IProcessResourceService {
 
 	String processSatelliteVisibleBySatellite(ResourceType contentType, String request, String version) throws TechnicalException, BusinessException;
 
-	String processSatelliteVisibleByPeriod(String version, VisibleSatParamDTO visibleSatParamDTO) throws TechnicalException, BusinessException;
+	String processSatelliteVisibleByPeriod(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version) throws TechnicalException, BusinessException;
 
 }

@@ -11,14 +11,14 @@ import java.time.ZoneOffset;
 import org.junit.Test;
 
 import fr.gnss.constellation.ouranos.api.resource.bean.VisibleSatParam;
-import fr.gnss.constellation.ouranos.service.resource.request.bean.VisibleSatParamDTO;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
 
 public class TestBeanParamToVisibleSatParamDTOMapper {
 
 	@Test
 	public void testBeanVisibleSatParamToDTONull() {
 		VisibleSatParam source = null;
-		VisibleSatParamDTO dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
+		VisibleSateliteRequestBean dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
 
 		assertNull(dto);
 	}
@@ -26,7 +26,7 @@ public class TestBeanParamToVisibleSatParamDTOMapper {
 	@Test
 	public void testBeanVisibleSatParamToDTOWithoutParam() {
 		VisibleSatParam source = new VisibleSatParam();
-		VisibleSatParamDTO dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
+		VisibleSateliteRequestBean dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
 
 		assertNotNull(dto);
 		assertNull(dto.getGeodeticCoordinate());
@@ -37,12 +37,13 @@ public class TestBeanParamToVisibleSatParamDTOMapper {
 		VisibleSatParam source = new VisibleSatParam();
 
 		LocalDateTime start = LocalDateTime.now(Clock.systemUTC());
-		source.setTimeStampStart(start.toInstant(ZoneOffset.UTC).toEpochMilli());
-		VisibleSatParamDTO dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
+		source.setTimeStampStart(String.valueOf(start.toInstant(ZoneOffset.UTC).toEpochMilli()));
+		VisibleSateliteRequestBean dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
 
 		assertNotNull(dto);
 		assertNotNull(dto.getDateDebut());
-		assertEquals(start.toInstant(ZoneOffset.UTC).toEpochMilli(), dto.getDateDebut().toInstant(ZoneOffset.UTC).toEpochMilli(), 0);
+		assertEquals(start.toInstant(ZoneOffset.UTC).toEpochMilli(),
+				dto.getDateDebut().toInstant(ZoneOffset.UTC).toEpochMilli(), 0);
 	}
 
 }

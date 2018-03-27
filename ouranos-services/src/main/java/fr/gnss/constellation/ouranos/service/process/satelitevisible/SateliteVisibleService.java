@@ -81,4 +81,22 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 
 	}
 
+	@Override
+	public List<SatelliteCoordinate<SphericalCoordinate>> getSatelliteVisibleBySatellite(
+			VisibleSateliteRequestBean visibleSatBean) throws TechnicalException, BusinessException {
+		
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DRF"));
+		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> sateliteForPeriod = this.orbitsDataService.getDatasForPeriod(visibleSatBean.getDateDebut(),
+				visibleSatBean.getDateFin(), EphemerideType.igs, OrbitType.sp3);
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.FRF"));
+
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DTF"));
+		List<SatelliteCoordinate<SphericalCoordinate>> l_satelitesVisible = null;
+		l_satelitesVisible = computationService.getSateliteVisibleBySatellite(sateliteForPeriod, visibleSatBean.getRadElevationMask(),
+				visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(), visibleSatBean.getGeodeticCoordinate());
+		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.FTF"));
+
+		return l_satelitesVisible;
+	}
+
 }

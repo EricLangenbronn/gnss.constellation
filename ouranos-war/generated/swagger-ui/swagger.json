@@ -26,38 +26,32 @@
           "name" : "tsStart",
           "in" : "query",
           "required" : false,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "string"
         }, {
           "name" : "tsEnd",
           "in" : "query",
           "required" : false,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "string"
         }, {
           "name" : "lat",
           "in" : "query",
           "required" : false,
-          "type" : "number",
-          "format" : "double"
+          "type" : "string"
         }, {
           "name" : "long",
           "in" : "query",
           "required" : false,
-          "type" : "number",
-          "format" : "double"
+          "type" : "string"
         }, {
           "name" : "alt",
           "in" : "query",
           "required" : false,
-          "type" : "number",
-          "format" : "double"
+          "type" : "string"
         }, {
           "name" : "elevmask",
           "in" : "query",
           "required" : false,
-          "type" : "number",
-          "format" : "double"
+          "type" : "string"
         } ],
         "responses" : {
           "default" : {
@@ -99,9 +93,9 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by satellite id",
         "description" : "",
-        "operationId" : "getVisiblesatelliteBySatelliteXml",
-        "consumes" : [ "application/xml" ],
-        "produces" : [ "application/xml;charset=UTF-8" ],
+        "operationId" : "getVisiblesatelliteBySatelliteJson",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
@@ -111,7 +105,7 @@
         }, {
           "in" : "body",
           "name" : "body",
-          "description" : "submission request on xml",
+          "description" : "submission request on json",
           "required" : true,
           "schema" : {
             "type" : "string"

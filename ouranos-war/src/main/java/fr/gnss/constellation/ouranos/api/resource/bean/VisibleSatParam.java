@@ -5,63 +5,63 @@ import javax.ws.rs.QueryParam;
 public class VisibleSatParam {
 
 	@QueryParam("tsStart")
-	private Long timeStampStart;
+	private String timeStampStart;
 	@QueryParam("tsEnd")
-	private Long timeStampEnd;
+	private String timeStampEnd;
 	@QueryParam("lat")
-	private Double latitude;
+	private String latitude;
 	@QueryParam("long")
-	private Double longitude;
+	private String longitude;
 	@QueryParam("alt")
-	private Double altitude;
+	private String altitude;
 	@QueryParam("elevmask")
-	private Double elevationMask;
+	private String elevationMask;
 
-	public Long getTimeStampStart() {
+	public String getTimeStampStart() {
 		return timeStampStart;
 	}
 
-	public void setTimeStampStart(Long timeStampStart) {
+	public void setTimeStampStart(String timeStampStart) {
 		this.timeStampStart = timeStampStart;
 	}
 
-	public Long getTimeStampEnd() {
+	public String getTimeStampEnd() {
 		return timeStampEnd;
 	}
 
-	public void setTimeStampEnd(Long timeStampEnd) {
+	public void setTimeStampEnd(String timeStampEnd) {
 		this.timeStampEnd = timeStampEnd;
 	}
 
-	public Double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
-	public Double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
-	public Double getAltitude() {
+	public String getAltitude() {
 		return altitude;
 	}
 
-	public void setAltitude(Double altitude) {
+	public void setAltitude(String altitude) {
 		this.altitude = altitude;
 	}
 
-	public Double getElevationMask() {
+	public String getElevationMask() {
 		return elevationMask;
 	}
 
-	public void setElevationMask(Double elevationMask) {
+	public void setElevationMask(String elevationMask) {
 		this.elevationMask = elevationMask;
 	}
 

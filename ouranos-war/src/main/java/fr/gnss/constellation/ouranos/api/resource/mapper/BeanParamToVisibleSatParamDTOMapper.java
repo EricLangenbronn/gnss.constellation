@@ -4,40 +4,57 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.gnss.constellation.ouranos.api.resource.bean.VisibleSatParam;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
-import fr.gnss.constellation.ouranos.service.resource.request.bean.VisibleSatParamDTO;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
 
 public class BeanParamToVisibleSatParamDTOMapper {
 
-	public static VisibleSatParamDTO beanVisibleSatParamToDTO(VisibleSatParam source) {
+	private final static Logger LOGGER = LoggerFactory.getLogger(BeanParamToVisibleSatParamDTOMapper.class);
+
+	public static VisibleSateliteRequestBean beanVisibleSatParamToDTO(VisibleSatParam source) {
 		return createBeanVisibleSatParamToDTO(source);
 	}
 
 	// -------------------- Methodes internes --------------------
 
-	private static VisibleSatParamDTO createBeanVisibleSatParamToDTO(VisibleSatParam source) {
+	private static VisibleSateliteRequestBean createBeanVisibleSatParamToDTO(VisibleSatParam source) {
 
-		VisibleSatParamDTO dto = null;
+		VisibleSateliteRequestBean dto = null;
 
 		if (source != null) {
 
-			dto = new VisibleSatParamDTO();
-			if (source.getTimeStampStart() != null) {
-				Instant start = Instant.ofEpochMilli(source.getTimeStampStart());
-				dto.setDateDebut(LocalDateTime.ofInstant(start, ZoneId.of("UTC")));
-			}
+			try {
+				dto = new VisibleSateliteRequestBean();
+				if (source.getTimeStampStart() != null) {
+					Long value = Long.parseLong(source.getTimeStampStart());
+					Instant start = Instant.ofEpochMilli(value.longValue());
+					dto.setDateDebut(LocalDateTime.ofInstant(start, ZoneId.of("UTC")));
+				}
 
-			if (source.getTimeStampEnd() != null) {
-				Instant fin = Instant.ofEpochMilli(source.getTimeStampEnd());
-				dto.setDateDebut(LocalDateTime.ofInstant(fin, ZoneId.of("UTC")));
-			}
+				if (source.getTimeStampEnd() != null) {
+					Long value = Long.parseLong(source.getTimeStampEnd());
+					Instant fin = Instant.ofEpochMilli(value);
+					dto.setDateDebut(LocalDateTime.ofInstant(fin, ZoneId.of("UTC")));
+				}
 
-			dto.setRadElevationMask(source.getElevationMask());
+				Double value = Double.parseDouble(source.getElevationMask());
+				dto.setRadElevationMask(value);
 
-			if (source.getLatitude() != null && source.getLongitude() != null && source.getAltitude() != null) {
-				GeodeticCoordinate geoDTO = new GeodeticCoordinate(source.getLatitude(), source.getLongitude(), source.getAltitude());
-				dto.setGeodeticCoordinate(geoDTO);
+				if (source.getLatitude() != null && source.getLongitude() != null && source.getAltitude() != null) {
+					Double lat = Double.parseDouble(source.getLatitude());
+					Double longi = Double.parseDouble(source.getLongitude());
+					Double alt = Double.parseDouble(source.getAltitude());
+
+					GeodeticCoordinate geoDTO = new GeodeticCoordinate(lat.doubleValue(), longi.doubleValue(),
+							alt.doubleValue());
+					dto.setGeodeticCoordinate(geoDTO);
+				}
+			} catch (NumberFormatException e) {
+				LOGGER.error(e.getMessage());
 			}
 		}
 
