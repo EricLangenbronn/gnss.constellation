@@ -15,7 +15,9 @@
     "/visibleSat/{version}/byPeriod" : {
       "get" : {
         "tags" : [ "visibleSat" ],
-        "operationId" : "getVisiblesatelliteByPeriodBeanParam",
+        "summary" : "Finds visible satellite order by period of time",
+        "description" : "",
+        "operationId" : "getVisiblesatelliteByPeriodBeanParamXml",
         "produces" : [ "application/xml;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
@@ -25,61 +27,39 @@
         }, {
           "name" : "tsStart",
           "in" : "query",
-          "required" : false,
+          "description" : "submission request",
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "tsEnd",
           "in" : "query",
-          "required" : false,
+          "description" : "submission request",
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "lat",
           "in" : "query",
-          "required" : false,
+          "description" : "submission request",
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "long",
           "in" : "query",
-          "required" : false,
+          "description" : "submission request",
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "alt",
           "in" : "query",
-          "required" : false,
+          "description" : "submission request",
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "elevmask",
           "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "visibleSat" ],
-        "summary" : "Finds visible satellite order by period",
-        "description" : "",
-        "operationId" : "postVisiblesatelliteByPeriodXml",
-        "consumes" : [ "application/xml" ],
-        "produces" : [ "application/xml;charset=UTF-8" ],
-        "parameters" : [ {
-          "name" : "version",
-          "in" : "path",
-          "description" : "version of the api",
+          "description" : "submission request",
           "required" : true,
           "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "description" : "submission request on xml",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/VisibleSateliteRequest"
-          }
         } ],
         "responses" : {
           "200" : {
@@ -93,9 +73,8 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by satellite id",
         "description" : "",
-        "operationId" : "getVisiblesatelliteBySatelliteJson",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json;charset=UTF-8" ],
+        "operationId" : "getVisiblesatelliteBySatelliteXml",
+        "produces" : [ "application/xml;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
@@ -103,13 +82,41 @@
           "required" : true,
           "type" : "string"
         }, {
-          "in" : "body",
-          "name" : "body",
-          "description" : "submission request on json",
+          "name" : "tsStart",
+          "in" : "query",
+          "description" : "submission request",
           "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
+          "type" : "string"
+        }, {
+          "name" : "tsEnd",
+          "in" : "query",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "lat",
+          "in" : "query",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "long",
+          "in" : "query",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "alt",
+          "in" : "query",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "elevmask",
+          "in" : "query",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
@@ -121,9 +128,9 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by satellite id",
         "description" : "",
-        "operationId" : "postVisiblesatelliteBySatelliteJson",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json;charset=UTF-8" ],
+        "operationId" : "postVisiblesatelliteBySatelliteXml",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "produces" : [ "application/xml;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
@@ -131,63 +138,47 @@
           "required" : true,
           "type" : "string"
         }, {
-          "in" : "body",
-          "name" : "body",
-          "description" : "submission request on json",
+          "name" : "tsStart",
+          "in" : "formData",
+          "description" : "submission request",
           "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
+          "type" : "string"
+        }, {
+          "name" : "tsEnd",
+          "in" : "formData",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "lat",
+          "in" : "formData",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "long",
+          "in" : "formData",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "alt",
+          "in" : "formData",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "elevmask",
+          "in" : "formData",
+          "description" : "submission request",
+          "required" : true,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "Given visible satellite found"
           }
         }
-      }
-    }
-  },
-  "definitions" : {
-    "GeodeticCoordinate" : {
-      "type" : "object",
-      "properties" : {
-        "latitude" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "longitude" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "altitude" : {
-          "type" : "number",
-          "format" : "double"
-        }
-      }
-    },
-    "VisibleSateliteRequest" : {
-      "type" : "object",
-      "required" : [ "endDateOfMeasure", "groundStation", "startDateOfMeasure" ],
-      "properties" : {
-        "groundStation" : {
-          "$ref" : "#/definitions/GeodeticCoordinate"
-        },
-        "startDateOfMeasure" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "endDateOfMeasure" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "elevationMask" : {
-          "type" : "number",
-          "format" : "double"
-        }
-      },
-      "xml" : {
-        "name" : "visibleSateliteRequest",
-        "namespace" : "http://www.ouranos.fr/ouranos/request/visibleSatelite/v10"
       }
     }
   }

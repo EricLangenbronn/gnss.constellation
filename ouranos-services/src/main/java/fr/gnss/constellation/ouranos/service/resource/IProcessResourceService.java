@@ -6,10 +6,10 @@ import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.Visibl
 
 public interface IProcessResourceService {
 
-	String processSatelliteVisibleByPeriod(ResourceType contentType, String request, String version) throws TechnicalException, BusinessException;
+	String processSatelliteVisibleByPeriod(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version)
+			throws TechnicalException, BusinessException;
 
-	String processSatelliteVisibleBySatellite(ResourceType contentType, String request, String version) throws TechnicalException, BusinessException;
-
-	String processSatelliteVisibleByPeriod(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version) throws TechnicalException, BusinessException;
+	String processSatelliteVisibleBySatellite(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version)
+			throws TechnicalException, BusinessException;
 
 }

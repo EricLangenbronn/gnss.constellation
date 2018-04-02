@@ -10,14 +10,14 @@ import java.time.ZoneOffset;
 
 import org.junit.Test;
 
-import fr.gnss.constellation.ouranos.api.resource.bean.VisibleSatParam;
+import fr.gnss.constellation.ouranos.api.resource.bean.VisibleSatParamQueryParam;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
 
 public class TestBeanParamToVisibleSatParamDTOMapper {
 
 	@Test
 	public void testBeanVisibleSatParamToDTONull() {
-		VisibleSatParam source = null;
+		VisibleSatParamQueryParam source = null;
 		VisibleSateliteRequestBean dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
 
 		assertNull(dto);
@@ -25,7 +25,7 @@ public class TestBeanParamToVisibleSatParamDTOMapper {
 
 	@Test
 	public void testBeanVisibleSatParamToDTOWithoutParam() {
-		VisibleSatParam source = new VisibleSatParam();
+		VisibleSatParamQueryParam source = new VisibleSatParamQueryParam();
 		VisibleSateliteRequestBean dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
 
 		assertNotNull(dto);
@@ -34,16 +34,15 @@ public class TestBeanParamToVisibleSatParamDTOMapper {
 
 	@Test
 	public void testBeanVisibleSatParamToDTOCheckDateTime() {
-		VisibleSatParam source = new VisibleSatParam();
+		VisibleSatParamQueryParam source = new VisibleSatParamQueryParam();
 
 		LocalDateTime start = LocalDateTime.now(Clock.systemUTC());
-		source.setTimeStampStart(String.valueOf(start.toInstant(ZoneOffset.UTC).toEpochMilli()));
+		source.setTimeStampStart(String.valueOf(start.toInstant(ZoneOffset.UTC).getEpochSecond()));
 		VisibleSateliteRequestBean dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
 
 		assertNotNull(dto);
 		assertNotNull(dto.getDateDebut());
-		assertEquals(start.toInstant(ZoneOffset.UTC).toEpochMilli(),
-				dto.getDateDebut().toInstant(ZoneOffset.UTC).toEpochMilli(), 0);
+		assertEquals(start.toInstant(ZoneOffset.UTC).getEpochSecond(), dto.getDateDebut().toInstant(ZoneOffset.UTC).getEpochSecond(), 0);
 	}
 
 }

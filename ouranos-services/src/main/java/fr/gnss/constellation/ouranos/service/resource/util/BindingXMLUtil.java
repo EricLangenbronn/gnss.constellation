@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.service.resource.utils;
+package fr.gnss.constellation.ouranos.service.resource.util;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,19 +14,19 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 
-public class BindingXMLUtils {
+public class BindingXMLUtil {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BindingXMLUtils.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BindingXMLUtil.class);
 
-	private static BindingXMLUtils INSTANCE = null;
+	private static BindingXMLUtil INSTANCE = null;
 
-	private BindingXMLUtils() {
+	private BindingXMLUtil() {
 
 	}
 
-	public static BindingXMLUtils getInstance() {
+	public static BindingXMLUtil getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new BindingXMLUtils();
+			INSTANCE = new BindingXMLUtil();
 		}
 
 		return INSTANCE;

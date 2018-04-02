@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.service.resource.request;
+package fr.gnss.constellation.ouranos.service.resource.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -7,52 +7,22 @@ import java.nio.charset.Charset;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
-import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.service.resource.ConstanteFlux;
-import fr.gnss.constellation.ouranos.service.resource.ResourceType;
-import fr.gnss.constellation.ouranos.service.resource.utils.BindingXMLUtils;
-import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
-@Service("requestResourceService")
-public class RequestResourceService implements IRequestResourceService {
+public class CommonBindingUtil {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RequestResourceService.class);
-
-	// -------------------- Methodes de l'interface --------------------
-
-	@Override
-	public VisibleSateliteRequest getRequestSateliteVisible(ResourceType resourceType, String version, String requete)
-			throws TechnicalException, BusinessException {
-
-		VisibleSateliteRequest request = null;
-
-		switch (resourceType) {
-		case xml:
-			request = this.bindXmlRequestToObject(requete, VisibleSateliteRequest.class);
-			break;
-		case json:
-			request = this.bindJsonRequestToObject(requete, VisibleSateliteRequest.class);
-			break;
-		default:
-			String message = "contentType non reconnu";
-			LOGGER.debug(message);
-			throw new BusinessException(message);
-		}
-
-		return request;
-	}
+	private static final Logger LOGGER = LoggerFactory.getLogger(CommonBindingUtil.class);
 
 	// -------------------- Methodes internes --------------------
 
 	public static <T> T bindXmlRequestToObject(final InputStream p_xml, final Class<T> p_class) throws BusinessException {
 		T bindedObject = null;
 		try {
-			BindingXMLUtils bindingXmlService = BindingXMLUtils.getInstance();
+			BindingXMLUtil bindingXmlService = BindingXMLUtil.getInstance();
 			Object request = bindingXmlService.mapXml2Object(p_xml, p_class);
 
 			bindedObject = (T) request;

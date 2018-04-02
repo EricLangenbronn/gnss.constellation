@@ -1,20 +1,20 @@
 package fr.gnss.constellation.ouranos.api.resource.bean;
 
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.FormParam;
 
-public class VisibleSatParam {
+public class VisibleSatParamFormParam implements IVisibleSatParam {
 
-	@QueryParam("tsStart")
+	@FormParam("tsStart")
 	private String timeStampStart;
-	@QueryParam("tsEnd")
+	@FormParam("tsEnd")
 	private String timeStampEnd;
-	@QueryParam("lat")
+	@FormParam("lat")
 	private String latitude;
-	@QueryParam("long")
+	@FormParam("long")
 	private String longitude;
-	@QueryParam("alt")
+	@FormParam("alt")
 	private String altitude;
-	@QueryParam("elevmask")
+	@FormParam("elevmask")
 	private String elevationMask;
 
 	public String getTimeStampStart() {

@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.api.resource.exception;
+package fr.gnss.constellation.ouranos.api.resource.writer;
 
 import fr.gnss.constellation.ouranos.xsd.response.error.Error;
 

@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.api.resource.exception;
+package fr.gnss.constellation.ouranos.api.resource.writer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
-import fr.gnss.constellation.ouranos.service.resource.utils.BindingXMLUtils;
+import fr.gnss.constellation.ouranos.service.resource.util.BindingXMLUtil;
 import fr.gnss.constellation.ouranos.xsd.response.error.Error;
 
 @Provider
@@ -46,7 +46,7 @@ public class ErreurXmlBodyWriter implements MessageBodyWriter<Error> {
 		String l_resultatXml = "";
 
 		try {
-			BindingXMLUtils bindingXmlService = BindingXMLUtils.getInstance();
+			BindingXMLUtil bindingXmlService = BindingXMLUtil.getInstance();
 			ByteArrayOutputStream l_outs = new ByteArrayOutputStream();
 			bindingXmlService.mapObject2Xml(error, l_outs);
 			l_resultatXml = new String(l_outs.toString("UTF-8"));
