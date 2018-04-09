@@ -8,11 +8,13 @@ public enum OrbitType {
 	clk, cls, erp, sp3, sum;
 
 	/**
-	 *  Returns an OrbitType with a value represented by the specified string. 
-	 *  
-	 * @param p_type - the string to be converted
+	 * Returns an OrbitType with a value represented by the specified string.
+	 * 
+	 * @param p_type
+	 *            - the string to be converted
 	 * @return the string representation of the specified OrbitType
-	 * @throws BusinessException - if the string is null, empty or not references
+	 * @throws BusinessException
+	 *             - if the string is null, empty or not references
 	 */
 	public static OrbitType stringToOrbitType(String p_type) throws BusinessException {
 		if (StringUtils.isBlank(p_type)) {
@@ -25,7 +27,7 @@ public enum OrbitType {
 			throw new BusinessException(message);
 		}
 
-		OrbitType l_res;
+		OrbitType l_res = null;
 		switch (p_type) {
 		case "clk":
 			l_res = OrbitType.clk;
@@ -43,9 +45,7 @@ public enum OrbitType {
 			l_res = OrbitType.sum;
 			break;
 		default:
-			throw new BusinessException(
-					"Le paramètre ne peut pas être convertit en OrbitType,  OrbitType inexistant [type=" + p_type
-							+ "]");
+			throw new BusinessException("Le paramètre ne peut pas être convertit en OrbitType,  OrbitType inexistant [type=" + p_type + "]");
 		}
 
 		return l_res;

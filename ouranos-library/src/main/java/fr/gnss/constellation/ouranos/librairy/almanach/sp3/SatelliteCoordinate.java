@@ -8,13 +8,19 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.ICoordinate;
 
 public class SatelliteCoordinate<T extends ICoordinate> {
 
+	// -------------------- Propriétés de la classe --------------------
+
 	private String id;
 	private Map<LocalDateTime, SatellitePosition<T>> satellites;
+
+	// ------------------------ Constructeur(s) ------------------------
 
 	public SatelliteCoordinate(String id) {
 		this.id = id;
 		this.satellites = new HashMap<>();
 	}
+
+	// ----------------------- Methodes internes -----------------------
 
 	public void addSatellite(LocalDateTime key, SatellitePosition<T> satelite) {
 		this.satellites.put(key, satelite);
@@ -27,6 +33,8 @@ public class SatelliteCoordinate<T extends ICoordinate> {
 	public Map<LocalDateTime, SatellitePosition<T>> getSatellites() {
 		return satellites;
 	}
+
+	// -------------------- Methodes de l'interface --------------------
 
 	@Override
 	public String toString() {

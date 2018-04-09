@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3cCoreParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.orbit.c.Sp3cCoreParser;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 

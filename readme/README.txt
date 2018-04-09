@@ -1,8 +1,9 @@
 Eclipse : 
 serveur tomcat > Open launch confguration > Arguments
 ajouter :
--Dlog4j.configuration="file:///C:/Users/eric_/Documents/workspace/ouranos.prop/log4j.xml"
--DOURANOS_REST_API_CONF="C:/Users/eric_/Documents/workspace/ouranos.prop"
+-Dlog4j.configurationFile="file:///C:/Users/eric_/Documents/workspace/ouranos.prop/log4j2.xml"
+-DOURANOS_REST_API_DIR_CONF="D:/Developpement/Workspace/eclipse/config/ouranos"
+-DOURANOS_REST_API_FILE_CONF="ouranos-rest-api.properties"
 
 Tomcat : 
 modifier <tomcat>/bin/setenv.sh

@@ -73,8 +73,8 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by satellite id",
         "description" : "",
-        "operationId" : "getVisiblesatelliteBySatelliteXml",
-        "produces" : [ "application/xml;charset=UTF-8" ],
+        "operationId" : "getVisiblesatelliteBySatelliteJson",
+        "produces" : [ "application/json;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
@@ -128,9 +128,9 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by satellite id",
         "description" : "",
-        "operationId" : "postVisiblesatelliteBySatelliteXml",
+        "operationId" : "postVisiblesatelliteBySatelliteJson",
         "consumes" : [ "application/x-www-form-urlencoded" ],
-        "produces" : [ "application/xml;charset=UTF-8" ],
+        "produces" : [ "application/json;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",

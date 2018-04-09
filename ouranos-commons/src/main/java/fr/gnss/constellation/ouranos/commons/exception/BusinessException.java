@@ -5,14 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class BusinessException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4082624330729087266L;
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(BusinessException.class);
 
 	public BusinessException() {
@@ -32,8 +26,8 @@ public class BusinessException extends Exception {
 	}
 
 	/**
-	 * Log et lève une exception BusinessException avec un logger slf4j en
-	 * entrée, un code d'erreur et un message.
+	 * Log et lève une exception BusinessException avec un logger slf4j en entrée,
+	 * un code d'erreur et un message.
 	 * 
 	 * @param p_logger
 	 *            logger SLF4J

@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
+package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.orbit.c;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,17 +13,14 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.parser.AbstractCoreParser;
-import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.format.Sp3CFormat;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.core.AbstractCoreParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.core.ISp3CoreParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
 
 public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3cCoreParser.class);
 
 	private static final long FIRST_CHARACTER_CORE_POSITION = 1342;
@@ -61,8 +58,7 @@ public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser
 	}
 
 	@Override
-	public SatelliteTimeCoordinate<CartesianCoordinate3D> getPositionAndClockRecord()
-			throws TechnicalException, BusinessException {
+	public SatelliteTimeCoordinate<CartesianCoordinate3D> getPositionAndClockRecord() throws TechnicalException, BusinessException {
 		SatelliteTimeCoordinate<CartesianCoordinate3D> sateliteByTime = null;
 
 		LocalDateTime epochHeaderRecord = null;
@@ -82,8 +78,8 @@ public class Sp3cCoreParser extends AbstractCoreParser implements ISp3CoreParser
 	}
 
 	@Override
-	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPeriodOfPosition(final LocalDateTime start,
-			final LocalDateTime end) throws TechnicalException, BusinessException {
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPeriodOfPosition(final LocalDateTime start, final LocalDateTime end)
+			throws TechnicalException, BusinessException {
 
 		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> satelitesByTime = new ArrayList<>();
 

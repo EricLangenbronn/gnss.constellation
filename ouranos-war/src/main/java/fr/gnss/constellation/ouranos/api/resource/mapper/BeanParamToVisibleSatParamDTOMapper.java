@@ -41,8 +41,10 @@ public class BeanParamToVisibleSatParamDTOMapper {
 					dto.setDateFin(LocalDateTime.ofInstant(fin, ZoneId.of("UTC")));
 				}
 
-				Double value = Math.toRadians(Double.parseDouble(source.getElevationMask()));
-				dto.setRadElevationMask(value);
+				if (source.getElevationMask() != null) {
+					Double value = Math.toRadians(Double.parseDouble(source.getElevationMask()));
+					dto.setRadElevationMask(value);
+				}
 
 				if (source.getLatitude() != null && source.getLongitude() != null && source.getAltitude() != null) {
 					Double lat = Double.parseDouble(source.getLatitude());

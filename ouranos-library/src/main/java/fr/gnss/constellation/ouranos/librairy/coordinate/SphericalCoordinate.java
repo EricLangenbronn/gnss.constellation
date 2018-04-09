@@ -2,15 +2,12 @@ package fr.gnss.constellation.ouranos.librairy.coordinate;
 
 import java.util.Objects;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SphericalCoordinate implements ICoordinate {
 
-	/**
-	 * Le logger de la classe.
-	 */
-	private static final Log LOGGER = LogFactory.getLog(SphericalCoordinate.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SphericalCoordinate.class);
 
 	/**
 	 * r : radial distance
@@ -37,8 +34,8 @@ public class SphericalCoordinate implements ICoordinate {
 	}
 
 	/**
-	 * Constructs a newly allocated SphericalCoordinate object that represents
-	 * the specified double values.
+	 * Constructs a newly allocated SphericalCoordinate object that represents the
+	 * specified double values.
 	 * 
 	 * @param radiusDistance
 	 *            - radial distance
@@ -56,8 +53,8 @@ public class SphericalCoordinate implements ICoordinate {
 	}
 
 	/**
-	 * Constructs a newly allocated SphericalCoordinate object that represents
-	 * the specified array of double.
+	 * Constructs a newly allocated SphericalCoordinate object that represents the
+	 * specified array of double.
 	 * 
 	 * @param p
 	 *            - coordinates list
@@ -65,8 +62,7 @@ public class SphericalCoordinate implements ICoordinate {
 	public SphericalCoordinate(double... p) {
 		this();
 		if (p.length != 3) {
-			throw new IllegalArgumentException(
-					"Une position doit posséder trois valeurs (radial distance, polar, azimuth)");
+			throw new IllegalArgumentException("Une position doit posséder trois valeurs (radial distance, polar, azimuth)");
 		}
 
 		this.distance = p[0];
@@ -75,10 +71,10 @@ public class SphericalCoordinate implements ICoordinate {
 	}
 
 	/**
-	 * Initializes a newly created SphericalCoordinate object so that it
-	 * represents the same position of SphericalCoordinate as the argument; in
-	 * other words, the newly created SphericalCoordinate is a copy of the
-	 * argument SphericalCoordinate.
+	 * Initializes a newly created SphericalCoordinate object so that it represents
+	 * the same position of SphericalCoordinate as the argument; in other words, the
+	 * newly created SphericalCoordinate is a copy of the argument
+	 * SphericalCoordinate.
 	 * 
 	 * @param p
 	 *            - A GeodeticCoordinate
@@ -114,8 +110,8 @@ public class SphericalCoordinate implements ICoordinate {
 	}
 
 	/**
-	 * The radius or radial distance is the Euclidean distance from the origin O
-	 * to P.
+	 * The radius or radial distance is the Euclidean distance from the origin O to
+	 * P.
 	 * 
 	 * @return the radius or radial
 	 */
@@ -124,8 +120,8 @@ public class SphericalCoordinate implements ICoordinate {
 	}
 
 	/**
-	 * The inclination (or polar angle) is the angle between the zenith
-	 * direction and the line segment OP.
+	 * The inclination (or polar angle) is the angle between the zenith direction
+	 * and the line segment OP.
 	 * 
 	 * @return the polar angle
 	 */
@@ -135,8 +131,8 @@ public class SphericalCoordinate implements ICoordinate {
 
 	/**
 	 * The azimuth (or azimuthal angle) is the signed angle measured from the
-	 * azimuth reference direction to the orthogonal projection of the line
-	 * segment OP on the reference plane.
+	 * azimuth reference direction to the orthogonal projection of the line segment
+	 * OP on the reference plane.
 	 * 
 	 * @return the azimuthal angle
 	 */
@@ -161,8 +157,7 @@ public class SphericalCoordinate implements ICoordinate {
 
 	@Override
 	public String toString() {
-		return "SphericalCoordinate [distance=" + distance + ", longitude=" + longitude + ", latitude=" + latitude
-				+ "]";
+		return "SphericalCoordinate [distance=" + distance + ", longitude=" + longitude + ", latitude=" + latitude + "]";
 	}
 
 }

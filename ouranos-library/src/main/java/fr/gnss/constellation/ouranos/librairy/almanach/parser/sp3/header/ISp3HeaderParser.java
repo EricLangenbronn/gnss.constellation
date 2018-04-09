@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
+package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.header;
 
 import java.time.LocalDateTime;
 
@@ -6,8 +6,6 @@ import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
 public interface ISp3HeaderParser {
-
-	void close();
 
 	String getVersionSymbol() throws TechnicalException;
 

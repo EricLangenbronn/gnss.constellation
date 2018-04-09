@@ -8,6 +8,8 @@ import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 
 public class Sp3FileName {
 
+	// -------------------- Propriétés de la classe --------------------
+
 	private EphemerideType ephemerideType; // igs, igr, igu
 	private long gpsWeek; // GPS Week, week 0000 is Jan. 6-12, 1980
 	private int day; // Day of week (Sun=0 --> Sat=6, Full Week=7 TODO : not yet
@@ -15,6 +17,8 @@ public class Sp3FileName {
 	private int hour; // Start hour (00,06,12,18)
 	private OrbitType orbitType; // Orbit, other extensions are clk,cls,erp,sum
 	private String compressType; // Z Files are Unix compressed
+
+	// ------------------------ Constructeur(s) ------------------------
 
 	/**
 	 * Initializes a newly created Sp3FileName object.
@@ -25,44 +29,6 @@ public class Sp3FileName {
 	 */
 	public Sp3FileName(String p_fileName) throws BusinessException {
 		this.valueOf(p_fileName);
-	}
-
-	private String igsIgrIglFileName(boolean withCompressType) {
-		// sssnnnnx.aaa.Z pour igs et igr
-		StringBuilder fileName = new StringBuilder();
-		fileName.append(this.ephemerideType.toString());
-		fileName.append(this.gpsWeek);
-		fileName.append(this.day);
-		fileName.append(".");
-		fileName.append(this.orbitType.toString());
-		if (withCompressType) {
-			fileName.append(".");
-			fileName.append(this.compressType);
-		}
-
-		return fileName.toString();
-	}
-
-	private String iguFileName(boolean withCompressType) {
-		// sssnnnnx_hr.aaa.Z pour igu
-		StringBuilder fileName = new StringBuilder();
-		fileName.append(this.ephemerideType.toString());
-		fileName.append(this.gpsWeek);
-		fileName.append(this.day);
-		fileName.append("_");
-		if (this.hour <= 9) {
-			fileName.append("0" + this.hour);
-		} else {
-			fileName.append(this.hour);
-		}
-		fileName.append(".");
-		fileName.append(this.orbitType.toString());
-		if (withCompressType) {
-			fileName.append(".");
-			fileName.append(this.compressType);
-		}
-
-		return fileName.toString();
 	}
 
 	/**
@@ -87,6 +53,46 @@ public class Sp3FileName {
 		this.orbitType = orbitType;
 		this.hour = hour;
 		this.compressType = "Z";
+	}
+
+	// ----------------------- Methodes internes -----------------------
+
+	private String igsIgrIglFileName(boolean withCompressType) {
+		// sssnnnnx.aaa.Z pour igs et igr
+		StringBuilder fileName = new StringBuilder();
+		fileName.append(String.valueOf(this.ephemerideType));
+		fileName.append(String.valueOf(this.gpsWeek));
+		fileName.append(String.valueOf(this.day));
+		fileName.append(".");
+		fileName.append(String.valueOf(this.orbitType));
+		if (withCompressType) {
+			fileName.append(".");
+			fileName.append(String.valueOf(this.compressType));
+		}
+
+		return fileName.toString();
+	}
+
+	private String iguFileName(boolean withCompressType) {
+		// sssnnnnx_hr.aaa.Z pour igu
+		StringBuilder fileName = new StringBuilder();
+		fileName.append(String.valueOf(this.ephemerideType));
+		fileName.append(String.valueOf(this.gpsWeek));
+		fileName.append(String.valueOf(this.day));
+		fileName.append("_");
+		if (this.hour <= 9) {
+			fileName.append("0" + this.hour);
+		} else {
+			fileName.append(this.hour);
+		}
+		fileName.append(".");
+		fileName.append(String.valueOf(this.orbitType));
+		if (withCompressType) {
+			fileName.append(".");
+			fileName.append(String.valueOf(this.compressType));
+		}
+
+		return fileName.toString();
 	}
 
 	/**
@@ -149,6 +155,8 @@ public class Sp3FileName {
 		return fileName.toString();
 
 	}
+
+	// -------------------- Méthodes Getter / Setter -------------------
 
 	/**
 	 * Get the type of the ephemeride.
@@ -217,6 +225,8 @@ public class Sp3FileName {
 		}
 	}
 
+	// -------------------- Methodes de l'interface --------------------
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -246,8 +256,8 @@ public class Sp3FileName {
 
 	@Override
 	public String toString() {
-		return "Sp3FileName [ephemerideType=" + ephemerideType + ", gpsWeek=" + gpsWeek + ", day=" + day + ", hour="
-				+ hour + ", orbitType=" + orbitType + ", compressType=" + compressType + "]";
+		return "Sp3FileName [ephemerideType=" + ephemerideType + ", gpsWeek=" + gpsWeek + ", day=" + day + ", hour=" + hour + ", orbitType=" + orbitType
+				+ ", compressType=" + compressType + "]";
 	}
 
 }

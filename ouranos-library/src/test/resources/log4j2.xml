@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" strict="true" name="XMLConfigTest" packages="org.apache.logging.log4j.test">
+
+	<Appenders>
+		<appender name="console" type="Console">
+			<Layout type="PatternLayout" pattern="%-5p %c{1} - %m%n" />
+		</appender>
+	</Appenders>
+
+	<Loggers>
+		<Root level="debug">
+			<AppenderRef ref="console" />
+		</Root>
+	</Loggers>
+
+</Configuration>

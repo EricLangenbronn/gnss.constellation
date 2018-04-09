@@ -8,13 +8,19 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.ICoordinate;
 
 public class SatelliteTimeCoordinate<T extends ICoordinate> {
 
+	// -------------------- Propriétés de la classe --------------------
+
 	private LocalDateTime epochHeaderRecord;
 	private Map<String, SatellitePosition<T>> satellites;
+
+	// ------------------------ Constructeur(s) ------------------------
 
 	public SatelliteTimeCoordinate(LocalDateTime epochHeaderRecord) {
 		this.epochHeaderRecord = epochHeaderRecord;
 		this.satellites = new HashMap<>();
 	}
+
+	// ----------------------- Methodes internes -----------------------
 
 	public void addSatellite(String key, SatellitePosition<T> satelite) {
 		this.satellites.put(key, satelite);
@@ -27,6 +33,8 @@ public class SatelliteTimeCoordinate<T extends ICoordinate> {
 	public Map<String, SatellitePosition<T>> getSatellites() {
 		return satellites;
 	}
+
+	// -------------------- Methodes de l'interface --------------------
 
 	@Override
 	public String toString() {

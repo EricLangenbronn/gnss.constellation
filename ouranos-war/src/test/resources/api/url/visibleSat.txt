@@ -1,45 +1,9 @@
-/* Appel de l'api XML */
-http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/bySatellite?requete=<?xml version="1.0" encoding="UTF-8" ?><vs:visibleSateliteRequest xmlns:vs="http://www.ouranos.fr/ouranos/request/visibleSatelite/v10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><groundStation><latitude>38.889139</latitude><longitude>-77.049</longitude><altitude>130.049</altitude></groundStation><startDateOfMeasure>2013-12-22T00:00:00</startDateOfMeasure><endDateOfMeasure>2013-12-22T23:45:00</endDateOfMeasure><elevationMask>15.0</elevationMask></vs:visibleSateliteRequest>
-http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/byPeriod?requete=<?xml version="1.0" encoding="UTF-8" ?><vs:visibleSateliteRequest xmlns:vs="http://www.ouranos.fr/ouranos/request/visibleSatelite/v10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><groundStation><latitude>38.889139</latitude><longitude>-77.049</longitude><altitude>130.049</altitude></groundStation><startDateOfMeasure>2013-12-22T00:00:00</startDateOfMeasure><endDateOfMeasure>2013-12-22T23:45:00</endDateOfMeasure><elevationMask>15.0</elevationMask></vs:visibleSateliteRequest>
+/* Apel de l'api Bean */
 Accept:application/xml;charset=UTF-8
 Content-Type:application/xml;charset=UTF-8
-XML correctement formaté
-
-<?xml version="1.0" encoding="UTF-8" ?>
-<vs:visibleSateliteRequest
-	xmlns:vs="http://www.ouranos.fr/ouranos/request/visibleSatelite/v10"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-	<groundStation>
-		<latitude>38.889139</latitude>
-		<longitude>-77.049</longitude>
-		<altitude>130.049</altitude>
-	</groundStation>
-	<startDateOfMeasure>2013-12-22T00:00:00</startDateOfMeasure>
-	<endDateOfMeasure>2013-12-22T23:45:00</endDateOfMeasure>
-	<elevationMask>15.0</elevationMask>
-
-</vs:visibleSateliteRequest>
-
-/* Appel de l'api JSON */
-http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/bySatellite?requete={"groundStation":{"latitude":"38.889139","longitude":"-77.049","altitude":"130.049"}, "startDateOfMeasure":"2013-12-22T00:00:00","endDateOfMeasure":"2013-12-22T23:45:00","elevationMask":"15.0"}
-http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/byPeriod?requete={"groundStation":{"latitude":"38.889139","longitude":"-77.049","altitude":"130.049"}, "startDateOfMeasure":"2013-12-22T00:00:00","endDateOfMeasure":"2013-12-22T23:45:00","elevationMask":"15.0"}
+OU
 Accept:application/json;charset=UTF-8
 Content-Type:application/json;charset=UTF-8
-JSON correctement formaté
 
-{
-    "groundStation": {
-        "latitude":"38.889139",
-        "longitude":"-77.049",
-        "altitude":"130.049"
-    },
-    "startDateOfMeasure":"2013-12-22T00:00:00",
-    "endDateOfMeasure":"2013-12-22T23:45:00",
-    "elevationMask":"15.0"
-}
-
-
-/* Apel de l'api Bean */
 http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/byPeriod?lat=38.889139&long=-77.049&alt=130.049&tsStart=1387666800&tsEnd=1387753199&elevmask=15.0
 http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/bySatellite?lat=38.889139&long=-77.049&alt=130.049&tsStart=1387666800&tsEnd=1387753199&elevmask=15.0

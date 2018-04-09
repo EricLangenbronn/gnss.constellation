@@ -15,12 +15,13 @@ import fr.gnss.constellation.ouranos.librairy.almanach.Sp3FileType;
 
 public class Sp3File {
 
-	/**
-	 * Le logger de la classe.
-	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3File.class);
 
+	// -------------------- Propriétés de la classe --------------------
+
 	private File sp3File;
+
+	// ------------------------ Constructeur(s) ------------------------
 
 	public Sp3File(File f) {
 		this.sp3File = f;
@@ -33,6 +34,8 @@ public class Sp3File {
 	public Sp3File(String chemin) {
 		this(new File(chemin));
 	}
+
+	// ----------------------- Methodes internes -----------------------
 
 	public Sp3FileType getSp3FileType() throws TechnicalException, BusinessException {
 		Sp3FileType sp3TypeFile = null;
@@ -58,8 +61,8 @@ public class Sp3File {
 				IOUtils.closeQuietly(sp3HeaderReader);
 			}
 		} else {
-			String message = "Impossible d'acceder au fichier [sp3File=" + this.sp3File.getAbsolutePath() + "] [exists="
-					+ this.sp3File.exists() + ", isFile=" + this.sp3File.isFile() + "]";
+			String message = "Impossible d'acceder au fichier [sp3File=" + this.sp3File.getAbsolutePath() + "] [exists=" + this.sp3File.exists() + ", isFile="
+					+ this.sp3File.isFile() + "]";
 			throw new TechnicalException(message);
 		}
 

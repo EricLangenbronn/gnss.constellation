@@ -9,12 +9,16 @@ import java.time.LocalDateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3cHeaderParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.orbit.c.Sp3cHeaderParser;
 
 public class TestSp3cHeaderParser {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(TestSp3cHeaderParser.class);
 
 	private static Sp3cHeaderParser sp3cHP;
 
@@ -39,7 +43,7 @@ public class TestSp3cHeaderParser {
 	@Test
 	public void TestStartDateTime() throws TechnicalException {
 		LocalDateTime res = sp3cHP.getStartEpochRecord();
-		System.out.println("res : " + res);
+		LOGGER.info("res : " + res);
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
+package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.core;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,10 +12,7 @@ public interface ISp3CoreParser {
 
 	public static int NB_MIN_MEASURE = 15;
 
-	void close();
-
-	SatelliteTimeCoordinate<CartesianCoordinate3D> getPositionAndClockRecord()
-			throws TechnicalException, BusinessException;
+	SatelliteTimeCoordinate<CartesianCoordinate3D> getPositionAndClockRecord() throws TechnicalException, BusinessException;
 
 	List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPeriodOfPosition(LocalDateTime start, LocalDateTime end)
 			throws TechnicalException, BusinessException;

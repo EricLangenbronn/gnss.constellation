@@ -1,6 +1,5 @@
 package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
 
-import java.io.Closeable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,9 +8,7 @@ import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
-public interface ISp3FileParser extends Closeable {
-
-	void close();
+public interface ISp3FileParser {
 
 	public String getVersionSymbol() throws TechnicalException;
 
@@ -47,6 +44,6 @@ public interface ISp3FileParser extends Closeable {
 
 	public String getTimeSystem() throws TechnicalException;
 
-	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPositionAndClockRecord(LocalDateTime start,
-			LocalDateTime end) throws TechnicalException, BusinessException;
+	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPositionAndClockRecord(LocalDateTime start, LocalDateTime end)
+			throws TechnicalException, BusinessException;
 }

@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.format;
+package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.orbit.c;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

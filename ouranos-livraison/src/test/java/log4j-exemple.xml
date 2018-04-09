@@ -1,77 +1,86 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF -->
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+<Configuration status="info" strict="true" name="XMLConfigTest" packages="org.apache.logging.log4j.test">
+
+	<Properties>
+		<Property name="log_directory"></Property>
+	</Properties>
 
 	<!-- ********** APPENDERS DEFINITION (begin) ********** -->
-	<appender name="console" class="org.apache.log4j.ConsoleAppender">
-		<param name="Target" value="System.out" />
-		<param name="Threshold" value="DEBUG" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p %c{1} - %m%n" />
-		</layout>
-	</appender>
+	<Appenders>
+		<Appender name="console" type="Console">
+			<Layout type="PatternLayout" pattern="%-5p %c{1} - %m%n" />
+		</Appender>
 
-	<appender name="OURANOS_REST_API_AUDIT_FILE_APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${CHEMIN_LOG}/ouranos-audit.log" />
-		<param name="Threshold" value="DEBUG" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern"
-				value="OURANOS-AUDIT %d{yyyy-MM-dd HH:mm:ss,SSS} %X{url} %X{method} %X{http_status} %X{execution_time}%n" />
-		</layout>
-	</appender>
+		<RollingFile name="OURANOS_REST_API_AUDIT_FILE_APPENDER" append="false">
+			<FileName>${log_directory}/ouranos-audit.log</FileName>
+			<FilePattern>${log_directory}/ouranos-audit%d{yyyy-MM-dd}.log</FilePattern>
+			<PatternLayout>
+				<Pattern>OURANOS-AUDIT %d{yyyy-MM-dd HH:mm:ss,SSS} %X{url} %X{method} %X{http_status} %X{execution_time}%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy />
+		</RollingFile>
 
-	<appender name="ASYNC_OURANOS_REST_API_AUDIT_FILE_APPENDER"
-		class="org.apache.log4j.AsyncAppender">
-		<appender-ref ref="OURANOS_REST_API_AUDIT_FILE_APPENDER" />
-	</appender>
 
-	<appender name="OURANOS_TRACE_INVOCATION_FILE_APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${CHEMIN_LOG}/ouranos-trace-invocation.log" />
-		<param name="Threshold" value="DEBUG" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern"
-				value="OURANOS-TRACE-INVOCATION %d{yyyy-MM-dd HH:mm:ss,SSS} %c{1} - %m%n" />
-		</layout>
-	</appender>
+		<Async name="ASYNC_OURANOS_REST_API_AUDIT_FILE_APPENDER">
+			<AppenderRef ref="OURANOS_REST_API_AUDIT_FILE_APPENDER" />
+		</Async>
 
-	<appender name="ASYNC_OURANOS_TRACE_INVOCATION_FILE_APPENDER"
-		class="org.apache.log4j.AsyncAppender">
-		<appender-ref ref="OURANOS_TRACE_INVOCATION_FILE_APPENDER" />
-	</appender>
+		<RollingFile name="OURANOS_TRACE_INVOCATION_FILE_APPENDER" append="false">
+			<FileName>${log_directory}/ouranos-trace-invocation.log</FileName>
+			<FilePattern>${log_directory}/ouranos-trace-invocation%d{yyyy-MM-dd}.log</FilePattern>
+			<PatternLayout>
+				<Pattern>OURANOS-TRACE-INVOCATION %d{yyyy-MM-dd HH:mm:ss,SSS} %c{1} - %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy />
+		</RollingFile>
 
-	<appender name="OURANOS_MONITOR_FILE_APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${CHEMIN_LOG}/ouranos-monitor.log" />
-		<param name="Threshold" value="DEBUG" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern"
-				value="OURANOS-MONITOR %d{yyyy-MM-dd HH:mm:ss,SSS} - %m%n" />
-		</layout>
-	</appender>
 
-	<appender name="ASYNC_OURANOS_MONITOR_FILE_APPENDER" class="org.apache.log4j.AsyncAppender">
-		<appender-ref ref="OURANOS_MONITOR_FILE_APPENDER" />
-	</appender>
+		<Async name="ASYNC_OURANOS_TRACE_INVOCATION_FILE_APPENDER">
+			<AppenderRef ref="OURANOS_TRACE_INVOCATION_FILE_APPENDER" />
+		</Async>
+
+		<RollingFile name="OURANOS_MONITOR_FILE_APPENDER" append="false">
+			<FileName>${log_directory}/ouranos-monitor.log</FileName>
+			<FilePattern>${log_directory}/ouranos-monitor%d{yyyy-MM-dd}.log</FilePattern>
+			<PatternLayout>
+				<Pattern>OURANOS-MONITOR %d{yyyy-MM-dd HH:mm:ss,SSS} - %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy />
+		</RollingFile>
+
+		<Async name="ASYNC_OURANOS_MONITOR_FILE_APPENDER">
+			<AppenderRef ref="OURANOS_MONITOR_FILE_APPENDER" />
+		</Async>
+
+	</Appenders>
 
 	<!-- ********** LOGGERS DEFINITION (begin) ********** -->
-	<root>
-		<priority value="INFO" />
-		<appender-ref ref="console" />
-	</root>
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="console" />
+		</Root>
 
-	<logger name="OURANOS_AUDIT" additivity="false">
-		<level value="INFO" />
-		<appender-ref ref="ASYNC_OURANOS_REST_API_AUDIT_FILE_APPENDER" />
-	</logger>
+		<Logger name="OURANOS_AUDIT" additivity="false" level="info">
+			<AppenderRef ref="ASYNC_OURANOS_REST_API_AUDIT_FILE_APPENDER" />
+		</Logger>
 
-	<logger name="OURANOS_TRACE_INVOCATION" additivity="false">
-		<level value="INFO" />
-		<appender-ref ref="ASYNC_OURANOS_TRACE_INVOCATION_FILE_APPENDER" />
-	</logger>
+		<Logger name="OURANOS_TRACE_INVOCATION" additivity="false" level="info">
+			<AppenderRef ref="ASYNC_OURANOS_TRACE_INVOCATION_FILE_APPENDER" />
+		</Logger>
 
-	<logger name="OURANOS_MONITORE" additivity="false">
-		<level value="INFO" />
-		<appender-ref ref="ASYNC_OURANOS_MONITOR_FILE_APPENDER" />
-	</logger>
+		<Logger name="OURANOS_MONITORE" additivity="false" level="info">
+			<AppenderRef ref="ASYNC_OURANOS_MONITOR_FILE_APPENDER" />
+		</Logger>
+	</Loggers>
 
-</log4j:configuration>
+</Configuration>

@@ -1,8 +1,9 @@
 package fr.gnss.constellation.librairy.almanach.sp3;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3File;

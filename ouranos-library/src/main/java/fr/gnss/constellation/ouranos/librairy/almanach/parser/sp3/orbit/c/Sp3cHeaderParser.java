@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3;
+package fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.orbit.c;
 
 import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
@@ -9,18 +9,16 @@ import org.slf4j.LoggerFactory;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
-import fr.gnss.constellation.ouranos.librairy.almanach.parser.AbstractHeaderParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.header.AbstractHeaderParser;
+import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.header.ISp3HeaderParser;
 
-public class Sp3aHeaderParser extends AbstractHeaderParser implements ISp3HeaderParser {
+public class Sp3cHeaderParser extends AbstractHeaderParser implements ISp3HeaderParser {
 
-	/**
-	 * Le logger de la classe.
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3aHeaderParser.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3cHeaderParser.class);
 
 	private static int headerNbCol = 60;
 
-	public Sp3aHeaderParser(RandomAccessFile p_fr) {
+	public Sp3cHeaderParser(RandomAccessFile p_fr) {
 		super(p_fr);
 	}
 
@@ -38,8 +36,8 @@ public class Sp3aHeaderParser extends AbstractHeaderParser implements ISp3Header
 		String minute = super.read(17, 2).replaceFirst(" ", "0");
 		String sec = super.read(20, 11).replaceFirst(" ", "0");
 
-		String dateTime = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + sec + "Z";
-		LocalDateTime startDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_INSTANT);
+		String dateTime = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + sec;
+		LocalDateTime startDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
 
 		return startDateTime;
 	}
