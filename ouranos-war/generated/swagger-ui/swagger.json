@@ -17,7 +17,8 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by period of time",
         "description" : "",
-        "operationId" : "getVisiblesatelliteByPeriodBeanParamXml",
+        "operationId" : "postVisiblesatelliteByPeriodBeanParamXml",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
         "produces" : [ "application/xml;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
@@ -26,37 +27,37 @@
           "type" : "string"
         }, {
           "name" : "tsStart",
-          "in" : "query",
+          "in" : "formData",
           "description" : "submission request",
           "required" : true,
           "type" : "string"
         }, {
           "name" : "tsEnd",
-          "in" : "query",
+          "in" : "formData",
           "description" : "submission request",
           "required" : true,
           "type" : "string"
         }, {
           "name" : "lat",
-          "in" : "query",
+          "in" : "formData",
           "description" : "submission request",
           "required" : true,
           "type" : "string"
         }, {
           "name" : "long",
-          "in" : "query",
+          "in" : "formData",
           "description" : "submission request",
           "required" : true,
           "type" : "string"
         }, {
           "name" : "alt",
-          "in" : "query",
+          "in" : "formData",
           "description" : "submission request",
           "required" : true,
           "type" : "string"
         }, {
           "name" : "elevmask",
-          "in" : "query",
+          "in" : "formData",
           "description" : "submission request",
           "required" : true,
           "type" : "string"
@@ -128,9 +129,9 @@
         "tags" : [ "visibleSat" ],
         "summary" : "Finds visible satellite order by satellite id",
         "description" : "",
-        "operationId" : "postVisiblesatelliteBySatelliteJson",
+        "operationId" : "postVisiblesatelliteBySatelliteXml",
         "consumes" : [ "application/x-www-form-urlencoded" ],
-        "produces" : [ "application/json;charset=UTF-8" ],
+        "produces" : [ "application/xml;charset=UTF-8" ],
         "parameters" : [ {
           "name" : "version",
           "in" : "path",
