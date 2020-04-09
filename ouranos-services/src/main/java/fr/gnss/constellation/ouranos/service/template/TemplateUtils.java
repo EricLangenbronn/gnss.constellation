@@ -26,17 +26,12 @@ public class TemplateUtils {
 
 	public String getPathTemplateRootDirectory(String resource, String resourceType, Version version) {
 
-		// Pour le moment on peut charger les templates qu'a partir du jar lui
-		// même a voir si les "/" sont tjs ok si on passe sur un répertoire
-		// windows
 		StringBuilder pathTemplate = new StringBuilder();
-		pathTemplate.append(ROOT_DIRECTORY).append("/").append(resource).append("/").append(resourceType).append("/")
-				.append(version).append(EXTENSION);
+		pathTemplate.append("classpath:/").append(ROOT_DIRECTORY).append("/").append(resource).append("/").append(resourceType).append("/").append(version).append(EXTENSION);
 		return pathTemplate.toString();
 	}
 
-	public List<Version> getAvailableVersionForResource(String resource, String resourceType)
-			throws TechnicalException {
+	public List<Version> getAvailableVersionForResource(String resource, String resourceType) throws TechnicalException {
 		List<Version> availabelResources = new ArrayList<Version>();
 
 		ClassLoader cl = this.getClass().getClassLoader();
@@ -45,8 +40,7 @@ public class TemplateUtils {
 		try {
 			// TODO : pas propre : voir pour réutiliser
 			// getPathTemplateRootDirecotry
-			Resource[] templates = resolver.getResources(
-					"classpath*:" + ROOT_DIRECTORY + "/" + resource + "/" + resourceType + "/*" + EXTENSION);
+			Resource[] templates = resolver.getResources("classpath*:" + ROOT_DIRECTORY + "/" + resource + "/" + resourceType + "/*" + EXTENSION);
 
 			for (int i = 0; i < templates.length; ++i) {
 
@@ -69,8 +63,7 @@ public class TemplateUtils {
 		return availabelResources;
 	}
 
-	public String resolveTemplateVersionInTermsOf(String resource, ResourceType resourceType, Version requestedVersion)
-			throws BusinessException {
+	public String resolveTemplateVersionInTermsOf(String resource, ResourceType resourceType, Version requestedVersion) throws BusinessException {
 		String templatePath = "";
 
 		try {
@@ -79,8 +72,7 @@ public class TemplateUtils {
 			templatePath = this.getPathTemplateRootDirectory(resource, resourceType.toString(), version);
 
 		} catch (TechnicalException e) {
-			String message = "Impossible de trouver le template demandé [resource=" + resource + ", requestedVersion="
-					+ requestedVersion + "]";
+			String message = "Impossible de trouver le template demandé [resource=" + resource + ", requestedVersion=" + requestedVersion + "]";
 			LOGGER.error(message);
 			throw new BusinessException(message, e);
 		}

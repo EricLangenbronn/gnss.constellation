@@ -15,17 +15,17 @@ import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.header.ISp3Hea
 public class Sp3aHeaderParser extends AbstractHeaderParser implements ISp3HeaderParser {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Sp3aHeaderParser.class);
-	
+
 	// -------------------- Propriétés de la classe --------------------
 
 	private static int headerNbCol = 60;
-	
+
 	// ------------------------ Constructeur(s) ------------------------
 
 	public Sp3aHeaderParser(RandomAccessFile p_fr) {
 		super(p_fr);
 	}
-	
+
 	// ----------------------- Methodes internes -----------------------
 
 	public String getVersionSymbol() throws TechnicalException {

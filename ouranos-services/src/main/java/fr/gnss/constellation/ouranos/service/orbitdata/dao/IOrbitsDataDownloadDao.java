@@ -10,6 +10,5 @@ public interface IOrbitsDataDownloadDao {
 
 	void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir) throws TechnicalException;
 
-	void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir, String ftpServerName)
-			throws TechnicalException;
+	void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir, String ftpServerName) throws TechnicalException;
 }

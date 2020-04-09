@@ -36,7 +36,7 @@ public class ProcessResourceService implements IProcessResourceService {
 	// -------------------- Methodes de l'interface --------------------
 
 	@Override
-	public String processSatelliteVisibleByPeriod(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version)
+	public StringBuffer processSatelliteVisibleByPeriod(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version)
 			throws TechnicalException, BusinessException {
 
 		List<SatelliteTimeCoordinate<SphericalCoordinate>> sateliteVisible = this.sateliteVisibleService.getSatelliteVisibleByPeriod(visibleSatBean);
@@ -45,13 +45,13 @@ public class ProcessResourceService implements IProcessResourceService {
 		fluxInformations.put("satellitesVisible", sateliteVisible);
 
 		Version v = ApiVersionUtil.getInstance().getVersion(version);
-		String response = this.responseResourceService.getFluxSateliteVisible("satellite-visible-byperiod", contentType, v, fluxInformations);
+		StringBuffer response = this.responseResourceService.getFluxSateliteVisible("satellite-visible-byperiod", contentType, v, fluxInformations);
 
 		return response;
 	}
 
 	@Override
-	public String processSatelliteVisibleBySatellite(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version)
+	public StringBuffer processSatelliteVisibleBySatellite(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version)
 			throws TechnicalException, BusinessException {
 
 		List<SatelliteCoordinate<SphericalCoordinate>> sateliteVisible = this.sateliteVisibleService.getSatelliteVisibleBySatellite(visibleSatBean);
@@ -60,7 +60,7 @@ public class ProcessResourceService implements IProcessResourceService {
 		fluxInformations.put("satellitesVisible", sateliteVisible);
 
 		Version v = ApiVersionUtil.getInstance().getVersion(version);
-		String response = this.responseResourceService.getFluxSateliteVisible("satellite-visible-bysatellite", contentType, v, fluxInformations);
+		StringBuffer response = this.responseResourceService.getFluxSateliteVisible("satellite-visible-bysatellite", contentType, v, fluxInformations);
 
 		return response;
 	}

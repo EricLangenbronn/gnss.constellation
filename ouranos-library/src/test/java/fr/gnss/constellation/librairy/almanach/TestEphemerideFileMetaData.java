@@ -1,6 +1,7 @@
 package fr.gnss.constellation.librairy.almanach;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;

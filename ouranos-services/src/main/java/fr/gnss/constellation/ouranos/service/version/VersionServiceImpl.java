@@ -22,7 +22,7 @@ public class VersionServiceImpl implements IVersionService {
 	private VersionProcessStrategyImpl versionProcessStrategy;
 
 	// -------------------- Constructeurs --------------------
-	
+
 	public VersionServiceImpl() {
 		this.versionProcessStrategy = new VersionProcessStrategyImpl();
 	}

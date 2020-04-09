@@ -23,7 +23,7 @@ export class VisibleSatService {
 
         let params = new URLSearchParams();
         params.set("requete", JSON.stringify(parameters));
-        let sateliteVisible = this.httpService.httpGet("api-rest/visibleSat/v01/byPeriod", params);
+        let sateliteVisible = this.httpService.httpGet("api/visibleSat/v01/byPeriod", params);
 
         return sateliteVisible;
     }
@@ -32,7 +32,7 @@ export class VisibleSatService {
 
         let params = new URLSearchParams();
         params.set("requete", JSON.stringify(parameters));
-        let sateliteVisible = this.httpService.httpGet("api-rest/visibleSat/v01/bySatellite", params);
+        let sateliteVisible = this.httpService.httpGet("api/visibleSat/v01/bySatellite", params);
 
         return sateliteVisible;
     }

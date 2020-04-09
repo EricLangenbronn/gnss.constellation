@@ -16,6 +16,14 @@
 			<groupId>org.jvnet.jaxb2_commons</groupId>
 			<artifactId>jaxb2-commons-lang</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -28,6 +36,11 @@
 						<groupId>org.jvnet.jaxb2_commons</groupId>
 						<artifactId>jaxb2-commons-lang</artifactId>
 						<version>${jaxb2-commons-lang.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>jakarta.xml.bind</groupId>
+						<artifactId>jakarta.xml.bind-api</artifactId>
+						<version>${jakarta.version}</version>
 					</dependency>
 				</dependencies>
 				<executions>

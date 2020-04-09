@@ -1,29 +1,30 @@
+/*[-
 #####################################################################################################
 ######################## Template velocity de satelitesVisible ######################################
 #####################################################################################################
-#set( $dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" )
+-]*/
 <?xml version="1.0" encoding="UTF-8"?>
 <satellitesVisible:satellitesVisible 
     xmlns:satellitesVisible="http://www.ouranos.fr/ouranos/response/visibleSatelite/v10/bySatellite"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     
-    #foreach($satelliteCoordinate in $satellitesVisible)
+    [# th:each="satelliteCoordinate : ${satellitesVisible}"]
         <satellite>
-            <id>$satelliteCoordinate.getId()</id>
+            <id>[(${satelliteCoordinate.getId()})]</id>
             <positions>
-                #foreach($satellite in $satelliteCoordinate.satellites.entrySet())
+                [# th:each="satellite : ${satelliteCoordinate.satellites.entrySet()}"]
                     <position>
-                        <epochHeader>$localDateTimeTool.format($satellite.key, $dateFormat)</epochHeader>
+                        <epochHeader>[(${#temporals.format(satellite.key, dateFormat)})]</epochHeader>
                         <sphericalCoordinate>
-                            <radialDirection>$satellitePositionTool.format($satellite.value.position.getRadiusDistance())</radialDirection>
-                            <longitude>$satellitePositionTool.format($satellite.value.position.getAzimuth())</longitude>
-                            <latitude>$satellitePositionTool.format($satellite.value.position.getInclination())</latitude>
+                            <radialDirection>[(${#numbers.formatDecimal(satellite.value.position.getRadiusDistance(),1,3,'POINT')})]</radialDirection>
+                            <longitude>[(${#numbers.formatDecimal(satellite.value.position.getAzimuth(),1,3,'POINT')})]</longitude>
+                            <latitude>[(${#numbers.formatDecimal(satellite.value.position.getInclination(),1,3,'POINT')})]</latitude>
                         </sphericalCoordinate>
                     </position>
-                #end
+                [/]
             </positions>
         </satellite>
-    #end
+    [/]
 </satellitesVisible:satellitesVisible>
 
 

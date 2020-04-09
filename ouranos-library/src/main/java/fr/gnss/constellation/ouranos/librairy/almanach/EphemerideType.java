@@ -8,24 +8,22 @@ public enum EphemerideType {
 	igl, igr, igs, igu;
 
 	/**
-	 * Returns an EphemerideType with a value represented by the specified string. 
+	 * Returns an EphemerideType with a value represented by the specified string.
 	 * 
-	 * @param type - the string to be converted
+	 * @param type
+	 *            - the string to be converted
 	 * @return the string representation of the specified EphemerideType
-	 * @throws BusinessException - if the string is null, empty or not references
+	 * @throws BusinessException
+	 *             - if the string is null, empty or not references
 	 */
-	public static EphemerideType stringToEphemerideType(String type)
-			throws BusinessException {
+	public static EphemerideType stringToEphemerideType(String type) throws BusinessException {
 		if (StringUtils.isBlank(type)) {
-			String message = "Le type de l'orbite doit être renseigné. [type="
-					+ type + "]";
+			String message = "Le type de l'orbite doit être renseigné. [type=" + type + "]";
 			throw new BusinessException(message);
 		}
 
 		if (type.length() != 3) {
-			throw new BusinessException(
-					"La taille du paramètre pour un EphemerideType doit être de 3 [type="
-							+ type + "]");
+			throw new BusinessException("La taille du paramètre pour un EphemerideType doit être de 3 [type=" + type + "]");
 		}
 
 		EphemerideType res;
@@ -43,8 +41,7 @@ public enum EphemerideType {
 			res = EphemerideType.igu;
 			break;
 		default:
-			String message = "Le paramètre ne peut pas être convertit en EphemerideType,  EphemerideType inexistant [type="
-					+ type + "]";
+			String message = "Le paramètre ne peut pas être convertit en EphemerideType,  EphemerideType inexistant [type=" + type + "]";
 			throw new BusinessException(message);
 		}
 

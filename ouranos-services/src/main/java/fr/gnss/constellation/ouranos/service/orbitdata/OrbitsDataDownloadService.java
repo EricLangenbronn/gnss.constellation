@@ -51,8 +51,10 @@ public class OrbitsDataDownloadService implements IOrbitsDataDownloadService {
 	public void downloadAndGetFileForPeriod(List<Sp3FileName> allSp3FileBetweenStartEnd) throws TechnicalException, BusinessException {
 
 		try {
+			String repertoireSp3 = configurationService.getDirectorySp3();
+			LOGGER.debug("Repertoire SP3 : " + repertoireSp3);
 			for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
-				String repertoireSp3 = configurationService.getDirectorySp3();
+
 				File sp3File = sp3Dao.getFile(repertoireSp3, sp3FileName);
 				if (sp3File == null) {
 					OrbitDataBean orbitDataBean = new OrbitDataBean(sp3FileName);

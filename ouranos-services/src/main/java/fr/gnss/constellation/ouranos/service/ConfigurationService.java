@@ -5,7 +5,6 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -16,7 +15,6 @@ import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 
 @Configuration
-@ComponentScan
 @PropertySources({ @PropertySource("classpath:ouranos-rest-api.properties"),
 		@PropertySource(value = "file:config/${OURANOS_REST_API_FILE_CONF}", ignoreResourceNotFound = true),
 		@PropertySource(value = "file:${OURANOS_REST_API_DIR_CONF}/${OURANOS_REST_API_FILE_CONF}", ignoreResourceNotFound = true), })

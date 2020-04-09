@@ -10,8 +10,7 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
 public class Sp3CFormat {
 
-	public static SatellitePosition<CartesianCoordinate3D> formatSatelitePosition(String line)
-			throws BusinessException {
+	public static SatellitePosition<CartesianCoordinate3D> formatSatelitePosition(String line) throws BusinessException {
 		if (line.charAt(0) != 'P') {
 			String message = "Ligne mal formatée, P attendu [line=" + line + "]";
 			throw new BusinessException(message);

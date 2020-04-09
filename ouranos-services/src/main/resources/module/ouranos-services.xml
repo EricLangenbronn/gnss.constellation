@@ -7,8 +7,7 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="fr.gnss.constellation.ouranos.service" />
-
-	<import resource="velocity-conf.xml" />
+	
 	<import resource="ouranos-aspect.xml" />
 
 </beans>

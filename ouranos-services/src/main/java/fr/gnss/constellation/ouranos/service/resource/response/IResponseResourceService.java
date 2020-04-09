@@ -9,6 +9,6 @@ import fr.gnss.constellation.ouranos.version.Version;
 
 public interface IResponseResourceService {
 
-	String getFluxSateliteVisible(String resource, ResourceType resourceType, Version version,
+	StringBuffer getFluxSateliteVisible(String resource, ResourceType resourceType, Version version,
 			Map<String, Object> informations) throws TechnicalException, BusinessException;
 }

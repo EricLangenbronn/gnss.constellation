@@ -17,7 +17,7 @@
 			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-war</artifactId>
 			<version>${project.version}</version>
-			<type>war</type>
+			<type>jar</type>
 			<scope>runtime</scope>
 		</dependency>
 

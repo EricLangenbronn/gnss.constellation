@@ -30,7 +30,7 @@ public class TestTemplateUtils {
 				new Version(1));
 
 		assertNotNull(templatePath);
-		assertEquals("templates/satellite-visible-bysatellite/xml/v01.vm", templatePath);
+		assertEquals("classpath:/templates/satellite-visible-bysatellite/xml/v01.vm", templatePath);
 
 	}
 
