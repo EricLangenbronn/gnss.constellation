@@ -13,7 +13,7 @@
 		<module>ouranos-library</module>
 		<module>ouranos-xsd</module>
 		<module>ouranos-services</module>
-		<module>ouranos-war</module>
+		<module>ouranos-rest-api</module>
 		<module>ouranos-ihm</module>
 		<module>ouranos-livraison</module>
 	</modules>
@@ -26,7 +26,7 @@
 		<maven.compiler.release>11</maven.compiler.release>
 		<java.version>11</java.version>
 
-		<commons.lang3.version>3.4</commons.lang3.version>
+		<commons.lang3.version>3.10</commons.lang3.version>
 		<commons.io.version>2.4</commons.io.version>
 		<commons.net.version>3.5</commons.net.version>
 		<commons.compress.version>1.20</commons.compress.version>
@@ -57,8 +57,8 @@
 		<node.version>v7.3.0</node.version>
 		<npm.version>3.9.5</npm.version>
 
-		<junit.version>4.12</junit.version>
-		<mockito.version>1.9.5</mockito.version>
+		<junit.jupiter>5.6.1</junit.jupiter>
+		<mockito.core.version>3.3.3</mockito.core.version>
 
 		<lombok.version>1.18.12</lombok.version>
 	</properties>
@@ -69,7 +69,7 @@
 			<!-- ########## Ouranos ########### -->
 			<dependency>
 				<groupId>fr.gnss.constellation.ouranos</groupId>
-				<artifactId>ouranos-war</artifactId>
+				<artifactId>ouranos-rest-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -150,6 +150,11 @@
 			</dependency>
 
 			<!-- ########## Spring ########### -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-autoconfigure</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter</artifactId>
@@ -298,15 +303,21 @@
 				<version>${swagger.version}</version>
 			</dependency>
 
+
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>${junit.jupiter}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
-				<artifactId>mockito-all</artifactId>
-				<version>${mockito.version}</version>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${spring.boot.version}</version>
 			</dependency>
 
 		</dependencies>

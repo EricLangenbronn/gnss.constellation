@@ -1,14 +1,14 @@
 package fr.gnss.constellation.librairy.almanach.parser.sp3;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.time.LocalDateTime;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,14 +22,14 @@ public class TestSp3cHeaderParser {
 
 	private static Sp3cHeaderParser sp3cHP;
 
-	@Before
+	@BeforeEach
 	public void loadFile() throws IOException {
 		String sp3FileName = TestSp3cHeaderParser.class.getResource("/Sp3File/igs17720.sp3").getFile();
 		RandomAccessFile sp3File = new RandomAccessFile(sp3FileName, "r");
 		sp3cHP = new Sp3cHeaderParser(sp3File);
 	}
 
-	@After
+	@AfterEach
 	public void closeFile() {
 		this.sp3cHP.close();
 	}

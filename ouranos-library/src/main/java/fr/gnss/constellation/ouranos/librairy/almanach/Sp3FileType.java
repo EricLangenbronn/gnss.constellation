@@ -16,7 +16,7 @@ public enum Sp3FileType {
 	 * @throws BusinessException
 	 *             - if the string is null, empty or not references
 	 */
-	public static Sp3FileType stringToSp3FileType(Character p_type) throws BusinessException {
+	public static Sp3FileType stringToSp3FileType(Character p_type) {
 		Objects.requireNonNull(p_type, "Le type de l'orbite doit être renseigné. [type=" + p_type + "]");
 
 		Sp3FileType l_res;
@@ -34,7 +34,7 @@ public enum Sp3FileType {
 			l_res = Sp3FileType.d;
 			break;
 		default:
-			throw new BusinessException("Le paramètre ne peut pas être convertit en Sp3FileType,  Sp3FileType inexistant [type=" + p_type + "]");
+			throw new IllegalArgumentException("Le paramètre ne peut pas être convertit en Sp3FileType,  Sp3FileType inexistant [type=" + p_type + "]");
 		}
 
 		return l_res;

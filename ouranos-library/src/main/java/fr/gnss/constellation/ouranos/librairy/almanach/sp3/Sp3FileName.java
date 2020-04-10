@@ -27,7 +27,7 @@ public class Sp3FileName {
 	 *            - A file name string.
 	 * @throws BusinessException
 	 */
-	public Sp3FileName(String p_fileName) throws BusinessException {
+	public Sp3FileName(String p_fileName) {
 		this.valueOf(p_fileName);
 	}
 
@@ -102,10 +102,10 @@ public class Sp3FileName {
 	 *            - a string.
 	 * @throws BusinessException
 	 */
-	private void valueOf(String p_fileName) throws BusinessException {
+	private void valueOf(String p_fileName) {
 		if (StringUtils.isBlank(p_fileName)) {
 			String message = "Le nom du fichier doit être renseigné. [fileName=" + p_fileName + "]";
-			throw new BusinessException(message);
+			throw new IllegalArgumentException(message);
 		}
 
 		try {
@@ -128,7 +128,7 @@ public class Sp3FileName {
 			}
 		} catch (NumberFormatException e) {
 			String l_message = "Impossible de parser le nom du fichier. [fileName=" + p_fileName + "]";
-			throw new BusinessException(l_message, e);
+			throw new IllegalArgumentException(l_message, e);
 		}
 	}
 

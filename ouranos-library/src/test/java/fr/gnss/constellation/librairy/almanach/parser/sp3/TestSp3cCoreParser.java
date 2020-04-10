@@ -1,7 +1,7 @@
 package fr.gnss.constellation.librairy.almanach.parser.sp3;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
@@ -23,14 +23,14 @@ public class TestSp3cCoreParser {
 
 	private static Sp3cCoreParser sp3cCP;
 
-	@Before
+	@BeforeEach
 	public void loadFile() throws IOException, TechnicalException {
 		String sp3FileName = TestSp3cCoreParser.class.getResource("/Sp3File/igs17720.sp3").getFile();
 		FileReader sp3File = new FileReader(sp3FileName);
 		sp3cCP = new Sp3cCoreParser(sp3File, LocalDateTime.parse("2013-12-22T00:00", DateTimeFormatter.ISO_DATE_TIME), 32);
 	}
 
-	@After
+	@AfterEach
 	public void closeFile() {
 		this.sp3cCP.close();
 	}

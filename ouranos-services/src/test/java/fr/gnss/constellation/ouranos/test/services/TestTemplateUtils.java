@@ -1,11 +1,11 @@
 package fr.gnss.constellation.ouranos.test.services;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import fr.gnss.constellation.ouranos.service.resource.ResourceType;
 import fr.gnss.constellation.ouranos.service.template.TemplateUtils;
@@ -26,8 +26,7 @@ public class TestTemplateUtils {
 	@Test
 	public void testResolveTemplateVersionInTermsOf() throws Exception {
 		TemplateUtils templateUtils = new TemplateUtils();
-		String templatePath = templateUtils.resolveTemplateVersionInTermsOf("satellite-visible-bysatellite", ResourceType.xml,
-				new Version(1));
+		String templatePath = templateUtils.resolveTemplateVersionInTermsOf("satellite-visible-bysatellite", ResourceType.xml, new Version(1));
 
 		assertNotNull(templatePath);
 		assertEquals("classpath:/templates/satellite-visible-bysatellite/xml/v01.vm", templatePath);

@@ -1,69 +1,81 @@
 package fr.gnss.constellation.librairy.almanach;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 
 public class TestEphemerideFileMetaData {
 
 	// The final (igs), rapid (igr),
 	@Test
-	public void TestFinalFileNameOk() throws Exception {
+	public void TestFinalFileNameOk() {
 		String fileName = "igs12810.sp3.Z";
 		Sp3FileName efmd = new Sp3FileName(fileName);
 		assertNotNull(efmd);
 	}
 
-	@Test(expected = BusinessException.class)
-	public void TestFinalFileNameKoEphemeride() throws Exception {
+	@Test
+	public void TestFinalFileNameKoEphemeride() {
 		String fileName = "igw12810.sp3.Z";
-		Sp3FileName efmd = new Sp3FileName(fileName);
-		assertNotNull(efmd);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			Sp3FileName efmd = new Sp3FileName(fileName);
+		});
 	}
 
-	@Test(expected = BusinessException.class)
-	public void TestFinalFileNameKoGpsWeek() throws Exception {
+	@Test
+	public void TestFinalFileNameKoGpsWeek() {
 		String fileName = "igsa2810.sp3.Z";
-		Sp3FileName efmd = new Sp3FileName(fileName);
-		assertNotNull(efmd);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			Sp3FileName efmd = new Sp3FileName(fileName);
+		});
 	}
 
-	@Test(expected = BusinessException.class)
-	public void TestFinalFileNameKoDay() throws Exception {
+	@Test
+	public void TestFinalFileNameKoDay() {
 		String fileName = "igs1281x.sp3.Z";
-		Sp3FileName efmd = new Sp3FileName(fileName);
-		assertNotNull(efmd);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			Sp3FileName efmd = new Sp3FileName(fileName);
+		});
 	}
 
-	@Test(expected = BusinessException.class)
-	public void TestFinalFileNameKoOrbitType() throws Exception {
+	@Test
+	public void TestFinalFileNameKoOrbitType() {
 		String fileName = "igs12810.see.Z";
-		Sp3FileName efmd = new Sp3FileName(fileName);
-		assertNotNull(efmd);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			Sp3FileName efmd = new Sp3FileName(fileName);
+		});
 	}
 
-	@Test(expected = BusinessException.class)
-	public void TestFinalFileNameKoCompressType() throws Exception {
+	@Test
+	public void TestFinalFileNameKoCompressType() {
 		String fileName = "igs12810.see.";
-		Sp3FileName efmd = new Sp3FileName(fileName);
-		assertNotNull(efmd);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			Sp3FileName efmd = new Sp3FileName(fileName);
+		});
 	}
 
 	// ultra-rapid (igu)
 	@Test
-	public void TestRapidFileNameOk() throws Exception {
+	public void TestRapidFileNameOk() {
 		String fileName = "igu12810_00.sp3.Z";
 		Sp3FileName efmd = new Sp3FileName(fileName);
 		assertNotNull(efmd);
 	}
 
-	@Test(expected = BusinessException.class)
-	public void TestFileNameKoEphemeride() throws Exception {
+	@Test
+	public void TestFileNameKoEphemeride() {
 		String fileName = "igw12810_hr.sp3.Z";
-		Sp3FileName efmd = new Sp3FileName(fileName);
-		assertNotNull(efmd);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			Sp3FileName efmd = new Sp3FileName(fileName);
+		});
 	}
 }

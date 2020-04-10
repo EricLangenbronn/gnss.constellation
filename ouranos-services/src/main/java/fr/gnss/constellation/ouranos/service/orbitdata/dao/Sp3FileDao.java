@@ -67,7 +67,7 @@ public class Sp3FileDao implements ISp3FileDao {
 
 	@Override
 	public File getFile(String repertoireSp3, Sp3FileName sp3FileName) {
-		Path pathFile = Paths.get(repertoireSp3, sp3FileName.getFileName(false));
+		Path pathFile = Path.of(repertoireSp3, sp3FileName.getFileName(false));
 		File sp3File = pathFile.toFile();
 
 		if (sp3File.exists()) {

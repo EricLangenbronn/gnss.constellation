@@ -1,7 +1,7 @@
 package fr.gnss.constellation.ouranos.test.wrapper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,9 +13,9 @@ import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
 import fr.gnss.constellation.ouranos.wrapper.XsdWrapper;
 import fr.gnss.constellation.ouranos.xsd.data.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
@@ -34,19 +34,17 @@ public class TestXsdWrapper {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(dateDebut);
 
-		XMLGregorianCalendar XMLdateDebut = DatatypeFactory.newInstance()
-				.newXMLGregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1,
-						cal.get(Calendar.DAY_OF_MONTH), dateDebut.getHours(), dateDebut.getMinutes(),
-						dateDebut.getSeconds(), DatatypeConstants.FIELD_UNDEFINED, cal.getTimeZone().LONG)
+		XMLGregorianCalendar XMLdateDebut = DatatypeFactory
+				.newInstance().newXMLGregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH),
+						dateDebut.getHours(), dateDebut.getMinutes(), dateDebut.getSeconds(), DatatypeConstants.FIELD_UNDEFINED, cal.getTimeZone().LONG)
 				.normalize();
 
 		Date dateFin = df.parse("2013-12-22 23:45:00");
 		cal.setTime(dateFin);
 
 		XMLGregorianCalendar XMLdateFin = DatatypeFactory.newInstance()
-				.newXMLGregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1,
-						cal.get(Calendar.DAY_OF_MONTH), dateFin.getHours(), dateFin.getMinutes(), dateFin.getSeconds(),
-						DatatypeConstants.FIELD_UNDEFINED, cal.getTimeZone().LONG)
+				.newXMLGregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), dateFin.getHours(),
+						dateFin.getMinutes(), dateFin.getSeconds(), DatatypeConstants.FIELD_UNDEFINED, cal.getTimeZone().LONG)
 				.normalize();
 
 		request.setStartDateOfMeasure(XMLdateDebut);
@@ -57,7 +55,7 @@ public class TestXsdWrapper {
 		geo.setAltitude(130.049);
 		request.setGroundStation(geo);
 
-		VisibleSateliteRequestBean res = XsdWrapper.wrapVisibleSateliteRequest(request);
+		VisibleSateliteRequestDto res = XsdWrapper.wrapVisibleSateliteRequest(request);
 		assertNotNull(res);
 		assertEquals(0.2617993877, res.getRadElevationMask(), 0.00001);
 

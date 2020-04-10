@@ -1,6 +1,6 @@
 package fr.gnss.constellation.ouranos.wrapper;
 
-import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
 import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
 public class XsdWrapper {
@@ -17,9 +17,9 @@ public class XsdWrapper {
 		return geodeticCoordinate;
 	}
 
-	public static VisibleSateliteRequestBean wrapVisibleSateliteRequest(VisibleSateliteRequest p_request) {
+	public static VisibleSateliteRequestDto wrapVisibleSateliteRequest(VisibleSateliteRequest p_request) {
 
-		VisibleSateliteRequestBean res = new VisibleSateliteRequestBean();
+		VisibleSateliteRequestDto res = new VisibleSateliteRequestDto();
 
 		res.setDateDebut(p_request.getStartDateOfMeasure().toGregorianCalendar().toZonedDateTime().toLocalDateTime());
 		res.setDateFin(p_request.getEndDateOfMeasure().toGregorianCalendar().toZonedDateTime().toLocalDateTime());

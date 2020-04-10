@@ -18,7 +18,7 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
-import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
 
 @Service("sateliteVisibleService")
 public class SateliteVisibleService implements ISateliteVisibleService {
@@ -39,7 +39,7 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 	// -------------------- Methodes de l'interface --------------------
 
 	@Override
-	public List<SatelliteTimeCoordinate<SphericalCoordinate>> getSatelliteVisibleByPeriod(VisibleSateliteRequestBean visibleSatBean)
+	public List<SatelliteTimeCoordinate<SphericalCoordinate>> getSatelliteVisibleByPeriod(VisibleSateliteRequestDto visibleSatBean)
 			throws TechnicalException, BusinessException {
 
 		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.DRF"));
@@ -57,7 +57,7 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 	}
 
 	@Override
-	public List<SatelliteCoordinate<SphericalCoordinate>> getSatelliteVisibleBySatellite(VisibleSateliteRequestBean visibleSatBean)
+	public List<SatelliteCoordinate<SphericalCoordinate>> getSatelliteVisibleBySatellite(VisibleSateliteRequestDto visibleSatBean)
 			throws TechnicalException, BusinessException {
 
 		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DRF"));

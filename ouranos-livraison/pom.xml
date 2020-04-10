@@ -15,7 +15,7 @@
 		<!-- ########## Ouranos ########### -->
 		<dependency>
 			<groupId>fr.gnss.constellation.ouranos</groupId>
-			<artifactId>ouranos-war</artifactId>
+			<artifactId>ouranos-rest-api</artifactId>
 			<version>${project.version}</version>
 			<type>jar</type>
 			<scope>runtime</scope>

@@ -1,10 +1,10 @@
 package fr.gnss.constellation.librairy.almanach.sp3;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.almanach.parser.sp3.Sp3FileParser;

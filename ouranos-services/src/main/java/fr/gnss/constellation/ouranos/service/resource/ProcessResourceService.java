@@ -15,8 +15,8 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.ISateliteVisibleService;
-import fr.gnss.constellation.ouranos.service.process.satelitevisible.bean.VisibleSateliteRequestBean;
-import fr.gnss.constellation.ouranos.service.resource.response.IResponseResourceService;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
+import fr.gnss.constellation.ouranos.service.resource.response.IFormatResponseResourceService;
 import fr.gnss.constellation.ouranos.version.ApiVersionUtil;
 import fr.gnss.constellation.ouranos.version.Version;
 
@@ -28,7 +28,7 @@ public class ProcessResourceService implements IProcessResourceService {
 	// -------------------- Services --------------------
 
 	@Autowired
-	private IResponseResourceService responseResourceService;
+	private IFormatResponseResourceService responseResourceService;
 
 	@Autowired
 	private ISateliteVisibleService sateliteVisibleService;
@@ -36,7 +36,7 @@ public class ProcessResourceService implements IProcessResourceService {
 	// -------------------- Methodes de l'interface --------------------
 
 	@Override
-	public StringBuffer processSatelliteVisibleByPeriod(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version)
+	public StringBuffer processSatelliteVisibleByPeriod(ResourceType contentType, VisibleSateliteRequestDto visibleSatBean, String version)
 			throws TechnicalException, BusinessException {
 
 		List<SatelliteTimeCoordinate<SphericalCoordinate>> sateliteVisible = this.sateliteVisibleService.getSatelliteVisibleByPeriod(visibleSatBean);
@@ -51,7 +51,7 @@ public class ProcessResourceService implements IProcessResourceService {
 	}
 
 	@Override
-	public StringBuffer processSatelliteVisibleBySatellite(ResourceType contentType, VisibleSateliteRequestBean visibleSatBean, String version)
+	public StringBuffer processSatelliteVisibleBySatellite(ResourceType contentType, VisibleSateliteRequestDto visibleSatBean, String version)
 			throws TechnicalException, BusinessException {
 
 		List<SatelliteCoordinate<SphericalCoordinate>> sateliteVisible = this.sateliteVisibleService.getSatelliteVisibleBySatellite(visibleSatBean);
