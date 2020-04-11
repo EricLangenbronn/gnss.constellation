@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
@@ -23,24 +21,17 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 @Service("computationService")
 public class ComputationService implements IComputationService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ComputationService.class);
-
 	@Override
-	public List<SatelliteTimeCoordinate<SphericalCoordinate>> getSateliteVisibleByPeriod(
-			List<SatelliteTimeCoordinate<CartesianCoordinate3D>> visibleSatellite, double elevationMask,
-			LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
-			throws TechnicalException, BusinessException {
+	public List<SatelliteTimeCoordinate<SphericalCoordinate>> getSateliteVisibleByPeriod(List<SatelliteTimeCoordinate<CartesianCoordinate3D>> visibleSatellite,
+			double elevationMask, LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
 
 		List<SatelliteTimeCoordinate<SphericalCoordinate>> sateliteVisibleByPeriod = new ArrayList<>();
 		for (SatelliteTimeCoordinate<CartesianCoordinate3D> e : visibleSatellite) {
 
-			SatelliteTimeCoordinate<SphericalCoordinate> sateliteTimeVisible = new SatelliteTimeCoordinate<>(
-					e.getEpochHeaderRecord());
+			SatelliteTimeCoordinate<SphericalCoordinate> sateliteTimeVisible = new SatelliteTimeCoordinate<>(e.getEpochHeaderRecord());
 			for (SatellitePosition<CartesianCoordinate3D> p : e.getSatellites().values()) {
 				double[] sphCoord = GeodeticTransformation.processElevationAzimuth(gStation, p.getPosition());
-				SphericalCoordinate spheCoord = new SphericalCoordinate(sphCoord[0], sphCoord[2], sphCoord[1]);
-				SatellitePosition<SphericalCoordinate> sp3SateliteInformation = new SatellitePosition<>(
-						p.getVehicleId(), spheCoord);
+				SatellitePosition<SphericalCoordinate> sp3SateliteInformation = new SatellitePosition<>(p.getVehicleId(), new SphericalCoordinate(sphCoord));
 
 				// sphCoord[2] = azimuth, azimuth doit être positif sinon c'est
 				// que le satelite est pas du bon coté de la terre
@@ -59,22 +50,16 @@ public class ComputationService implements IComputationService {
 	}
 
 	@Override
-	public List<SatelliteCoordinate<SphericalCoordinate>> getSateliteVisibleBySatellite(
-			List<SatelliteTimeCoordinate<CartesianCoordinate3D>> visibleSatellite, double elevationMask,
-			LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation)
-			throws TechnicalException, BusinessException {
+	public List<SatelliteCoordinate<SphericalCoordinate>> getSateliteVisibleBySatellite(List<SatelliteTimeCoordinate<CartesianCoordinate3D>> visibleSatellite,
+			double elevationMask, LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation) throws TechnicalException, BusinessException {
 
 		Map<String, SatelliteCoordinate<SphericalCoordinate>> sateliteVisible = new HashMap<>();
 		for (SatelliteTimeCoordinate<CartesianCoordinate3D> e : visibleSatellite) {
 
-			SatelliteTimeCoordinate<SphericalCoordinate> sateliteTimeVisible = new SatelliteTimeCoordinate<>(
-					e.getEpochHeaderRecord());
 			for (SatellitePosition<CartesianCoordinate3D> p : e.getSatellites().values()) {
 
 				double[] sphCoord = GeodeticTransformation.processElevationAzimuth(gStation, p.getPosition());
-				SphericalCoordinate spheCoord = new SphericalCoordinate(sphCoord[0], sphCoord[2], sphCoord[1]);
-				SatellitePosition<SphericalCoordinate> satellitePosition = new SatellitePosition<>(
-						p.getVehicleId(), spheCoord);
+				SatellitePosition<SphericalCoordinate> satellitePosition = new SatellitePosition<>(p.getVehicleId(), new SphericalCoordinate(sphCoord));
 
 				// sphCoord[2] = azimuth, azimuth doit être positif sinon c'est
 				// que le satelite est pas du bon coté de la terre

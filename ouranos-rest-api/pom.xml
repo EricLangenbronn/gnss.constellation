@@ -31,7 +31,7 @@
 							</info>
 							<springmvc>false</springmvc>
 							<locations>
-								<location>fr.gnss.constellation.ouranos.api.resource</location>
+								<location>fr.gnss.constellation.ouranos.api.controller</location>
 							</locations>
 							<schemes>
 								<scheme>http</scheme>
@@ -99,6 +99,19 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- swagger -->

@@ -5,6 +5,11 @@ ajouter :
 -DOURANOS_REST_API_DIR_CONF="D:/Developpement/Workspace/eclipse/config/ouranos"
 -DOURANOS_REST_API_FILE_CONF="ouranos-rest-api.properties"
 
+Eclipse debug mode
+-Dspring-boot.run.jvmArguments="-Xdebug
+-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
+
+
 Par defaut les fichiers *.sp3 sont chargé dans C:\
 Il est possible de les charger à partir d'un autre répertoire,
 en lancant le programme avec un fichier en parametre : ouranos-api-rest.properties

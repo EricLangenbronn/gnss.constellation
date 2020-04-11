@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
-import fr.gnss.constellation.ouranos.service.orbitdata.bean.OrbitDataBean;
+import fr.gnss.constellation.ouranos.service.orbitdata.domain.OrbitData;
 import fr.gnss.constellation.ouranos.toolbox.ClientFtpSp3File;
 import fr.gnss.constellation.ouranos.toolbox.ManagedConnection;
 
@@ -35,7 +35,7 @@ public class OrbitsDataDownloadDao implements IOrbitsDataDownloadDao {
 	// -------------------- Methodes de l'interface --------------------
 
 	@Override
-	public void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir) throws TechnicalException {
+	public void downloadAndStoreSp3File(List<OrbitData> orbitsData, Path destinationDir) throws TechnicalException {
 
 		this.clientFtpSp3File = new ClientFtpSp3File();
 		this.checkConnectionDownloadAndStoreSp3File(orbitsData, destinationDir);
@@ -43,7 +43,7 @@ public class OrbitsDataDownloadDao implements IOrbitsDataDownloadDao {
 	}
 
 	@Override
-	public void downloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir, String ftpServerName) throws TechnicalException {
+	public void downloadAndStoreSp3File(List<OrbitData> orbitsData, Path destinationDir, String ftpServerName) throws TechnicalException {
 
 		this.clientFtpSp3File = new ClientFtpSp3File(ftpServerName);
 		this.checkConnectionDownloadAndStoreSp3File(orbitsData, destinationDir);
@@ -52,7 +52,7 @@ public class OrbitsDataDownloadDao implements IOrbitsDataDownloadDao {
 
 	// -------------------- Methodes internes --------------------
 
-	private void checkConnectionDownloadAndStoreSp3File(List<OrbitDataBean> orbitsData, Path destinationDir) throws TechnicalException {
+	private void checkConnectionDownloadAndStoreSp3File(List<OrbitData> orbitsData, Path destinationDir) throws TechnicalException {
 
 		ManagedConnection<ClientFtpSp3File> managedConnection = new ManagedConnection<>();
 		this.clientFtpSp3File = managedConnection.initConnection(this.clientFtpSp3File);
@@ -64,7 +64,7 @@ public class OrbitsDataDownloadDao implements IOrbitsDataDownloadDao {
 			Sp3FileName sp3FileName = null;
 			Path pathToSaveSp3 = null;
 			try {
-				for (OrbitDataBean orbitData : orbitsData) {
+				for (OrbitData orbitData : orbitsData) {
 					sp3FileName = new Sp3FileName(orbitData.getEphemeride(), orbitData.getEpoch(), orbitData.getDayInWeek(), orbitData.getHour(),
 							orbitData.getOrbitType());
 					pathToSaveSp3 = Paths.get(destinationDir.toString(), sp3FileName.getFileName(true));

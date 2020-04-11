@@ -5,9 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
@@ -21,25 +18,20 @@ import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
 import fr.gnss.constellation.ouranos.service.IConfigurationService;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.IOrbitsDataDao;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.Sp3FileNameUtils;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("orbitsDataService")
+@RequiredArgsConstructor
 public class OrbitsDataService implements IOrbitsDataService {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(OrbitsDataService.class);
 
 	// -------------------- Services --------------------
 
-	@Autowired
-	private IOrbitsDataDao orbitsDataDao;
-
-	@Autowired
-	private IOrbitsDataDownloadService orbitsDataDownloadService;
-
-	@Autowired
-	private IConfigurationService configurationService;
-
-	@Autowired
-	private IConfigurationLogMessageService configurationErrorMessageService;
+	private final IOrbitsDataDao orbitsDataDao;
+	private final IOrbitsDataDownloadService orbitsDataDownloadService;
+	private final IConfigurationService configurationService;
+	private final IConfigurationLogMessageService configurationErrorMessageService;
 
 	// -------------------- Methodes de l'interface --------------------
 
@@ -68,12 +60,12 @@ public class OrbitsDataService implements IOrbitsDataService {
 			}
 
 		} catch (TechnicalException e) {
-			LOGGER.error(configurationErrorMessageService.getDefautErrorMessage("ODS.GDFP.TE"), start, end, ephemerideType, orbitType);
+			log.error(configurationErrorMessageService.getDefautErrorMessage("ODS.GDFP.TE"), start, end, ephemerideType, orbitType);
 			throw new TechnicalException(
 					MessageFormat.format(configurationErrorMessageService.getDefautErrorMessage("ODS.GDFP.TE"), start, end, ephemerideType, orbitType), e);
 		} catch (BusinessException e) {
 			// start, end, ephemerideType, orbitType
-			LOGGER.error(configurationErrorMessageService.getDefautErrorMessage("ODS.GDFP.BE"), start, end, ephemerideType, orbitType);
+			log.error(configurationErrorMessageService.getDefautErrorMessage("ODS.GDFP.BE"), start, end, ephemerideType, orbitType);
 			throw new BusinessException(
 					MessageFormat.format(configurationErrorMessageService.getDefautErrorMessage("ODS.GDFP.BE"), start, end, ephemerideType, orbitType), e);
 		}

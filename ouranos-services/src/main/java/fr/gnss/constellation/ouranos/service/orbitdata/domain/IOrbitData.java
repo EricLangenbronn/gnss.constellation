@@ -1,10 +1,10 @@
-package fr.gnss.constellation.ouranos.service.orbitdata.bean;
+package fr.gnss.constellation.ouranos.service.orbitdata.domain;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 
 // TODO : remplacer OrbitDataBean par l'interface pour decoupler le truc
-public interface IOrbitDataBean {
+public interface IOrbitData {
 
 	EphemerideType getEphemerideType();
 

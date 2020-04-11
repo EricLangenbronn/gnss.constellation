@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
@@ -19,19 +16,16 @@ import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.Visible
 import fr.gnss.constellation.ouranos.service.resource.response.IFormatResponseResourceService;
 import fr.gnss.constellation.ouranos.version.ApiVersionUtil;
 import fr.gnss.constellation.ouranos.version.Version;
+import lombok.RequiredArgsConstructor;
 
 @Service("processResourceService")
+@RequiredArgsConstructor
 public class ProcessResourceService implements IProcessResourceService {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProcessResourceService.class);
 
 	// -------------------- Services --------------------
 
-	@Autowired
-	private IFormatResponseResourceService responseResourceService;
-
-	@Autowired
-	private ISateliteVisibleService sateliteVisibleService;
+	private final IFormatResponseResourceService responseResourceService;
+	private final ISateliteVisibleService sateliteVisibleService;
 
 	// -------------------- Methodes de l'interface --------------------
 

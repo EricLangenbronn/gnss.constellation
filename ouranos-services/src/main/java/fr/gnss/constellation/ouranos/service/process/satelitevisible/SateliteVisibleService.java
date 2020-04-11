@@ -2,9 +2,6 @@ package fr.gnss.constellation.ouranos.service.process.satelitevisible;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
@@ -19,22 +16,19 @@ import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
 import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("sateliteVisibleService")
+@RequiredArgsConstructor
 public class SateliteVisibleService implements ISateliteVisibleService {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(SateliteVisibleService.class);
 
 	// -------------------- Services --------------------
 
-	@Autowired
-	private IConfigurationLogMessageService configurationLogMessageService;
-
-	@Autowired
-	private IOrbitsDataService orbitsDataService;
-
-	@Autowired
-	private IComputationService computationService;
+	private final IConfigurationLogMessageService configurationLogMessageService;
+	private final IOrbitsDataService orbitsDataService;
+	private final IComputationService computationService;
 
 	// -------------------- Methodes de l'interface --------------------
 
@@ -42,16 +36,16 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 	public List<SatelliteTimeCoordinate<SphericalCoordinate>> getSatelliteVisibleByPeriod(VisibleSateliteRequestDto visibleSatBean)
 			throws TechnicalException, BusinessException {
 
-		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.DRF"));
+		log.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.DRF"));
 		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> sateliteForPeriod = this.orbitsDataService.getDatasForPeriod(visibleSatBean.getDateDebut(),
 				visibleSatBean.getDateFin(), EphemerideType.igs, OrbitType.sp3);
-		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.FRF"));
+		log.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.FRF"));
 
-		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.DTF"));
+		log.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.DTF"));
 		List<SatelliteTimeCoordinate<SphericalCoordinate>> l_satelitesVisible = null;
 		l_satelitesVisible = computationService.getSateliteVisibleByPeriod(sateliteForPeriod, visibleSatBean.getRadElevationMask(),
 				visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(), visibleSatBean.getGeodeticCoordinate());
-		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.FTF"));
+		log.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBP.FTF"));
 
 		return l_satelitesVisible;
 	}
@@ -60,16 +54,16 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 	public List<SatelliteCoordinate<SphericalCoordinate>> getSatelliteVisibleBySatellite(VisibleSateliteRequestDto visibleSatBean)
 			throws TechnicalException, BusinessException {
 
-		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DRF"));
+		log.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DRF"));
 		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> sateliteForPeriod = this.orbitsDataService.getDatasForPeriod(visibleSatBean.getDateDebut(),
 				visibleSatBean.getDateFin(), EphemerideType.igs, OrbitType.sp3);
-		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.FRF"));
+		log.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.FRF"));
 
-		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DTF"));
+		log.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.DTF"));
 		List<SatelliteCoordinate<SphericalCoordinate>> l_satelitesVisible = null;
 		l_satelitesVisible = computationService.getSateliteVisibleBySatellite(sateliteForPeriod, visibleSatBean.getRadElevationMask(),
 				visibleSatBean.getDateDebut(), visibleSatBean.getDateFin(), visibleSatBean.getGeodeticCoordinate());
-		LOGGER.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.FTF"));
+		log.debug(configurationLogMessageService.getDefautErrorMessage("SVS.GSVBS.FTF"));
 
 		return l_satelitesVisible;
 	}

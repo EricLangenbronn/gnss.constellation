@@ -15,9 +15,9 @@ import fr.gnss.constellation.ouranos.commons.exception.TechnicalException;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
 import fr.gnss.constellation.ouranos.service.IConfigurationService;
-import fr.gnss.constellation.ouranos.service.orbitdata.bean.OrbitDataBean;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.IOrbitsDataDownloadDao;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.ISp3FileDao;
+import fr.gnss.constellation.ouranos.service.orbitdata.domain.OrbitData;
 import fr.gnss.constellation.ouranos.toolbox.UnCompress;
 
 /**
@@ -57,8 +57,8 @@ public class OrbitsDataDownloadService implements IOrbitsDataDownloadService {
 
 				File sp3File = sp3Dao.getFile(repertoireSp3, sp3FileName);
 				if (sp3File == null) {
-					OrbitDataBean orbitDataBean = new OrbitDataBean(sp3FileName);
-					List<OrbitDataBean> orbitDataBeans = new ArrayList<>();
+					OrbitData orbitDataBean = new OrbitData(sp3FileName);
+					List<OrbitData> orbitDataBeans = new ArrayList<>();
 					orbitDataBeans.add(orbitDataBean);
 					this.orbitsDataDownloadDao.downloadAndStoreSp3File(orbitDataBeans, Paths.get(repertoireSp3));
 					// uncompress

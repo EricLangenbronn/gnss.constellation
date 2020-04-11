@@ -1,24 +1,38 @@
 package fr.gnss.constellation.ouranos.api.controller.domain;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class VisibleSatParamQueryParam implements IVisibleSatParam {
 
+	@Valid
 	@NotBlank(message = "Timestamp start is mandatory")
 	private String tsStart;
 
+	@Valid
 	@NotBlank(message = "Timestamp end is mandatory")
 	private String tsEnd;
 
+	@Valid
 	@NotBlank(message = "Latitude is mandatory")
 	private String lat;
 
+	@Valid
 	@NotBlank(message = "Longitude is mandatory")
 	private String longi;
 
+	@Valid
 	@NotBlank(message = "Altitude is mandatory")
 	private String alt;
 
+	@Valid
 	@NotBlank(message = "Elevation mask is mandatory")
 	private String elevmask;
 
@@ -44,30 +58,6 @@ public class VisibleSatParamQueryParam implements IVisibleSatParam {
 
 	public String getElevationMask() {
 		return elevmask;
-	}
-
-	public void setTsStart(String tsStart) {
-		this.tsStart = tsStart;
-	}
-
-	public void setTsEnd(String tsEnd) {
-		this.tsEnd = tsEnd;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public void setLongi(String longi) {
-		this.longi = longi;
-	}
-
-	public void setAlt(String alt) {
-		this.alt = alt;
-	}
-
-	public void setElevmask(String elevmask) {
-		this.elevmask = elevmask;
 	}
 
 }

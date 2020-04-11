@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -97,6 +98,18 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	// 400
+
+	@Override
+	protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		Error error = new Error();
+		error.setStatus(HttpStatus.BAD_REQUEST.value());
+		error.setReasonPhrase(HttpStatus.BAD_REQUEST.getReasonPhrase());
+		error.setMessage("binding error " + ex.getMessage() + " " + StringUtils.join(ex.getAllErrors(), ", "));
+		error.setStackTrace(ExceptionUtils.getFullStackTrace(ex));
+
+		return handleExceptionInternal(ex, error, getHeader(headers, request), HttpStatus.BAD_REQUEST, request);
+	}
 
 	@Override
 	protected @ResponseBody ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers,
@@ -248,8 +261,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		List<String> requestHeaderNames = new ArrayList<>();
 		request.getHeaderNames().forEachRemaining(requestHeaderNames::add);
 
-		List<String> requestHeaderNameNeeds = requestHeaderNames.stream().filter(headerName -> !StringUtils.equalsAnyIgnoreCase(headerName, HttpHeaders.HOST))
-				.collect(Collectors.toList());
+		List<String> requestHeaderNameNeeds = requestHeaderNames.stream()
+				.filter(headerName -> !StringUtils.equalsAnyIgnoreCase(headerName, HttpHeaders.HOST, HttpHeaders.CONTENT_TYPE)).collect(Collectors.toList());
 
 		for (String headerName : requestHeaderNameNeeds) {
 			headers.set(headerName, request.getHeader(headerName));
