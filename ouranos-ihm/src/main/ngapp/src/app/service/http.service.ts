@@ -14,7 +14,9 @@ export class HttpService {
 
     httpGet(url: string, params: URLSearchParams): Observable<any> {
 
-        let requestOptions = new RequestOptions({ search: params });
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let requestOptions = new RequestOptions({ search: params, headers : headers});
         let request = this.http.get(`${this.baseUrl}/${url}`, requestOptions)
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch(this.handleError);

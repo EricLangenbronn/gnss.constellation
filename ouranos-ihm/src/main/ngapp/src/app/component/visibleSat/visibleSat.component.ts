@@ -38,11 +38,11 @@ export class VisibleSatComponent implements OnInit {
         this.highchartsComponent.clearGraphe();
 
         this.apiRequest.elevationMask = this.tempAndSpat.getElevationMask();
-        this.apiRequest.startDateOfMeasure = this.tempAndSpat.getDateStartMeasureISO();
-        this.apiRequest.endDateOfMeasure = this.tempAndSpat.getDateEndMeasureISO();
-        this.apiRequest.groundStation.longitude = this.LlaComponent.getLongitude();
-        this.apiRequest.groundStation.latitude = this.LlaComponent.getLatitude();
-        this.apiRequest.groundStation.altitude = this.LlaComponent.getAltitude();
+        this.apiRequest.startDateOfMeasure = this.tempAndSpat.getTimestampStartMeasureSecond();
+        this.apiRequest.endDateOfMeasure = this.tempAndSpat.getTimestampEndMeasureSecond();
+        this.apiRequest.longitude = this.LlaComponent.getLongitude();
+        this.apiRequest.latitude = this.LlaComponent.getLatitude();
+        this.apiRequest.altitude = this.LlaComponent.getAltitude();
 
         this.getSateliteVisibleByPeriod();
 

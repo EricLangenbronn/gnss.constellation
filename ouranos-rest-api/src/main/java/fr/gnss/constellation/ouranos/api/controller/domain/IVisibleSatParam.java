@@ -2,16 +2,16 @@ package fr.gnss.constellation.ouranos.api.controller.domain;
 
 public interface IVisibleSatParam {
 
-	String getTimeStampStart();
+	Long getTimeStampStart();
 
-	String getTimeStampEnd();
+	Long getTimeStampEnd();
 
-	String getLatitude();
+	Double getLatitude();
 
-	String getLongitude();
+	Double getLongitude();
 
-	String getAltitude();
+	Double getAltitude();
 
-	String getElevationMask();
+	Double getElevationMask();
 
 }

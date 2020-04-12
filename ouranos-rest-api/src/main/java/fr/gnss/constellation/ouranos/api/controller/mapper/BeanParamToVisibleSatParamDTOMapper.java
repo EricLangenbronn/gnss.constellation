@@ -30,26 +30,24 @@ public class BeanParamToVisibleSatParamDTOMapper {
 			try {
 				dto = new VisibleSateliteRequestDto();
 				if (source.getTimeStampStart() != null) {
-					Long value = Long.parseLong(source.getTimeStampStart());
-					Instant start = Instant.ofEpochSecond(value.longValue());
+					Instant start = Instant.ofEpochSecond(source.getTimeStampStart());
 					dto.setDateDebut(LocalDateTime.ofInstant(start, ZoneId.of("UTC")));
 				}
 
 				if (source.getTimeStampEnd() != null) {
-					Long value = Long.parseLong(source.getTimeStampEnd());
-					Instant fin = Instant.ofEpochSecond(value);
+					Instant fin = Instant.ofEpochSecond(source.getTimeStampEnd());
 					dto.setDateFin(LocalDateTime.ofInstant(fin, ZoneId.of("UTC")));
 				}
 
 				if (source.getElevationMask() != null) {
-					Double value = Math.toRadians(Double.parseDouble(source.getElevationMask()));
+					Double value = Math.toRadians(source.getElevationMask());
 					dto.setRadElevationMask(value);
 				}
 
 				if (source.getLatitude() != null && source.getLongitude() != null && source.getAltitude() != null) {
-					Double lat = Double.parseDouble(source.getLatitude());
-					Double longi = Double.parseDouble(source.getLongitude());
-					Double alt = Double.parseDouble(source.getAltitude());
+					Double lat = source.getLatitude();
+					Double longi = source.getLongitude();
+					Double alt = source.getAltitude();
 
 					GeodeticCoordinate geoDTO = new GeodeticCoordinate(lat.doubleValue(), longi.doubleValue(), alt.doubleValue());
 					dto.setGeodeticCoordinate(geoDTO);

@@ -13,50 +13,6 @@
 	<packaging>jar</packaging>
 	<name>Ouranos - REST API</name>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.github.kongchen</groupId>
-				<artifactId>swagger-maven-plugin</artifactId>
-				<configuration>
-					<apiSources>
-						<apiSource>
-							<info>
-								<title>Ouranos Swagger Maven Plugin Sample</title>
-								<version>${project.version}</version>
-							</info>
-							<springmvc>false</springmvc>
-							<locations>
-								<location>fr.gnss.constellation.ouranos.api.controller</location>
-							</locations>
-							<schemes>
-								<scheme>http</scheme>
-								<scheme>https</scheme>
-							</schemes>
-							<host>localhost:8080</host>
-							<basePath>/api</basePath>
-							<outputPath>${basedir}/generated/document.html</outputPath>
-							<swaggerDirectory>${basedir}/generated/swagger-ui</swaggerDirectory>
-							<attachSwaggerArtifact>true</attachSwaggerArtifact>
-						</apiSource>
-					</apiSources>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>fr.gnss.constellation.ouranos</groupId>
@@ -138,4 +94,61 @@
 		</dependency>
 
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<classifier>spring-boot</classifier>
+							<mainClass>
+								fr.gnss.constellation.ouranos.api.SpringBootRestApplication
+							</mainClass>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<configuration>
+					<apiSources>
+						<apiSource>
+							<info>
+								<title>Ouranos Swagger Maven Plugin Sample</title>
+								<version>${project.version}</version>
+							</info>
+							<springmvc>true</springmvc>
+							<locations>
+								<location>fr.gnss.constellation.ouranos.api.controller</location>
+							</locations>
+							<schemes>
+								<scheme>http</scheme>
+								<scheme>https</scheme>
+							</schemes>
+							<host>localhost:8080</host>
+							<basePath>/api</basePath>
+							<outputPath>${basedir}/generated/document.html</outputPath>
+							<swaggerDirectory>${basedir}/generated/swagger-ui</swaggerDirectory>
+							<attachSwaggerArtifact>true</attachSwaggerArtifact>
+						</apiSource>
+					</apiSources>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

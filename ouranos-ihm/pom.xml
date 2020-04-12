@@ -10,7 +10,6 @@
 
 	<artifactId>ouranos-ihm</artifactId>
 	<name>Ouranos - IHM Web</name>
-	<packaging>war</packaging>
 
 	<dependencies>
 	</dependencies>
@@ -36,34 +35,23 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>assembly-zip.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<webResources>
-						<resource>
-							<!-- this is relative to the pom.xml directory -->
-							<directory>src/main/ngapp/dist</directory>
-							<includes>
-								<include>**/*.html</include>
-								<include>**/*.js</include>
-								<include>**/*.css</include>
-								<!-- fichier bootstrap -->
-								<include>**/*.svg</include>
-								<include>**/*.ttf</include>
-								<include>**/*.eot</include>
-								<include>**/*.woff</include>
-								<include>**/*.woff2</include>
-								<include>**/*.ico</include>
-							</includes>
-						</resource>
-					</webResources>
-				</configuration>
-			</plugin>
-			<!-- Plugin to execute command "npm install" and "npm run build" inside 
-				/angular directory -->
+			<!-- Plugin to execute command "npm install" and "npm run build" inside /angular directory -->
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
@@ -93,8 +81,7 @@
 							<arguments>install</arguments>
 						</configuration>
 					</execution>
-					<!-- It will execute command "npm build" inside "/angular" directory 
-						to clean and create "/dist" directory -->
+					<!-- It will execute command "npm build" inside "/angular" directory to clean and create "/dist" directory -->
 					<execution>
 						<id>npm build</id>
 						<goals>

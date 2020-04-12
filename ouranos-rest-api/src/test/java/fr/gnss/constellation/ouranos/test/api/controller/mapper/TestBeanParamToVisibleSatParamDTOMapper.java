@@ -38,7 +38,7 @@ public class TestBeanParamToVisibleSatParamDTOMapper {
 		VisibleSatParamQueryParam source = new VisibleSatParamQueryParam();
 
 		LocalDateTime start = LocalDateTime.now(Clock.systemUTC());
-		source.setTsStart(String.valueOf(start.toInstant(ZoneOffset.UTC).getEpochSecond()));
+		source.setStartDateOfMeasure(start.toInstant(ZoneOffset.UTC).getEpochSecond());
 		VisibleSateliteRequestDto dto = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(source);
 
 		assertNotNull(dto);

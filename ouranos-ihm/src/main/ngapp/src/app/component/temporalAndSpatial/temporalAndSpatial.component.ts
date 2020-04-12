@@ -36,11 +36,11 @@ export class TemporalAndSpatialComponent implements OnInit {
         return this.elevationMask;
     }
 
-    getDateStartMeasureISO(): string {
-        return this.startDate.toISOString();
+    getTimestampStartMeasureSecond(): string {
+        return "" + (this.startDate.getTime() / 1000);
     }
 
-    getDateEndMeasureISO(): string {
-        return this.endDate.toISOString();
+    getTimestampEndMeasureSecond(): string {
+        return  "" + (this.endDate.getTime() / 1000);
     }
 }

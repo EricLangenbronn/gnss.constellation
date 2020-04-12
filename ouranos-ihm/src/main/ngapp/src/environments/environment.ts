@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  urlServer: "http://127.0.0.1:8080/ouranos-war"
+  urlServer: "http://127.0.0.1:8080"
 };

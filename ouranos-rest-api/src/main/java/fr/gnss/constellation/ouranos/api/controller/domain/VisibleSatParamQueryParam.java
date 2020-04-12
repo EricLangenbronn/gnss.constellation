@@ -1,8 +1,9 @@
 package fr.gnss.constellation.ouranos.api.controller.domain;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,51 +14,59 @@ import lombok.NoArgsConstructor;
 public class VisibleSatParamQueryParam implements IVisibleSatParam {
 
 	@Valid
-	@NotBlank(message = "Timestamp start is mandatory")
-	private String tsStart;
+	@NotNull(message = "Timestamp start is mandatory")
+	@ApiParam(value = "Timestamp date début en seconde", required = true)
+	private Long startDateOfMeasure;
 
 	@Valid
-	@NotBlank(message = "Timestamp end is mandatory")
-	private String tsEnd;
+	@NotNull(message = "Timestamp end is mandatory")
+	@ApiParam(value = "Timestamp date fin en seconde", required = true)
+	private Long endDateOfMeasure;
 
 	@Valid
-	@NotBlank(message = "Latitude is mandatory")
-	private String lat;
+	@NotNull(message = "Latitude is mandatory")
+	private Double latitude;
 
 	@Valid
-	@NotBlank(message = "Longitude is mandatory")
-	private String longi;
+	@NotNull(message = "Longitude is mandatory")
+	private Double longitude;
 
 	@Valid
-	@NotBlank(message = "Altitude is mandatory")
-	private String alt;
+	@NotNull(message = "Altitude is mandatory")
+	private Double altitude;
 
 	@Valid
-	@NotBlank(message = "Elevation mask is mandatory")
-	private String elevmask;
+	@NotNull(message = "Elevation mask is mandatory")
+	private Double elevationMask;
 
-	public String getTimeStampStart() {
-		return tsStart;
+	@Override
+	public Long getTimeStampStart() {
+		return startDateOfMeasure;
 	}
 
-	public String getTimeStampEnd() {
-		return tsEnd;
+	@Override
+	public Long getTimeStampEnd() {
+		return endDateOfMeasure;
 	}
 
-	public String getLatitude() {
-		return lat;
+	@Override
+	public Double getLatitude() {
+		return latitude;
 	}
 
-	public String getLongitude() {
-		return longi;
+	@Override
+	public Double getLongitude() {
+		return longitude;
 	}
 
-	public String getAltitude() {
-		return alt;
+	@Override
+	public Double getAltitude() {
+		return altitude;
 	}
 
-	public String getElevationMask() {
-		return elevmask;
+	@Override
+	public Double getElevationMask() {
+		return elevationMask;
 	}
 
 }

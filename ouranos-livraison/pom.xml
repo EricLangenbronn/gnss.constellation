@@ -8,7 +8,6 @@
 	</parent>
 
 	<artifactId>ouranos-livraison</artifactId>
-	<packaging>war</packaging>
 	<name>Ouranos - Package de livraison</name>
 
 	<dependencies>
@@ -17,16 +16,15 @@
 			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-rest-api</artifactId>
 			<version>${project.version}</version>
+			<classifier>spring-boot</classifier>
 			<type>jar</type>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-ihm</artifactId>
 			<version>${project.version}</version>
-			<type>war</type>
-			<scope>runtime</scope>
+			<type>zip</type>
 		</dependency>
 	</dependencies>
 
@@ -34,10 +32,21 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>assembly-zip.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

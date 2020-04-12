@@ -12,7 +12,7 @@ import { Parameters } from '../model/api/request/parameters';
 @Injectable()
 export class VisibleSatService {
 
-    private defaultQuestion = '{"groundStation":{"latitude":"38.889139","longitude":"-77.049","altitude":"130.049"},"startDateOfMeasure":"2013-12-22T00:00:00","endDateOfMeasure":"2013-12-22T23:45:00","elevationMask":"15.0"}';
+    private defaultQuestion = '"latitude":"38.889139","longitude":"-77.049","altitude":"130.049","startDateOfMeasure":"1387666800","endDateOfMeasure":"1387753199","elevationMask":"15.0"';
     private httpService: HttpService;
 
     constructor(private http: Http) { 
@@ -21,8 +21,7 @@ export class VisibleSatService {
 
     getSateliteVisibleByPeriod(parameters : Parameters): Observable<ByPeriod> {
 
-        let params = new URLSearchParams();
-        params.set("requete", JSON.stringify(parameters));
+        let params = this.generateURLSearchParams(parameters);
         let sateliteVisible = this.httpService.httpGet("api/visibleSat/v01/byPeriod", params);
 
         return sateliteVisible;
@@ -30,10 +29,23 @@ export class VisibleSatService {
 
     getSateliteVisibleBySatellite(parameters : Parameters): Observable<BySatellite> {
 
-        let params = new URLSearchParams();
+        let params = this.generateURLSearchParams(parameters);
         params.set("requete", JSON.stringify(parameters));
         let sateliteVisible = this.httpService.httpGet("api/visibleSat/v01/bySatellite", params);
 
         return sateliteVisible;
+    }
+
+    generateURLSearchParams(parameters : Parameters): URLSearchParams {
+        let params = new URLSearchParams();
+
+        params.set("startDateOfMeasure", parameters.startDateOfMeasure);
+        params.set("endDateOfMeasure", parameters.endDateOfMeasure);
+        params.set("elevationMask", parameters.elevationMask.toString());
+        params.set("longitude", parameters.longitude.toString());
+        params.set("latitude", parameters.latitude.toString());
+        params.set("altitude", parameters.altitude.toString());
+
+        return params;
     }
 }

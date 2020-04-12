@@ -3,14 +3,12 @@ import { GroundStation } from './groundStation';
 export class Parameters {
 
     public startDateOfMeasure : string;
-    public endDateOfMeasure : String;
+    public endDateOfMeasure : string;
     public elevationMask : number;
-    public groundStation : GroundStation;
+    public longitude : number;
+    public latitude : number;
+    public altitude : number;
 
     constructor() {
-        this.startDateOfMeasure = "";
-        this.endDateOfMeasure = "";
-        this.elevationMask = 15.0;
-        this.groundStation = new GroundStation();
     }
-}
+}   
