@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,12 +34,12 @@ public class ITOrbitsDataDownloadService {
 	@Autowired
 	private IOrbitsDataDownloadService orbitsDataDownloadService;
 
-	@Autowired
-	protected ConfigurationService configurationService;
+	@Value("${download.sp3.directory}")
+	private String defaultDownloadSp3Directory;
 
 	@After
 	public void deleteAllDownloadFile() throws IOException {
-		FileUtils.cleanDirectory(new File(configurationService.getDirectorySp3()));
+		FileUtils.cleanDirectory(new File(defaultDownloadSp3Directory));
 	}
 
 	@Test
@@ -51,7 +52,7 @@ public class ITOrbitsDataDownloadService {
 		this.orbitsDataDownloadService.downloadAndGetFileForPeriod(allSp3FileBetweenStartEnd);
 
 		for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
-			File sp3DownloadFile = Paths.get(configurationService.getDirectorySp3(), sp3FileName.getFileName(false)).toFile();
+			File sp3DownloadFile = Paths.get(defaultDownloadSp3Directory, sp3FileName.getFileName(false)).toFile();
 			assertTrue(sp3DownloadFile.exists());
 		}
 	}
@@ -66,7 +67,7 @@ public class ITOrbitsDataDownloadService {
 		this.orbitsDataDownloadService.downloadAndGetFileForPeriod(allSp3FileBetweenStartEnd);
 
 		for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
-			File sp3DownloadFile = Paths.get(configurationService.getDirectorySp3(), sp3FileName.getFileName(false)).toFile();
+			File sp3DownloadFile = Paths.get(defaultDownloadSp3Directory, sp3FileName.getFileName(false)).toFile();
 			assertTrue(sp3DownloadFile.exists());
 		}
 	}
@@ -82,7 +83,7 @@ public class ITOrbitsDataDownloadService {
 		this.orbitsDataDownloadService.downloadAndGetFileForPeriod(allSp3FileBetweenStartEnd);
 
 		for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
-			File sp3DownloadFile = Paths.get(configurationService.getDirectorySp3(), sp3FileName.getFileName(false)).toFile();
+			File sp3DownloadFile = Paths.get(defaultDownloadSp3Directory, sp3FileName.getFileName(false)).toFile();
 			assertTrue(sp3DownloadFile.exists());
 		}
 	}
@@ -98,7 +99,7 @@ public class ITOrbitsDataDownloadService {
 		this.orbitsDataDownloadService.downloadAndGetFileForPeriod(allSp3FileBetweenStartEnd);
 
 		for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
-			File sp3DownloadFile = Paths.get(configurationService.getDirectorySp3(), sp3FileName.getFileName(false)).toFile();
+			File sp3DownloadFile = Paths.get(defaultDownloadSp3Directory, sp3FileName.getFileName(false)).toFile();
 			assertTrue(sp3DownloadFile.exists());
 		}
 	}
@@ -113,7 +114,7 @@ public class ITOrbitsDataDownloadService {
 		this.orbitsDataDownloadService.downloadAndGetFileForPeriod(allSp3FileBetweenStartEnd);
 
 		for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
-			File sp3DownloadFile = Paths.get(configurationService.getDirectorySp3(), sp3FileName.getFileName(false)).toFile();
+			File sp3DownloadFile = Paths.get(defaultDownloadSp3Directory, sp3FileName.getFileName(false)).toFile();
 			assertTrue(sp3DownloadFile.exists());
 		}
 	}
@@ -128,7 +129,7 @@ public class ITOrbitsDataDownloadService {
 		this.orbitsDataDownloadService.downloadAndGetFileForPeriod(allSp3FileBetweenStartEnd);
 
 		for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
-			File sp3DownloadFile = Paths.get(configurationService.getDirectorySp3(), sp3FileName.getFileName(false)).toFile();
+			File sp3DownloadFile = Paths.get(defaultDownloadSp3Directory, sp3FileName.getFileName(false)).toFile();
 			assertTrue(sp3DownloadFile.exists());
 		}
 	}

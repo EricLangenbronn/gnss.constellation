@@ -24,26 +24,19 @@ public class ClientFtpSp3File implements IConnection {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientFtpSp3File.class);
 
-	// -------------------- Valeurs par défaut des propriétés --------------------
-
-	private static final String FTP_SERVER_NAME = "ftp.igs.org";
-	private static final String EPOCH_DIRECTORY = "/pub/product";
-
 	// -------------------- Propriétés de la classe --------------------
 
 	private ClientFtp clientFtp;
 	private String ipServer = "";
 	private String ftpServerName = "";
+	private String epochDirectory = "";
 	private boolean isOpenConnection = false;
 
 	// -------------------- Constructeurs --------------------
 
-	public ClientFtpSp3File() {
-		this.ftpServerName = FTP_SERVER_NAME;
-	}
-
-	public ClientFtpSp3File(String ftpServerName) {
-		this.ftpServerName = ftpServerName;
+	public ClientFtpSp3File(ClientFtpSp3FileConfiguration clientFtpSp3FileConfiguration) {
+		this.ftpServerName = clientFtpSp3FileConfiguration.getFtpServerName();
+		this.epochDirectory = clientFtpSp3FileConfiguration.getEpochDirectory();
 	}
 
 	// -------------------- Methodes de l'interface --------------------
@@ -82,7 +75,7 @@ public class ClientFtpSp3File implements IConnection {
 	// -------------------- Methodes internes --------------------
 
 	public void downloadAndStoreSp3File(Sp3FileName sp3fileName, Path destinationSp3File) throws IOException {
-		String sp3UrlFileName = EPOCH_DIRECTORY + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
+		String sp3UrlFileName = this.epochDirectory + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
 
 		boolean isOpenConnection = this.clientFtp.openConnection();
 		String message = "";

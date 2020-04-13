@@ -15,7 +15,6 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordina
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
-import fr.gnss.constellation.ouranos.service.IConfigurationService;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.IOrbitsDataDao;
 import fr.gnss.constellation.ouranos.service.orbitdata.dao.Sp3FileNameUtils;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +29,8 @@ public class OrbitsDataService implements IOrbitsDataService {
 
 	private final IOrbitsDataDao orbitsDataDao;
 	private final IOrbitsDataDownloadService orbitsDataDownloadService;
-	private final IConfigurationService configurationService;
 	private final IConfigurationLogMessageService configurationErrorMessageService;
+	private final String defaultDownloadSp3Directory;
 
 	// -------------------- Methodes de l'interface --------------------
 
@@ -56,7 +55,7 @@ public class OrbitsDataService implements IOrbitsDataService {
 					dateFin = end;
 				}
 
-				allSatelitesForPeriod.addAll(this.orbitsDataDao.readDatasForPeriod(configurationService.getDirectorySp3(), sp3FileName, dateDebut, dateFin));
+				allSatelitesForPeriod.addAll(this.orbitsDataDao.readDatasForPeriod(defaultDownloadSp3Directory, sp3FileName, dateDebut, dateFin));
 			}
 
 		} catch (TechnicalException e) {
