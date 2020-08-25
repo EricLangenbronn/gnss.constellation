@@ -24,7 +24,7 @@
     "@angular/router": "^6.1.10",
     "bootstrap": "3.4.1",
     "core-js": "^2.4.1",
-    "highcharts": "8.0.4",
+    "highcharts": "8.2.0",
     "ng2-highcharts": "1.2.0",
     "rxjs": "^6.5.5",
     "rxjs-compat": "^6.5.5",
