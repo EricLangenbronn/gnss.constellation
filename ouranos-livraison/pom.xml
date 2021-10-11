@@ -19,13 +19,14 @@
 			<classifier>spring-boot</classifier>
 			<type>jar</type>
 		</dependency>
-
+        <!-- 
 		<dependency>
 			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-ihm</artifactId>
 			<version>${project.version}</version>
 			<type>zip</type>
 		</dependency>
+		 -->
 	</dependencies>
 
 	<build>

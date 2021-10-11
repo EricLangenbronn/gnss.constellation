@@ -43,7 +43,7 @@ public class TestSp3FileNameUtils {
 	@Test
 	public void testSp3FileNameDateTimeEndDimanche() throws Exception {
 		Sp3FileName sp3FileName = new Sp3FileName("igs17720.sp3");
-		LocalDateTime expectedDate = LocalDateTime.of(2013, 12, 22, 23, 45, 0);
+		LocalDateTime expectedDate = LocalDateTime.of(2013, 12, 22, 23, 59, 0);
 
 		LocalDateTime dateDebut = Sp3FileNameUtils.getEndDateTime(sp3FileName);
 
@@ -53,7 +53,7 @@ public class TestSp3FileNameUtils {
 	@Test
 	public void testSp3FileNameDateTimeEndOtherDay() throws Exception {
 		Sp3FileName sp3FileName = new Sp3FileName("igs18254.sp3");
-		LocalDateTime expectedDate = LocalDateTime.of(2015, 1, 1, 23, 45, 0);
+		LocalDateTime expectedDate = LocalDateTime.of(2015, 1, 1, 23, 59, 0);
 
 		LocalDateTime dateDebut = Sp3FileNameUtils.getEndDateTime(sp3FileName);
 

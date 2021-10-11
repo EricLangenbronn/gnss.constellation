@@ -26,7 +26,7 @@ public class Sp3FileNameUtils {
 		if (sp3FileName != null) {
 			LocalDate dateDebut = Sp3Const.FIRST_EPOCH_RECORD.plusWeeks(sp3FileName.getGpsWeek());
 			dateDebut = dateDebut.plusDays(sp3FileName.getDay());
-			LocalTime timeDebut = LocalTime.of(23, 45);
+			LocalTime timeDebut = LocalTime.of(23, 59);
 			dateTimeDebut = LocalDateTime.of(dateDebut, timeDebut);
 		}
 
