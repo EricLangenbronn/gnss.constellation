@@ -28,7 +28,7 @@ public class ITOrbitsDataService {
     private IOrbitsDataService orbitsDataService;
 
     @Test
-    public void testReadDatasForPeriodStartAfterEndBefore() throws Exception {
+    public void testReadDatasForPeriodStartAfterEndBefore() {
 
         LocalDateTime start = LocalDateTime.parse("2013-08-22T10:00", DateTimeFormatter.ISO_DATE_TIME);
         LocalDateTime end = LocalDateTime.parse("2013-08-22T15:00", DateTimeFormatter.ISO_DATE_TIME);
@@ -40,15 +40,15 @@ public class ITOrbitsDataService {
                 EphemerideType.igs, OrbitType.sp3);
 
         assertNotNull(datas);
-        assertEquals(21, datas.size());
+        assertEquals(20, datas.size());
 
     }
 
     @Test
-    public void testReadDatasForPeriodStartEqualsEndEquals() throws Exception {
+    public void testReadDatasForPeriodStartEqualsEndEquals() {
 
         LocalDateTime start = LocalDateTime.parse("2013-08-22T00:00", DateTimeFormatter.ISO_DATE_TIME);
-        LocalDateTime end = LocalDateTime.parse("2013-08-22T23:45", DateTimeFormatter.ISO_DATE_TIME);
+        LocalDateTime end = LocalDateTime.parse("2013-08-22T23:59", DateTimeFormatter.ISO_DATE_TIME);
 
         List<File> files = new ArrayList<>();
         files.add(new File("./src/it/resources/Sp3File/igs17720.sp3"));
@@ -62,7 +62,7 @@ public class ITOrbitsDataService {
     }
 
     @Test
-    public void testReadDatasForPeriodStartEqualsEndBefore() throws Exception {
+    public void testReadDatasForPeriodStartEqualsEndBefore() {
 
         LocalDateTime start = LocalDateTime.parse("2013-08-22T00:00", DateTimeFormatter.ISO_DATE_TIME);
         LocalDateTime end = LocalDateTime.parse("2013-08-22T15:45", DateTimeFormatter.ISO_DATE_TIME);
@@ -74,12 +74,12 @@ public class ITOrbitsDataService {
                 EphemerideType.igs, OrbitType.sp3);
 
         assertNotNull(datas);
-        assertEquals(64, datas.size());
+        assertEquals(63, datas.size());
 
     }
 
     @Test
-    public void testReadDatasForPeriodStartAfterEndEquals() throws Exception {
+    public void testReadDatasForPeriodStartAfterEndEquals() {
 
         LocalDateTime start = LocalDateTime.parse("2013-08-22T10:00", DateTimeFormatter.ISO_DATE_TIME);
         LocalDateTime end = LocalDateTime.parse("2013-08-22T23:45", DateTimeFormatter.ISO_DATE_TIME);
@@ -91,7 +91,7 @@ public class ITOrbitsDataService {
                 EphemerideType.igs, OrbitType.sp3);
 
         assertNotNull(datas);
-        assertEquals(56, datas.size());
+        assertEquals(55, datas.size());
 
     }
 

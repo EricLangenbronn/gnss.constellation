@@ -35,7 +35,7 @@ public class OrbitDataUtils {
 
 		List<Sp3FileName> sp3FileBetween2Date = new ArrayList<>();
 
-		for (LocalDateTime i = dateDebut; i.compareTo(dateFin) < 0; i = i.plusHours(23).plusMinutes(45)) {
+		for (LocalDateTime i = dateDebut; i.compareTo(dateFin) < 0; i = i.plusHours(23).plusMinutes(59).plusSeconds(59)) {
 			sp3FileBetween2Date.add(OrbitDataUtils.getSp3FileName(ephemerideType, i, orbitType));
 		}
 
