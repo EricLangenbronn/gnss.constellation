@@ -1,18 +1,15 @@
 package fr.gnss.constellation.ouranos.test.api.controller.mapper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-import org.junit.Test;
-
 import fr.gnss.constellation.ouranos.api.controller.domain.VisibleSatParamQueryParam;
 import fr.gnss.constellation.ouranos.api.controller.mapper.BeanParamToVisibleSatParamDTOMapper;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestBeanParamToVisibleSatParamDTOMapper {
 

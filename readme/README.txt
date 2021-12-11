@@ -62,3 +62,9 @@ https://www.orekit.org/static/apidocs/index.html?org/orekit/files/sp3/SP3Parser.
 Fichier sp3 
 https://kb.igs.org/hc/en-us/articles/115003935351-Access-to-Products
 
+
+
+
+
+Bash command :
+java -Dserver.port=8081 -Dlog4j.configurationFile="file:///E:/Developpement/Workspace/eclipse/config/ouranos/log4j2.xml" -DOURANOS_REST_API_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos -DOURANOS_REST_API_FILE_CONF=ouranos-rest-api.properties -jar .\ouranos-rest-api-0.0.0-SNAPSHOT.jar @PSBoundParameters

@@ -12,8 +12,6 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.gnss.constellation.ouranos.commons.exception.BusinessException;
-
 public class BindingXMLUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BindingXMLUtil.class);
@@ -32,7 +30,7 @@ public class BindingXMLUtil {
 		return INSTANCE;
 	}
 
-	public <T> Object mapXml2Object(final InputStream p_xml, final Class<T> p_class) throws BusinessException {
+	public <T> Object mapXml2Object(final InputStream p_xml, final Class<T> p_class)  {
 		Object l_Request = null;
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(p_class);
@@ -42,13 +40,12 @@ public class BindingXMLUtil {
 			IOUtils.closeQuietly(p_xml);
 		} catch (JAXBException l_e) {
 			String l_message = "Impossible de transformer le flux en objet de type : " + p_class.getName();
-			LOGGER.error(l_message, l_e);
-			throw new BusinessException(l_message, l_e);
+			throw new RuntimeException(l_message, l_e);
 		}
 		return l_Request;
 	}
 
-	public void mapObject2Xml(Object p_object, OutputStream p_output) throws BusinessException {
+	public void mapObject2Xml(Object p_object, OutputStream p_output)  {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(p_object.getClass());
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -58,8 +55,7 @@ public class BindingXMLUtil {
 			IOUtils.closeQuietly(p_output);
 		} catch (JAXBException l_e) {
 			String l_message = "Impossible de transformer l'ojet en flux de sortie : " + p_object.getClass();
-			LOGGER.error(l_message, l_e);
-			throw new BusinessException(l_message, l_e);
+			throw new RuntimeException(l_message, l_e);
 		}
 	}
 

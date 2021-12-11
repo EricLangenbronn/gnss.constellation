@@ -1,12 +1,8 @@
-package fr.gnss.constellation.librairy.coordinate;
+package fr.gnss.constellation.ouranos.librairy.coordinate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticTransformation;
-import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 
 public class TestGeodeticTransformation {
 

@@ -23,7 +23,7 @@ public class TestSp3CoreParser {
 	@Test
 	public void testConstructeurWithUnImplementSp3Type_thenOk() {
 		assertThrows(UnsupportedOperationException.class, () -> {
-			new Sp3CoreParser(Sp3FileType.a);
+			new Sp3CoreParser(Sp3FileType.b);
 		});
 	}
 

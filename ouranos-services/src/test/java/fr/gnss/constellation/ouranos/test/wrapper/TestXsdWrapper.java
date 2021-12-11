@@ -13,12 +13,12 @@ import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import fr.ouranos.ouranos.data.v10.coordinate.GeodeticCoordinate;
+import fr.ouranos.ouranos.request.visiblesatelite.v10.VisibleSateliteRequest;
 import org.junit.jupiter.api.Test;
 
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
 import fr.gnss.constellation.ouranos.wrapper.XsdWrapper;
-import fr.gnss.constellation.ouranos.xsd.data.GeodeticCoordinate;
-import fr.gnss.constellation.ouranos.xsd.request.VisibleSateliteRequest;
 
 public class TestXsdWrapper {
 

@@ -14,11 +14,11 @@ public class Sp3FormatSecondLineTypeC extends AbstractSp3FormatSecondLine {
 			throw new RuntimeException(message);
 		}
 
-		sp3Header.setGPSWeek(line.substring(3, 7));
-		sp3Header.setsSecondsOfWeek(line.substring(8, 23).trim());
-		sp3Header.setEpochInterval(line.substring(24, 38).trim());
-		sp3Header.setModJulDaySt(line.substring(39, 44));
-		sp3Header.setFractionalDay(line.substring(45, 60).trim());
+		sp3Header.setGPSWeek(Integer.parseInt(line.substring(3, 7)));
+		sp3Header.setsSecondsOfWeek(Float.parseFloat(line.substring(8, 23).trim()));
+		sp3Header.setEpochInterval(Float.parseFloat(line.substring(24, 38).trim()));
+		sp3Header.setModJulDaySt(Integer.parseInt(line.substring(39, 44)));
+		sp3Header.setFractionalDay(Float.parseFloat(line.substring(45, 60).trim()));
 	}
 
 }

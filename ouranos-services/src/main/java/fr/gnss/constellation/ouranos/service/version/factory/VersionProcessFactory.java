@@ -4,26 +4,26 @@ import fr.gnss.constellation.ouranos.service.version.strategy.IVersionProcessStr
 import fr.gnss.constellation.ouranos.service.version.strategy.VersionProcessPrefixStrategyImpl;
 
 public class VersionProcessFactory {
-	
-	// -------------------- Propriétés de la classe --------------------
 
-	private final IVersionProcessStrategy prefixVersionStrategy;
-	
-	// -------------------- Constructeurs --------------------
-	
-	public VersionProcessFactory() {
-		this.prefixVersionStrategy = new VersionProcessPrefixStrategyImpl();
-	}
+    // -------------------- Propriétés de la classe --------------------
 
-	public IVersionProcessStrategy getVersionProcessStrategy(VersionType versionType) {
+    private final IVersionProcessStrategy prefixVersionStrategy;
 
-		IVersionProcessStrategy strategieChoise;
+    // -------------------- Constructeurs --------------------
 
-		switch (versionType) {
-		default:
-			strategieChoise = this.prefixVersionStrategy;
-		}
+    public VersionProcessFactory() {
+        this.prefixVersionStrategy = new VersionProcessPrefixStrategyImpl();
+    }
 
-		return strategieChoise;
-	}
+    public IVersionProcessStrategy getVersionProcessStrategy(VersionType versionType) {
+
+        IVersionProcessStrategy strategieChoise;
+
+        switch (versionType) {
+            default:
+                strategieChoise = this.prefixVersionStrategy;
+        }
+
+        return strategieChoise;
+    }
 }

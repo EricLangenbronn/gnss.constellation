@@ -1,4 +1,4 @@
-package fr.gnss.constellation.librairy.almanach.sp3;
+package fr.gnss.constellation.ouranos.librairy.almanach.sp3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

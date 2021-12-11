@@ -37,7 +37,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import fr.gnss.constellation.ouranos.xsd.response.error.Error;
+import fr.ouranos.ouranos.response.error.Error;
 
 @RestControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)

@@ -3,7 +3,8 @@ package fr.gnss.constellation.ouranos.api.controller.domain;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import io.swagger.annotations.ApiParam;
+
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,12 +16,12 @@ public class VisibleSatParamQueryParam implements IVisibleSatParam {
 
 	@Valid
 	@NotNull(message = "Timestamp start is mandatory")
-	@ApiParam(value = "Timestamp date début en seconde", required = true)
+	@Parameter(description = "Timestamp date début en seconde", required = true)
 	private Long startDateOfMeasure;
 
 	@Valid
 	@NotNull(message = "Timestamp end is mandatory")
-	@ApiParam(value = "Timestamp date fin en seconde", required = true)
+	@Parameter(description = "Timestamp date fin en seconde", required = true)
 	private Long endDateOfMeasure;
 
 	@Valid

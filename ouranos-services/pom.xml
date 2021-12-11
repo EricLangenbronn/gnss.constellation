@@ -14,10 +14,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>fr.gnss.constellation.ouranos</groupId>
-			<artifactId>ouranos-commons</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>fr.gnss.constellation.ouranos</groupId>
 			<artifactId>ouranos-library</artifactId>
 		</dependency>
 		<dependency>
@@ -140,13 +136,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

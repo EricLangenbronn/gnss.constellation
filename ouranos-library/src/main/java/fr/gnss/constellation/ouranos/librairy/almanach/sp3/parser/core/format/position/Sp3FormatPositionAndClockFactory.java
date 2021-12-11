@@ -12,6 +12,8 @@ public class Sp3FormatPositionAndClockFactory {
 	public static AbstractSp3FormatPositionAndClock<CartesianCoordinate3D> getParserPositionAndClock(Sp3FileType sp3FileType) {
 
 		switch (sp3FileType) {
+		case a:
+			return new Sp3FormatPositionAndClockTypeA();
 		case c:
 			return new Sp3FormatPositionAndClockTypeC();
 		default:
