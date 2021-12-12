@@ -1,10 +1,11 @@
 package fr.gnss.constellation.ouranos.it.service;
 
+import fr.gnss.constellation.ouranos.config.OuranosConfiguration;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
+import fr.gnss.constellation.ouranos.service.orbitdata.access.OrbitsDataService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"/moduleTest/ouranos-services-test.xml"})
+@ContextConfiguration(classes = {OuranosConfiguration.class})
 public class ITOrbitsDataService {
 
     @Autowired
-    private IOrbitsDataService orbitsDataService;
+    private OrbitsDataService orbitsDataService;
 
     @Test
     public void testReadDatasForPeriodStartAfterEndBefore() {
@@ -93,10 +94,6 @@ public class ITOrbitsDataService {
         assertNotNull(datas);
         assertEquals(55, datas.size());
 
-    }
-
-    public void setOrbitsDataService(IOrbitsDataService orbitsDataService) {
-        this.orbitsDataService = orbitsDataService;
     }
 
 }

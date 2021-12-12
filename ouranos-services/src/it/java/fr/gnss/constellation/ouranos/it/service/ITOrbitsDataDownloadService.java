@@ -1,10 +1,11 @@
 package fr.gnss.constellation.ouranos.it.service;
 
 
+import fr.gnss.constellation.ouranos.config.OuranosConfiguration;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
-import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataDownloadService;
+import fr.gnss.constellation.ouranos.service.orbitdata.download.IOrbitsDataDownloadService;
 import fr.gnss.constellation.ouranos.service.orbitdata.OrbitDataUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -26,8 +27,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"/moduleTest/ouranos-services-test.xml"})
-@TestPropertySource("classpath:ouranos-rest-api.properties")
+@ContextConfiguration(classes = {OuranosConfiguration.class})
+@TestPropertySource("classpath:ouranos.properties")
 public class ITOrbitsDataDownloadService {
 
     @Autowired
@@ -131,10 +132,6 @@ public class ITOrbitsDataDownloadService {
             File sp3DownloadFile = Paths.get(defaultDownloadSp3Directory, sp3FileName.getFileName(false)).toFile();
             assertTrue(sp3DownloadFile.exists());
         }
-    }
-
-    public void setOrbitsDataDownloadService(IOrbitsDataDownloadService orbitsDataDownloadService) {
-        this.orbitsDataDownloadService = orbitsDataDownloadService;
     }
 
 }

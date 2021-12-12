@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.it.service;
 
+import fr.gnss.constellation.ouranos.config.OuranosConfiguration;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticTransformation;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"/moduleTest/ouranos-services-test.xml"})
+@ContextConfiguration(classes = {OuranosConfiguration.class})
 public class ITTraitementPosition {
 
     @Autowired
@@ -52,8 +53,4 @@ public class ITTraitementPosition {
      * exec.afficheSateliteVisible(map); } catch (BusinessException e) {
      * System.out.println("end of file"); break; } } }
      */
-
-    public void setExecutionService(IComputationService executionDao) {
-        this.computationService = executionDao;
-    }
 }

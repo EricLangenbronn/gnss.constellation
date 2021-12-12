@@ -2,8 +2,8 @@ Eclipse :
 serveur tomcat > Open launch confguration > Arguments
 ajouter :
 -Dlog4j.configurationFile="file:///C:/Users/eric_/Documents/workspace/ouranos.prop/log4j2.xml"
--DOURANOS_REST_API_DIR_CONF="D:/Developpement/Workspace/eclipse/config/ouranos"
--DOURANOS_REST_API_FILE_CONF="ouranos-rest-api.properties"
+-DOURANOS_DIR_CONF="D:/Developpement/Workspace/eclipse/config/ouranos"
+-DOURANOS_FILE_CONF="ouranos-rest-api.properties"
 
 Eclipse debug mode
 -Dspring-boot.run.jvmArguments="-Xdebug
@@ -67,4 +67,4 @@ https://kb.igs.org/hc/en-us/articles/115003935351-Access-to-Products
 
 
 Bash command :
-java -Dserver.port=8081 -Dlog4j.configurationFile="file:///E:/Developpement/Workspace/eclipse/config/ouranos/log4j2.xml" -DOURANOS_REST_API_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos -DOURANOS_REST_API_FILE_CONF=ouranos-rest-api.properties -jar .\ouranos-rest-api-0.0.0-SNAPSHOT.jar @PSBoundParameters
+java -Dserver.port=8080 -Dlog4j.configurationFile="file:///E:/Developpement/Workspace/eclipse/config/ouranos/log4j2.xml" -DOURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos -DOURANOS_FILE_CONF=ouranos.properties -jar .\ouranos-rest-api-0.0.0-SNAPSHOT.jar

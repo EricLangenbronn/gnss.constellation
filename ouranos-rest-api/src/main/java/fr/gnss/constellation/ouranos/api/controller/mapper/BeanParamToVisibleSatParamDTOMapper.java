@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-import fr.gnss.constellation.ouranos.api.controller.domain.IVisibleSatParam;
+import fr.gnss.constellation.ouranos.api.controller.dto.IVisibleSatParam;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
 

@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service("computationService")
+@Service
 public class ComputationService implements IComputationService {
 
     @Override

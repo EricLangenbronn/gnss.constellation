@@ -6,9 +6,9 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
-import fr.gnss.constellation.ouranos.service.IConfigurationLogMessageService;
+import fr.gnss.constellation.ouranos.service.logmessage.ILogMessageService;
 import fr.gnss.constellation.ouranos.service.computation.IComputationService;
-import fr.gnss.constellation.ouranos.service.orbitdata.IOrbitsDataService;
+import fr.gnss.constellation.ouranos.service.orbitdata.access.IOrbitsDataService;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,14 +16,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
-@Service("sateliteVisibleService")
+@Service
 @RequiredArgsConstructor
+@Slf4j
 public class SateliteVisibleService implements ISateliteVisibleService {
 
     // -------------------- Services --------------------
 
-    private final IConfigurationLogMessageService configurationLogMessageService;
+    private final ILogMessageService configurationLogMessageService;
     private final IOrbitsDataService orbitsDataService;
     private final IComputationService computationService;
 

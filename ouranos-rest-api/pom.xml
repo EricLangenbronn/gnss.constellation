@@ -80,8 +80,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <groupId>uk.co.jemos.podam</groupId>
+            <artifactId>podam</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -100,7 +100,7 @@
                         <configuration>
                             <classifier>spring-boot</classifier>
                             <mainClass>
-                                fr.gnss.constellation.ouranos.api.SpringBootRestApplication
+                                fr.gnss.constellation.ouranos.api.OuranosRestApplication
                             </mainClass>
                         </configuration>
                     </execution>

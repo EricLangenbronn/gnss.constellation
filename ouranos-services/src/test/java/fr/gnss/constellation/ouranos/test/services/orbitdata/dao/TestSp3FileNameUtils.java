@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
-import fr.gnss.constellation.ouranos.service.orbitdata.dao.Sp3FileNameUtils;
+import fr.gnss.constellation.ouranos.service.orbitdata.Sp3FileNameUtils;
 
 public class TestSp3FileNameUtils {
 

@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface IComputationService {
 
-    public List<SatelliteTimeCoordinate<SphericalCoordinate>> getSateliteVisibleByPeriod(
+    List<SatelliteTimeCoordinate<SphericalCoordinate>> getSateliteVisibleByPeriod(
             List<SatelliteTimeCoordinate<CartesianCoordinate3D>> visibleSatellite, double elevationMask
             , LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation);
 
-    public List<SatelliteCoordinate<SphericalCoordinate>> getSateliteVisibleBySatellite(
+    List<SatelliteCoordinate<SphericalCoordinate>> getSateliteVisibleBySatellite(
             List<SatelliteTimeCoordinate<CartesianCoordinate3D>> visibleSatellite, double elevationMask
             , LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation);
 }
