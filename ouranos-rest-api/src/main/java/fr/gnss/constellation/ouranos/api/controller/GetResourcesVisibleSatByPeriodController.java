@@ -5,7 +5,7 @@ import fr.gnss.constellation.ouranos.api.controller.mapper.BeanParamToVisibleSat
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
 import fr.gnss.constellation.ouranos.service.process.satelitevisible.ISateliteVisibleService;
-import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.domain.VisibleSateliteRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -35,7 +35,7 @@ public class GetResourcesVisibleSatByPeriodController {
     public List<SatelliteTimeCoordinate<SphericalCoordinate>> getVisiblesatelliteByPeriod(
             @Parameter(description = "submission request", required = true) @NotNull @Valid VisibleSatParamQueryParamDto visibleSatParam) {
 
-        VisibleSateliteRequestDto visibleSatBean = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(visibleSatParam);
+        VisibleSateliteRequest visibleSatBean = BeanParamToVisibleSatParamDTOMapper.beanVisibleSatParamToDTO(visibleSatParam);
 
         return sateliteVisibleService.getSatelliteVisibleByPeriod(visibleSatBean);
     }

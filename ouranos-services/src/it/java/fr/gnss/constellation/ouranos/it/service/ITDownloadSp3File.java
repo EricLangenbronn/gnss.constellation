@@ -1,9 +1,7 @@
 package fr.gnss.constellation.ouranos.it.service;
 
-import fr.gnss.constellation.ouranos.ftp.ClientFtp;
+import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.net.InetAddress;
 import java.nio.file.Path;
@@ -13,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ITDownloadSp3File {
-
+/*
     private static final String URL_FTP_SP3 = "igs.ensg.ign.fr";
     private static final String URL_FTP_SP3_DIRECTORY = "/pub/igs/products";
 
@@ -56,5 +54,5 @@ public class ITDownloadSp3File {
         boolean isOpen = client.openConnection();
         assertFalse(isOpen);
     }
-
+*/
 }

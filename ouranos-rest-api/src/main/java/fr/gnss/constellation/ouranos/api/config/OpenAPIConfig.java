@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class OpenAPIConfig {
 
     @Bean
-    public OpenAPI api(@Value("${info.app.version}") String buildVersion) {
+    public OpenAPI api(@Value("${info.build.version}") String buildVersion) {
         return new OpenAPI()
                 .components(new Components())
                 .info(apiInfo(buildVersion));

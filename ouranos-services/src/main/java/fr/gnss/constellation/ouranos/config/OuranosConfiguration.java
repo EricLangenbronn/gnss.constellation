@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySources;
 @PropertySources({@PropertySource("classpath:ouranos.properties"),
         @PropertySource(value = "file:config/${OURANOS_FILE_CONF}", ignoreResourceNotFound = true),
         @PropertySource(value = "file:${OURANOS_DIR_CONF}/${OURANOS_FILE_CONF}", ignoreResourceNotFound = true)})
-@ComponentScan(basePackages = "fr.gnss.constellation.ouranos.service")
+@ComponentScan(basePackages = "fr.gnss.constellation.ouranos")
 public class OuranosConfiguration {
 
 }

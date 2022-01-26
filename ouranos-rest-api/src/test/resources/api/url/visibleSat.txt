@@ -1,9 +1,0 @@
-/* Apel de l'api Bean */
-Accept:application/xml;charset=UTF-8
-Content-Type:application/xml;charset=UTF-8
-OU
-Accept:application/json;charset=UTF-8
-Content-Type:application/json;charset=UTF-8
-
-http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/byPeriod?lat=38.889139&long=-77.049&alt=130.049&tsStart=1387666800&tsEnd=1387753199&elevmask=15.0
-http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/bySatellite?lat=38.889139&long=-77.049&alt=130.049&tsStart=1387666800&tsEnd=1387753199&elevmask=15.0

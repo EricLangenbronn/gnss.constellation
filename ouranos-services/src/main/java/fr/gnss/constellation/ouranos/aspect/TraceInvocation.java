@@ -1,63 +1,38 @@
 package fr.gnss.constellation.ouranos.aspect;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.JoinPoint.StaticPart;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
+import org.aspectj.lang.annotation.*;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 @Aspect
-public class TraceInvocation implements Ordered {
+@ConfigurationProperties("interceptor-trace-invocation")
+@Component
+@Slf4j(topic = "OURANOS_TRACE_INVOCATION")
+public class TraceInvocation {
 
-	private static Logger LOGGER = LoggerFactory.getLogger("OURANOS_TRACE_INVOCATION");
-	private int order;
+    @Pointcut("execution(* *.*(..)) && within(fr.gnss.constellation.ouranos.service..*)")
+    public void interceptFunctionCall() {
+    }
 
-	@Pointcut("within(fr.gnss.constellation.ouranos.service..*)")
-	public void afficherParametreMethode() {} ;
-	
-	@Before("afficherParametreMethode()")
-	public void afficherDebutTrace(final JoinPoint joinpoint) throws Throwable {
-		final Object[] args = joinpoint.getArgs();
-		final StringBuffer sb = new StringBuffer();
-		sb.append(joinpoint.getSignature().toString());
-		sb.append(" avec les parametres : (");
+    @Before("interceptFunctionCall()")
+    public void afficherDebutTrace(final JoinPoint joinpoint) throws Throwable {
+        final StringBuffer sb = new StringBuffer();
+        sb.append(joinpoint.getSignature().toString());
 
-		for (int i = 0; i < args.length; i++) {
-			sb.append(args[i]);
-			if (i < args.length - 1) {
-				sb.append(", ");
-			}
-		}
-		sb.append(")");
+        log.info("Debut methode :  {}", sb);
+    }
 
-		LOGGER.info("Debut methode : " + sb);
-	}
+    @AfterReturning(pointcut = "interceptFunctionCall()", returning = "result")
+    public void afficherFinTrace(final JoinPoint joinpoint, final Object result) throws Throwable {
+        String nomMethode = joinpoint.getSignature().toLongString();
+        log.info("Fin methode : {}", nomMethode);
+    }
 
-	@AfterReturning
-	public void afficherFinTrace(final StaticPart staticPart, final Object result) throws Throwable {
-		String nomMethode = staticPart.getSignature().toLongString();
-		LOGGER.info("Fin methode :  " + nomMethode + " retour=" + result);
-	}
-
-	@AfterThrowing
-	public void afficherExceptionTrace(final StaticPart staticPart, final Exception exception) throws Throwable {
-		String nomMethode = staticPart.getSignature().toLongString();
-		LOGGER.error("Exception durant la methode :  " + nomMethode, exception);
-	}
-
-	@Override
-	@Order(2)
-	public int getOrder() {
-		return this.order;
-	}
-
-	public void setOrder(final int order) {
-		this.order = order;
-	}
+    @AfterThrowing(pointcut = "interceptFunctionCall()", throwing = "exception")
+    public void afficherExceptionTrace(final JoinPoint joinpoint, final Exception exception) throws Throwable {
+        String nomMethode = joinpoint.getSignature().toLongString();
+        log.error("Exception durant la methode {}, {} ", nomMethode, exception.getMessage());
+    }
 }

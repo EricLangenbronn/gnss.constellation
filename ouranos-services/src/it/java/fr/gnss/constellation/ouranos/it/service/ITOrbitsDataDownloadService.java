@@ -5,7 +5,6 @@ import fr.gnss.constellation.ouranos.config.OuranosConfiguration;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
-import fr.gnss.constellation.ouranos.service.orbitdata.download.IOrbitsDataDownloadService;
 import fr.gnss.constellation.ouranos.service.orbitdata.OrbitDataUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -30,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration(classes = {OuranosConfiguration.class})
 @TestPropertySource("classpath:ouranos.properties")
 public class ITOrbitsDataDownloadService {
-
+/*
     @Autowired
     private IOrbitsDataDownloadService orbitsDataDownloadService;
 
@@ -133,5 +132,5 @@ public class ITOrbitsDataDownloadService {
             assertTrue(sp3DownloadFile.exists());
         }
     }
-
+*/
 }

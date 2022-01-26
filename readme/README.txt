@@ -67,4 +67,9 @@ https://kb.igs.org/hc/en-us/articles/115003935351-Access-to-Products
 
 
 Bash command :
-java -Dserver.port=8080 -Dlog4j.configurationFile="file:///E:/Developpement/Workspace/eclipse/config/ouranos/log4j2.xml" -DOURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos -DOURANOS_FILE_CONF=ouranos.properties -jar .\ouranos-rest-api-0.0.0-SNAPSHOT.jar
+java -Dserver.port=8080 -DOURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos -DOURANOS_FILE_CONF=ouranos.properties -jar .\ouranos-rest-api-0.0.0-SNAPSHOT.jar
+
+Powershell command :
+Start-Process java -NoNewWindow -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT.jar', '--server.port=8080', '--OURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos', '--OURANOS_FILE_CONF=ouranos.properties', '--logging.config=E:\Developpement\Workspace\eclipse\config\ouranos\logback.xml')
+Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT.jar', '--server.port=8080', '--OURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos', '--OURANOS_FILE_CONF=ouranos.properties', '--logging.config=E:\Developpement\Workspace\eclipse\config\ouranos\logback.xml')
+

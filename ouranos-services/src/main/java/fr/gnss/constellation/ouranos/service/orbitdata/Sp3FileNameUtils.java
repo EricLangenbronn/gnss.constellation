@@ -22,14 +22,14 @@ public class Sp3FileNameUtils {
 	}
 
 	public static LocalDateTime getEndDateTime(Sp3FileName sp3FileName) {
-		LocalDateTime dateTimeDebut = null;
+		LocalDateTime dateTimeFin = null;
 		if (sp3FileName != null) {
 			LocalDate dateDebut = Sp3Const.FIRST_EPOCH_RECORD.plusWeeks(sp3FileName.getGpsWeek());
 			dateDebut = dateDebut.plusDays(sp3FileName.getDay());
-			LocalTime timeDebut = LocalTime.of(23, 59);
-			dateTimeDebut = LocalDateTime.of(dateDebut, timeDebut);
+			LocalTime timeFin = LocalTime.of(23, 59);
+			dateTimeFin = LocalDateTime.of(dateDebut, timeFin);
 		}
 
-		return dateTimeDebut;
+		return dateTimeFin;
 	}
 }

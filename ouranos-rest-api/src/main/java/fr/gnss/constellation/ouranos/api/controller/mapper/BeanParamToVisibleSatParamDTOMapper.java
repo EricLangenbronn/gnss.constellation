@@ -6,23 +6,23 @@ import java.time.ZoneId;
 
 import fr.gnss.constellation.ouranos.api.controller.dto.IVisibleSatParam;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
-import fr.gnss.constellation.ouranos.service.process.satelitevisible.dto.VisibleSateliteRequestDto;
+import fr.gnss.constellation.ouranos.service.process.satelitevisible.domain.VisibleSateliteRequest;
 
 public class BeanParamToVisibleSatParamDTOMapper {
 
-	public static VisibleSateliteRequestDto beanVisibleSatParamToDTO(IVisibleSatParam source) {
+	public static VisibleSateliteRequest beanVisibleSatParamToDTO(IVisibleSatParam source) {
 		return createBeanVisibleSatParamToDTO(source);
 	}
 
 	// -------------------- Methodes internes --------------------
 
-	private static VisibleSateliteRequestDto createBeanVisibleSatParamToDTO(IVisibleSatParam source) {
+	private static VisibleSateliteRequest createBeanVisibleSatParamToDTO(IVisibleSatParam source) {
 
-		VisibleSateliteRequestDto dto = null;
+		VisibleSateliteRequest dto = null;
 
 		if (source != null) {
 
-			dto = new VisibleSateliteRequestDto();
+			dto = new VisibleSateliteRequest();
 			if (source.getTimeStampStart() != null) {
 				Instant start = Instant.ofEpochSecond(source.getTimeStampStart());
 				dto.setDateDebut(LocalDateTime.ofInstant(start, ZoneId.of("UTC")));

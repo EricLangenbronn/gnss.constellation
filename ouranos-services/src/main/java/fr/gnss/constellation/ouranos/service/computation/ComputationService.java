@@ -46,38 +46,4 @@ public class ComputationService implements IComputationService {
         return sateliteVisibleByPeriod;
     }
 
-    @Override
-    public List<SatelliteCoordinate<SphericalCoordinate>> getSateliteVisibleBySatellite(List<SatelliteTimeCoordinate<CartesianCoordinate3D>> visibleSatellite,
-                                                                                        double elevationMask, LocalDateTime start, LocalDateTime end, GeodeticCoordinate gStation) {
-
-        Map<String, SatelliteCoordinate<SphericalCoordinate>> sateliteVisible = new HashMap<>();
-        for (SatelliteTimeCoordinate<CartesianCoordinate3D> e : visibleSatellite) {
-
-            for (SatellitePosition<CartesianCoordinate3D> p : e.getSatellites().values()) {
-
-                double[] sphCoord = GeodeticTransformation.processElevationAzimuth(gStation, p.getPosition());
-                SatellitePosition<SphericalCoordinate> satellitePosition = new SatellitePosition<>(p.getVehicleId(), new SphericalCoordinate(sphCoord));
-
-                // sphCoord[2] = azimuth, azimuth doit être positif sinon c'est
-                // que le satelite est pas du bon coté de la terre
-                if (sphCoord[2] >= 0) {
-                    // 3.1415 / 2 rad = 90.0°, on vérifie qu'il est entre 90° et
-                    // l'élévation
-                    if ((sphCoord[1] >= elevationMask) && (sphCoord[1] < (3.141592 / 2))) {
-                        if (sateliteVisible.containsKey(satellitePosition.getVehicleId())) {
-                            SatelliteCoordinate<SphericalCoordinate> satellite = sateliteVisible.get(satellitePosition.getVehicleId());
-                            satellite.addSatellite(e.getEpochHeaderRecord(), satellitePosition);
-                        } else {
-                            SatelliteCoordinate<SphericalCoordinate> satelliteCoord = new SatelliteCoordinate<>(satellitePosition.getVehicleId());
-                            satelliteCoord.addSatellite(e.getEpochHeaderRecord(), satellitePosition);
-                            sateliteVisible.put(satellitePosition.getVehicleId(), satelliteCoord);
-                        }
-                    }
-                }
-            }
-        }
-
-        return new ArrayList<SatelliteCoordinate<SphericalCoordinate>>(sateliteVisible.values());
-    }
-
 }

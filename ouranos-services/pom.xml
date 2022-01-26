@@ -16,15 +16,6 @@
             <groupId>fr.gnss.constellation.ouranos</groupId>
             <artifactId>ouranos-library</artifactId>
         </dependency>
-        <dependency>
-            <groupId>fr.gnss.constellation.ouranos</groupId>
-            <artifactId>ouranos-xsd</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>commons-net</groupId>
@@ -73,6 +64,10 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -109,11 +104,6 @@
         <dependency>
             <groupId>uk.co.jemos.podam</groupId>
             <artifactId>podam</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

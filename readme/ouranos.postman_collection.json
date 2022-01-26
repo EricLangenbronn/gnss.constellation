@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "7bac3a66-79a4-4b91-b160-8a0baa58846f",
+		"name": "Ouranos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Actuator heatlh",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Visible sat byPeriod",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/visibleSat/byPeriod?startDateOfMeasure=1387666800&endDateOfMeasure=1387753199&latitude=38.889139&longitude=-77.049&altitude=130.049&elevationMask=15.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"visibleSat",
+						"byPeriod"
+					],
+					"query": [
+						{
+							"key": "startDateOfMeasure",
+							"value": "1387666800"
+						},
+						{
+							"key": "endDateOfMeasure",
+							"value": "1387753199"
+						},
+						{
+							"key": "latitude",
+							"value": "38.889139"
+						},
+						{
+							"key": "longitude",
+							"value": "-77.049"
+						},
+						{
+							"key": "altitude",
+							"value": "130.049"
+						},
+						{
+							"key": "elevationMask",
+							"value": "15.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Swagger",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/swagger-ui.html",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"swagger-ui.html"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
