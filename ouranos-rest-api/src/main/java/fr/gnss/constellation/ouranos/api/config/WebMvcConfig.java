@@ -1,6 +1,6 @@
 package fr.gnss.constellation.ouranos.api.config;
 
-import fr.gnss.constellation.ouranos.api.controller.filter.LogginInterceptor;
+import fr.gnss.constellation.ouranos.api.filter.LogginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

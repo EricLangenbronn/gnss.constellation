@@ -9,14 +9,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.Sp3FileType;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.core.Sp3CoreParser;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.Sp3Header;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.Sp3HeaderParser;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
-public class Sp3Reader implements Closeable, Iterable<SatelliteTimeCoordinate<CartesianCoordinate3D>> {
+public class Sp3Reader implements Closeable, Iterable<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> {
 
 	private Sp3FileReader sp3FileReader;
 	private Sp3CoreParser sp3CoreParser;
@@ -53,7 +53,7 @@ public class Sp3Reader implements Closeable, Iterable<SatelliteTimeCoordinate<Ca
 		return sp3Header;
 	}
 
-	public List<SatelliteTimeCoordinate<CartesianCoordinate3D>> getPositionsAndClocksRecords(LocalDateTime startClock, LocalDateTime endClock)
+	public List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> getPositionsAndClocksRecords(LocalDateTime startClock, LocalDateTime endClock)
 			throws IOException {
 
 		if (endClock.isBefore(startClock)) {
@@ -75,7 +75,7 @@ public class Sp3Reader implements Closeable, Iterable<SatelliteTimeCoordinate<Ca
 		} while (currentClock.isBefore(startClock));
 
 		long currentBeginLinePosInFile = sp3FileReader.getFilePointer();
-		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> positionsAndClocksRecords = new ArrayList<>();
+		List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> positionsAndClocksRecords = new ArrayList<>();
 		while (currentClock.isBefore(endClock)) { // recuperation des données entre les deux dates
 
 			List<String> satPosition = new ArrayList<>();
@@ -103,7 +103,7 @@ public class Sp3Reader implements Closeable, Iterable<SatelliteTimeCoordinate<Ca
 		return positionsAndClocksRecords;
 	}
 
-	public SatelliteTimeCoordinate<CartesianCoordinate3D> readNext() throws IOException {
+	public TimeCoordinateSatellitePosition<CartesianCoordinate3D> readNext() throws IOException {
 
 		while (!sp3FileReader.isEndOfHeader()) { // skip all header
 			sp3FileReader.readLine();
@@ -132,7 +132,7 @@ public class Sp3Reader implements Closeable, Iterable<SatelliteTimeCoordinate<Ca
 	}
 
 	@Override
-	public Iterator<SatelliteTimeCoordinate<CartesianCoordinate3D>> iterator() {
+	public Iterator<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> iterator() {
 		try {
 			return new Sp3Iterator(this);
 		} catch (IOException e) {

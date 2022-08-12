@@ -11,10 +11,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatellitePosition;
 import org.junit.jupiter.api.Test;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
@@ -54,7 +54,7 @@ public class TestSp3Iterator {
 		Sp3Iterator sp3Iterator = new Sp3Iterator(sp3Reader);
 		assertNotNull(sp3Iterator);
 
-		SatelliteTimeCoordinate<CartesianCoordinate3D> positionsAndClockRecord = sp3Iterator.next();
+		TimeCoordinateSatellitePosition<CartesianCoordinate3D> positionsAndClockRecord = sp3Iterator.next();
 		assertNotNull(positionsAndClockRecord);
 		assertEquals(LocalDateTime.parse("2013-12-22T00:00", DateTimeFormatter.ISO_DATE_TIME), positionsAndClockRecord.getEpochHeaderRecord());
 		assertEquals(32, positionsAndClockRecord.getSatellites().size());
@@ -73,7 +73,7 @@ public class TestSp3Iterator {
 		Sp3Iterator sp3Iterator = new Sp3Iterator(sp3Reader);
 		assertNotNull(sp3Iterator);
 
-		SatelliteTimeCoordinate<CartesianCoordinate3D> positionsAndClockRecord = sp3Iterator.next();
+		TimeCoordinateSatellitePosition<CartesianCoordinate3D> positionsAndClockRecord = sp3Iterator.next();
 		positionsAndClockRecord = sp3Iterator.next();
 
 		assertNotNull(positionsAndClockRecord);
@@ -94,16 +94,16 @@ public class TestSp3Iterator {
 		Sp3Iterator sp3Iterator = new Sp3Iterator(sp3Reader);
 		assertNotNull(sp3Iterator);
 
-		List<SatelliteTimeCoordinate<CartesianCoordinate3D>> positionsAndClocksRecords = new ArrayList<>();
+		List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> positionsAndClocksRecords = new ArrayList<>();
 		while (sp3Iterator.hasNext()) {
-			SatelliteTimeCoordinate<CartesianCoordinate3D> positionsAndClockRecord = sp3Iterator.next();
+			TimeCoordinateSatellitePosition<CartesianCoordinate3D> positionsAndClockRecord = sp3Iterator.next();
 			positionsAndClocksRecords.add(positionsAndClockRecord);
 		}
 
 		assertNotNull(positionsAndClocksRecords);
 		assertFalse(positionsAndClocksRecords.isEmpty());
 		assertEquals(96, positionsAndClocksRecords.size());
-		for (SatelliteTimeCoordinate<CartesianCoordinate3D> positionsAndClockRecord : positionsAndClocksRecords) {
+		for (TimeCoordinateSatellitePosition<CartesianCoordinate3D> positionsAndClockRecord : positionsAndClocksRecords) {
 			assertEquals(32, positionsAndClockRecord.getSatellites().size());
 		}
 

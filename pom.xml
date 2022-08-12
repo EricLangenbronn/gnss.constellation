@@ -18,7 +18,7 @@
 
     <modules>
         <module>ouranos-library</module>
-        <module>ouranos-services</module>
+        <module>ouranos-domain</module>
         <module>ouranos-rest-api</module>
         <!-- <module>ouranos-ihm</module> IHM a refaire -->
         <module>ouranos-livraison</module>
@@ -44,8 +44,8 @@
         <jackson.version>2.13.0</jackson.version>
         <springdoc.openapi.ui.version>1.5.13</springdoc.openapi.ui.version>
         <aspectj.version>1.9.7</aspectj.version>
-        <lombok.version>1.18.22</lombok.version>
-        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <lombok.version>1.18.24</lombok.version>
+        <mapstruct.version>1.5.2.Final</mapstruct.version>
 
         <logback.classic.version>1.2.10</logback.classic.version>
 
@@ -72,7 +72,7 @@
             </dependency>
             <dependency>
                 <groupId>fr.gnss.constellation.ouranos</groupId>
-                <artifactId>ouranos-services</artifactId>
+                <artifactId>ouranos-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--
@@ -201,6 +201,13 @@
                 <version>${logback.classic.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+
             <!-- AOP -->
             <dependency>
                 <groupId>org.aspectj</groupId>
@@ -254,7 +261,6 @@
                 <version>${podam.version}</version>
                 <scope>test</scope>
             </dependency>
-
 
         </dependencies>
     </dependencyManagement>

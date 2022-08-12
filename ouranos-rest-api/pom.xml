@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>fr.gnss.constellation.ouranos</groupId>
-            <artifactId>ouranos-services</artifactId>
+            <artifactId>ouranos-domain</artifactId>
         </dependency>
 
         <!-- ########## Spring ########### -->
@@ -56,6 +56,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
         </dependency>
 
         <dependency>

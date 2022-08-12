@@ -3,11 +3,11 @@ package fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.core;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatellitePosition;
 import org.apache.commons.lang3.StringUtils;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.Sp3FileType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteTimeCoordinate;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.core.format.epoch.AbstractSp3FormatEpochHeader;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.core.format.epoch.Sp3FormatEpochHeaderFactory;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.core.format.position.AbstractSp3FormatPositionAndClock;
@@ -37,10 +37,10 @@ public class Sp3CoreParser {
 		return sp3ParserPositionAndClock.parsePositionAndClock(line);
 	}
 
-	public SatelliteTimeCoordinate<CartesianCoordinate3D> parsePositionsAndClock(String clockLine, String[] positionLines) {
+	public TimeCoordinateSatellitePosition<CartesianCoordinate3D> parsePositionsAndClock(String clockLine, String[] positionLines) {
 
 		LocalDateTime epochHeaderRecord = sp3ParserEpochHeader.parseEpochHeader(clockLine);
-		SatelliteTimeCoordinate<CartesianCoordinate3D> sateliteByTime = new SatelliteTimeCoordinate<>(epochHeaderRecord);
+		TimeCoordinateSatellitePosition<CartesianCoordinate3D> sateliteByTime = new TimeCoordinateSatellitePosition<>(epochHeaderRecord);
 
 		for (int i = 0; i < positionLines.length; ++i) {
 			SatellitePosition<CartesianCoordinate3D> satelitePosition = sp3ParserPositionAndClock.parsePositionAndClock(positionLines[i]);
@@ -50,9 +50,9 @@ public class Sp3CoreParser {
 		return sateliteByTime;
 	}
 
-	public SatelliteTimeCoordinate<CartesianCoordinate3D> parsePositionsAndClock(LocalDateTime clock, String[] positionLines) {
+	public TimeCoordinateSatellitePosition<CartesianCoordinate3D> parsePositionsAndClock(LocalDateTime clock, String[] positionLines) {
 
-		SatelliteTimeCoordinate<CartesianCoordinate3D> sateliteByTime = new SatelliteTimeCoordinate<>(clock);
+		TimeCoordinateSatellitePosition<CartesianCoordinate3D> sateliteByTime = new TimeCoordinateSatellitePosition<>(clock);
 
 		for (int i = 0; i < positionLines.length; ++i) {
 			SatellitePosition<CartesianCoordinate3D> satelitePosition = sp3ParserPositionAndClock.parsePositionAndClock(positionLines[i]);

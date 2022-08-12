@@ -7,25 +7,25 @@ public class SphericalCoordinate implements ICoordinate {
     /**
      * r : radial distance
      */
-    private double distance;
+    private double radialDistance;
 
     /**
      * θ : polar angle (theta)
      */
-    private double longitude;
+    private double polarAngle;
 
     /**
      * φ : azimuthal angle
      */
-    private double latitude;
+    private double azimuthalAngle;
 
     /**
      * Initializes a newly created SphericalCoordinate object.
      */
     public SphericalCoordinate() {
-        this.distance = 0;
-        this.longitude = 0;
-        this.latitude = 0;
+        this.radialDistance = 0;
+        this.polarAngle = 0;
+        this.azimuthalAngle = 0;
     }
 
     /**
@@ -37,12 +37,11 @@ public class SphericalCoordinate implements ICoordinate {
      * @param phi            - latitude
      */
     public SphericalCoordinate(double radiusDistance, double theta, double phi) {
-        this.distance = radiusDistance;
-        this.longitude = theta;
-        this.latitude = phi;
+        this.radialDistance = radiusDistance;
+        this.polarAngle = theta;
+        this.azimuthalAngle = phi;
 
-        // TODO Why comment ?
-        // validate();
+        validate();
     }
 
     /**
@@ -57,9 +56,11 @@ public class SphericalCoordinate implements ICoordinate {
             throw new IllegalArgumentException("Une position doit posséder trois valeurs (radial distance, polar, azimuth)");
         }
 
-        this.distance = p[0];
-        this.longitude = p[1];
-        this.latitude = p[2];
+        this.radialDistance = p[0];
+        this.polarAngle = p[1];
+        this.azimuthalAngle = p[2];
+
+        validate();
     }
 
     /**
@@ -75,28 +76,27 @@ public class SphericalCoordinate implements ICoordinate {
 
         Objects.requireNonNull(p, "SphericalCoordinate");
 
-        this.distance = p.getRadiusDistance();
-        this.longitude = p.getAzimuth();
-        this.latitude = p.getInclination();
+        this.radialDistance = p.getRadiusDistance();
+        this.polarAngle = p.getAzimuth();
+        this.azimuthalAngle = p.getInclination();
 
-        // validate();
+        validate();
     }
 
     /**
      * r ≥ 0 0° ≤ θ ≤ 180° (π rad) 0° ≤ φ < 360° (2π rad)
      */
     private void validate() {
-        if (this.distance < 0) {
-            throw new RuntimeException("Attention la distance radial est inférieur à zéro");
+        if (this.radialDistance < 0.0) {
+            throw new IllegalArgumentException(String.format("Attention la distance radial est inférieur à zéro [radialDistance=%s]", radialDistance));
+        }
+        
+        if ((this.polarAngle < -(Math.PI / 2.0)) || (this.polarAngle > (Math.PI / 2.0))) {
+            throw new IllegalArgumentException(String.format("L'inclinaison (latitude) doit être compris entre -90 et 90 degrée [azimuthalAngle=%s]", Math.toDegrees(polarAngle)));
         }
 
-        /** inclinaison compris entre -90 et 90 degrée */
-        if ((this.latitude < -(Math.PI / 2)) || (this.latitude > (Math.PI / 2))) {
-            throw new RuntimeException("L'inclinaison (latitude) doit être compris entre -90 et 90 degrée");
-        }
-
-        if ((this.longitude < -(Math.PI)) || (this.longitude) > (Math.PI)) {
-            throw new RuntimeException("L'azimuth (longitude) doit être compris entre -180 et 180 degrée");
+        if ((this.azimuthalAngle < -(Math.PI)) || (this.azimuthalAngle) > (Math.PI)) {
+            throw new IllegalArgumentException(String.format("L'azimuth (longitude) doit être compris entre -180 et 180 degrée [polarAngle=%s]", Math.toDegrees(azimuthalAngle)));
         }
     }
 
@@ -107,7 +107,7 @@ public class SphericalCoordinate implements ICoordinate {
      * @return the radius or radial
      */
     public double getRadiusDistance() {
-        return this.distance;
+        return this.radialDistance;
     }
 
     /**
@@ -117,7 +117,7 @@ public class SphericalCoordinate implements ICoordinate {
      * @return the polar angle
      */
     public double getInclination() {
-        return this.latitude;
+        return this.polarAngle;
     }
 
     /**
@@ -128,15 +128,15 @@ public class SphericalCoordinate implements ICoordinate {
      * @return the azimuthal angle
      */
     public double getAzimuth() {
-        return this.longitude;
+        return this.azimuthalAngle;
     }
 
     @Override
     public double[] getPosition() {
         double[] position = new double[3];
-        position[0] = distance;
-        position[1] = longitude;
-        position[2] = latitude;
+        position[0] = radialDistance;
+        position[1] = polarAngle;
+        position[2] = azimuthalAngle;
 
         return position;
     }
@@ -148,7 +148,7 @@ public class SphericalCoordinate implements ICoordinate {
 
     @Override
     public String toString() {
-        return "SphericalCoordinate [distance=" + distance + ", longitude=" + longitude + ", latitude=" + latitude + "]";
+        return "SphericalCoordinate [distance=" + radialDistance + ", longitude=" + polarAngle + ", latitude=" + azimuthalAngle + "]";
     }
 
 }

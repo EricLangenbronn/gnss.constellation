@@ -1,29 +1,7 @@
 package fr.gnss.constellation.ouranos.test.api.controller;
 
-import fr.gnss.constellation.ouranos.config.OuranosConfiguration;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatelliteCoordinate;
-import fr.gnss.constellation.ouranos.librairy.coordinate.SphericalCoordinate;
-import fr.gnss.constellation.ouranos.service.process.satelitevisible.SateliteVisibleService;
-import fr.gnss.constellation.ouranos.service.process.satelitevisible.domain.VisibleSateliteRequest;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
-
-import java.util.Arrays;
-
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 /*
 @WebMvcTest(value = GetResourcesVisibleSatBySatController.class)
 @ContextConfiguration(classes = {OuranosConfiguration.class})
