@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.1</version>
+        <version>2.7.2</version>
     </parent>
 
     <groupId>fr.gnss.constellation.ouranos</groupId>
@@ -41,13 +41,10 @@
         <spring.boot.version>2.6.1</spring.boot.version>
 
         <jakarta.version>2.3.3</jakarta.version>
-        <jackson.version>2.13.0</jackson.version>
-        <springdoc.openapi.ui.version>1.5.13</springdoc.openapi.ui.version>
-        <aspectj.version>1.9.7</aspectj.version>
+        <springdoc.openapi.ui.version>1.6.9</springdoc.openapi.ui.version>
+        <aspectj.version>1.9.9.1</aspectj.version>
         <lombok.version>1.18.24</lombok.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
-
-        <logback.classic.version>1.2.10</logback.classic.version>
 
         <!-- angular -->
         <node.version>v12.16.2</node.version>
@@ -196,15 +193,15 @@
                 <version>${lombok.version}</version>
             </dependency>
             <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.classic.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
             </dependency>
 
 
@@ -219,7 +216,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
+                <version>${jackson-bom.version}</version>
             </dependency>
 
             <dependency>
