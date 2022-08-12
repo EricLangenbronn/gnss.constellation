@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>fr.gnss.constellation.ouranos</groupId>
-            <artifactId>ouranos-domain</artifactId>
+            <artifactId>ouranos-core</artifactId>
         </dependency>
 
         <!-- ########## Spring ########### -->

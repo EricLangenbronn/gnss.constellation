@@ -18,7 +18,7 @@
 
     <modules>
         <module>ouranos-library</module>
-        <module>ouranos-domain</module>
+        <module>ouranos-core</module>
         <module>ouranos-rest-api</module>
         <!-- <module>ouranos-ihm</module> IHM a refaire -->
         <module>ouranos-livraison</module>
@@ -69,7 +69,7 @@
             </dependency>
             <dependency>
                 <groupId>fr.gnss.constellation.ouranos</groupId>
-                <artifactId>ouranos-domain</artifactId>
+                <artifactId>ouranos-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--
