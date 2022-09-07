@@ -44,13 +44,13 @@ public class ResourcesVisibleSatelliteController {
         return resourcesVisibleSatByPeriodControllerMapper.visiblesSatelitesDomainToDto(
                 sateliteVisibleService.getSatelliteVisible(
                         GroundStation.builder()
-                                .latitude(new GroundStation.Latitude(Math.toRadians(visibleSatRequestDto.getLatitude())))
-                                .longitude(new GroundStation.Longitude(Math.toRadians(visibleSatRequestDto.getLongitude())))
-                                .altitude(new GroundStation.Altitude(visibleSatRequestDto.getAltitude()))
+                                .latitude(new GroundStation.Latitude(Math.toRadians(visibleSatRequestDto.latitude())))
+                                .longitude(new GroundStation.Longitude(Math.toRadians(visibleSatRequestDto.longitude())))
+                                .altitude(new GroundStation.Altitude(visibleSatRequestDto.altitude()))
                                 .build(),
-                        new ElevationMask(Math.toRadians(visibleSatRequestDto.getElevationMask())),
-                        LocalDateTime.ofInstant(Instant.ofEpochSecond(visibleSatRequestDto.getStartDateOfMeasure()), ZoneId.of("UTC")),
-                        LocalDateTime.ofInstant(Instant.ofEpochSecond(visibleSatRequestDto.getEndDateOfMeasure()), ZoneId.of("UTC"))
+                        new ElevationMask(Math.toRadians(visibleSatRequestDto.elevationMask())),
+                        LocalDateTime.ofInstant(Instant.ofEpochSecond(visibleSatRequestDto.startDateOfMeasure()), ZoneId.of("UTC")),
+                        LocalDateTime.ofInstant(Instant.ofEpochSecond(visibleSatRequestDto.endDateOfMeasure()), ZoneId.of("UTC"))
                 )
         );
     }

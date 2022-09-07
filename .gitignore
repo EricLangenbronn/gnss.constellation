@@ -135,6 +135,7 @@ Thumbs.db
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+.idea/**/encodings.xml
 
 # Gradle
 .idea/**/gradle.xml
@@ -173,5 +174,4 @@ out/
 
 *.iml
 modules.xml
-.idea/misc.xml
 *.ipr
