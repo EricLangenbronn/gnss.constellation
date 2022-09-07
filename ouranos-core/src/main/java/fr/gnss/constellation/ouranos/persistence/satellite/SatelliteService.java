@@ -5,7 +5,7 @@ import fr.gnss.constellation.ouranos.domain.ISatelliteService;
 import fr.gnss.constellation.ouranos.domain.Satellite;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
-import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticTransformation;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateTransformation;
 import fr.gnss.constellation.ouranos.persistence.orbitdata.IOrbitsDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class SatelliteService implements ISatelliteService {
     public List<Satellite> getSatellitePosition(GroundStation groundStation, LocalDateTime start, LocalDateTime end) {
 
         return satelliteServiceMapper.satelliteWithSphericalCoordinateForPeriodToSatelliteDomain(
-                GeodeticTransformation.transformCartesionsToSphericals(
+                CoordinateTransformation.transformCartesionsToSphericals(
                         orbitsDataService.getCartesionPositionsForPeriod(start, end, EphemerideType.igs, OrbitType.sp3),
                         satelliteServiceMapper.domainGroundStationToGeodeticCoordinate(groundStation)
                 )

@@ -20,7 +20,6 @@
         <module>ouranos-library</module>
         <module>ouranos-core</module>
         <module>ouranos-rest-api</module>
-        <!-- <module>ouranos-ihm</module> IHM a refaire -->
         <module>ouranos-livraison</module>
     </modules>
 

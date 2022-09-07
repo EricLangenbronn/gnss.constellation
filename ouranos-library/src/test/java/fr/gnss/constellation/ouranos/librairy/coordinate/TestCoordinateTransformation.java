@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class TestGeodeticTransformation {
+public class TestCoordinateTransformation {
 
 	@Test
 	public void testGeodeticToCartesianStrasbourg() throws Exception {
 
-		double[] cartesianPosition = GeodeticTransformation.geodeticToCartesianWSG84(Math.toRadians(48.5839200), Math.toRadians(7.7455300), 120.0);
+		double[] cartesianPosition = CoordinateTransformation.geodeticToCartesianWSG84(Math.toRadians(48.5839200), Math.toRadians(7.7455300), 120.0);
 
 		assertEquals(4188756.20483369, cartesianPosition[0], 0.0001);
 		assertEquals(569731.86031346, cartesianPosition[1], 0.0001);
@@ -20,7 +20,7 @@ public class TestGeodeticTransformation {
 	@Test
 	public void testGeodeticToCartesianParis() throws Exception {
 
-		double[] cartesianPosition = GeodeticTransformation.geodeticToCartesianWSG84(Math.toRadians(48.8534100), Math.toRadians(2.3488000), 120.0);
+		double[] cartesianPosition = CoordinateTransformation.geodeticToCartesianWSG84(Math.toRadians(48.8534100), Math.toRadians(2.3488000), 120.0);
 
 		assertEquals(4201270.83938198, cartesianPosition[0], 0.0001);
 		assertEquals(172324.672938237, cartesianPosition[1], 0.0001);
@@ -33,7 +33,7 @@ public class TestGeodeticTransformation {
 
 		CartesianCoordinate3D cartesiantStationSatelite = new CartesianCoordinate3D(4201270.83938198, 172324.672938237, 4779938.29153465);
 
-		double[] resEver = GeodeticTransformation.transformECEFtoENU(Math.toRadians(48.5839200), Math.toRadians(7.7455300),
+		double[] resEver = CoordinateTransformation.transformECEFtoENU(Math.toRadians(48.5839200), Math.toRadians(7.7455300),
 				cartesiantStationSatelite.getVector());
 
 		assertEquals(-395468.0517734572, resEver[0], 0.0001);
@@ -45,7 +45,7 @@ public class TestGeodeticTransformation {
 	public void testCalcElevationAzimuthSat() throws Exception {
 
 		GeodeticCoordinate station = new GeodeticCoordinate(Math.toRadians(48.5839200), Math.toRadians(7.7455300), 120.0);
-		double[] cartesianStation = GeodeticTransformation.geodeticToCartesianWSG84(station.getLatitude(), station.getLongitude(), station.getAltitude());
+		double[] cartesianStation = CoordinateTransformation.geodeticToCartesianWSG84(station.getLatitude(), station.getLongitude(), station.getAltitude());
 
 		assertEquals(4188756.20483369, cartesianStation[0], 0.0001);
 		assertEquals(569731.86031346, cartesianStation[1], 0.0001);
@@ -60,7 +60,7 @@ public class TestGeodeticTransformation {
 		assertEquals(-26405880.6253134608, stationSatelite.Y(), 0.0001);
 		assertEquals(-7262712.7983230464, stationSatelite.Z(), 0.0001);
 
-		double[] enuStationSateliteVector = GeodeticTransformation.transformECEFtoENU(station.getLatitude(), station.getLongitude(),
+		double[] enuStationSateliteVector = CoordinateTransformation.transformECEFtoENU(station.getLatitude(), station.getLongitude(),
 				stationSatelite.getVector());
 
 		assertEquals(-26333757.6613142528, enuStationSateliteVector[0], 0.0001);
@@ -87,7 +87,7 @@ public class TestGeodeticTransformation {
 		GeodeticCoordinate station = new GeodeticCoordinate(Math.toRadians(48.5839200), Math.toRadians(7.7455300), 120.0);
 		CartesianCoordinate3D satelite = new CartesianCoordinate3D(5441177.312, -25836148.765, -2502546.747);
 
-		double[] angles = GeodeticTransformation.processElevationAzimuth(station, satelite);
+		double[] angles = CoordinateTransformation.processElevationAzimuth(station, satelite);
 
 		// Angle d'élévation
 		assertEquals(-0.2574305456, angles[1], 0.0001);

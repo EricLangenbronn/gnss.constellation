@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 
-public class Sp3FormatSatelliteIdTypeC extends AbstractSp3FormatSatelliteId {
+public class Sp3FormatSatelliteIdTypeA extends AbstractSp3FormatSatelliteId {
 
     @Override
     public void parseSatelliteId(String line, Sp3Header sp3Header) {
@@ -15,7 +15,7 @@ public class Sp3FormatSatelliteIdTypeC extends AbstractSp3FormatSatelliteId {
             throw new IllegalArgumentException(message);
         }
 
-        String satelliteIdInformation = line.substring(9, line.length());
+        String satelliteIdInformation = line.substring(10, line.length());
         List<String> satelliteIds = Arrays.stream(satelliteIdInformation.split("(?<=\\G...)"))
                 .map(String::trim)
                 .filter(satelliteId -> !"0".equals(satelliteId))

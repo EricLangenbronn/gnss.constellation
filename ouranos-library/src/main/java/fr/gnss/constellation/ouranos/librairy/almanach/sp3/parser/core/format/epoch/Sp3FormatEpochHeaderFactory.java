@@ -10,14 +10,11 @@ public class Sp3FormatEpochHeaderFactory {
 
 	public static AbstractSp3FormatEpochHeader getParserEpochHeader(Sp3FileType sp3FileType) {
 
-		switch (sp3FileType) {
-		case a:
-			return new Sp3FormatEpochHeaderTypeA();
-		case c:
-			return new Sp3FormatEpochHeaderTypeC();
-		default:
-			throw new UnsupportedOperationException("Parser Epoch Header with type " + sp3FileType + ", NotImplement");
-		}
+		return switch (sp3FileType) {
+			case a -> new Sp3FormatEpochHeaderTypeA();
+			case c -> new Sp3FormatEpochHeaderTypeC();
+			default -> throw new UnsupportedOperationException("Parser Epoch Header with type " + sp3FileType + ", NotImplement");
+		};
 	}
 
 }

@@ -11,14 +11,11 @@ public class Sp3FormatPositionAndClockFactory {
 
 	public static AbstractSp3FormatPositionAndClock<CartesianCoordinate3D> getParserPositionAndClock(Sp3FileType sp3FileType) {
 
-		switch (sp3FileType) {
-		case a:
-			return new Sp3FormatPositionAndClockTypeA();
-		case c:
-			return new Sp3FormatPositionAndClockTypeC();
-		default:
-			throw new RuntimeException("Parser Position And Clock with type " + sp3FileType + ", NotImplement");
-		}
+		return switch (sp3FileType) {
+			case a -> new Sp3FormatPositionAndClockTypeA();
+			case c -> new Sp3FormatPositionAndClockTypeC();
+			default -> throw new RuntimeException("Parser Position And Clock with type " + sp3FileType + ", NotImplement");
+		};
 	}
 
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class GeodeticTransformation {
+public class CoordinateTransformation {
 
     /**
      * WGS 84 (World Geodetic System 1984 : système géodésique mondial, révision
@@ -16,32 +16,6 @@ public class GeodeticTransformation {
      */
     public static double a = 6378137.0000; // demi grand axe en metre
     public static double b = 6356752.3142; // demi petit axe en metre
-
-    public static double[] degreeToRadian(double degree[]) {
-        if (degree.length != 3) {
-            throw new IllegalArgumentException("Une position doit posséder trois valeurs");
-        }
-
-        double[] radian = new double[3];
-        radian[0] = Math.toRadians(degree[0]);
-        radian[1] = Math.toRadians(degree[1]);
-        radian[2] = Math.toRadians(degree[2]);
-
-        return radian;
-    }
-
-    public static double[] radianToDegree(double[] radian) {
-        if (radian.length != 3) {
-            throw new IllegalArgumentException("Une position doit posséder trois valeurs");
-        }
-
-        double[] degree = new double[3];
-        degree[0] = Math.toRadians(radian[0]);
-        degree[1] = Math.toRadians(radian[1]);
-        degree[2] = Math.toRadians(radian[2]);
-
-        return degree;
-    }
 
     /**
      * Convert geodetic to geocentric (ECEF) coordinates.
@@ -57,7 +31,7 @@ public class GeodeticTransformation {
         Objects.requireNonNull(heights, "heights");
 
         double ee = 1 - (Math.pow((b / a), 2));
-        double N = GeodeticTransformation.a / Math.sqrt(1.0 - ee * (Math.sin(phi) * Math.sin(phi)));
+        double N = CoordinateTransformation.a / Math.sqrt(1.0 - ee * (Math.sin(phi) * Math.sin(phi)));
 
         double x = (N + heights) * Math.cos(phi) * Math.cos(lambda);
         double y = (N + heights) * Math.cos(phi) * Math.sin(lambda);
@@ -124,13 +98,13 @@ public class GeodeticTransformation {
      */
     public static double[] processElevationAzimuth(GeodeticCoordinate gStation, CartesianCoordinate3D satelite) {
 
-        double[] stationWSF84 = GeodeticTransformation.geodeticToCartesianWSG84(gStation.getLatitude(),
+        double[] stationWSF84 = CoordinateTransformation.geodeticToCartesianWSG84(gStation.getLatitude(),
                 gStation.getLongitude(), gStation.getAltitude());
         CartesianCoordinate3D stationSatelite = CartesianCoordinate3D.minus(satelite,
                 new CartesianCoordinate3D(stationWSF84));
         CartesianCoordinate3D stationSateliteNorm = stationSatelite.normalized();
 
-        double[] enuStationSatelite = GeodeticTransformation.transformECEFtoENU(gStation.getLatitude(),
+        double[] enuStationSatelite = CoordinateTransformation.transformECEFtoENU(gStation.getLatitude(),
                 gStation.getLongitude(), stationSateliteNorm.getVector());
 
         double[] angles = new double[3];
@@ -151,7 +125,7 @@ public class GeodeticTransformation {
 
         TimeCoordinateSatellitePosition<SphericalCoordinate> timeCoordinateSatellitePositionSpherical = new TimeCoordinateSatellitePosition<SphericalCoordinate>(timeCoordinateSatellitePositionCartesian.getEpochHeaderRecord());
         for (SatellitePosition<CartesianCoordinate3D> satellitePositionCartesianCoordinate : timeCoordinateSatellitePositionCartesian.getSatellites().values()) {
-            double[] sphCoord = GeodeticTransformation.processElevationAzimuth(groundStation, satellitePositionCartesianCoordinate.getPosition());
+            double[] sphCoord = CoordinateTransformation.processElevationAzimuth(groundStation, satellitePositionCartesianCoordinate.getPosition());
             SatellitePosition<SphericalCoordinate> satellitePositionSpherical = new SatellitePosition<>(satellitePositionCartesianCoordinate.getVehicleId(), new SphericalCoordinate(sphCoord));
 
 

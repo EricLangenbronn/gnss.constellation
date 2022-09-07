@@ -3,7 +3,7 @@ package fr.gnss.constellation.ouranos.it.service;
 import fr.gnss.constellation.ouranos.config.OuranosConfiguration;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
-import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticTransformation;
+import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateTransformation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,11 +26,11 @@ public class ITTraitementPosition {
         GeodeticCoordinate stationGeo = new GeodeticCoordinate(Math.toRadians(38.889139), Math.toRadians(-77.049),
                 130.049);
 
-        CartesianCoordinate3D stationCar = new CartesianCoordinate3D(GeodeticTransformation.geodeticToCartesianWSG84(
+        CartesianCoordinate3D stationCar = new CartesianCoordinate3D(CoordinateTransformation.geodeticToCartesianWSG84(
                 stationGeo.getLatitude(), stationGeo.getLongitude(), stationGeo.getAltitude()));
         CartesianCoordinate3D satelite = new CartesianCoordinate3D(-12110.343226, -13482.507392, -19488.380856);
 
-        double[] angles = GeodeticTransformation.processElevationAzimuth(stationGeo, satelite);
+        double[] angles = CoordinateTransformation.processElevationAzimuth(stationGeo, satelite);
         assertNotNull(angles);
 
         System.out.println("angle : " + angles);
