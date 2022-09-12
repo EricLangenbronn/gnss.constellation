@@ -18,6 +18,7 @@
 
     <modules>
         <module>ouranos-library</module>
+        <module>ouranos-domain</module>
         <module>ouranos-core</module>
         <module>ouranos-rest-api</module>
     </modules>
@@ -67,16 +68,14 @@
             </dependency>
             <dependency>
                 <groupId>fr.gnss.constellation.ouranos</groupId>
+                <artifactId>ouranos-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.gnss.constellation.ouranos</groupId>
                 <artifactId>ouranos-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--
-            <dependency>
-                <groupId>fr.gnss.constellation.ouranos</groupId>
-                <artifactId>ouranos-ihm</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-             -->
 
             <!-- ########## common lib ########### -->
             <dependency>
@@ -179,7 +178,7 @@
             </dependency>
 
             <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
             </dependency>
@@ -335,11 +334,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>jaxb2-maven-plugin</artifactId>
                     <version>2.5.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>com.github.eirslett</groupId>
-                    <artifactId>frontend-maven-plugin</artifactId>
-                    <version>1.12.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>

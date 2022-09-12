@@ -1,6 +1,6 @@
-package fr.gnss.constellation.ouranos.domain;
+package fr.gnss.constellation.ouranos.persistence.satellite;
 
-import fr.gnss.constellation.ouranos.persistence.orbitdata.IOrbitsDataService;
+import fr.gnss.constellation.ouranos.domain.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,6 @@ public class SateliteVisibleService implements ISateliteVisibleService {
 
     // -------------------- Services --------------------
 
-    private final IOrbitsDataService orbitsDataService;
     private final ISatelliteService satelliteService;
 
     // -------------------- Methodes de l'interface --------------------
