@@ -83,9 +83,9 @@ public class Sp3FileRepository implements ISp3FileRepository {
             Files.createFile(sp3File);
             FileUtils.copyInputStreamToFile(inputStream, sp3File.toFile());
         } catch (FileAlreadyExistsException e) {
-            log.warn(MessageFormat.format("Le fichier sp3 existe déjà, on ne veut pas l'écraser. [sp3File={}]", sp3File.getFileName()), e);
+            log.warn(MessageFormat.format("Le fichier sp3 existe déjà, on ne veut pas l'écraser. [sp3File={0}]", sp3File.getFileName()), e);
         } catch (IOException e) {
-            throw new RuntimeException(MessageFormat.format("Erreur lors de la sauvegarde du fichier sp3. [sp3File={}]", sp3File.getFileName()), e);
+            throw new RuntimeException(MessageFormat.format("Erreur lors de la sauvegarde du fichier sp3. [sp3File={0}]", sp3File.getFileName()), e);
         }
 
         return new Sp3File(sp3File.toFile());

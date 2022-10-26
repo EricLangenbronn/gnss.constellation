@@ -80,11 +80,7 @@ Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT.jar', '
 Quarkus :
 cd gnss.constellation\ouranos-rest-api\target\quarkus-app
 create : config/application.properties
-sp3.directory=E:\\Developpement\\Workspace\\eclipse\\config\\ouranos\\sp3
-authorized.access.ftp.sp3=true
 
-products.access.ftp-server-name=igs.ensg.ign.fr
-products.access.epoch-directory=/pub/igs/products
 
 Start-Process java -ArgumentList @('-jar quarkus-run.jar')
 
