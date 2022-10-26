@@ -11,15 +11,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/actuator/health",
+					"raw": "http://localhost:8080/q/health/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"actuator",
-						"health"
+						"q",
+						"health",
+						""
 					]
 				}
 			},
@@ -89,14 +90,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/swagger-ui.html",
+					"raw": "http://localhost:8080/q/openapi",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"swagger-ui.html"
+						"q",
+						"openapi"
 					]
 				}
 			},

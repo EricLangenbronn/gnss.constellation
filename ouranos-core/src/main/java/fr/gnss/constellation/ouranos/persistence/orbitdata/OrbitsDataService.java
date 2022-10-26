@@ -12,15 +12,15 @@ import fr.gnss.constellation.ouranos.persistence.sp3.stream.ISp3InputStreamRepos
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.springframework.stereotype.Service;
 
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Service
+@Singleton
 @RequiredArgsConstructor
 @Slf4j
 public class OrbitsDataService implements IOrbitsDataService {

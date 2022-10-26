@@ -1,14 +1,13 @@
 package fr.gnss.constellation.ouranos.persistence.sp3.stream;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@EnableConfigurationProperties(Sp3InputStreamRepositoryProperties.class)
-@RequiredArgsConstructor
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+
+@ApplicationScoped
+@AllArgsConstructor
 public class Sp3InputStreamRepositoryConfiguration {
 
     // -------------------- Valeurs par défaut des propriétés --------------------
@@ -16,23 +15,25 @@ public class Sp3InputStreamRepositoryConfiguration {
     private static final String FTP_SERVER_NAME = "igs.ensg.ign.fr";
     private static final String EPOCH_DIRECTORY = "/pub/igs/products";
 
+    private final Sp3InputStreamRepositoryProperties sp3InputStreamRepositoryProperties;
+
     // -------------------- Methodes internes --------------------
 
-    @Bean("ftpServerName")
-    public String getFtpServerName(Sp3InputStreamRepositoryProperties props) {
+    @Produces
+    public String getDefaultFtpServerName() {
 
-        if (StringUtils.isNotBlank(props.getFtpServerName())) {
-            return props.getFtpServerName();
+        if (StringUtils.isNotBlank(sp3InputStreamRepositoryProperties.ftpServerName)) {
+            return sp3InputStreamRepositoryProperties.ftpServerName;
         } else {
             return FTP_SERVER_NAME;
         }
     }
 
-    @Bean("epochDirectory")
-    public String getEpochDirectory(Sp3InputStreamRepositoryProperties props) {
+    @Produces
+    public String getDefaultEpochDirectory() {
 
-        if (StringUtils.isNotBlank(props.getEpochDirectory())) {
-            return props.getEpochDirectory();
+        if (StringUtils.isNotBlank(sp3InputStreamRepositoryProperties.epochDirectory)) {
+            return sp3InputStreamRepositoryProperties.epochDirectory;
         } else {
             return EPOCH_DIRECTORY;
         }

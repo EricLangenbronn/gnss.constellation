@@ -73,3 +73,18 @@ Powershell command :
 Start-Process java -NoNewWindow -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT.jar', '--server.port=8080', '--OURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos', '--OURANOS_FILE_CONF=ouranos.properties', '--logging.config=E:\Developpement\Workspace\eclipse\config\ouranos\logback.xml')
 Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT.jar', '--server.port=8080', '--OURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos', '--OURANOS_FILE_CONF=ouranos.properties', '--logging.config=E:\Developpement\Workspace\eclipse\config\ouranos\logback.xml')
 
+
+
+
+
+Quarkus :
+cd gnss.constellation\ouranos-rest-api\target\quarkus-app
+create : config/application.properties
+sp3.directory=E:\\Developpement\\Workspace\\eclipse\\config\\ouranos\\sp3
+authorized.access.ftp.sp3=true
+
+products.access.ftp-server-name=igs.ensg.ign.fr
+products.access.epoch-directory=/pub/igs/products
+
+Start-Process java -ArgumentList @('-jar quarkus-run.jar')
+

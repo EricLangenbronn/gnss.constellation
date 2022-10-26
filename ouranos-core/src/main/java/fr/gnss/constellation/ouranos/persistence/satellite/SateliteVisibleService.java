@@ -3,15 +3,15 @@ package fr.gnss.constellation.ouranos.persistence.satellite;
 import fr.gnss.constellation.ouranos.domain.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
+import javax.inject.Singleton;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
+@Singleton
 @RequiredArgsConstructor
 @Slf4j
 public class SateliteVisibleService implements ISateliteVisibleService {

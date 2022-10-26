@@ -14,6 +14,4 @@ public interface ISp3FileRepository {
     Sp3File getFile(Sp3FileName sp3FileName);
 
     Sp3File saveSp3File(Sp3FileName sp3FileName, InputStream inputStream);
-
-    boolean isSp3DirectoryWritable();
 }

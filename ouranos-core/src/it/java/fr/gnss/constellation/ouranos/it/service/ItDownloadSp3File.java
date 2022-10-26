@@ -1,28 +1,30 @@
 package fr.gnss.constellation.ouranos.it.service;
 
+
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class ITDownloadSp3File {
-/*
+
+public class ItDownloadSp3File {
+
+
     private static final String URL_FTP_SP3 = "igs.ensg.ign.fr";
     private static final String URL_FTP_SP3_DIRECTORY = "/pub/igs/products";
 
     @Test
     public void testConnexion() throws Exception {
         InetAddress address = InetAddress.getByName(URL_FTP_SP3);
-
         ClientFtp client = new ClientFtp(address.getHostAddress());
 
-        boolean isOpen = client.openConnection();
-        assertTrue(isOpen);
+        assertDoesNotThrow(client::openConnection);
+        assertTrue(client.isConnected());
 
         client.logoutAndCloseConnection();
     }
@@ -30,18 +32,18 @@ public class ITDownloadSp3File {
     @Test
     public void testConnexionDownloadFile() throws Exception {
         InetAddress address = InetAddress.getByName(URL_FTP_SP3);
-
         ClientFtp client = new ClientFtp(address.getHostAddress());
 
-        boolean isOpen = client.openConnection();
-        assertTrue(isOpen);
+        client.openConnection();
+        assertTrue(client.isConnected());
 
-        Path accessOutputFile = Paths.get(".", "src/it/resources/Sp3File/igs12821.sp3.Z");
-        client.downloadBinaryFile(URL_FTP_SP3_DIRECTORY + "/1282/igs12821.sp3.Z", accessOutputFile);
+        InputStream sp3InputStream = client.retrieveFileStream(URL_FTP_SP3_DIRECTORY + "/1282/igs12821.sp3.Z");
+
+        assertNotNull(sp3InputStream);
+        assertNotEquals(-1, sp3InputStream.read());
 
         client.logoutAndCloseConnection();
-        assertTrue(accessOutputFile.toFile().exists());
-        assertTrue(accessOutputFile.toFile().length() != 0);
+        IOUtils.closeQuietly(sp3InputStream);
     }
 
     @Test
@@ -49,10 +51,11 @@ public class ITDownloadSp3File {
         InetAddress address = InetAddress.getByName(URL_FTP_SP3);
 
         ClientFtp client = new ClientFtp(address.getHostAddress());
-        client.setTimeOut(10); // 10 milliseconde
+        client.setTimeOut(1); // 1 milliseconde
 
-        boolean isOpen = client.openConnection();
-        assertFalse(isOpen);
+        assertThrows(IOException.class, client::openConnection);
+        assertFalse(client.isConnected());
+        client.logoutAndCloseConnection();
     }
-*/
+
 }

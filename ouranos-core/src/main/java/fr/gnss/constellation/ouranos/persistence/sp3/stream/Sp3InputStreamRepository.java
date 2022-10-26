@@ -6,27 +6,24 @@ import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+
+@Singleton
 @RequiredArgsConstructor
 @Slf4j
 public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
 
     // -------------------- Propriétés de la classe --------------------
 
-    @Qualifier("ftpServerName")
-    private final String ftpServerName;
-    @Qualifier("epochDirectory")
-    private final String epochDirectory;
+    private final Sp3InputStreamRepositoryConfiguration sp3InputStreamRepositoryConfiguration;
     private ClientFtp clientFtp;
     private ManagedConnection<ClientFtp> managedConnection;
 
@@ -34,7 +31,7 @@ public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
 
     @PostConstruct
     public void init() {
-        this.clientFtp = new ClientFtp(ftpServerName);
+        this.clientFtp = new ClientFtp(sp3InputStreamRepositoryConfiguration.getDefaultFtpServerName());
         this.managedConnection = new ManagedConnection<>();
     }
 
@@ -44,7 +41,7 @@ public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
 
         clientFtp = managedConnection.initConnection(clientFtp);
         if (clientFtp == null) {
-            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + ftpServerName);
+            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + sp3InputStreamRepositoryConfiguration.getDefaultFtpServerName());
         }
 
         InputStream compressSp3InputSteam = null;
@@ -73,7 +70,7 @@ public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
 
         clientFtp = managedConnection.initConnection(clientFtp);
         if (clientFtp == null) {
-            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + ftpServerName);
+            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + sp3InputStreamRepositoryConfiguration.getDefaultFtpServerName());
         }
 
         Map<Sp3FileName, InputStream> sp3Files = new HashMap<>();
@@ -97,7 +94,7 @@ public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
     }
 
     public String generateFtSp3FileUrl(Sp3FileName sp3fileName) {
-        return epochDirectory + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
+        return sp3InputStreamRepositoryConfiguration.getDefaultEpochDirectory() + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
     }
 
 }

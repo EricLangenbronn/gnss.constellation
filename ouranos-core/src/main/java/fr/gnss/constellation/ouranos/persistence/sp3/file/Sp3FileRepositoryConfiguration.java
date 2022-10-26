@@ -1,28 +1,25 @@
 package fr.gnss.constellation.ouranos.persistence.sp3.file;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-import java.io.File;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 
-@Configuration
-@EnableConfigurationProperties(Sp3FileRepositoryProperties.class)
-@RequiredArgsConstructor
-@Slf4j
+@ApplicationScoped
+@AllArgsConstructor
 public class Sp3FileRepositoryConfiguration {
 
-    @Bean("sp3Directory")
-    public File getSp3Directory(Sp3FileRepositoryProperties props) {
+    private final Sp3FileRepositoryProperties sp3FileRepositoryProperties;
 
-        File defaultDownloadSp3Directory;
-        if (StringUtils.isBlank(props.getDirectory())) {
-            defaultDownloadSp3Directory = new File(System.getProperty("user.home"));
+    @Produces
+    public Sp3StorageDirectory getDefaultSp3StorageDirectory() {
+
+        Sp3StorageDirectory defaultDownloadSp3Directory;
+        if (StringUtils.isBlank(sp3FileRepositoryProperties.directory)) {
+            defaultDownloadSp3Directory = new Sp3StorageDirectory(System.getProperty("user.home"));
         } else {
-            defaultDownloadSp3Directory = new File(props.getDirectory());
+            defaultDownloadSp3Directory = new Sp3StorageDirectory(sp3FileRepositoryProperties.directory);
         }
 
         return defaultDownloadSp3Directory;
