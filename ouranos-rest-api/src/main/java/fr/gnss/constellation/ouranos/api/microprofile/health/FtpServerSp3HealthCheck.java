@@ -1,7 +1,8 @@
 package fr.gnss.constellation.ouranos.api.microprofile.health;
 
+import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
-import fr.gnss.constellation.ouranos.infrastructure.sp3.Sp3InputStreamDaoConfiguration;
+import fr.gnss.constellation.ouranos.persistence.orbitdata.AuthorizedNewDownload;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
@@ -15,7 +16,8 @@ import javax.enterprise.context.ApplicationScoped;
 @RequiredArgsConstructor
 public class FtpServerSp3HealthCheck implements HealthCheck {
 
-    private final Sp3InputStreamDaoConfiguration sp3InputStreamDaoConfiguration;
+    private final FtpServerName ftpServerName;
+    private final AuthorizedNewDownload authorizedNewDownload;
 
     @Override
     public HealthCheckResponse call() {
@@ -24,14 +26,21 @@ public class FtpServerSp3HealthCheck implements HealthCheck {
 
         try {
 
-            ClientFtp clientFtp = new ClientFtp(sp3InputStreamDaoConfiguration.getDefaultFtpServerName());
-            clientFtp.openConnection();
-            clientFtp.logoutAndCloseConnection();
+            if (authorizedNewDownload.isAuthorized()) {
+                ClientFtp clientFtp = new ClientFtp(ftpServerName);
+                clientFtp.openConnection();
+                clientFtp.logoutAndCloseConnection();
 
-            responseBuilder.up();
+                responseBuilder.up();
+            } else {
+                responseBuilder.down()
+                        .withData("Impossible de se connecter au serveur FTP SP3 non authorisé : ", authorizedNewDownload.isAuthorized());
+            }
+
+
         } catch (Exception e) {
             responseBuilder.down()
-                    .withData("error", e.getMessage());
+                    .withData("Impossible de se connecter au serveur FTP SP3 : ", e.getMessage());
         }
 
         return responseBuilder.build();

@@ -3,6 +3,7 @@ package fr.gnss.constellation.ouranos.domain.satellite;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
@@ -18,8 +19,10 @@ import java.util.stream.Collectors;
 @Getter
 public class Satellite {
 
-
+    @NonNull
     private SatelliteId satelliteId;
+
+    @NonNull
     private Map<LocalDateTime, Position> positions;
 
     public Map<LocalDateTime, Position> positionsVisible(double elevationMask) {

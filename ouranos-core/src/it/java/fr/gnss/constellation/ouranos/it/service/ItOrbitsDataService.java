@@ -4,7 +4,7 @@ import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.persistence.orbitdata.OrbitsDataRepository;
+import fr.gnss.constellation.ouranos.persistence.orbitdata.OrbitDataRepository;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ItOrbitsDataService {
 
     @Inject
-    private OrbitsDataRepository orbitsDataService;
+    private OrbitDataRepository orbitsDataService;
 
     @Test
     public void testReadDatasForPeriodStartAfterEndBefore() {

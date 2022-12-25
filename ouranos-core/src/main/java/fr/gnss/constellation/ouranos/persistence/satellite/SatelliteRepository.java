@@ -6,7 +6,7 @@ import fr.gnss.constellation.ouranos.domain.satellite.Satellite;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CoordinateTransformation;
-import fr.gnss.constellation.ouranos.persistence.orbitdata.IOrbitsDataRepository;
+import fr.gnss.constellation.ouranos.persistence.orbitdata.IOrbitDataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
@@ -22,7 +22,7 @@ public class SatelliteRepository implements ISatelliteRepository {
 
     private final SatelliteRepositoryMapper satelliteRepositoryMapper = Mappers.getMapper(SatelliteRepositoryMapper.class);
 
-    private final IOrbitsDataRepository orbitsDataRepository;
+    private final IOrbitDataRepository orbitsDataRepository;
 
 
     @Override

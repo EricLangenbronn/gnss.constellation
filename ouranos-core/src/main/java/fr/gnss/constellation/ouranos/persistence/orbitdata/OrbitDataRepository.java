@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.persistence.orbitdata;
 
+import fr.gnss.constellation.ouranos.infrastructure.sp3.ISp3InputStreamDao;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
@@ -8,7 +9,6 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatelli
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.reader.Sp3Reader;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.persistence.sp3.ISp3FileDao;
-import fr.gnss.constellation.ouranos.infrastructure.sp3.ISp3InputStreamDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -23,12 +23,13 @@ import java.util.List;
 @Singleton
 @RequiredArgsConstructor
 @Slf4j
-public class OrbitsDataRepository implements IOrbitsDataRepository {
+public class OrbitDataRepository implements IOrbitDataRepository {
 
     // -------------------- Services --------------------
 
     private final ISp3FileDao sp3FileRepository;
     private final ISp3InputStreamDao sp3InputStreamRepository;
+    private final AuthorizedNewDownload authorizedNewDownload;
 
     // -------------------- Methodes de l'interface --------------------
 
@@ -49,11 +50,14 @@ public class OrbitsDataRepository implements IOrbitsDataRepository {
             Sp3Reader sp3FileParser = null;
             try {
                 Sp3File sp3File = sp3FileRepository.getFile(sp3FileName);
-                if (sp3File == null) {
+                if (sp3File == null && authorizedNewDownload.isAuthorized()) {
                     sp3File = sp3FileRepository.saveSp3File(sp3FileName, sp3InputStreamRepository.downloadSp3File(sp3FileName, true));
                 }
-                sp3FileParser = new Sp3Reader(sp3File);
-                allSatelitesForPeriod.addAll(sp3FileParser.getPositionsAndClocksRecords(dateDebut, dateFin));
+
+                if (sp3File != null) {
+                    sp3FileParser = new Sp3Reader(sp3File);
+                    allSatelitesForPeriod.addAll(sp3FileParser.getPositionsAndClocksRecords(dateDebut, dateFin));
+                }
             } catch (IOException e) {
                 throw new RuntimeException("Impossible de charger les informations pour ce fichier : " + sp3FileName, e);
             } finally {

@@ -18,9 +18,9 @@ import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 
 public class Sp3Reader implements Closeable, Iterable<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> {
 
-	private Sp3FileReader sp3FileReader;
-	private Sp3CoreParser sp3CoreParser;
-	private Sp3HeaderParser sp3HeaderParser;
+	private final Sp3FileReader sp3FileReader;
+	private final Sp3CoreParser sp3CoreParser;
+	private final Sp3HeaderParser sp3HeaderParser;
 
 	private Sp3Header sp3Header;
 

@@ -1,6 +1,7 @@
 package fr.gnss.constellation.ouranos.infrastructure.sp3;
 
 import fr.gnss.constellation.ouranos.common.compress.UnCompress;
+import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.common.network.ManagedConnection;
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
@@ -23,7 +24,8 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
 
     // -------------------- Propriétés de la classe --------------------
 
-    private final Sp3InputStreamDaoConfiguration sp3InputStreamDaoConfiguration;
+    private final FtpServerName ftpServerName;
+    private final EpochDirectory epochDirectory;
     private ClientFtp clientFtp;
     private ManagedConnection<ClientFtp> managedConnection;
 
@@ -31,7 +33,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
 
     @PostConstruct
     public void init() {
-        this.clientFtp = new ClientFtp(sp3InputStreamDaoConfiguration.getDefaultFtpServerName());
+        this.clientFtp = new ClientFtp(ftpServerName);
         this.managedConnection = new ManagedConnection<>();
     }
 
@@ -41,7 +43,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
 
         clientFtp = managedConnection.initConnection(clientFtp);
         if (clientFtp == null) {
-            throw new RuntimeException(String.format("Impossible d'établir une connexion au serveur FTP : %s ", sp3InputStreamDaoConfiguration.getDefaultFtpServerName().getValue()));
+            throw new RuntimeException(String.format("Impossible d'établir une connexion au serveur FTP : %s ", ftpServerName.getValue()));
         }
 
         InputStream compressSp3InputSteam = null;
@@ -70,7 +72,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
 
         clientFtp = managedConnection.initConnection(clientFtp);
         if (clientFtp == null) {
-            throw new RuntimeException(String.format("Impossible d'établir une connexion au serveur FTP : %s", sp3InputStreamDaoConfiguration.getDefaultFtpServerName().getValue()));
+            throw new RuntimeException(String.format("Impossible d'établir une connexion au serveur FTP : %s", ftpServerName.getValue()));
         }
 
         Map<Sp3FileName, InputStream> sp3Files = new HashMap<>();
@@ -94,7 +96,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
     }
 
     public String generateFtSp3FileUrl(Sp3FileName sp3fileName) {
-        return sp3InputStreamDaoConfiguration.getDefaultEpochDirectory().getValue() + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
+        return epochDirectory.getValue() + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
     }
 
 }
