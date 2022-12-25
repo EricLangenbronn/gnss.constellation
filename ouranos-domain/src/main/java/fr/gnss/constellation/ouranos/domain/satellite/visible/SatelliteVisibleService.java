@@ -4,6 +4,8 @@ import fr.gnss.constellation.ouranos.domain.satellite.ElevationMask;
 import fr.gnss.constellation.ouranos.domain.satellite.GroundStation;
 import fr.gnss.constellation.ouranos.domain.satellite.ISatelliteRepository;
 import fr.gnss.constellation.ouranos.domain.satellite.Satellite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 
 
 public class SatelliteVisibleService {
+
+    private static final Logger log = LoggerFactory.getLogger(SatelliteVisibleService.class);
 
     // -------------------- Services --------------------
 
@@ -38,6 +42,9 @@ public class SatelliteVisibleService {
         List<Satellite> satellites = satelliteRepository.getSatellitePosition(groundStation, start, end);
 
         ElevationMask currentElevationMask = elevationMask == null ? defaultElevationMask : elevationMask;
+        if (elevationMask != currentElevationMask) {
+            log.warn("On utilise la configuration par défaut pour l''élévation mask, il se pourrait que ce ne soit pas voulu");
+        }
 
         return Optional.ofNullable(satellites).stream().flatMap(Collection::stream)
                 .map(satellite -> {

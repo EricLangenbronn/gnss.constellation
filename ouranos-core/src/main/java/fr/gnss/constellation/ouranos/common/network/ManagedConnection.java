@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ManagedConnection<E extends IConnection> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ManagedConnection.class);
+    private static final Logger log = LoggerFactory.getLogger(ManagedConnection.class);
 
     private static final int NB_TENTATIVE_CONNECTION = 3;
 
@@ -32,12 +32,12 @@ public class ManagedConnection<E extends IConnection> {
     public E initConnection(E connection) {
         int nbTentative = 0;
         while ((nbTentative < this.nbTentativeConnection) && (!connection.isConnectionOpen())) {
-            LOGGER.info("Nombre de tentative de connexion : " + nbTentative);
+            log.info("Nombre de tentative de connexion : " + nbTentative);
             nbTentative = nbTentative + 1;
             try {
                 connection.openConnection();
             } catch (IOException e) {
-                LOGGER.warn("Impossible d'ouvrir la connexion à la tentative : " + nbTentative);
+                log.warn("Impossible d'ouvrir la connexion à la tentative : " + nbTentative);
             }
         }
 

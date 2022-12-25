@@ -3,6 +3,7 @@ package fr.gnss.constellation.ouranos.domain.satellite;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 
 @Builder
 @Getter
@@ -11,14 +12,17 @@ public class GroundStation {
     /**
      * latitude : phi : radian (NordSud)
      */
+    @NonNull
     private Latitude latitude;
     /**
      * longitude : lambda : radian (EstOuest)
      */
+    @NonNull
     private Longitude longitude;
     /**
      * altitude : h : metre
      */
+    @NonNull
     private Altitude altitude;
 
 
