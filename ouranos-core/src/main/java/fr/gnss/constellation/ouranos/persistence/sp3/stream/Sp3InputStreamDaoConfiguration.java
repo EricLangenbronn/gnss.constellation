@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.persistence.sp3.stream;
 
+import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,28 +16,18 @@ public class Sp3InputStreamDaoConfiguration {
     private static final String FTP_SERVER_NAME = "igs.ensg.ign.fr";
     private static final String EPOCH_DIRECTORY = "/pub/igs/products";
 
-    private final Sp3InputStreamRepositoryProperties sp3InputStreamRepositoryProperties;
+    private final Sp3InputStreamDaoProperties sp3InputStreamDaoProperties;
 
     // -------------------- Methodes internes --------------------
 
     @Produces
-    public String getDefaultFtpServerName() {
-
-        if (StringUtils.isNotBlank(sp3InputStreamRepositoryProperties.ftpServerName)) {
-            return sp3InputStreamRepositoryProperties.ftpServerName;
-        } else {
-            return FTP_SERVER_NAME;
-        }
+    public FtpServerName getDefaultFtpServerName() {
+        return new FtpServerName(StringUtils.isNotBlank(sp3InputStreamDaoProperties.ftpServerName) ? sp3InputStreamDaoProperties.ftpServerName : FTP_SERVER_NAME);
     }
 
     @Produces
-    public String getDefaultEpochDirectory() {
-
-        if (StringUtils.isNotBlank(sp3InputStreamRepositoryProperties.epochDirectory)) {
-            return sp3InputStreamRepositoryProperties.epochDirectory;
-        } else {
-            return EPOCH_DIRECTORY;
-        }
+    public EpochDirectory getDefaultEpochDirectory() {
+        return new EpochDirectory(StringUtils.isNotBlank(sp3InputStreamDaoProperties.epochDirectory) ? sp3InputStreamDaoProperties.epochDirectory : EPOCH_DIRECTORY);
     }
 
 }

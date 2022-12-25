@@ -1,6 +1,7 @@
 package fr.gnss.constellation.ouranos.it.service;
 
 
+import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class ItDownloadSp3File {
     @Test
     public void testConnexion() throws Exception {
         InetAddress address = InetAddress.getByName(URL_FTP_SP3);
-        ClientFtp client = new ClientFtp(address.getHostAddress());
+        ClientFtp client = new ClientFtp(new FtpServerName(address.getHostAddress()));
 
         assertDoesNotThrow(client::openConnection);
         assertTrue(client.isConnected());
@@ -32,7 +33,7 @@ public class ItDownloadSp3File {
     @Test
     public void testConnexionDownloadFile() throws Exception {
         InetAddress address = InetAddress.getByName(URL_FTP_SP3);
-        ClientFtp client = new ClientFtp(address.getHostAddress());
+        ClientFtp client = new ClientFtp(new FtpServerName(address.getHostAddress()));
 
         client.openConnection();
         assertTrue(client.isConnected());
@@ -50,7 +51,7 @@ public class ItDownloadSp3File {
     public void testConnexionCheckTimeOut() throws Exception {
         InetAddress address = InetAddress.getByName(URL_FTP_SP3);
 
-        ClientFtp client = new ClientFtp(address.getHostAddress());
+        ClientFtp client = new ClientFtp(new FtpServerName(address.getHostAddress()));
         client.setTimeOut(1); // 1 milliseconde
 
         assertThrows(IOException.class, client::openConnection);

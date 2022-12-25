@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.common.network.ftp;
 
+import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.common.network.IConnection;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTP;
@@ -26,13 +27,13 @@ public class ClientFtp implements IConnection {
     private String user = "";
     private String password = "";
 
-    public ClientFtp(String serverName) {
-        this.serverName = serverName;
+    public ClientFtp(FtpServerName ftpServerName) {
+        this.serverName = ftpServerName.getValue();
         this.ftp.setConnectTimeout(30000); // 30seconde
     }
 
-    public ClientFtp(String serverName, String user, String password) {
-        this(serverName);
+    public ClientFtp(FtpServerName ftpServerName, String user, String password) {
+        this(ftpServerName);
         this.user = user;
         this.password = password;
     }

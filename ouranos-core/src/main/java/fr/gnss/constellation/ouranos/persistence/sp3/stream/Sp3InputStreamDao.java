@@ -41,7 +41,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
 
         clientFtp = managedConnection.initConnection(clientFtp);
         if (clientFtp == null) {
-            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + sp3InputStreamDaoConfiguration.getDefaultFtpServerName());
+            throw new RuntimeException(String.format("Impossible d'établir une connexion au serveur FTP : %s ", sp3InputStreamDaoConfiguration.getDefaultFtpServerName().getValue()));
         }
 
         InputStream compressSp3InputSteam = null;
@@ -70,7 +70,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
 
         clientFtp = managedConnection.initConnection(clientFtp);
         if (clientFtp == null) {
-            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + sp3InputStreamDaoConfiguration.getDefaultFtpServerName());
+            throw new RuntimeException(String.format("Impossible d'établir une connexion au serveur FTP : %s", sp3InputStreamDaoConfiguration.getDefaultFtpServerName().getValue()));
         }
 
         Map<Sp3FileName, InputStream> sp3Files = new HashMap<>();
@@ -94,7 +94,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
     }
 
     public String generateFtSp3FileUrl(Sp3FileName sp3fileName) {
-        return sp3InputStreamDaoConfiguration.getDefaultEpochDirectory() + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
+        return sp3InputStreamDaoConfiguration.getDefaultEpochDirectory().getValue() + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
     }
 
 }
