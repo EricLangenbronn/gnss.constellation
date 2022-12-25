@@ -8,7 +8,7 @@ import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
 @AllArgsConstructor
-public class Sp3InputStreamRepositoryConfiguration {
+public class Sp3InputStreamDaoConfiguration {
 
     // -------------------- Valeurs par défaut des propriétés --------------------
 

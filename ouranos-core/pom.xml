@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>fr.gnss.constellation.ouranos</groupId>
-            <artifactId>ouranos-library</artifactId>
+            <artifactId>ouranos-sp3-library</artifactId>
         </dependency>
         <dependency>
             <groupId>fr.gnss.constellation.ouranos</groupId>

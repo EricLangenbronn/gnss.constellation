@@ -7,8 +7,8 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.reader.Sp3Reader;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.persistence.sp3.file.ISp3FileRepository;
-import fr.gnss.constellation.ouranos.persistence.sp3.stream.ISp3InputStreamRepository;
+import fr.gnss.constellation.ouranos.persistence.sp3.file.ISp3FileDao;
+import fr.gnss.constellation.ouranos.persistence.sp3.stream.ISp3InputStreamDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -23,12 +23,12 @@ import java.util.List;
 @Singleton
 @RequiredArgsConstructor
 @Slf4j
-public class OrbitsDataService implements IOrbitsDataService {
+public class OrbitsDataRepository implements IOrbitsDataRepository {
 
     // -------------------- Services --------------------
 
-    private final ISp3FileRepository sp3FileRepository;
-    private final ISp3InputStreamRepository sp3InputStreamRepository;
+    private final ISp3FileDao sp3FileRepository;
+    private final ISp3InputStreamDao sp3InputStreamRepository;
 
     // -------------------- Methodes de l'interface --------------------
 

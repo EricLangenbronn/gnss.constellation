@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.domain;
 
+import fr.gnss.constellation.ouranos.domain.satellite.Satellite;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.domain;
+package fr.gnss.constellation.ouranos.domain.satellite;
 
 
 public class ElevationMask {

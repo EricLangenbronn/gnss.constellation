@@ -11,7 +11,7 @@
     </description>
 
     <modules>
-        <module>ouranos-library</module>
+        <module>ouranos-sp3-library</module>
         <module>ouranos-domain</module>
         <module>ouranos-core</module>
         <module>ouranos-rest-api</module>
@@ -54,7 +54,7 @@
             </dependency>
             <dependency>
                 <groupId>fr.gnss.constellation.ouranos</groupId>
-                <artifactId>ouranos-library</artifactId>
+                <artifactId>ouranos-sp3-library</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -2,9 +2,9 @@ package fr.gnss.constellation.ouranos.api.controller;
 
 import fr.gnss.constellation.ouranos.api.controller.dto.SatelliteDto;
 import fr.gnss.constellation.ouranos.api.controller.mapper.ResourcesVisibleSatByPeriodControllerMapper;
-import fr.gnss.constellation.ouranos.domain.ElevationMask;
-import fr.gnss.constellation.ouranos.domain.GroundStation;
-import fr.gnss.constellation.ouranos.domain.ISateliteVisibleService;
+import fr.gnss.constellation.ouranos.domain.satellite.ElevationMask;
+import fr.gnss.constellation.ouranos.domain.satellite.GroundStation;
+import fr.gnss.constellation.ouranos.domain.satellite.visible.SatelliteVisibleService;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 
@@ -24,7 +24,7 @@ import java.util.List;
 public class ResourcesVisibleSatelliteController {
 
     private final ResourcesVisibleSatByPeriodControllerMapper resourcesVisibleSatByPeriodControllerMapper = Mappers.getMapper(ResourcesVisibleSatByPeriodControllerMapper.class);
-    private final ISateliteVisibleService sateliteVisibleService;
+    private final SatelliteVisibleService sateliteVisibleService;
 
     @GET
     @Path("/")

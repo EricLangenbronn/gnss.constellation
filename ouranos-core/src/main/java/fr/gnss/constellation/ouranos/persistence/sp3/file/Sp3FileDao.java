@@ -23,7 +23,7 @@ import java.util.Optional;
 @Singleton
 @RequiredArgsConstructor
 @Slf4j
-public class Sp3FileRepository implements ISp3FileRepository {
+public class Sp3FileDao implements ISp3FileDao {
 
     // -------------------- Attributs --------------------
 

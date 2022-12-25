@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-public interface ISp3InputStreamRepository {
+public interface ISp3InputStreamDao {
 
     InputStream downloadSp3File(Sp3FileName sp3FileName, boolean unCompressSp3File);
 

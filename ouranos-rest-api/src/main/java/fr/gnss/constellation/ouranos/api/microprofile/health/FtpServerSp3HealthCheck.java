@@ -1,7 +1,7 @@
 package fr.gnss.constellation.ouranos.api.microprofile.health;
 
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
-import fr.gnss.constellation.ouranos.persistence.sp3.stream.Sp3InputStreamRepositoryConfiguration;
+import fr.gnss.constellation.ouranos.persistence.sp3.stream.Sp3InputStreamDaoConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
@@ -15,7 +15,7 @@ import javax.enterprise.context.ApplicationScoped;
 @RequiredArgsConstructor
 public class FtpServerSp3HealthCheck implements HealthCheck {
 
-    private final Sp3InputStreamRepositoryConfiguration sp3InputStreamRepositoryConfiguration;
+    private final Sp3InputStreamDaoConfiguration sp3InputStreamDaoConfiguration;
 
     @Override
     public HealthCheckResponse call() {
@@ -24,7 +24,7 @@ public class FtpServerSp3HealthCheck implements HealthCheck {
 
         try {
 
-            ClientFtp clientFtp = new ClientFtp(sp3InputStreamRepositoryConfiguration.getDefaultFtpServerName());
+            ClientFtp clientFtp = new ClientFtp(sp3InputStreamDaoConfiguration.getDefaultFtpServerName());
             clientFtp.openConnection();
             clientFtp.logoutAndCloseConnection();
 

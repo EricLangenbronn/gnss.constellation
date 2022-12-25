@@ -19,11 +19,11 @@ import java.util.Map;
 @Singleton
 @RequiredArgsConstructor
 @Slf4j
-public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
+public class Sp3InputStreamDao implements ISp3InputStreamDao {
 
     // -------------------- Propriétés de la classe --------------------
 
-    private final Sp3InputStreamRepositoryConfiguration sp3InputStreamRepositoryConfiguration;
+    private final Sp3InputStreamDaoConfiguration sp3InputStreamDaoConfiguration;
     private ClientFtp clientFtp;
     private ManagedConnection<ClientFtp> managedConnection;
 
@@ -31,7 +31,7 @@ public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
 
     @PostConstruct
     public void init() {
-        this.clientFtp = new ClientFtp(sp3InputStreamRepositoryConfiguration.getDefaultFtpServerName());
+        this.clientFtp = new ClientFtp(sp3InputStreamDaoConfiguration.getDefaultFtpServerName());
         this.managedConnection = new ManagedConnection<>();
     }
 
@@ -41,7 +41,7 @@ public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
 
         clientFtp = managedConnection.initConnection(clientFtp);
         if (clientFtp == null) {
-            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + sp3InputStreamRepositoryConfiguration.getDefaultFtpServerName());
+            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + sp3InputStreamDaoConfiguration.getDefaultFtpServerName());
         }
 
         InputStream compressSp3InputSteam = null;
@@ -70,7 +70,7 @@ public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
 
         clientFtp = managedConnection.initConnection(clientFtp);
         if (clientFtp == null) {
-            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + sp3InputStreamRepositoryConfiguration.getDefaultFtpServerName());
+            throw new RuntimeException("Impossible d'établir une connexion au serveur FTP : " + sp3InputStreamDaoConfiguration.getDefaultFtpServerName());
         }
 
         Map<Sp3FileName, InputStream> sp3Files = new HashMap<>();
@@ -94,7 +94,7 @@ public class Sp3InputStreamRepository implements ISp3InputStreamRepository {
     }
 
     public String generateFtSp3FileUrl(Sp3FileName sp3fileName) {
-        return sp3InputStreamRepositoryConfiguration.getDefaultEpochDirectory() + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
+        return sp3InputStreamDaoConfiguration.getDefaultEpochDirectory() + "/" + sp3fileName.getGpsWeek() + "/" + sp3fileName.getFileName(true);
     }
 
 }

@@ -1,7 +1,7 @@
 package fr.gnss.constellation.ouranos.persistence.satellite;
 
-import fr.gnss.constellation.ouranos.domain.GroundStation;
-import fr.gnss.constellation.ouranos.domain.Satellite;
+import fr.gnss.constellation.ouranos.domain.satellite.GroundStation;
+import fr.gnss.constellation.ouranos.domain.satellite.Satellite;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Mapper
-public interface SatelliteServiceMapper {
+public interface SatelliteRepositoryMapper {
 
     default GeodeticCoordinate domainGroundStationToGeodeticCoordinate(GroundStation groundStation) {
         return new GeodeticCoordinate(groundStation.getLatitude().getValue()

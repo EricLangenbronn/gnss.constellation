@@ -6,7 +6,7 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import java.io.InputStream;
 import java.util.List;
 
-public interface ISp3FileRepository {
+public interface ISp3FileDao {
 
 
     List<Sp3File> getListSp3File();

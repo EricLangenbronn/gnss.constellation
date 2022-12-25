@@ -8,18 +8,18 @@ import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
 @AllArgsConstructor
-public class Sp3FileRepositoryConfiguration {
+public class Sp3FileDaoConfiguration {
 
-    private final Sp3FileRepositoryProperties sp3FileRepositoryProperties;
+    private final Sp3FileDaoProperties sp3FileDaoProperties;
 
     @Produces
     public Sp3StorageDirectory getDefaultSp3StorageDirectory() {
 
         Sp3StorageDirectory defaultDownloadSp3Directory;
-        if (StringUtils.isBlank(sp3FileRepositoryProperties.directory)) {
+        if (StringUtils.isBlank(sp3FileDaoProperties.directory)) {
             defaultDownloadSp3Directory = new Sp3StorageDirectory(System.getProperty("user.home"));
         } else {
-            defaultDownloadSp3Directory = new Sp3StorageDirectory(sp3FileRepositoryProperties.directory);
+            defaultDownloadSp3Directory = new Sp3StorageDirectory(sp3FileDaoProperties.directory);
         }
 
         return defaultDownloadSp3Directory;
