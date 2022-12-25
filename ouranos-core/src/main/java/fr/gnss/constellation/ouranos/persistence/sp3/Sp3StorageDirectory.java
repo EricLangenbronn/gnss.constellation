@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.persistence.sp3.file;
+package fr.gnss.constellation.ouranos.persistence.sp3;
 
 import java.io.File;
 import java.io.FilenameFilter;

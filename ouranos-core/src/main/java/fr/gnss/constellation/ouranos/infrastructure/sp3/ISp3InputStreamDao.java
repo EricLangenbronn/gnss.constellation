@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.persistence.sp3.stream;
+package fr.gnss.constellation.ouranos.infrastructure.sp3;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 

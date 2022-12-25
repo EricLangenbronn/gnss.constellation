@@ -1,7 +1,7 @@
 package fr.gnss.constellation.ouranos.api.microprofile.health;
 
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
-import fr.gnss.constellation.ouranos.persistence.sp3.stream.Sp3InputStreamDaoConfiguration;
+import fr.gnss.constellation.ouranos.infrastructure.sp3.Sp3InputStreamDaoConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;

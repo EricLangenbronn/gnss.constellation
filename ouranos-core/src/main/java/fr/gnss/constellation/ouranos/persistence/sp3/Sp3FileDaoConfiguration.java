@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.persistence.sp3.file;
+package fr.gnss.constellation.ouranos.persistence.sp3;
 
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

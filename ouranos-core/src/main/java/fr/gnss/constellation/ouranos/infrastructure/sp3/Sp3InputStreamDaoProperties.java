@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.persistence.sp3.stream;
+package fr.gnss.constellation.ouranos.infrastructure.sp3;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,8 +1,6 @@
 package fr.gnss.constellation.ouranos.persistence.sp3;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
-import fr.gnss.constellation.ouranos.persistence.sp3.file.Sp3FileDao;
-import fr.gnss.constellation.ouranos.persistence.sp3.file.Sp3StorageDirectory;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
