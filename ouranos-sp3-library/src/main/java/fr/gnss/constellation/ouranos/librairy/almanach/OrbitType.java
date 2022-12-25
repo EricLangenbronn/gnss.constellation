@@ -23,27 +23,14 @@ public enum OrbitType {
             throw new IllegalArgumentException(message);
         }
 
-        OrbitType l_res = null;
-        switch (p_type) {
-            case "clk":
-                l_res = OrbitType.clk;
-                break;
-            case "cls":
-                l_res = OrbitType.cls;
-                break;
-            case "erp":
-                l_res = OrbitType.erp;
-                break;
-            case "sp3":
-                l_res = OrbitType.sp3;
-                break;
-            case "sum":
-                l_res = OrbitType.sum;
-                break;
-            default:
-                throw new IllegalArgumentException("Le paramètre ne peut pas être convertit en OrbitType,  OrbitType inexistant [type=" + p_type + "]");
-        }
-
-        return l_res;
+        return switch (p_type) {
+            case "clk" -> OrbitType.clk;
+            case "cls" -> OrbitType.cls;
+            case "erp" -> OrbitType.erp;
+            case "sp3" -> OrbitType.sp3;
+            case "sum" -> OrbitType.sum;
+            default ->
+                    throw new IllegalArgumentException("Le paramètre ne peut pas être convertit en OrbitType,  OrbitType inexistant [type=" + p_type + "]");
+        };
     }
 }

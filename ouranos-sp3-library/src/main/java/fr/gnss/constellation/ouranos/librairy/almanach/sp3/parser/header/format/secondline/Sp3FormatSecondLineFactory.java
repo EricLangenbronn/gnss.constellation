@@ -13,7 +13,8 @@ public class Sp3FormatSecondLineFactory {
         return switch (sp3FileType) {
             case a -> new Sp3FormatSecondLineTypeA();
             case c -> new Sp3FormatSecondLineTypeC();
-            default -> throw new IllegalArgumentException("Parser Second Line with type " + sp3FileType + ", NotImplement");
+            default ->
+                    throw new IllegalArgumentException(String.format("Parser Second Line with type %s, NotImplement", sp3FileType));
         };
     }
 

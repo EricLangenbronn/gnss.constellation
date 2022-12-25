@@ -12,8 +12,7 @@ public class Sp3FormatFirstLineTypeC extends AbstractSp3FormatFirstLine {
     public void parseFirstLine(String line, Sp3Header sp3Header) {
 
         if (StringUtils.isBlank(line) || (StringUtils.isNotBlank(line) && line.charAt(0) != '#')) {
-            String message = "Ligne mal formatée, # attendu [line=" + line + "]";
-            throw new RuntimeException(message);
+            throw new RuntimeException(String.format("Ligne mal formatée, # attendu [line=%s]", line));
         }
 
         sp3Header.setVersionSymbol(line.substring(0, 2));

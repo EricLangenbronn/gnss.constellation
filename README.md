@@ -8,8 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-To compile the project you need to install maven and java 8.
-The REST API is a *.war application, so you need to install Tomcat, Josss or other java server.
+To compile the project you need to install maven and java 17.
 
 ### Installing
 
+mvn clean package
+The application is here : gnss.constellation\ouranos-rest-api\target\quarkus-app

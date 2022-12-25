@@ -19,8 +19,8 @@ public class Sp3CoreParser {
 	private static final String CLOCK_LINE = "*";
 	private static final String POSITION_LINE = "P";
 
-	private AbstractSp3FormatEpochHeader sp3ParserEpochHeader;
-	private AbstractSp3FormatPositionAndClock<CartesianCoordinate3D> sp3ParserPositionAndClock;
+	private final AbstractSp3FormatEpochHeader sp3ParserEpochHeader;
+	private final AbstractSp3FormatPositionAndClock<CartesianCoordinate3D> sp3ParserPositionAndClock;
 
 	public Sp3CoreParser(final Sp3FileType sp3FileType) {
 		Objects.requireNonNull(sp3FileType, "sp3 type");
@@ -42,8 +42,8 @@ public class Sp3CoreParser {
 		LocalDateTime epochHeaderRecord = sp3ParserEpochHeader.parseEpochHeader(clockLine);
 		TimeCoordinateSatellitePosition<CartesianCoordinate3D> sateliteByTime = new TimeCoordinateSatellitePosition<>(epochHeaderRecord);
 
-		for (int i = 0; i < positionLines.length; ++i) {
-			SatellitePosition<CartesianCoordinate3D> satelitePosition = sp3ParserPositionAndClock.parsePositionAndClock(positionLines[i]);
+		for (String positionLine : positionLines) {
+			SatellitePosition<CartesianCoordinate3D> satelitePosition = sp3ParserPositionAndClock.parsePositionAndClock(positionLine);
 			sateliteByTime.addSatellite(satelitePosition.getVehicleId(), satelitePosition);
 		}
 
@@ -54,8 +54,8 @@ public class Sp3CoreParser {
 
 		TimeCoordinateSatellitePosition<CartesianCoordinate3D> sateliteByTime = new TimeCoordinateSatellitePosition<>(clock);
 
-		for (int i = 0; i < positionLines.length; ++i) {
-			SatellitePosition<CartesianCoordinate3D> satelitePosition = sp3ParserPositionAndClock.parsePositionAndClock(positionLines[i]);
+		for (String positionLine : positionLines) {
+			SatellitePosition<CartesianCoordinate3D> satelitePosition = sp3ParserPositionAndClock.parsePositionAndClock(positionLine);
 			sateliteByTime.addSatellite(satelitePosition.getVehicleId(), satelitePosition);
 		}
 

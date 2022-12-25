@@ -15,25 +15,14 @@ public enum Sp3FileType {
     public static Sp3FileType stringToSp3FileType(Character p_type) {
         Objects.requireNonNull(p_type, "Le type de l'orbite doit être renseigné. [type=" + p_type + "]");
 
-        Sp3FileType l_res;
-        switch (p_type) {
-            case 'a':
-                l_res = Sp3FileType.a;
-                break;
-            case 'b':
-                l_res = Sp3FileType.b;
-                break;
-            case 'c':
-                l_res = Sp3FileType.c;
-                break;
-            case 'd':
-                l_res = Sp3FileType.d;
-                break;
-            default:
-                throw new IllegalArgumentException("Le paramètre ne peut pas être convertit en Sp3FileType,  Sp3FileType inexistant [type=" + p_type + "]");
-        }
-
-        return l_res;
+        return switch (p_type) {
+            case 'a' -> Sp3FileType.a;
+            case 'b' -> Sp3FileType.b;
+            case 'c' -> Sp3FileType.c;
+            case 'd' -> Sp3FileType.d;
+            default ->
+                    throw new IllegalArgumentException("Le paramètre ne peut pas être convertit en Sp3FileType,  Sp3FileType inexistant [type=" + p_type + "]");
+        };
     }
 
 }

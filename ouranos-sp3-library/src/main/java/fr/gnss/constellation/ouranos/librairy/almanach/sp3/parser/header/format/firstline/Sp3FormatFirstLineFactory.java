@@ -13,7 +13,8 @@ public class Sp3FormatFirstLineFactory {
         return switch (sp3FileType) {
             case a -> new Sp3FormatFirstLineTypeA();
             case c -> new Sp3FormatFirstLineTypeC();
-            default -> throw new IllegalArgumentException("Parser First Line with type " + sp3FileType + ", NotImplement");
+            default ->
+                    throw new IllegalArgumentException(String.format("Parser First Line with type %s, NotImplement", sp3FileType));
         };
     }
 

@@ -73,7 +73,7 @@ public class Sp3FileName {
         fileName.append(String.valueOf(this.day));
         fileName.append("_");
         if (this.hour <= 9) {
-            fileName.append("0" + this.hour);
+            fileName.append("0").append(this.hour);
         } else {
             fileName.append(this.hour);
         }
@@ -127,23 +127,13 @@ public class Sp3FileName {
         String fileName = "";
 
         switch (this.ephemerideType) {
-            case igl:
-                fileName = this.igsIgrIglFileName(withCompressType);
-                break;
-            case igs:
-                fileName = this.igsIgrIglFileName(withCompressType);
-                break;
-            case igr:
-                fileName = this.igsIgrIglFileName(withCompressType);
-                break;
-            case igu:
-                fileName = this.iguFileName(withCompressType);
-                break;
-            default:
-                break;
+            case igl, igs, igr -> fileName = this.igsIgrIglFileName(withCompressType);
+            case igu -> fileName = this.iguFileName(withCompressType);
+            default -> {
+            }
         }
 
-        return fileName.toString();
+        return fileName;
 
     }
 

@@ -10,8 +10,8 @@ public class TimeCoordinateSatellitePosition<T extends ICoordinate> {
 
     // -------------------- Propriétés de la classe --------------------
 
-    private LocalDateTime epochHeaderRecord;
-    private Map<String, SatellitePosition<T>> satellites;
+    private final LocalDateTime epochHeaderRecord;
+    private final Map<String, SatellitePosition<T>> satellites;
 
     // ------------------------ Constructeur(s) ------------------------
 

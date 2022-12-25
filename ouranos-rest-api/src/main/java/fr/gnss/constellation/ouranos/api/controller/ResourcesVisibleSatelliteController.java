@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 
-@Path("/api/visibleSat/byPeriod")
+@Path("/api/visibleSat")
 @RequiredArgsConstructor
 public class ResourcesVisibleSatelliteController {
 
@@ -27,20 +27,20 @@ public class ResourcesVisibleSatelliteController {
     private final SatelliteVisibleService sateliteVisibleService;
 
     @GET
-    @Path("/")
+    @Path("")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<SatelliteDto> getVisibleSatellite(@NotNull @QueryParam("startDateOfMeasure") Long startDateOfMeasure, @NotNull @QueryParam("endDateOfMeasure") Long endDateOfMeasure
-            , @NotNull @QueryParam("latitude") Double latitude, @NotNull @QueryParam("longitude") Double longitude, @NotNull @QueryParam("altitude") Double altitude
-            , @NotNull @QueryParam("elevationMask") Double elevationMask) {
+            , @NotNull @QueryParam("latitude") Double latitudeDegree, @NotNull @QueryParam("longitude") Double longitudeDegree, @NotNull @QueryParam("altitude") Double altitudeMeter
+            , @NotNull @QueryParam("elevationMask") Double elevationMaskDegree) {
 
         return resourcesVisibleSatByPeriodControllerMapper.visiblesSatelitesDomainToDto(
                 sateliteVisibleService.getSatelliteVisible(
                         GroundStation.builder()
-                                .latitude(new GroundStation.Latitude(Math.toRadians(latitude)))
-                                .longitude(new GroundStation.Longitude(Math.toRadians(longitude)))
-                                .altitude(new GroundStation.Altitude(altitude))
+                                .latitude(new GroundStation.Latitude(Math.toRadians(latitudeDegree)))
+                                .longitude(new GroundStation.Longitude(Math.toRadians(longitudeDegree)))
+                                .altitude(new GroundStation.Altitude(altitudeMeter))
                                 .build(),
-                        new ElevationMask(Math.toRadians(elevationMask)),
+                        new ElevationMask(Math.toRadians(elevationMaskDegree)),
                         LocalDateTime.ofInstant(Instant.ofEpochSecond(startDateOfMeasure), ZoneId.of("UTC")),
                         LocalDateTime.ofInstant(Instant.ofEpochSecond(endDateOfMeasure), ZoneId.of("UTC"))
                 )

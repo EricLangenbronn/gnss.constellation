@@ -22,25 +22,15 @@ public enum EphemerideType {
             throw new IllegalArgumentException("La taille du paramètre pour un EphemerideType doit être de 3 [type=" + type + "]");
         }
 
-        EphemerideType res;
-        switch (type) {
-            case "igl":
-                res = EphemerideType.igl;
-                break;
-            case "igr":
-                res = EphemerideType.igr;
-                break;
-            case "igs":
-                res = EphemerideType.igs;
-                break;
-            case "igu":
-                res = EphemerideType.igu;
-                break;
-            default:
+        return switch (type) {
+            case "igl" -> EphemerideType.igl;
+            case "igr" -> EphemerideType.igr;
+            case "igs" -> EphemerideType.igs;
+            case "igu" -> EphemerideType.igu;
+            default -> {
                 String message = "Le paramètre ne peut pas être convertit en EphemerideType,  EphemerideType inexistant [type=" + type + "]";
                 throw new IllegalArgumentException(message);
-        }
-
-        return res;
+            }
+        };
     }
 }

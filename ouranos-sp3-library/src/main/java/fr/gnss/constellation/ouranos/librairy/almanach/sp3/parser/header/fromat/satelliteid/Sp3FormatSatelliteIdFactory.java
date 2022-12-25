@@ -13,7 +13,8 @@ public class Sp3FormatSatelliteIdFactory {
         return switch (sp3FileType) {
             case a -> new Sp3FormatSatelliteIdTypeA();
             case c -> new Sp3FormatSatelliteIdTypeC();
-            default -> throw new IllegalArgumentException("Parser Satellite Id with type " + sp3FileType + ", NotImplement");
+            default ->
+                    throw new IllegalArgumentException(String.format("Parser Satellite Id with type %s, NotImplement", sp3FileType));
         };
     }
 

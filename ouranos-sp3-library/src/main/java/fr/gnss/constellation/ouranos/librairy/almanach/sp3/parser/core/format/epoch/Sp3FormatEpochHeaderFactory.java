@@ -4,17 +4,18 @@ import fr.gnss.constellation.ouranos.librairy.almanach.Sp3FileType;
 
 public class Sp3FormatEpochHeaderFactory {
 
-	private Sp3FormatEpochHeaderFactory() {
+    private Sp3FormatEpochHeaderFactory() {
 
-	}
+    }
 
-	public static AbstractSp3FormatEpochHeader getParserEpochHeader(Sp3FileType sp3FileType) {
+    public static AbstractSp3FormatEpochHeader getParserEpochHeader(Sp3FileType sp3FileType) {
 
-		return switch (sp3FileType) {
-			case a -> new Sp3FormatEpochHeaderTypeA();
-			case c -> new Sp3FormatEpochHeaderTypeC();
-			default -> throw new UnsupportedOperationException("Parser Epoch Header with type " + sp3FileType + ", NotImplement");
-		};
-	}
+        return switch (sp3FileType) {
+            case a -> new Sp3FormatEpochHeaderTypeA();
+            case c -> new Sp3FormatEpochHeaderTypeC();
+            default ->
+                    throw new UnsupportedOperationException(String.format("Parser Epoch Header with type %s, NotImplement", sp3FileType));
+        };
+    }
 
 }

@@ -19,7 +19,7 @@ public class Sp3FileReader implements ISp3FileReader {
     private static final String COMMENT = "/*";
     private static final String EOF = "EOF";
 
-    private RandomAccessFile fileReader;
+    private final RandomAccessFile fileReader;
     private int nbModuloI = 0;
     private boolean skipComment = true;
 
@@ -84,7 +84,7 @@ public class Sp3FileReader implements ISp3FileReader {
     }
 
     public static boolean isEOF(String line) {
-        return line == null ? true : EOF.equals(line);
+        return line == null || EOF.equals(line);
     }
 
     // -------------------- Methodes de l'interface --------------------

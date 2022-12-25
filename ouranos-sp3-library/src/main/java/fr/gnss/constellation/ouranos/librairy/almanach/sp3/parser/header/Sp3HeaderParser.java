@@ -41,17 +41,17 @@ public class Sp3HeaderParser {
 	public Sp3Header loadSp3Header(String[] header) throws IOException {
 		Sp3Header sp3Header = new Sp3Header();
 
-		for (int i = 0; i < header.length; ++i) {
-			if (isFirstLine(sp3FileType, header[i])) {
-				sp3FormatFirstLine.parseFirstLine(header[i], sp3Header);
+		for (String s : header) {
+			if (isFirstLine(sp3FileType, s)) {
+				sp3FormatFirstLine.parseFirstLine(s, sp3Header);
 			}
 
-			if (isSecondLine(header[i])) {
-				sp3FormatSecondLine.parseSecondLine(header[i], sp3Header);
+			if (isSecondLine(s)) {
+				sp3FormatSecondLine.parseSecondLine(s, sp3Header);
 			}
 
-			if (isSatelliteIdLine(header[i])) {
-				sp3FormatSatelliteId.parseSatelliteId(header[i], sp3Header);
+			if (isSatelliteIdLine(s)) {
+				sp3FormatSatelliteId.parseSatelliteId(s, sp3Header);
 			}
 		}
 

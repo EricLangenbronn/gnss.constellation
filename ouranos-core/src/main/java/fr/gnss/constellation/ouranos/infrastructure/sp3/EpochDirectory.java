@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class EpochDirectory {
 
-    private String epochDirectory;
+    private final String epochDirectory;
 
     public EpochDirectory(String epochDirectory) {
         if (StringUtils.isBlank(epochDirectory)) {

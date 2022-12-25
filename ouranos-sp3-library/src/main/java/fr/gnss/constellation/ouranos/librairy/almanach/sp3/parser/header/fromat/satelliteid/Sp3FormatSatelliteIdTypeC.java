@@ -11,8 +11,7 @@ public class Sp3FormatSatelliteIdTypeC extends AbstractSp3FormatSatelliteId {
     @Override
     public void parseSatelliteId(String line, Sp3Header sp3Header) {
         if (StringUtils.isBlank(line) || (StringUtils.isNotBlank(line) && line.charAt(0) != '+')) {
-            String message = "Ligne mal formatée, + attendu [line=" + line + "]";
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(String.format("Ligne mal formatée, + attendu [line=%s]", line));
         }
 
         String satelliteIdInformation = line.substring(9, line.length());
