@@ -20,17 +20,17 @@ public class Satellite {
     private SatelliteId satelliteId;
 
     @NonNull
-    private SortedMap<LocalDateTime, Position> positions;
+    private SortedMap<LocalDateTime, Position> positionsByTime;
 
     public SortedMap<LocalDateTime, Position> positionsVisible(double elevationMask) {
-        return Optional.of(positions.entrySet()).stream().flatMap(Collection::stream)
+        return Optional.of(positionsByTime.entrySet()).stream().flatMap(Collection::stream)
                 .filter(entry -> entry.getValue().isVisible(elevationMask))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (o1, o2) -> o1, TreeMap::new));
         // .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     public void addPositionIfAbsent(LocalDateTime localDateTime, Position position) {
-        this.positions.putIfAbsent(localDateTime, position);
+        this.positionsByTime.putIfAbsent(localDateTime, position);
     }
 
     public static class SatelliteId {

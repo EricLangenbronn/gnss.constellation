@@ -13,7 +13,7 @@ import java.util.List;
 public interface ResourcesVisibleSatByPeriodControllerMapper {
 
     @Mapping(target = "satelliteId", source = "satelliteId", qualifiedByName = "visibleSateliteSatelliteIdDomainToDto")
-    @Mapping(target = "positions", source = "positions")
+    @Mapping(target = "positionsByTime", source = "positionsByTime")
     SatelliteDto visibleSateliteDomainToDto(Satellite satellite);
 
     List<SatelliteDto> visiblesSatelitesDomainToDto(List<Satellite> satellite);

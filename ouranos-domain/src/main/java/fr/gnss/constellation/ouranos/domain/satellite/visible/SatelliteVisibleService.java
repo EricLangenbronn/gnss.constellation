@@ -50,10 +50,10 @@ public class SatelliteVisibleService {
                 .map(satellite -> {
                             Satellite satelliteVisible = Satellite.builder()
                                     .satelliteId(satellite.getSatelliteId())
-                                    .positions(satellite.positionsVisible(currentElevationMask.getValue()))
+                                    .positionsByTime(satellite.positionsVisible(currentElevationMask.getValue()))
                                     .build();
 
-                            if (satelliteVisible.getPositions().size() > 0) {
+                            if (satelliteVisible.getPositionsByTime().size() > 0) {
                                 return satelliteVisible;
                             } else {
                                 return null;

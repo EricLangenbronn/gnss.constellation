@@ -32,7 +32,7 @@ public interface SatelliteRepositoryMapper {
                 satellites.add(
                         Satellite.builder()
                                 .satelliteId(new Satellite.SatelliteId(satelliteId))
-                                .positions(new TreeMap<>())
+                                .positionsByTime(new TreeMap<>())
                                 .build()
                 );
             }
