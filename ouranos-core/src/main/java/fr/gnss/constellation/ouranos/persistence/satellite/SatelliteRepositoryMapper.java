@@ -10,8 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 @Mapper
 public interface SatelliteRepositoryMapper {
@@ -32,7 +32,7 @@ public interface SatelliteRepositoryMapper {
                 satellites.add(
                         Satellite.builder()
                                 .satelliteId(new Satellite.SatelliteId(satelliteId))
-                                .positions(new HashMap<>())
+                                .positions(new TreeMap<>())
                                 .build()
                 );
             }

@@ -7,10 +7,7 @@ import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -23,12 +20,13 @@ public class Satellite {
     private SatelliteId satelliteId;
 
     @NonNull
-    private Map<LocalDateTime, Position> positions;
+    private SortedMap<LocalDateTime, Position> positions;
 
-    public Map<LocalDateTime, Position> positionsVisible(double elevationMask) {
+    public SortedMap<LocalDateTime, Position> positionsVisible(double elevationMask) {
         return Optional.of(positions.entrySet()).stream().flatMap(Collection::stream)
                 .filter(entry -> entry.getValue().isVisible(elevationMask))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (o1, o2) -> o1, TreeMap::new));
+        // .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     public void addPositionIfAbsent(LocalDateTime localDateTime, Position position) {
