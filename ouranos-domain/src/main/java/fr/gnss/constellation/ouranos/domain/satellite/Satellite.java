@@ -26,7 +26,6 @@ public class Satellite {
         return Optional.of(positionsByTime.entrySet()).stream().flatMap(Collection::stream)
                 .filter(entry -> entry.getValue().isVisible(elevationMask))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (o1, o2) -> o1, TreeMap::new));
-        // .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     public void addPositionIfAbsent(LocalDateTime localDateTime, Position position) {
