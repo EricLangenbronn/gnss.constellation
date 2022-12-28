@@ -20,8 +20,8 @@ public class ClientFtp implements IConnection {
     private static final String DEFAULT_USER = "anonymous";
     private static final String DEFAULT_PASSWORD = "anonymous@domain.com";
 
-    private FTPClient ftp = new FTPClient();
-    private FTPClientConfig config = new FTPClientConfig();
+    private final FTPClient ftp = new FTPClient();
+    private final FTPClientConfig config = new FTPClientConfig();
 
     private String serverName = "";
     private String user = "";

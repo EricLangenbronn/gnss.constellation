@@ -29,7 +29,7 @@ public class ResourcesVisibleSatelliteController {
     @GET
     @Path("")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<SatelliteDto> getVisibleSatellite(@NotNull @QueryParam("startDateOfMeasure") Long startDateOfMeasure, @NotNull @QueryParam("endDateOfMeasure") Long endDateOfMeasure
+    public List<SatelliteDto> getVisibleSatellite(@NotNull @QueryParam("startDateOfMeasure") Long startTimestampOfMeasure, @NotNull @QueryParam("endDateOfMeasure") Long endTimestampOfMeasure
             , @NotNull @QueryParam("latitude") Double latitudeDegree, @NotNull @QueryParam("longitude") Double longitudeDegree, @NotNull @QueryParam("altitude") Double altitudeMeter
             , @NotNull @QueryParam("elevationMask") Double elevationMaskDegree) {
 
@@ -41,8 +41,8 @@ public class ResourcesVisibleSatelliteController {
                                 .altitude(new GroundStation.Altitude(altitudeMeter))
                                 .build(),
                         new ElevationMask(Math.toRadians(elevationMaskDegree)),
-                        LocalDateTime.ofInstant(Instant.ofEpochSecond(startDateOfMeasure), ZoneId.of("UTC")),
-                        LocalDateTime.ofInstant(Instant.ofEpochSecond(endDateOfMeasure), ZoneId.of("UTC"))
+                        LocalDateTime.ofInstant(Instant.ofEpochSecond(startTimestampOfMeasure), ZoneId.of("UTC")),
+                        LocalDateTime.ofInstant(Instant.ofEpochSecond(endTimestampOfMeasure), ZoneId.of("UTC"))
                 )
         );
     }

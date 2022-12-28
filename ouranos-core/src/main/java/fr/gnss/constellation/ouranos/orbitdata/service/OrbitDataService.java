@@ -38,10 +38,10 @@ public class OrbitDataService implements IOrbitDataService {
     public List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> getCartesionPositionsForPeriod(LocalDateTime start, LocalDateTime end
             , EphemerideType ephemerideType, OrbitType orbitType) {
 
-        List<Sp3FileName> allSp3FileBetweenStartEnd = Sp3FileNameUtils.getAllSp3FileNameBetween2Date(ephemerideType, start, end, orbitType);
+        List<Sp3FileName> allSp3FileNameBetweenStartEnd = Sp3FileNameUtils.getAllSp3FileNameBetween2Date(ephemerideType, start, end, orbitType);
 
         List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> allSatelitesForPeriod = new ArrayList<>();
-        for (Sp3FileName sp3FileName : allSp3FileBetweenStartEnd) {
+        for (Sp3FileName sp3FileName : allSp3FileNameBetweenStartEnd) {
             LocalDateTime dateDebut = Sp3FileNameUtils.getStartDateTime(sp3FileName);
             LocalDateTime dateFin = Sp3FileNameUtils.getEndDateTime(sp3FileName);
 
