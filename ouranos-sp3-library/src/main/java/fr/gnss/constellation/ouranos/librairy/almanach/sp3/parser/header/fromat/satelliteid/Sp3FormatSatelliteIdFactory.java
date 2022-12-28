@@ -8,7 +8,7 @@ public class Sp3FormatSatelliteIdFactory {
 
     }
 
-    public static AbstractSp3FormatSatelliteId getParserSatelliteId(Sp3FileType sp3FileType) {
+    public static ISp3FormatSatelliteId getParserSatelliteId(Sp3FileType sp3FileType) {
 
         return switch (sp3FileType) {
             case a -> new Sp3FormatSatelliteIdTypeA();

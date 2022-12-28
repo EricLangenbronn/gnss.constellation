@@ -16,8 +16,6 @@ public class Sp3StorageDirectory {
     }
 
     public boolean isAccessible() {
-        // MessageFormat.format("Impossible d'accéder au répertoire contenant les fichiers Sp3. [pathSp3Dir= {0}]", sp3StorageDirectory.getAbsolutePath());
-
         return sp3StorageDirectory.exists() && sp3StorageDirectory.isDirectory() && sp3StorageDirectory.canRead();
     }
 

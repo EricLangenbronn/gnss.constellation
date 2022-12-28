@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 
-public class Sp3FormatSatelliteIdTypeC extends AbstractSp3FormatSatelliteId {
+public class Sp3FormatSatelliteIdTypeC implements ISp3FormatSatelliteId {
 
     @Override
     public void parseSatelliteId(String line, Sp3Header sp3Header) {

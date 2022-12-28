@@ -4,7 +4,7 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import org.apache.commons.lang3.StringUtils;
 
-public class Sp3FormatPositionAndClockTypeC extends AbstractSp3FormatPositionAndClock<CartesianCoordinate3D> {
+public final class Sp3FormatPositionAndClockTypeC implements ISp3FormatPositionAndClock<CartesianCoordinate3D> {
 
     @Override
     public SatellitePosition<CartesianCoordinate3D> parsePositionAndClock(String line) {

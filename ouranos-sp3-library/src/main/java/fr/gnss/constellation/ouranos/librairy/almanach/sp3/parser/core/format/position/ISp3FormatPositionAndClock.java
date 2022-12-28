@@ -3,7 +3,7 @@ package fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.core.format.p
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.SatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.coordinate.ICoordinate;
 
-public abstract class AbstractSp3FormatPositionAndClock<T extends ICoordinate> {
-	
-	public abstract SatellitePosition<T> parsePositionAndClock(String line);
+public sealed interface ISp3FormatPositionAndClock<T extends ICoordinate> permits Sp3FormatPositionAndClockTypeA, Sp3FormatPositionAndClockTypeC {
+
+    SatellitePosition<T> parsePositionAndClock(String line);
 }

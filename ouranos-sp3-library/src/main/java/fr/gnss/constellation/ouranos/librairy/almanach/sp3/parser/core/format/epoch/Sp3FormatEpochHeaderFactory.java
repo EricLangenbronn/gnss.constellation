@@ -8,7 +8,7 @@ public class Sp3FormatEpochHeaderFactory {
 
     }
 
-    public static AbstractSp3FormatEpochHeader getParserEpochHeader(Sp3FileType sp3FileType) {
+    public static ISp3FormatEpochHeader getParserEpochHeader(Sp3FileType sp3FileType) {
 
         return switch (sp3FileType) {
             case a -> new Sp3FormatEpochHeaderTypeA();

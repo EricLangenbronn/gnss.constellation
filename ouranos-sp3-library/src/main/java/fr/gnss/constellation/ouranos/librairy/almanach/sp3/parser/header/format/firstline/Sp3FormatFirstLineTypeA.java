@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Sp3FormatFirstLineTypeA extends AbstractSp3FormatFirstLine {
+public class Sp3FormatFirstLineTypeA implements ISp3FormatFirstLine {
 
     @Override
     public void parseFirstLine(String line, Sp3Header sp3Header) {

@@ -9,7 +9,7 @@ public class Sp3FormatPositionAndClockFactory {
 
     }
 
-    public static AbstractSp3FormatPositionAndClock<CartesianCoordinate3D> getParserPositionAndClock(Sp3FileType sp3FileType) {
+    public static ISp3FormatPositionAndClock<CartesianCoordinate3D> getParserPositionAndClock(Sp3FileType sp3FileType) {
 
         return switch (sp3FileType) {
             case a -> new Sp3FormatPositionAndClockTypeA();

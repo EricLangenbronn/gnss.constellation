@@ -8,7 +8,7 @@ public class Sp3FormatSecondLineFactory {
 
     }
 
-    public static AbstractSp3FormatSecondLine getParserSecondLine(Sp3FileType sp3FileType) {
+    public static ISp3FormatSecondLine getParserSecondLine(Sp3FileType sp3FileType) {
 
         return switch (sp3FileType) {
             case a -> new Sp3FormatSecondLineTypeA();

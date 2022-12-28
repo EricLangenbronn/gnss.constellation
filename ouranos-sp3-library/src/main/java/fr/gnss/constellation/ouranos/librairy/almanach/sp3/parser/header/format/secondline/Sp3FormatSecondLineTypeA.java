@@ -3,7 +3,7 @@ package fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.format
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.Sp3Header;
 import org.apache.commons.lang3.StringUtils;
 
-public class Sp3FormatSecondLineTypeA extends AbstractSp3FormatSecondLine {
+public class Sp3FormatSecondLineTypeA implements ISp3FormatSecondLine {
 
     @Override
     public void parseSecondLine(String line, Sp3Header sp3Header) {

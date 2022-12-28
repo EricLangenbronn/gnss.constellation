@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class Sp3FormatEpochHeaderTypeC extends AbstractSp3FormatEpochHeader {
+public final class Sp3FormatEpochHeaderTypeC implements ISp3FormatEpochHeader {
 
     @Override
     public LocalDateTime parseEpochHeader(String line) {

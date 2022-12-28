@@ -8,7 +8,7 @@ public class Sp3FormatFirstLineFactory {
 
     }
 
-    public static AbstractSp3FormatFirstLine getParserFirstLine(Sp3FileType sp3FileType) {
+    public static ISp3FormatFirstLine getParserFirstLine(Sp3FileType sp3FileType) {
 
         return switch (sp3FileType) {
             case a -> new Sp3FormatFirstLineTypeA();

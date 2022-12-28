@@ -6,11 +6,11 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.Sp3FileType;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.format.firstline.AbstractSp3FormatFirstLine;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.format.firstline.ISp3FormatFirstLine;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.format.firstline.Sp3FormatFirstLineFactory;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.format.secondline.AbstractSp3FormatSecondLine;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.format.secondline.ISp3FormatSecondLine;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.format.secondline.Sp3FormatSecondLineFactory;
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.fromat.satelliteid.AbstractSp3FormatSatelliteId;
+import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.fromat.satelliteid.ISp3FormatSatelliteId;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.parser.header.fromat.satelliteid.Sp3FormatSatelliteIdFactory;
 
 public class Sp3HeaderParser {
@@ -20,9 +20,9 @@ public class Sp3HeaderParser {
 	private static final String SATELLITE_ID = "+ ";
 	private static final String ORBIT_ACCURACY = "++";
 
-	private final AbstractSp3FormatFirstLine sp3FormatFirstLine;
-	private final AbstractSp3FormatSecondLine sp3FormatSecondLine;
-	private final AbstractSp3FormatSatelliteId sp3FormatSatelliteId;
+	private final ISp3FormatFirstLine sp3FormatFirstLine;
+	private final ISp3FormatSecondLine sp3FormatSecondLine;
+	private final ISp3FormatSatelliteId sp3FormatSatelliteId;
 
 	private final Sp3FileType sp3FileType;
 
