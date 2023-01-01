@@ -1,7 +1,7 @@
-package fr.gnss.constellation.ouranos.api.controller;
+package fr.gnss.constellation.ouranos.api.controller.satellitevisible;
 
-import fr.gnss.constellation.ouranos.api.controller.dto.SatelliteDto;
-import fr.gnss.constellation.ouranos.api.controller.mapper.ResourcesVisibleSatByPeriodControllerMapper;
+import fr.gnss.constellation.ouranos.api.controller.satellitevisible.dto.SatelliteDto;
+import fr.gnss.constellation.ouranos.api.controller.satellitevisible.mapper.ResourcesVisibleSatByPeriodControllerMapper;
 import fr.gnss.constellation.ouranos.domain.satellite.ElevationMask;
 import fr.gnss.constellation.ouranos.domain.satellite.GroundStation;
 import fr.gnss.constellation.ouranos.domain.satellite.visible.SatelliteVisibleService;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @Path("/api/visibleSat")
 @RequiredArgsConstructor
-public class ResourcesVisibleSatelliteController {
+public class VisibleSatelliteController {
 
     private final ResourcesVisibleSatByPeriodControllerMapper resourcesVisibleSatByPeriodControllerMapper = Mappers.getMapper(ResourcesVisibleSatByPeriodControllerMapper.class);
     private final SatelliteVisibleService sateliteVisibleService;
@@ -30,14 +30,14 @@ public class ResourcesVisibleSatelliteController {
     @Path("")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<SatelliteDto> getVisibleSatellite(@NotNull @QueryParam("startDateOfMeasure") Long startTimestampOfMeasure, @NotNull @QueryParam("endDateOfMeasure") Long endTimestampOfMeasure
-            , @NotNull @QueryParam("latitude") Double latitudeDegree, @NotNull @QueryParam("longitude") Double longitudeDegree, @NotNull @QueryParam("altitude") Double altitudeMeter
+            , @NotNull @QueryParam("decimalLatitudeDegree") Double decimalLatitudeDegree, @NotNull @QueryParam("decimalLongitudeDegree") Double decimalLongitudeDegree, @NotNull @QueryParam("altitude") Double altitudeMeter
             , @NotNull @QueryParam("elevationMask") Double elevationMaskDegree) {
 
         return resourcesVisibleSatByPeriodControllerMapper.visiblesSatelitesDomainToDto(
                 sateliteVisibleService.getSatelliteVisible(
                         GroundStation.builder()
-                                .latitude(new GroundStation.Latitude(Math.toRadians(latitudeDegree)))
-                                .longitude(new GroundStation.Longitude(Math.toRadians(longitudeDegree)))
+                                .latitude(new GroundStation.Latitude(Math.toRadians(decimalLatitudeDegree)))
+                                .longitude(new GroundStation.Longitude(Math.toRadians(decimalLongitudeDegree)))
                                 .altitude(new GroundStation.Altitude(altitudeMeter))
                                 .build(),
                         new ElevationMask(Math.toRadians(elevationMaskDegree)),

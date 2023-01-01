@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.api.controller.dto;
+package fr.gnss.constellation.ouranos.api.controller.satellitevisible.dto;
 
 import java.time.LocalDateTime;
 import java.util.SortedMap;

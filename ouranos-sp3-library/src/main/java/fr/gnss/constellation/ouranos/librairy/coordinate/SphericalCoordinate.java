@@ -77,8 +77,8 @@ public class SphericalCoordinate implements ICoordinate {
         Objects.requireNonNull(p, "SphericalCoordinate");
 
         this.radialDistance = p.getRadiusDistance();
-        this.polarAngle = p.getAzimuth();
-        this.azimuthalAngle = p.getInclination();
+        this.polarAngle = p.getInclination();
+        this.azimuthalAngle = p.getAzimuth();
 
         validate();
     }

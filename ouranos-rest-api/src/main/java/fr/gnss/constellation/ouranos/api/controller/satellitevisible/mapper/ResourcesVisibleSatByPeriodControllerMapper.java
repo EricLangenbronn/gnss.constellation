@@ -1,6 +1,6 @@
-package fr.gnss.constellation.ouranos.api.controller.mapper;
+package fr.gnss.constellation.ouranos.api.controller.satellitevisible.mapper;
 
-import fr.gnss.constellation.ouranos.api.controller.dto.SatelliteDto;
+import fr.gnss.constellation.ouranos.api.controller.satellitevisible.dto.SatelliteDto;
 import fr.gnss.constellation.ouranos.domain.satellite.Satellite;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
