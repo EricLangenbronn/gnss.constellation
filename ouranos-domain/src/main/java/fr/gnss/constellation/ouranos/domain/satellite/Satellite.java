@@ -34,7 +34,7 @@ public class Satellite {
 
     public static class SatelliteId {
 
-        private static final Pattern patternSatelliteId = Pattern.compile("(G)([0-9]{2})");
+        private static final Pattern patternSatelliteId = Pattern.compile("(G|R|E|C|J)([0-9]{2})");
 
         private final String satelliteId;
 

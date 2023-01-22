@@ -55,7 +55,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
             }
             log.debug("Téléchargement réussi : " + sp3FileName);
         } catch (IOException e) {
-            throw new RuntimeException("Impossible de télécharger le fichier : " + sp3FileName, e);
+            throw new RuntimeException("Impossible de télécharger le fichier : " + generateFtSp3FileUrl(sp3FileName), e);
         } finally {
             clientFtp.logoutAndCloseConnection();
         }

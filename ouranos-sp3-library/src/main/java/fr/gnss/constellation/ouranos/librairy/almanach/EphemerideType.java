@@ -3,7 +3,13 @@ package fr.gnss.constellation.ouranos.librairy.almanach;
 import org.apache.commons.lang3.StringUtils;
 
 public enum EphemerideType {
-    igl, igr, igs, igu;
+    igl("IGS final solution combination (GLONASS only)"), igr("IGS rapid solution combination"), igs("IGS final solution combination"), igu("IGS ultra-rapid solution combination");
+
+    private String description;
+
+    EphemerideType(String description) {
+        this.description = description;
+    }
 
     /**
      * Returns an EphemerideType with a value represented by the specified string.

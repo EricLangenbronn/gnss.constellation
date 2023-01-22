@@ -13,6 +13,11 @@
     <packaging>jar</packaging>
     <name>Ouranos - REST API</name>
 
+    <properties>
+        <quarkus.package.type>uber-jar</quarkus.package.type>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>fr.gnss.constellation.ouranos</groupId>
