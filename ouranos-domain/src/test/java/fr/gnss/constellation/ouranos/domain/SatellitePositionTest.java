@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 class SatellitePositionTest {
 
-    @Test
-    void test() {
+  @Test
+  void test() {
 
-    }
+  }
 }

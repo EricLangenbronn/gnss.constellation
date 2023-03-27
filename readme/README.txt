@@ -83,4 +83,5 @@ create : config/application.properties
 
 
 Start-Process java -ArgumentList @('-jar quarkus-run.jar')
+Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT-runner.jar')
 

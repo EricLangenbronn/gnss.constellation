@@ -1,19 +1,18 @@
 package fr.gnss.constellation.ouranos.orbitdata.service;
 
 
-import lombok.AllArgsConstructor;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import lombok.AllArgsConstructor;
 
 @ApplicationScoped
 @AllArgsConstructor
 public class OrbitDataConfiguration {
 
-    private final OrbitsDataProperties orbitsDataProperties;
+  private final OrbitsDataProperties orbitsDataProperties;
 
-    @Produces
-    public AuthorizedNewDownload getAuthorizedNewDownload() {
-        return new AuthorizedNewDownload(orbitsDataProperties.authorizedDownload);
-    }
+  @Produces
+  public AuthorizedNewDownload getAuthorizedNewDownload() {
+    return new AuthorizedNewDownload(orbitsDataProperties.authorizedDownload);
+  }
 }

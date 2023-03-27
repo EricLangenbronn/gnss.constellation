@@ -28,13 +28,13 @@ function [a,b,e2,finv]=refell(type)
 % Email: mike@craymer.com
 
 type=upper(type);
-if (type=='CLK66' | type=='NAD27')
+if (type=='CLK66' || type=='NAD27')
   a=6378206.4;
   finv=294.9786982;
 elseif type=='GRS67'
   a=6378160.0;
   finv=298.247167427;
-elseif (type=='GRS80' | type=='NAD83')
+elseif (type=='GRS80' || type=='NAD83')
   a=6378137.0;
   finv=298.257222101;
 elseif (type=='WGS72')

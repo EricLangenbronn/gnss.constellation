@@ -4,83 +4,81 @@ import java.util.Objects;
 
 public class PolarCoordinate implements ICoordinate {
 
-	/**
-	 * distance
-	 */
-	private double r;
+  /**
+   * distance
+   */
+  private double radialDistance;
 
-	/**
-	 * angle
-	 *
-	 */
-	private double theta;
+  /**
+   * angle
+   */
+  private double theta;
 
-	/**
-	 * Initializes a newly created PolarCoordinate object.
-	 */
-	public PolarCoordinate() {
-		r = 0;
-		theta = 0;
-	}
+  /**
+   * Initializes a newly created PolarCoordinate object.
+   */
+  public PolarCoordinate() {
+    radialDistance = 0;
+    theta = 0;
+  }
 
-	/**
-	 * Build a PolarCoordinate transformer from values.
-	 */
-	public PolarCoordinate(double r, double theta) {
-		this.r = r;
-		this.theta = theta;
-	}
+  /**
+   * Build a PolarCoordinate transformer from values.
+   */
+  public PolarCoordinate(double radialDistance, double theta) {
+    this.radialDistance = radialDistance;
+    this.theta = theta;
+  }
 
-	/**
-	 * Build a PolarCoordinate transformer from CartesianCoordinate3D.
-	 * 
-	 * @param c
-	 *            - A CartesianCoordinate3D
-	 */
-	public PolarCoordinate(CartesianCoordinate3D c) {
-		this();
+  /**
+   * Build a PolarCoordinate transformer from CartesianCoordinate3D.
+   *
+   * @param c - A CartesianCoordinate3D
+   */
+  public PolarCoordinate(CartesianCoordinate3D c) {
+    this();
 
-		Objects.requireNonNull(c, "CartesianCoordinate3D");
+    Objects.requireNonNull(c, "CartesianCoordinate3D");
 
-		r = Math.sqrt(Math.pow(c.X(), 2) + Math.pow(c.Y(), 2));
-		theta = Math.atan2(c.Y(), c.X());
-	}
+    radialDistance = Math.sqrt(Math.pow(c.getAbscisse(), 2) + Math.pow(c.getOrdonnee(), 2));
+    theta = Math.atan2(c.getOrdonnee(), c.getAbscisse());
+  }
 
-	/**
-	 * Get the radius.
-	 * 
-	 * @return the radius r
-	 */
-	public double getR() {
-		return r;
-	}
+  /**
+   * Get the radius.
+   *
+   * @return the radius r
+   */
+  public double getRadialDistance() {
+    return radialDistance;
+  }
 
-	@Override
-	public double[] getPosition() {
-		double[] position = new double[2];
-		position[0] = this.r;
-		position[1] = this.theta;
+  @Override
+  public double[] getPosition() {
+    double[] position = new double[2];
+    position[0] = this.radialDistance;
+    position[1] = this.theta;
 
-		return position;
-	}
+    return position;
+  }
 
-	@Override
-	public int getDimensions() {
-		return 2;
-	}
+  @Override
+  public int getDimensions() {
+    return 2;
+  }
 
-	/**
-	 * Get the azimuthal angle in x-y plane.
-	 * 
-	 * @return the azimuthal angle in x-y plane
-	 */
-	public double getTheta() {
-		return theta;
-	}
+  /**
+   * Get the azimuthal angle in x-y plane.
+   *
+   * @return the azimuthal angle in x-y plane
+   */
+  public double getTheta() {
+    return theta;
+  }
 
-	@Override
-	public String toString() {
-		return "PolarCoordinate [r=" + r + ", theta=" + theta + "]";
-	}
+  @Override
+  public String toString() {
+    return "PolarCoordinate [r=" + radialDistance + ", theta=" + theta + "]";
+  }
 
 }

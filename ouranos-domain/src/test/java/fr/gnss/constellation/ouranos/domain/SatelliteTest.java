@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 class SatelliteTest {
 
-    @Test
-    void test() {
+  @Test
+  void test() {
 
-    }
+  }
 }

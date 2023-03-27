@@ -1,5 +1,5 @@
 function [dx,dy]=dg2lg(dlat,dlon,lat,h,a,e2)
-% DG2LG  Converts Ælat,Ælon,Æh to local geodetic coordinates.
+% DG2LG  Converts lat,lon,h to local geodetic coordinates.
 %   Local origin at lat,lon.  If astronomic lat,h input,
 %   then output is in local astronomic system.  Vectorized.
 %   See also LG2DG.

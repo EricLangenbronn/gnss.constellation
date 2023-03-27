@@ -2,6 +2,7 @@ clc # reset de la console
 
 # chargement des librairies
 addpath("./librairie/geodetic299/geodetic")
+formatSortie = '%0.10f';
 
 # Test du fichier fr.gnss.constellation.librairy.coordinate.TestCoordinate.java
 disp("###### Test des fonctions de la librairies ######")
@@ -10,7 +11,10 @@ disp("1. TestCoordinate");
 
 # Constante
 [a,b,e2,finv] = refell('WGS84');
-formatSortie = '%0.10f';
+disp(['a=', sprintf(formatSortie, a)]);
+disp(['b=', sprintf(formatSortie, b)]);
+disp(['e2=', sprintf(formatSortie, e2)]);
+disp(['finv=', sprintf(formatSortie, finv)]);
 
 ####### Début des tests #######
 
@@ -27,7 +31,7 @@ disp(['    (x=', sprintf(formatSortie, x) , ', y=', sprintf(formatSortie,y), ', 
 
 
 # testGeodeticToCartesianParis
-# ct2lg - Conventional terrestrial (ECEF) to local geodetic (NEU) 
+# ct2lg - Conventional terrestrial (ECEF) to local geodetic (NEU)
 lat = deg2rad(48.8534100);
 lon = deg2rad(2.3488000);
 h = 120.0;
@@ -39,7 +43,7 @@ disp(['    (x=', sprintf(formatSortie, x) , ', y=', sprintf(formatSortie,y), ', 
 
 
 # testTransformECEFtoENUStrasbourg
-# ct2lg - Conventional terrestrial (ECEF) to local geodetic (NEU) 
+# ct2lg - Conventional terrestrial (ECEF) to local geodetic (NEU)
 dX = 4201270.83938198;
 dY = 172324.672938237;
 dZ = 4779938.29153465;
@@ -69,8 +73,6 @@ disp(['    Vecteur station/satelite : (x=', sprintf(formatSortie, VStationSateli
 
 # /!\ ct2lg retourne : north, east, up
 [vStaSatNEUX, vStaSatNEUY, vStaSatNEUZ]  = ct2lg(VStationSatelite(1),VStationSatelite(2),VStationSatelite(3),lat,lon);
-vStaSatNEU = [vStaSatNEUY, vStaSatNEUX, vStaSatNEUZ];
-disp(['    Vecteur station/satelite NEU : (x=', sprintf(formatSortie, vStaSatNEU(1)) , ', y=', sprintf(formatSortie,vStaSatNEU(2)), ', z=', sprintf(formatSortie,vStaSatNEU(3)), ')']);
-disp(['    Elavation : ', sprintf(formatSortie, asin(vStaSatNEU(3)/norm(vStaSatNEU))) ]);
-disp(['    Azimuth : ', sprintf(formatSortie, atan2(vStaSatNEU(1)/norm(vStaSatNEU),vStaSatNEU(2)/norm(vStaSatNEU))) ]);
-
+disp(['    Vecteur station/satelite NEU : (x=', sprintf(formatSortie, vStaSatNEUX) , ', y=', sprintf(formatSortie,vStaSatNEUY), ', z=', sprintf(formatSortie,vStaSatNEUZ), ')']);
+disp(['    Elavation : ', sprintf(formatSortie, asin(-vStaSatNEUZ/norm(vStaSatNEU))) ]);
+disp(['    Azimuth : ', sprintf(formatSortie, atan2(vStaSatNEUX/norm(vStaSatNEU),vStaSatNEUY/norm(vStaSatNEU))) ]);

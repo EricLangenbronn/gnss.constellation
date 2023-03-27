@@ -5,11 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 public class Sp3Const {
 
-	public static LocalDate FIRST_EPOCH_RECORD;
+  public static LocalDate FIRST_EPOCH_RECORD;
 
-	public int sampleInterval = 15;
-
-	static {
-		FIRST_EPOCH_RECORD = LocalDate.parse("1980-01-06", DateTimeFormatter.ISO_DATE);
-	}
+  static {
+    FIRST_EPOCH_RECORD = LocalDate.parse("1980-01-06", DateTimeFormatter.ISO_DATE);
+  }
 }

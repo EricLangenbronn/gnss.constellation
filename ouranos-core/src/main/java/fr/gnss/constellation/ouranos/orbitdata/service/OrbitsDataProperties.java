@@ -5,5 +5,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "orbit.data")
 public class OrbitsDataProperties {
 
-    public boolean authorizedDownload;
+  public boolean authorizedDownload;
 }

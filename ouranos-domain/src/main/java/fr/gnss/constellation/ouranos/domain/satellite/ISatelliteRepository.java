@@ -6,5 +6,5 @@ import java.util.List;
 public interface ISatelliteRepository {
 
 
-    List<Satellite> getSatellitePosition(GroundStation groundStation, LocalDateTime start, LocalDateTime end);
+  List<Satellite> getSatellitePosition(GroundStation groundStation, LocalDateTime start, LocalDateTime end);
 }

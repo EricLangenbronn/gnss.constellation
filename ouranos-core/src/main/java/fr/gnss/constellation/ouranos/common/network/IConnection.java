@@ -4,10 +4,10 @@ import java.io.IOException;
 
 public interface IConnection {
 
-	void openConnection() throws IOException;
+  void openConnection() throws IOException;
 
-	boolean isConnectionOpen();
+  boolean isConnectionOpen();
 
-	void closeConnection();
+  void closeConnection();
 
 }

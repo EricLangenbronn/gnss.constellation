@@ -1,154 +1,134 @@
 package fr.gnss.constellation.ouranos.librairy.coordinate;
 
-import java.util.Objects;
-
+/**
+ * Les coordonnées sphériques, sont utilisées pour décrire la position d'un point dans l'espace
+ * tridimensionnel en général. Elles sont basées sur la géométrie sphérique et comprennent la distance radiale,
+ * l'angle de polarité et l'angle d'azimut. La distance radiale mesure la distance entre le point et l'origine du
+ * système de coordonnées, l'angle de polarité mesure l'angle entre le vecteur position du point et l'axe z du système
+ * de coordonnées, et l'angle d'azimut mesure l'angle entre le plan xy et le vecteur position du point projeté
+ * sur ce plan.
+ */
 public class SphericalCoordinate implements ICoordinate {
 
-    /**
-     * r : radial distance
-     */
-    private double radialDistance;
+  /**
+   * Radial distance r (distance to origin)
+   */
+  private final double radialDistance;
 
-    /**
-     * θ : polar angle (theta)
-     */
-    private double polarAngle;
+  /**
+   * Polar angle θ (theta) (angle with respect to polar axis)
+   * For θ, the range [0°, 180°] for inclination is equivalent to [−90°, +90°] for elevation.
+   * In geography, the latitude is the elevation [−90°, +90°].
+   */
+  private final double polarAngle;
 
-    /**
-     * φ : azimuthal angle
-     */
-    private double azimuthalAngle;
+  /**
+   * Azimuthal angle φ (phi)
+   */
+  private final double azimuthalAngle;
 
-    /**
-     * Initializes a newly created SphericalCoordinate object.
-     */
-    public SphericalCoordinate() {
-        this.radialDistance = 0;
-        this.polarAngle = 0;
-        this.azimuthalAngle = 0;
+  /**
+   * Constructs a newly allocated SphericalCoordinate object that represents the
+   * specified double values.
+   *
+   * @param radialDistance - radial distance
+   * @param polarAngle     - polar angle
+   * @param azimuthalAngle - azimuthal angle
+   */
+  public SphericalCoordinate(double radialDistance, double polarAngle, double azimuthalAngle) {
+
+    if (radialDistance < 0.0) {
+      throw new IllegalArgumentException(
+          String.format("Attention la distance radial est inférieur à zéro [radialDistance=%s]", radialDistance));
     }
+    this.radialDistance = radialDistance;
 
-    /**
-     * Constructs a newly allocated SphericalCoordinate object that represents the
-     * specified double values.
-     *
-     * @param radiusDistance - radial distance
-     * @param theta          - longitude
-     * @param phi            - latitude
-     */
-    public SphericalCoordinate(double radiusDistance, double theta, double phi) {
-        this.radialDistance = radiusDistance;
-        this.polarAngle = theta;
-        this.azimuthalAngle = phi;
-
-        validate();
+    if ((polarAngle < -(Math.PI / 2.0)) || (polarAngle > (Math.PI / 2.0))) {
+      throw new IllegalArgumentException(
+          String.format("L'inclinaison (latitude) doit être compris entre -90 et 90 degrée [azimuthalAngle=%s]"
+              , Math.toDegrees(polarAngle))
+      );
     }
+    this.polarAngle = polarAngle;
 
-    /**
-     * Constructs a newly allocated SphericalCoordinate object that represents the
-     * specified array of double.
-     *
-     * @param p - coordinates list
-     */
-    public SphericalCoordinate(double... p) {
-        this();
-        if (p.length != 3) {
-            throw new IllegalArgumentException("Une position doit posséder trois valeurs (radial distance, polar, azimuth)");
-        }
-
-        this.radialDistance = p[0];
-        this.polarAngle = p[1];
-        this.azimuthalAngle = p[2];
-
-        validate();
+    if ((azimuthalAngle < -(Math.PI)) || (azimuthalAngle) > (Math.PI)) {
+      throw new IllegalArgumentException(String.format("L'azimuth (longitude) doit être compris entre -180 et 180 degrée [polarAngle=%s]"
+          , Math.toDegrees(azimuthalAngle)));
     }
+    this.azimuthalAngle = azimuthalAngle;
+  }
 
-    /**
-     * Initializes a newly created SphericalCoordinate object so that it represents
-     * the same position of SphericalCoordinate as the argument; in other words, the
-     * newly created SphericalCoordinate is a copy of the argument
-     * SphericalCoordinate.
-     *
-     * @param p - A GeodeticCoordinate
-     */
-    public SphericalCoordinate(SphericalCoordinate p) {
-        this();
+  /**
+   * Constructs a newly allocated SphericalCoordinate object that represents the
+   * specified array of double.
+   *
+   * @param p - coordinates list
+   */
+  public SphericalCoordinate(double... p) {
+    this(p[0], p[1], p[2]);
+  }
 
-        Objects.requireNonNull(p, "SphericalCoordinate");
+  /**
+   * Initializes a newly created SphericalCoordinate object so that it represents
+   * the same position of SphericalCoordinate as the argument; in other words, the
+   * newly created SphericalCoordinate is a copy of the argument
+   * SphericalCoordinate.
+   *
+   * @param p - A GeodeticCoordinate
+   */
+  public SphericalCoordinate(SphericalCoordinate p) {
+    this(p.getRadialDistance(), p.getPolarAngle(), p.getAzimuthAngle());
+  }
 
-        this.radialDistance = p.getRadiusDistance();
-        this.polarAngle = p.getInclination();
-        this.azimuthalAngle = p.getAzimuth();
+  /**
+   * The radius or radial distance is the Euclidean distance from the origin O to
+   * P.
+   *
+   * @return the radius or radial
+   */
+  public double getRadialDistance() {
+    return this.radialDistance;
+  }
 
-        validate();
-    }
+  /**
+   * The inclination (or polar angle) is the angle between the zenith direction
+   * and the line segment OP.
+   *
+   * @return the polar angle
+   */
+  public double getPolarAngle() {
+    return this.polarAngle;
+  }
 
-    /**
-     * r ≥ 0 0° ≤ θ ≤ 180° (π rad) 0° ≤ φ < 360° (2π rad)
-     */
-    private void validate() {
-        if (this.radialDistance < 0.0) {
-            throw new IllegalArgumentException(String.format("Attention la distance radial est inférieur à zéro [radialDistance=%s]", radialDistance));
-        }
-        
-        if ((this.polarAngle < -(Math.PI / 2.0)) || (this.polarAngle > (Math.PI / 2.0))) {
-            throw new IllegalArgumentException(String.format("L'inclinaison (latitude) doit être compris entre -90 et 90 degrée [azimuthalAngle=%s]", Math.toDegrees(polarAngle)));
-        }
+  /**
+   * The azimuth (or azimuthal angle) is the signed angle measured from the
+   * azimuth reference direction to the orthogonal projection of the line segment
+   * OP on the reference plane.
+   *
+   * @return the azimuthal angle
+   */
+  public double getAzimuthAngle() {
+    return this.azimuthalAngle;
+  }
 
-        if ((this.azimuthalAngle < -(Math.PI)) || (this.azimuthalAngle) > (Math.PI)) {
-            throw new IllegalArgumentException(String.format("L'azimuth (longitude) doit être compris entre -180 et 180 degrée [polarAngle=%s]", Math.toDegrees(azimuthalAngle)));
-        }
-    }
+  @Override
+  public double[] getPosition() {
+    double[] position = new double[3];
+    position[0] = radialDistance;
+    position[1] = polarAngle;
+    position[2] = azimuthalAngle;
 
-    /**
-     * The radius or radial distance is the Euclidean distance from the origin O to
-     * P.
-     *
-     * @return the radius or radial
-     */
-    public double getRadiusDistance() {
-        return this.radialDistance;
-    }
+    return position;
+  }
 
-    /**
-     * The inclination (or polar angle) is the angle between the zenith direction
-     * and the line segment OP.
-     *
-     * @return the polar angle
-     */
-    public double getInclination() {
-        return this.polarAngle;
-    }
+  @Override
+  public int getDimensions() {
+    return 3;
+  }
 
-    /**
-     * The azimuth (or azimuthal angle) is the signed angle measured from the
-     * azimuth reference direction to the orthogonal projection of the line segment
-     * OP on the reference plane.
-     *
-     * @return the azimuthal angle
-     */
-    public double getAzimuth() {
-        return this.azimuthalAngle;
-    }
-
-    @Override
-    public double[] getPosition() {
-        double[] position = new double[3];
-        position[0] = radialDistance;
-        position[1] = polarAngle;
-        position[2] = azimuthalAngle;
-
-        return position;
-    }
-
-    @Override
-    public int getDimensions() {
-        return 3;
-    }
-
-    @Override
-    public String toString() {
-        return "SphericalCoordinate [distance=" + radialDistance + ", longitude=" + polarAngle + ", latitude=" + azimuthalAngle + "]";
-    }
+  @Override
+  public String toString() {
+    return "SphericalCoordinate [distance=" + radialDistance + ", polarAngle=" + polarAngle + ", azimuthalAngle=" + azimuthalAngle + "]";
+  }
 
 }

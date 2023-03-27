@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class ErrorDto {
 
-    private String errorCode;
-    private String response;
+  private String errorCode;
+  private String response;
 
 }
