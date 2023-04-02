@@ -22,7 +22,7 @@ public class TrackTimeInterceptor {
       returnValue = context.proceed();
     } finally {
       long elapsed = System.currentTimeMillis() - startTime;
-      log.info("{}.{}, s'execute en {} milliseconde", context.getClass(), context.getMethod(), elapsed);
+      log.info("{}.{}, s'execute en {}ms", context.getClass(), context.getMethod(), elapsed);
     }
 
     return returnValue;

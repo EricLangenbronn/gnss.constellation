@@ -1,11 +1,11 @@
-Eclipse : 
+# Eclipse :
 serveur tomcat > Open launch confguration > Arguments
 ajouter :
 -Dlog4j.configurationFile="file:///C:/Users/eric_/Documents/workspace/ouranos.prop/log4j2.xml"
 -DOURANOS_DIR_CONF="D:/Developpement/Workspace/eclipse/config/ouranos"
 -DOURANOS_FILE_CONF="ouranos-rest-api.properties"
 
-Eclipse debug mode
+# Eclipse debug mode
 -Dspring-boot.run.jvmArguments="-Xdebug
 -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
 
@@ -20,7 +20,7 @@ content la ligne suivante :
 http://127.0.1:8080/ouranos-livraison/
 
 
-IHM Angular
+# IHM Angular
 L'ihm angular cherche l'api à l'addresse suivante : 
 http://127.0.1:8080/ouranos-livraison/
 
@@ -54,7 +54,7 @@ http://127.0.0.1:8080/api/visibleSat/v01/bySatellite?lat=38.889139&longi=-77.049
 
 
 
-Documentation
+# Documentation
 fichier sp3
 ftp://igs.ensg.ign.fr/pub/igs/products/1282/
 lib java pour gps
@@ -65,7 +65,7 @@ https://kb.igs.org/hc/en-us/articles/115003935351-Access-to-Products
 
 
 
-
+# SpringBoot :
 Bash command :
 java -Dserver.port=8080 -DOURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos -DOURANOS_FILE_CONF=ouranos.properties -jar .\ouranos-rest-api-0.0.0-SNAPSHOT.jar
 
@@ -77,7 +77,7 @@ Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT.jar', '
 
 
 
-Quarkus :
+# Quarkus :
 cd gnss.constellation\ouranos-rest-api\target\quarkus-app
 create : config/application.properties
 
@@ -85,3 +85,8 @@ create : config/application.properties
 Start-Process java -ArgumentList @('-jar quarkus-run.jar')
 Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT-runner.jar')
 
+
+# Docker :
+docker build -t ouranos:latest .
+docker run --name ouranos-runing -p 8080:8080 -e "JAVA_OPTS=-Ddebug -Xmx128m" ouranos:latest --server.port=8080
+docker rmi --force $(docker images -q) // drop all images

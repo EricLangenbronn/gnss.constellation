@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 @Builder
 @Getter
+@Slf4j
 public class Satellite {
 
   @NonNull
@@ -28,7 +30,10 @@ public class Satellite {
 
   public SortedMap<LocalDateTime, Position> positionsVisible(double elevationMask) {
     return Optional.of(positionsByTime.entrySet()).stream().flatMap(Collection::stream)
-        .filter(entry -> entry.getValue().isVisible(elevationMask))
+        .filter(entry -> {
+          log.debug(String.format("Satellite : %s", this.satelliteId.getValue()));
+          return entry.getValue().isVisible(elevationMask);
+        })
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (o1, o2) -> o1, TreeMap::new));
   }
 
@@ -49,8 +54,8 @@ public class Satellite {
         this.satelliteId = satelliteId;
       } else {
         throw new IllegalArgumentException(
-            String.format("Le nom du satellite ne correspond pas au pattern [pattern=%s, satelliteId=%s] ", patternSatelliteId.pattern()
-                , satelliteId));
+            String.format("Le nom du satellite ne correspond pas au pattern [pattern=%s, satelliteId=%s] "
+                , patternSatelliteId.pattern(), satelliteId));
       }
     }
 
@@ -95,7 +100,12 @@ public class Satellite {
       if (this.getAzimuthalAngle().getValue() >= 0) {
         // 3.1415 / 2 rad = 90.0°, on vérifie qu'il est entre 90° et 0°
         if ((this.getPolarAngle().getValue() >= correctionElevationMask) && (this.getPolarAngle().getValue() < (Math.PI / 2.0))) {
+          log.debug(String.format("Visible [azimuth=%s,elevation=%s]", Math.toDegrees(this.getAzimuthalAngle().getValue())
+              , Math.toDegrees(this.getPolarAngle().getValue())));
           return true;
+        } else {
+          log.debug(String.format("Non visible [azimuth=%s,elevation=%s]", Math.toDegrees(this.getAzimuthalAngle().getValue())
+              , Math.toDegrees(this.getPolarAngle().getValue())));
         }
       }
 
