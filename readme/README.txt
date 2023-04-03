@@ -37,16 +37,16 @@ mettre
 "build": "ng build --env=prod",
 
 
-URL de  test pour l'api WAR
+# URL de  test pour l'api WAR
 /ouranos-war/src/test/resources/api/url/*
 
-URL de test de l'api
+# URL de test de l'api
 http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/byPeriod?lat=38.889139&long=-77.049&alt=130.049&tsStart=1387666800&tsEnd=1387753199&elevmask=15.0
 http://127.0.0.1:8080/ouranos-war/api-rest/visibleSat/v01/bySatellite?lat=38.889139&long=-77.049&alt=130.049&tsStart=1387666800&tsEnd=1387753199&elevmask=15.0
 
 
 
-URL de test de l'api springboot
+# URL de test de l'api springboot
 http://127.0.0.1:8080/api/visibleSat/v01/byPeriod?lat=38.889139&longi=-77.049&alt=130.049&tsStart=1387666800&tsEnd=1387753199&elevmask=15.0
 http://127.0.0.1:8080/api/visibleSat/v01/bySatellite?lat=38.889139&longi=-77.049&alt=130.049&tsStart=1387666800&tsEnd=1387753199&elevmask=15.0
 
@@ -55,21 +55,21 @@ http://127.0.0.1:8080/api/visibleSat/v01/bySatellite?lat=38.889139&longi=-77.049
 
 
 # Documentation
-fichier sp3
+#Fichier sp3
 ftp://igs.ensg.ign.fr/pub/igs/products/1282/
-lib java pour gps
+#Lib java pour gps
 https://www.orekit.org/static/apidocs/index.html?org/orekit/files/sp3/SP3Parser.html
-Fichier sp3 
+#Fichier sp3
 https://kb.igs.org/hc/en-us/articles/115003935351-Access-to-Products
 
 
 
 
 # SpringBoot :
-Bash command :
+#Bash command :
 java -Dserver.port=8080 -DOURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos -DOURANOS_FILE_CONF=ouranos.properties -jar .\ouranos-rest-api-0.0.0-SNAPSHOT.jar
 
-Powershell command :
+#Powershell command :
 Start-Process java -NoNewWindow -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT.jar', '--server.port=8080', '--OURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos', '--OURANOS_FILE_CONF=ouranos.properties', '--logging.config=E:\Developpement\Workspace\eclipse\config\ouranos\logback.xml')
 Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT.jar', '--server.port=8080', '--OURANOS_DIR_CONF=E:\Developpement\Workspace\eclipse\config\ouranos', '--OURANOS_FILE_CONF=ouranos.properties', '--logging.config=E:\Developpement\Workspace\eclipse\config\ouranos\logback.xml')
 
@@ -88,5 +88,8 @@ Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT-runner.
 
 # Docker :
 docker build -t ouranos:latest .
-docker run --name ouranos-runing -p 8080:8080 -e "JAVA_OPTS=-Ddebug -Xmx128m" ouranos:latest --server.port=8080
+docker run --name ouranos-server -p 8080:8080 -e "JAVA_OPTS=-Ddebug -Xmx128m" ouranos:latest --server.port=8080
 docker rmi --force $(docker images -q) // drop all images
+
+# Docker compose :
+docker-compose down && docker-compose up --build
