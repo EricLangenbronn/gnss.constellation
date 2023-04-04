@@ -11,7 +11,7 @@ import org.eclipse.microprofile.health.Readiness;
 @Readiness
 @ApplicationScoped
 @RequiredArgsConstructor
-public class AccessibleSp3DirectoryCheck implements HealthCheck {
+public class AccessibleSp3DirectoryHealthCheck implements HealthCheck {
 
   private final Sp3StorageDirectory defaultDownloadSp3Directory;
 
