@@ -1,9 +1,18 @@
+## Stage 1 : build with maven builder image
+FROM maven:3.8-eclipse-temurin-17-alpine as builder
+
+COPY . /usr/src/ouranos/
+
+RUN mvn -f /usr/src/ouranos/pom.xml clean package
+
+
+## Stage 2 : create the docker final image
 FROM eclipse-temurin:17-alpine
 
 RUN addgroup -S ouranos && adduser -S ouranosuser -G ouranos
 
 RUN mkdir /opt/ouranos
-COPY ouranos-rest-api/target/ouranos-rest-api-0.0.0-SNAPSHOT-runner.jar /opt/ouranos
+COPY --from=builder /usr/src/ouranos/ouranos-rest-api/target/*-runner.jar /opt/ouranos
 
 RUN mkdir /opt/ouranos/config
 RUN touch /opt/ouranos/config/application.properties
