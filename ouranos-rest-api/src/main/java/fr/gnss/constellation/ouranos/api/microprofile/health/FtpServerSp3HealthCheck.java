@@ -36,7 +36,6 @@ public class FtpServerSp3HealthCheck implements HealthCheck {
             .withData("Impossible de se connecter au serveur FTP SP3 non authorisé : ", authorizedNewDownload.isAuthorized());
       }
 
-
     } catch (Exception e) {
       responseBuilder.down()
           .withData("Impossible de se connecter au serveur FTP SP3 : ", e.getMessage());
