@@ -18,7 +18,8 @@ RUN mkdir /opt/ouranos/config
 RUN touch /opt/ouranos/config/application.properties
 RUN echo -e '\
 quarkus.http.cors=true\n\
-orbit.data.authorized-download=true\n\
+sp3.authorized-download=true\n\
+sp3.download-parallel=true\n\
 default.sp3.directory=/opt/ouranos/sp3\n\
 default.products.access.ftp-server-name=gssc.esa.int\n\
 default.products.access.epoch-directory=/gnss/products\n\

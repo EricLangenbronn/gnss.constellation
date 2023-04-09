@@ -8,37 +8,33 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatelli
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.reader.Sp3Reader;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
 import fr.gnss.constellation.ouranos.orbitdata.sp3.Sp3FileNameUtils;
-import fr.gnss.constellation.ouranos.orbitdata.sp3.infrastructure.ISp3InputStreamDao;
-import fr.gnss.constellation.ouranos.orbitdata.sp3.persitence.ISp3FileDao;
+import fr.gnss.constellation.ouranos.orbitdata.sp3.service.ISp3Service;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Singleton;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
 
 @Singleton
 @RequiredArgsConstructor
-@Slf4j
 public class OrbitDataService implements IOrbitDataService {
 
   // -------------------- Services --------------------
 
-  private final ISp3FileDao sp3FileRepository;
-  private final ISp3InputStreamDao sp3InputStreamRepository;
-  private final AuthorizedNewDownload authorizedNewDownload;
+  private final ISp3Service sp3Service;
 
   // -------------------- Methodes de l'interface --------------------
-
 
   @Override
   public List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> getCartesionPositionsForPeriod(LocalDateTime start, LocalDateTime end
       , EphemerideType ephemerideType, OrbitType orbitType) {
 
     List<Sp3FileName> allSp3FileNameBetweenStartEnd = Sp3FileNameUtils.getAllSp3FileNameBetween2Date(ephemerideType, start, end, orbitType);
+
+    sp3Service.downloadsAndStoresIfNotExist(allSp3FileNameBetweenStartEnd);
 
     List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> allSatelitesForPeriod = new ArrayList<>();
     for (Sp3FileName sp3FileName : allSp3FileNameBetweenStartEnd) {
@@ -50,11 +46,7 @@ public class OrbitDataService implements IOrbitDataService {
 
       Sp3Reader sp3FileParser = null;
       try {
-        Sp3File sp3File = sp3FileRepository.getFile(sp3FileName);
-        if (sp3File == null && authorizedNewDownload.isAuthorized()) {
-          sp3File = sp3FileRepository.saveSp3File(sp3FileName, sp3InputStreamRepository.downloadSp3File(sp3FileName, true));
-        }
-
+        Sp3File sp3File = sp3Service.getSp3File(sp3FileName);
         if (sp3File != null) {
           sp3FileParser = new Sp3Reader(sp3File);
           allSatelitesForPeriod.addAll(sp3FileParser.getPositionsAndClocksRecords(dateDebut, dateFin));

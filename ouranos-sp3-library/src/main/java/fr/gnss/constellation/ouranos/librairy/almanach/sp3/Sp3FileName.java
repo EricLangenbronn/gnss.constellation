@@ -24,7 +24,7 @@ public class Sp3FileName {
    * @param fileName - A file name string.
    */
   public Sp3FileName(String fileName) {
-    this.valueOf(fileName);
+    this.parseFilename(fileName);
   }
 
   /**
@@ -91,7 +91,7 @@ public class Sp3FileName {
    *
    * @param fileName - a string.
    */
-  private void valueOf(String fileName) {
+  private void parseFilename(String fileName) {
     if (StringUtils.isBlank(fileName)) {
       String message = "Le nom du fichier doit être renseigné. [fileName=" + fileName + "]";
       throw new IllegalArgumentException(message);

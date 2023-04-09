@@ -2,7 +2,7 @@ package fr.gnss.constellation.ouranos.api.microprofile.health;
 
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
-import fr.gnss.constellation.ouranos.orbitdata.service.AuthorizedNewDownload;
+import fr.gnss.constellation.ouranos.orbitdata.sp3.service.AuthorizedNewSp3Download;
 import javax.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.microprofile.health.HealthCheck;
@@ -16,7 +16,7 @@ import org.eclipse.microprofile.health.Readiness;
 public class FtpServerSp3HealthCheck implements HealthCheck {
 
   private final FtpServerName ftpServerName;
-  private final AuthorizedNewDownload authorizedNewDownload;
+  private final AuthorizedNewSp3Download authorizedNewSp3Download;
 
   @Override
   public HealthCheckResponse call() {
@@ -25,7 +25,7 @@ public class FtpServerSp3HealthCheck implements HealthCheck {
 
     try {
 
-      if (authorizedNewDownload.isAuthorized()) {
+      if (authorizedNewSp3Download.isAuthorized()) {
         ClientFtp clientFtp = new ClientFtp(ftpServerName);
         clientFtp.openConnection();
         clientFtp.logoutAndCloseConnection();
@@ -33,7 +33,7 @@ public class FtpServerSp3HealthCheck implements HealthCheck {
         responseBuilder.up();
       } else {
         responseBuilder.down()
-            .withData("Impossible de se connecter au serveur FTP SP3 non authorisé : ", authorizedNewDownload.isAuthorized());
+            .withData("Impossible de se connecter au serveur FTP SP3 non authorisé : ", authorizedNewSp3Download.isAuthorized());
       }
 
     } catch (Exception e) {
