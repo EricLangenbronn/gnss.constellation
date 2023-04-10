@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3;
+package fr.gnss.constellation.ouranos.sp3;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

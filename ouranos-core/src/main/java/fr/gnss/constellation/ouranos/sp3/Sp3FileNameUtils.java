@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3;
+package fr.gnss.constellation.ouranos.sp3;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;

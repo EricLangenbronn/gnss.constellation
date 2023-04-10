@@ -3,7 +3,7 @@ FROM maven:3.8-eclipse-temurin-17-alpine as builder
 
 COPY . /usr/src/ouranos/
 
-RUN mvn -f /usr/src/ouranos/pom.xml clean package
+RUN mvn -f /usr/src/ouranos/pom.xml clean package -Douranos.parallel-processing.enabled=true
 
 
 ## Stage 2 : create the docker final image
@@ -19,10 +19,9 @@ RUN touch /opt/ouranos/config/application.properties
 RUN echo -e '\
 quarkus.http.cors=true\n\
 sp3.authorized-download=true\n\
-sp3.download-parallel=true\n\
 default.sp3.directory=/opt/ouranos/sp3\n\
-default.products.access.ftp-server-name=gssc.esa.int\n\
-default.products.access.epoch-directory=/gnss/products\n\
+default.products.access.ftp-server-name=igs.ign.fr\n\
+default.products.access.epoch-directory=/pub/igs/products\n\
 default.elevation.mask.elevation-mask-degree=10'\
 >> /opt/ouranos/config/application.properties
 

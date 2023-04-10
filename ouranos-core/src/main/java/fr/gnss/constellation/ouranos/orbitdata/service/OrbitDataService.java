@@ -1,5 +1,6 @@
 package fr.gnss.constellation.ouranos.orbitdata.service;
 
+import fr.gnss.constellation.ouranos.AuthorizedParallelProcessing;
 import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
@@ -7,8 +8,8 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.reader.Sp3Reader;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.orbitdata.sp3.Sp3FileNameUtils;
-import fr.gnss.constellation.ouranos.orbitdata.sp3.service.ISp3Service;
+import fr.gnss.constellation.ouranos.sp3.Sp3FileNameUtils;
+import fr.gnss.constellation.ouranos.sp3.service.ISp3Service;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class OrbitDataService implements IOrbitDataService {
   // -------------------- Services --------------------
 
   private final ISp3Service sp3Service;
+  private final AuthorizedParallelProcessing authorizedParallelProcessing;
 
   // -------------------- Methodes de l'interface --------------------
 
@@ -57,6 +59,7 @@ public class OrbitDataService implements IOrbitDataService {
         IOUtils.closeQuietly(sp3FileParser);
       }
     }
+
 
     return allSatelitesForPeriod;
   }

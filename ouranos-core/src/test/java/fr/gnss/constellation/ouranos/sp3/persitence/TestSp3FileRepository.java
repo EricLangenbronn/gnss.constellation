@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3.persitence;
+package fr.gnss.constellation.ouranos.sp3.persitence;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;

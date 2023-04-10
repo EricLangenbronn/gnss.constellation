@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3.service;
+package fr.gnss.constellation.ouranos.sp3.service;
 
 public class AuthorizedNewSp3Download {
 

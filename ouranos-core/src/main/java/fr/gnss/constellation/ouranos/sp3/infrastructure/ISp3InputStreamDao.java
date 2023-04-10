@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3.infrastructure;
+package fr.gnss.constellation.ouranos.sp3.infrastructure;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import java.io.InputStream;

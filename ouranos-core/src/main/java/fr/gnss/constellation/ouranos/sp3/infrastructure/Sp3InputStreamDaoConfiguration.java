@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3.infrastructure;
+package fr.gnss.constellation.ouranos.sp3.infrastructure;
 
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import javax.enterprise.context.ApplicationScoped;
@@ -15,20 +15,20 @@ public class Sp3InputStreamDaoConfiguration {
   private static final String FTP_SERVER_NAME = "igs.ensg.ign.fr";
   private static final String EPOCH_DIRECTORY = "/pub/igs/products";
 
-  private final Sp3InputStreamDaoProperties sp3InputStreamDaoProperties;
-
   // -------------------- Methodes internes --------------------
 
   @Produces
-  public FtpServerName getDefaultFtpServerName() {
+  public FtpServerName getDefaultFtpServerName(Sp3InputStreamDaoProperties sp3InputStreamDaoProperties) {
     return new FtpServerName(
-        StringUtils.isNotBlank(sp3InputStreamDaoProperties.ftpServerName) ? sp3InputStreamDaoProperties.ftpServerName : FTP_SERVER_NAME);
+        StringUtils.isNotBlank(sp3InputStreamDaoProperties.ftpServerName) ? sp3InputStreamDaoProperties.ftpServerName : FTP_SERVER_NAME
+    );
   }
 
   @Produces
-  public EpochDirectory getDefaultEpochDirectory() {
+  public EpochDirectory getDefaultEpochDirectory(Sp3InputStreamDaoProperties sp3InputStreamDaoProperties) {
     return new EpochDirectory(
-        StringUtils.isNotBlank(sp3InputStreamDaoProperties.epochDirectory) ? sp3InputStreamDaoProperties.epochDirectory : EPOCH_DIRECTORY);
+        StringUtils.isNotBlank(sp3InputStreamDaoProperties.epochDirectory) ? sp3InputStreamDaoProperties.epochDirectory : EPOCH_DIRECTORY
+    );
   }
 
 }

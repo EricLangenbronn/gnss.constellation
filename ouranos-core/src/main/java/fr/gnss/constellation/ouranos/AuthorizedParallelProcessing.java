@@ -1,10 +1,10 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3.service;
+package fr.gnss.constellation.ouranos;
 
-public class AuthorizedParallelSp3Download {
+public class AuthorizedParallelProcessing {
 
   private final boolean authorizedParallelDownload;
 
-  public AuthorizedParallelSp3Download(boolean authorizedParallelDownload) {
+  public AuthorizedParallelProcessing(boolean authorizedParallelDownload) {
     this.authorizedParallelDownload = authorizedParallelDownload;
   }
 

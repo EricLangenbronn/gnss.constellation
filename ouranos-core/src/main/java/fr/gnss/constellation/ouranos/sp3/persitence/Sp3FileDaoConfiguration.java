@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3.persitence;
+package fr.gnss.constellation.ouranos.sp3.persitence;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -9,10 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 @AllArgsConstructor
 public class Sp3FileDaoConfiguration {
 
-  private final Sp3FileDaoProperties sp3FileDaoProperties;
-
   @Produces
-  public Sp3StorageDirectory getDefaultSp3StorageDirectory() {
+  public Sp3StorageDirectory getDefaultSp3StorageDirectory(Sp3FileDaoProperties sp3FileDaoProperties) {
 
     Sp3StorageDirectory defaultDownloadSp3Directory;
     if (StringUtils.isBlank(sp3FileDaoProperties.directory)) {

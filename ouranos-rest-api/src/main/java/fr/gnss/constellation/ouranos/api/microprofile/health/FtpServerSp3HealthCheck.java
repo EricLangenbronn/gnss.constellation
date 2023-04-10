@@ -2,7 +2,7 @@ package fr.gnss.constellation.ouranos.api.microprofile.health;
 
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
-import fr.gnss.constellation.ouranos.orbitdata.sp3.service.AuthorizedNewSp3Download;
+import fr.gnss.constellation.ouranos.sp3.service.AuthorizedNewSp3Download;
 import javax.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.microprofile.health.HealthCheck;

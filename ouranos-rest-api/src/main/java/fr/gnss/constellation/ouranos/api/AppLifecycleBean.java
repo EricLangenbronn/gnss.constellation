@@ -9,14 +9,14 @@ import org.jboss.logging.Logger;
 @ApplicationScoped
 public class AppLifecycleBean {
 
-  private static final Logger LOGGER = Logger.getLogger("ListenerBean");
+  private static final Logger log = Logger.getLogger("ListenerBean");
 
   void onStart(@Observes StartupEvent ev) {
-    LOGGER.info("Ouranos is starting...");
+    log.info("Ouranos is starting...");
   }
 
   void onStop(@Observes ShutdownEvent ev) {
-    LOGGER.info("Ouranos is shutting down...");
+    log.info("Ouranos is shutting down...");
   }
 
 }

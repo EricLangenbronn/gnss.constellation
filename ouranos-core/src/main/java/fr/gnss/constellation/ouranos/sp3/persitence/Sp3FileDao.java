@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.orbitdata.sp3.persitence;
+package fr.gnss.constellation.ouranos.sp3.persitence;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +27,8 @@ public class Sp3FileDao implements ISp3FileDao {
 
   private static final FilenameFilter filter = (directory, fileName) -> fileName.endsWith(".sp3") || fileName.endsWith(".sp3.Z");
 
-  // -------------------- Initialisation --------------------
+  // -------------------- Propriétés de la classe --------------------
+
   private final Sp3StorageDirectory defaultDownloadSp3Directory;
 
   // -------------------- Methodes de l'interface --------------------
@@ -50,7 +50,7 @@ public class Sp3FileDao implements ISp3FileDao {
     if (hasSp3File) {
       sp3FileNames = new ArrayList<>();
       for (File sp3File : defaultDownloadSp3Directory.listFiles(filter)) {
-        log.debug(MessageFormat.format("Chargement fichier : {0}", sp3File.getName()));
+        log.debug(String.format("Chargement fichier : %s", sp3File.getName()));
         sp3FileNames.add(new Sp3File(sp3File));
       }
     }
@@ -78,7 +78,7 @@ public class Sp3FileDao implements ISp3FileDao {
 
     if (!defaultDownloadSp3Directory.isWritable()) {
       throw new RuntimeException(
-          MessageFormat.format("Impossible d'accéder en écriture au répertoire contenant les fichiers Sp3. [pathSp3Dir= {0}]"
+          String.format("Impossible d'accéder en écriture au répertoire contenant les fichiers Sp3. [pathSp3Dir= %s]"
               , defaultDownloadSp3Directory.getAbsolutePath())
       );
     }
@@ -88,10 +88,10 @@ public class Sp3FileDao implements ISp3FileDao {
       Files.createFile(sp3File);
       FileUtils.copyInputStreamToFile(inputStream, sp3File.toFile());
     } catch (FileAlreadyExistsException e) {
-      log.warn(MessageFormat.format("Le fichier sp3 existe déjà, on ne veut pas l'écraser. [sp3File={0}]", sp3File.getFileName()), e);
+      log.warn(String.format("Le fichier sp3 existe déjà, on ne veut pas l'écraser. [sp3File=%s]", sp3File.getFileName()), e);
     } catch (IOException e) {
       throw new RuntimeException(
-          MessageFormat.format("Erreur lors de la sauvegarde du fichier sp3. [sp3File={0}]", sp3File.getFileName())
+          String.format("Erreur lors de la sauvegarde du fichier sp3. [sp3File=%s]", sp3File.getFileName())
           , e
       );
     }
@@ -102,7 +102,7 @@ public class Sp3FileDao implements ISp3FileDao {
   private void checkAccessSp3Directory() {
     if (!defaultDownloadSp3Directory.isAccessible()) {
       throw new RuntimeException(
-          MessageFormat.format("Impossible d'accéder au répertoire contenant les fichiers Sp3. [pathSp3Dir= {0}]"
+          String.format("Impossible d'accéder au répertoire contenant les fichiers Sp3. [pathSp3Dir= %s]"
               , defaultDownloadSp3Directory.getAbsolutePath())
       );
     }
