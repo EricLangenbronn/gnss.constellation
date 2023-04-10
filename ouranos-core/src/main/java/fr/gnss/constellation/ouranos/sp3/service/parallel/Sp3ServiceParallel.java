@@ -1,11 +1,10 @@
 package fr.gnss.constellation.ouranos.sp3.service.parallel;
 
 
-import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.sp3.persitence.ISp3FileDao;
+import fr.gnss.constellation.ouranos.sp3.service.AbstractSp3Service;
 import fr.gnss.constellation.ouranos.sp3.service.AuthorizedNewSp3Download;
-import fr.gnss.constellation.ouranos.sp3.service.ISp3Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,24 +12,33 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
 
-@RequiredArgsConstructor
 @Slf4j
-public class Sp3ServiceParallel implements ISp3Service {
+public class Sp3ServiceParallel extends AbstractSp3Service {
+
+  // -------------------- Attributs --------------------
 
   private static final int NB_THREADS = 10;
   private static final int NB_MILLIS_TIMEOUT = 30000; // 30secondes
 
   // -------------------- Services --------------------
 
-  private final ISp3FileDao sp3FileRepository;
   private final AuthorizedNewSp3Download authorizedNewSp3Download;
   private final Sp3DownloadAndStoreFactory sp3DownloadAndStoreFactory;
   private final ExecutorService executorService = Executors.newFixedThreadPool(NB_THREADS);
+
+  // ------------------------ Constructeur(s) ------------------------
+
+  public Sp3ServiceParallel(ISp3FileDao sp3FileRepository, AuthorizedNewSp3Download authorizedNewSp3Download
+      , Sp3DownloadAndStoreFactory sp3DownloadAndStoreFactory) {
+    super(sp3FileRepository);
+    this.authorizedNewSp3Download = authorizedNewSp3Download;
+    this.sp3DownloadAndStoreFactory = sp3DownloadAndStoreFactory;
+
+  }
 
   // -------------------- Methodes de l'interface --------------------
 
@@ -64,15 +72,5 @@ public class Sp3ServiceParallel implements ISp3Service {
                 , sp3DownloadAndStoreTask.getSp3FileName().getFileName(true)));
           });
     }
-  }
-
-  @Override
-  public boolean isSp3FileExisting(Sp3FileName sp3FileName) {
-    return sp3FileRepository.getFile(sp3FileName) != null;
-  }
-
-  @Override
-  public Sp3File getSp3File(Sp3FileName sp3FileName) {
-    return sp3FileRepository.getFile(sp3FileName);
   }
 }

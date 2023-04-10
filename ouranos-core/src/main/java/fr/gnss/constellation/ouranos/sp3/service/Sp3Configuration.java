@@ -2,6 +2,7 @@ package fr.gnss.constellation.ouranos.sp3.service;
 
 import fr.gnss.constellation.ouranos.sp3.infrastructure.ISp3InputStreamDao;
 import fr.gnss.constellation.ouranos.sp3.persitence.ISp3FileDao;
+import fr.gnss.constellation.ouranos.sp3.service.followup.Sp3Service;
 import fr.gnss.constellation.ouranos.sp3.service.parallel.Sp3DownloadAndStoreFactory;
 import fr.gnss.constellation.ouranos.sp3.service.parallel.Sp3ServiceParallel;
 import io.quarkus.arc.DefaultBean;
