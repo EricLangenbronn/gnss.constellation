@@ -12,12 +12,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SatelliteVisibleConfiguration {
 
-  private final ISatelliteRepository satelliteRepository;
-
-  private final SatelliteVisibleProperties satelliteVisibleProperties;
-
   @Produces
-  public SatelliteVisibleService getSatelliteVisibleService() {
+  public SatelliteVisibleService getSatelliteVisibleService(
+      ISatelliteRepository satelliteRepository, SatelliteVisibleProperties satelliteVisibleProperties) {
+    
     return new SatelliteVisibleService(satelliteRepository
         , new ElevationMask(Math.toRadians(Objects.requireNonNullElse(satelliteVisibleProperties.elevationMaskDegree, 15.0))));
   }

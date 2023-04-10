@@ -17,7 +17,7 @@ import org.springframework.util.CollectionUtils;
 
 
 @Slf4j
-public class Sp3ServiceParallel extends AbstractSp3Service {
+public class Sp3ParallelService extends AbstractSp3Service {
 
   // -------------------- Attributs --------------------
 
@@ -32,7 +32,7 @@ public class Sp3ServiceParallel extends AbstractSp3Service {
 
   // ------------------------ Constructeur(s) ------------------------
 
-  public Sp3ServiceParallel(ISp3FileDao sp3FileRepository, AuthorizedNewSp3Download authorizedNewSp3Download
+  public Sp3ParallelService(ISp3FileDao sp3FileRepository, AuthorizedNewSp3Download authorizedNewSp3Download
       , Sp3DownloadAndStoreFactory sp3DownloadAndStoreFactory) {
     super(sp3FileRepository);
     this.authorizedNewSp3Download = authorizedNewSp3Download;

@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.sp3.service.followup;
+package fr.gnss.constellation.ouranos.sp3.service.sequential;
 
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-public class Sp3Service extends AbstractSp3Service {
+public class Sp3sequentialService extends AbstractSp3Service {
 
   // -------------------- Services --------------------
 
@@ -23,7 +23,7 @@ public class Sp3Service extends AbstractSp3Service {
 
   // ------------------------ Constructeur(s) ------------------------
 
-  public Sp3Service(ISp3FileDao sp3FileRepository, ISp3InputStreamDao sp3InputStreamRepository
+  public Sp3sequentialService(ISp3FileDao sp3FileRepository, ISp3InputStreamDao sp3InputStreamRepository
       , AuthorizedNewSp3Download authorizedNewSp3Download) {
     super(sp3FileRepository);
     this.sp3FileRepository = sp3FileRepository;
