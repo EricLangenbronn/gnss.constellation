@@ -7,7 +7,7 @@ RUN mvn -f /usr/src/ouranos/pom.xml clean package -Douranos.parallel-processing.
 
 
 ## Stage 2 : create the docker final image
-FROM eclipse-temurin:17-alpine
+FROM eclipse-temurin:17-jre-alpine
 
 RUN addgroup -S ouranos && adduser -S ouranosuser -G ouranos
 
@@ -26,8 +26,11 @@ default.elevation.mask.elevation-mask-degree=10'\
 >> /opt/ouranos/config/application.properties
 
 RUN mkdir /opt/ouranos/sp3
-
 RUN chown -R ouranosuser:ouranos /opt/ouranos
+
+RUN mkdir /var/log/ouranos
+RUN chown -R ouranosuser:ouranos /var/log/ouranos
+
 
 USER ouranosuser
 
