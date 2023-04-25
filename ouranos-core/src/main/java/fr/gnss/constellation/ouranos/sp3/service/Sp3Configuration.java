@@ -7,8 +7,8 @@ import fr.gnss.constellation.ouranos.sp3.service.parallel.Sp3ParallelService;
 import fr.gnss.constellation.ouranos.sp3.service.sequential.Sp3sequentialService;
 import io.quarkus.arc.DefaultBean;
 import io.quarkus.arc.properties.IfBuildProperty;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import lombok.AllArgsConstructor;
 
 @ApplicationScoped

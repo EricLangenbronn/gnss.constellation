@@ -1,10 +1,10 @@
 package fr.gnss.constellation.ouranos.api.controller.exception.dto;
 
+import jakarta.validation.ConstraintViolation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.validation.ConstraintViolation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

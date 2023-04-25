@@ -1,7 +1,7 @@
 package fr.gnss.constellation.ouranos.sp3.persitence;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 

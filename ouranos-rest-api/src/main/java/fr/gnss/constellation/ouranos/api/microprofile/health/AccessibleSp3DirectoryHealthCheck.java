@@ -1,7 +1,7 @@
 package fr.gnss.constellation.ouranos.api.microprofile.health;
 
 import fr.gnss.constellation.ouranos.sp3.persitence.Sp3StorageDirectory;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;

@@ -4,11 +4,10 @@ import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.sp3.infrastructure.ISp3InputStreamDao;
 import fr.gnss.constellation.ouranos.sp3.persitence.ISp3FileDao;
-import org.jboss.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Sp3DownloadAndStoreTask implements Runnable {
-
-  private static final Logger log = Logger.getLogger(Sp3DownloadAndStoreTask.class);
 
   private final ISp3InputStreamDao sp3InputStreamRepository;
   private final ISp3FileDao sp3FileRepository;

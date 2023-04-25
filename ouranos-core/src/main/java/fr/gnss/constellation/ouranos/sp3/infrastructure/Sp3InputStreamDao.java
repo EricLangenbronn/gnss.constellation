@@ -6,12 +6,12 @@ import fr.gnss.constellation.ouranos.common.network.ManagedConnection;
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.monitoring.tracktime.TrackTime;
+import jakarta.inject.Singleton;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

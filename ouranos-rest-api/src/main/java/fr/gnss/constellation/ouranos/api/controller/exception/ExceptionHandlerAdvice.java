@@ -3,7 +3,7 @@ package fr.gnss.constellation.ouranos.api.controller.exception;
 
 import fr.gnss.constellation.ouranos.api.controller.exception.dto.BadRequestDto;
 import fr.gnss.constellation.ouranos.api.controller.exception.dto.ErrorDto;
-import javax.validation.ConstraintViolationException;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;

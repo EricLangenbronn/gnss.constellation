@@ -1,8 +1,8 @@
 package fr.gnss.constellation.ouranos.sp3.infrastructure;
 
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 

@@ -7,7 +7,7 @@ import fr.gnss.constellation.ouranos.librairy.almanach.EphemerideType;
 import fr.gnss.constellation.ouranos.librairy.almanach.OrbitType;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.TimeCoordinateSatellitePosition;
 import fr.gnss.constellation.ouranos.librairy.coordinate.CartesianCoordinate3D;
-import fr.gnss.constellation.ouranos.orbitdata.service.OrbitDataService;
+import fr.gnss.constellation.ouranos.orbitdata.service.sequential.OrbitDataSequentialService;
 import io.quarkus.test.junit.QuarkusTest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 public class ItOrbitsDataService {
 
   @Inject
-  private OrbitDataService orbitsDataService;
+  private OrbitDataSequentialService orbitsDataService;
 
   @Test
   public void testReadDatasForPeriodStartAfterEndBefore() {

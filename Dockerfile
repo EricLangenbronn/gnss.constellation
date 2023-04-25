@@ -22,7 +22,11 @@ sp3.authorized-download=true\n\
 default.sp3.directory=/opt/ouranos/sp3\n\
 default.products.access.ftp-server-name=igs.ign.fr\n\
 default.products.access.epoch-directory=/pub/igs/products\n\
-default.elevation.mask.elevation-mask-degree=10'\
+default.elevation.mask.elevation-mask-degree=10\n\
+\n\
+quarkus.log.file.enable=true\n\
+quarkus.log.file.format=%d{HH:mm:ss.SSS} %-5p [%c{2.}]] (%t) %s%e%n\n\
+quarkus.log.file.level=INFO'\
 >> /opt/ouranos/config/application.properties
 
 RUN mkdir /opt/ouranos/sp3
