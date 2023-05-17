@@ -13,10 +13,10 @@ public class Sp3FileDaoConfiguration {
   public Sp3StorageDirectory getDefaultSp3StorageDirectory(Sp3FileDaoProperties sp3FileDaoProperties) {
 
     Sp3StorageDirectory defaultDownloadSp3Directory;
-    if (StringUtils.isBlank(sp3FileDaoProperties.directory)) {
+    if (StringUtils.isBlank(sp3FileDaoProperties.directory())) {
       defaultDownloadSp3Directory = new Sp3StorageDirectory(System.getProperty("user.home"));
     } else {
-      defaultDownloadSp3Directory = new Sp3StorageDirectory(sp3FileDaoProperties.directory);
+      defaultDownloadSp3Directory = new Sp3StorageDirectory(sp3FileDaoProperties.directory());
     }
 
     return defaultDownloadSp3Directory;

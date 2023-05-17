@@ -1,10 +1,10 @@
 package fr.gnss.constellation.ouranos.sp3.persitence;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import io.smallrye.config.ConfigMapping;
 
-@ConfigurationProperties(prefix = "default.sp3")
-public class Sp3FileDaoProperties {
+@ConfigMapping(prefix = "default.sp3")
+public interface Sp3FileDaoProperties {
 
-  public String directory;
+  String directory();
 
 }

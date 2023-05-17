@@ -17,7 +17,7 @@ public class Sp3Configuration {
 
   @Produces
   public AuthorizedNewSp3Download getAuthorizedNewSp3Download(Sp3Properties sp3Properties) {
-    return new AuthorizedNewSp3Download(sp3Properties.authorizedDownload);
+    return new AuthorizedNewSp3Download(sp3Properties.authorizedDownload());
   }
 
   @Produces

@@ -1,9 +1,9 @@
 package fr.gnss.constellation.ouranos.sp3.service;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import io.smallrye.config.ConfigMapping;
 
-@ConfigurationProperties(prefix = "sp3")
-public class Sp3Properties {
+@ConfigMapping(prefix = "sp3")
+public interface Sp3Properties {
 
-  public boolean authorizedDownload;
+  boolean authorizedDownload();
 }

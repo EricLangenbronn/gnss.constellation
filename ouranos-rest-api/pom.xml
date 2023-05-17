@@ -25,18 +25,10 @@
         </dependency>
 
         <!-- ########## Quarkus ########### -->
-
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-spring-web</artifactId>
-        </dependency>
+        
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-spring-boot-properties</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -76,6 +68,11 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
         </dependency>
 
         <!-- tests -->

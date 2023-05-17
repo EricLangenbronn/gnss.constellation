@@ -1,10 +1,9 @@
 package fr.gnss.constellation.ouranos.satellite.visible.config;
 
+import io.smallrye.config.ConfigMapping;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+@ConfigMapping(prefix = "default.elevation.mask")
+public interface SatelliteVisibleProperties {
 
-@ConfigurationProperties(prefix = "default.elevation.mask")
-public class SatelliteVisibleProperties {
-
-  public Double elevationMaskDegree;
+  Double elevationMaskDegree();
 }

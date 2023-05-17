@@ -17,6 +17,6 @@ public class SatelliteVisibleConfiguration {
       ISatelliteRepository satelliteRepository, SatelliteVisibleProperties satelliteVisibleProperties) {
 
     return new SatelliteVisibleService(satelliteRepository
-        , new ElevationMask(Math.toRadians(Objects.requireNonNullElse(satelliteVisibleProperties.elevationMaskDegree, 15.0))));
+        , new ElevationMask(Math.toRadians(Objects.requireNonNullElse(satelliteVisibleProperties.elevationMaskDegree(), 15.0))));
   }
 }

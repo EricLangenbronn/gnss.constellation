@@ -20,14 +20,15 @@ public class Sp3InputStreamDaoConfiguration {
   @Produces
   public FtpServerName getDefaultFtpServerName(Sp3InputStreamDaoProperties sp3InputStreamDaoProperties) {
     return new FtpServerName(
-        StringUtils.isNotBlank(sp3InputStreamDaoProperties.ftpServerName) ? sp3InputStreamDaoProperties.ftpServerName : FTP_SERVER_NAME
+        StringUtils.isNotBlank(sp3InputStreamDaoProperties.ftpServerName()) ? sp3InputStreamDaoProperties.ftpServerName() : FTP_SERVER_NAME
     );
   }
 
   @Produces
   public EpochDirectory getDefaultEpochDirectory(Sp3InputStreamDaoProperties sp3InputStreamDaoProperties) {
     return new EpochDirectory(
-        StringUtils.isNotBlank(sp3InputStreamDaoProperties.epochDirectory) ? sp3InputStreamDaoProperties.epochDirectory : EPOCH_DIRECTORY
+        StringUtils.isNotBlank(sp3InputStreamDaoProperties.epochDirectory()) ? sp3InputStreamDaoProperties.epochDirectory() :
+            EPOCH_DIRECTORY
     );
   }
 

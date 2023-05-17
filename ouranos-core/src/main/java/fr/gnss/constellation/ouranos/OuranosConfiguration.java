@@ -10,6 +10,6 @@ public class OuranosConfiguration {
 
   @Produces
   public AuthorizedParallelProcessing getAuthorizedParallelProcessing(OuranosProperties ouranosProperties) {
-    return new AuthorizedParallelProcessing(ouranosProperties.parallelProcessing);
+    return new AuthorizedParallelProcessing(ouranosProperties.parallelProcessing());
   }
 }

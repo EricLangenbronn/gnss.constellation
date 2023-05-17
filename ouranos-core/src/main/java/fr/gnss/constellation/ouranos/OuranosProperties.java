@@ -1,9 +1,9 @@
 package fr.gnss.constellation.ouranos;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import io.smallrye.config.ConfigMapping;
 
-@ConfigurationProperties(prefix = "ouranos")
-public class OuranosProperties {
+@ConfigMapping(prefix = "ouranos")
+public interface OuranosProperties {
 
-  public boolean parallelProcessing;
+  boolean parallelProcessing();
 }

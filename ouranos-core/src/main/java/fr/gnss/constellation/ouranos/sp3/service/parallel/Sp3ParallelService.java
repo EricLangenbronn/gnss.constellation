@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 
 @Slf4j
@@ -52,7 +52,7 @@ public class Sp3ParallelService extends AbstractSp3Service {
     );
 
     if (!CollectionUtils.isEmpty(tasksNotExecuted)) {
-      Optional.ofNullable(tasksNotExecuted).stream().flatMap(Collection::stream)
+      Optional.of(tasksNotExecuted).stream().flatMap(Collection::stream)
           .forEach(taskNotExecuted -> {
             Sp3DownloadAndStoreTask sp3DownloadAndStoreTask = (Sp3DownloadAndStoreTask) taskNotExecuted;
             log.error(String.format("Ce téléchargement n'a pas pu se faire [sp3FileName=%s]"
