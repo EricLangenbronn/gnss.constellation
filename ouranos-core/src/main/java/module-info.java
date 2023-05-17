@@ -17,8 +17,8 @@ module ouranos.core {
   requires ouranos.domain;
   requires ouranos.sp3;
 
-  exports fr.gnss.constellation.ouranos.sp3.persitence;
-  exports fr.gnss.constellation.ouranos.common.network;
-  exports fr.gnss.constellation.ouranos.sp3.service;
   exports fr.gnss.constellation.ouranos.common.network.ftp;
+  exports fr.gnss.constellation.ouranos.common.network;
+  exports fr.gnss.constellation.ouranos.sp3.persitence;
+  exports fr.gnss.constellation.ouranos.sp3.service;
 }

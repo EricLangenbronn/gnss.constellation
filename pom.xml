@@ -107,22 +107,12 @@
 
             <dependency>
                 <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-spring-web</artifactId>
-                <version>${quarkus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
                 <version>${quarkus.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-spring-di</artifactId>
-                <version>${quarkus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-spring-boot-properties</artifactId>
                 <version>${quarkus.version}</version>
             </dependency>
             <dependency>
@@ -140,6 +130,12 @@
                 <artifactId>quarkus-smallrye-metrics</artifactId>
                 <version>${quarkus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-smallrye-openapi</artifactId>
+                <version>${quarkus.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>io.smallrye.config</groupId>
@@ -170,13 +166,6 @@
                 <groupId>jakarta.xml.bind</groupId>
                 <artifactId>jakarta.xml.bind-api</artifactId>
                 <version>${jakarta.version}</version>
-            </dependency>
-
-            <!-- swagger -->
-            <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-smallrye-openapi</artifactId>
-                <version>${quarkus.version}</version>
             </dependency>
 
             <dependency>
