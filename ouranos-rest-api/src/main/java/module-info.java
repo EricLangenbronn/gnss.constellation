@@ -6,6 +6,7 @@ module ouranos.http {
   requires jakarta.ws.rs;
   requires java.desktop;
   requires lombok;
+  requires micrometer.core;
   requires microprofile.health.api;
   requires org.apache.commons.lang3;
   requires org.mapstruct;

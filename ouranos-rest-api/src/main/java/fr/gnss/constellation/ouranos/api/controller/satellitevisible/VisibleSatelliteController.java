@@ -1,12 +1,15 @@
 package fr.gnss.constellation.ouranos.api.controller.satellitevisible;
 
+
 import fr.gnss.constellation.ouranos.api.controller.satellitevisible.dto.SatelliteDto;
 import fr.gnss.constellation.ouranos.api.controller.satellitevisible.mapper.VisibleSatelliteControllerMapper;
 import fr.gnss.constellation.ouranos.domain.satellite.ElevationMask;
 import fr.gnss.constellation.ouranos.domain.satellite.GroundStation;
 import fr.gnss.constellation.ouranos.domain.satellite.visible.SatelliteVisibleService;
 import fr.gnss.constellation.ouranos.librairy.coordinate.GeodeticCoordinate;
-import io.smallrye.common.constraint.NotNull;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -20,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 
 @Path("/api/visibleSat")
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @RequiredArgsConstructor
 public class VisibleSatelliteController {
 
@@ -29,7 +33,8 @@ public class VisibleSatelliteController {
 
   @GET
   @Path("")
-  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  @Timed(value = "visible-satellite-timer", description = "A measure how long it takes to perform the visible satelites.")
+  @Counted(value = "visible-satellite-counter", description = "A measure how many times is perform the visible satelites.")
   public List<SatelliteDto> getVisibleSatellite(
       @NotNull @QueryParam("startDateOfMeasure") Long startTimestampOfMeasure
       , @NotNull @QueryParam("endDateOfMeasure") Long endTimestampOfMeasure

@@ -32,16 +32,17 @@
         <commons.compress.version>1.23.0</commons.compress.version>
         <commons.collections4.version>4.3</commons.collections4.version>
 
-        <quarkus.version>3.0.3.Final</quarkus.version>
-        <smallrye.config.version>3.2.1</smallrye.config.version>
-        <rest.assured.version>5.3.0</rest.assured.version>
+        <quarkus.version>3.2.0.Final</quarkus.version>
+        <smallrye.config.version>3.3.1</smallrye.config.version>
+        <rest.assured.version>5.3.1</rest.assured.version>
 
-        <jakarta.version>2.3.3</jakarta.version>
         <lombok.version>1.18.26</lombok.version>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <logback.version>1.4.6</logback.version>
 
         <podam.version>7.2.11.RELEASE</podam.version>
+
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
     </properties>
 
 
@@ -112,11 +113,6 @@
             </dependency>
             <dependency>
                 <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-spring-di</artifactId>
-                <version>${quarkus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-hibernate-validator</artifactId>
                 <version>${quarkus.version}</version>
             </dependency>
@@ -127,12 +123,17 @@
             </dependency>
             <dependency>
                 <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-smallrye-metrics</artifactId>
+                <artifactId>quarkus-smallrye-openapi</artifactId>
                 <version>${quarkus.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-smallrye-openapi</artifactId>
+                <artifactId>quarkus-micrometer</artifactId>
+                <version>${quarkus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
                 <version>${quarkus.version}</version>
             </dependency>
 
@@ -165,13 +166,13 @@
             <dependency>
                 <groupId>jakarta.xml.bind</groupId>
                 <artifactId>jakarta.xml.bind-api</artifactId>
-                <version>${jakarta.version}</version>
+                <version>4.0.0</version>
             </dependency>
 
             <dependency>
-                <groupId>javax.annotation</groupId>
-                <artifactId>javax.annotation-api</artifactId>
-                <version>1.3.2</version>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>2.1.1</version>
             </dependency>
 
             <dependency>
@@ -287,6 +288,11 @@
                     <version>3.3.0</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.10</version>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>3.2.1</version>
@@ -365,6 +371,40 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>merge</id>
+                        <goals>
+                            <goal>merge</goal>
+                        </goals>
+                        <configuration>
+                            <fileSets>
+                                <fileSet implementation="org.apache.maven.shared.model.fileset.FileSet">
+                                    <directory>${project.basedir}</directory>
+                                    <includes>
+                                        <include>**/*.exec</include>
+                                    </includes>
+                                </fileSet>
+                            </fileSets>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

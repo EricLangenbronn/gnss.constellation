@@ -23,6 +23,8 @@ default.products.access.ftp-server-name=igs.ign.fr\n\
 default.products.access.epoch-directory=/pub/igs/products\n\
 default.elevation.mask.elevation-mask-degree=10\n\
 \n\
+quarkus.micrometer.binder-enabled-default=true\n\
+quarkus.micrometer.binder.http-server.ignore-patterns='/q.*'\n\
 quarkus.http.cors=true\n\
 quarkus.log.file.enable=true\n\
 quarkus.log.file.format=%d{HH:mm:ss.SSS} %-5p [%c{2.}]] (%t) %s%e%n\n\

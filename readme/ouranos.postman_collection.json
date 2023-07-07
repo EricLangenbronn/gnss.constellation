@@ -6,26 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "Actuator heatlh",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/q/health",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"q",
-						"health"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Visible sat byPeriod",
 			"request": {
 				"method": "GET",
@@ -140,6 +120,47 @@
 			"response": []
 		},
 		{
+			"name": "Actuator heatlh",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/q/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"q",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actuator metrics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/q/metrics/prometheus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"q",
+						"metrics",
+						"prometheus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Swagger",
 			"request": {
 				"method": "GET",
@@ -154,6 +175,25 @@
 					"path": [
 						"q",
 						"openapi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jolokia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jolokia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jolokia"
 					]
 				}
 			},
