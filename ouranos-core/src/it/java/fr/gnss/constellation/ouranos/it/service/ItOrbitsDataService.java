@@ -29,7 +29,7 @@ public class ItOrbitsDataService {
     LocalDateTime end = LocalDateTime.parse("2013-08-22T15:00", DateTimeFormatter.ISO_DATE_TIME);
 
 
-    List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> datas = orbitsDataService.getCartesionPositionsForPeriod(start, end,
+    List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> datas = orbitsDataService.getCartesianPositionsForPeriod(start, end,
         EphemerideType.igs, OrbitType.sp3);
 
     assertNotNull(datas);
@@ -42,7 +42,7 @@ public class ItOrbitsDataService {
     LocalDateTime start = LocalDateTime.parse("2013-08-22T00:00", DateTimeFormatter.ISO_DATE_TIME);
     LocalDateTime end = LocalDateTime.parse("2013-08-22T23:59", DateTimeFormatter.ISO_DATE_TIME);
 
-    List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> datas = orbitsDataService.getCartesionPositionsForPeriod(start, end,
+    List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> datas = orbitsDataService.getCartesianPositionsForPeriod(start, end,
         EphemerideType.igs, OrbitType.sp3);
 
     assertNotNull(datas);
@@ -55,7 +55,7 @@ public class ItOrbitsDataService {
     LocalDateTime start = LocalDateTime.parse("2013-08-22T00:00", DateTimeFormatter.ISO_DATE_TIME);
     LocalDateTime end = LocalDateTime.parse("2013-08-22T15:45", DateTimeFormatter.ISO_DATE_TIME);
 
-    List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> datas = orbitsDataService.getCartesionPositionsForPeriod(start, end,
+    List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> datas = orbitsDataService.getCartesianPositionsForPeriod(start, end,
         EphemerideType.igs, OrbitType.sp3);
 
     assertNotNull(datas);
@@ -68,7 +68,7 @@ public class ItOrbitsDataService {
     LocalDateTime start = LocalDateTime.parse("2013-08-22T10:00", DateTimeFormatter.ISO_DATE_TIME);
     LocalDateTime end = LocalDateTime.parse("2013-08-22T23:45", DateTimeFormatter.ISO_DATE_TIME);
 
-    List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> datas = orbitsDataService.getCartesionPositionsForPeriod(start, end,
+    List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> datas = orbitsDataService.getCartesianPositionsForPeriod(start, end,
         EphemerideType.igs, OrbitType.sp3);
 
     assertNotNull(datas);

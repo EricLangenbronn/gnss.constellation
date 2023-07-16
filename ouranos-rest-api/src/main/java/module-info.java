@@ -1,4 +1,4 @@
-module ouranos.http {
+module ouranos.rest {
   requires com.fasterxml.jackson.databind;
   requires io.smallrye.common.constraint;
   requires jakarta.cdi;

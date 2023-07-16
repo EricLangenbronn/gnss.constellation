@@ -40,6 +40,8 @@
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <logback.version>1.4.6</logback.version>
 
+        <quarkus.caffeine.version>3.2.0.Final</quarkus.caffeine.version>
+
         <podam.version>7.2.11.RELEASE</podam.version>
 
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
@@ -137,6 +139,11 @@
                 <version>${quarkus.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-cache</artifactId>
+                <version>${quarkus.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.smallrye.config</groupId>
@@ -173,12 +180,6 @@
                 <groupId>jakarta.annotation</groupId>
                 <artifactId>jakarta.annotation-api</artifactId>
                 <version>2.1.1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jolokia</groupId>
-                <artifactId>jolokia-core</artifactId>
-                <version>1.7.2</version>
             </dependency>
 
             <!-- test -->

@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface IOrbitDataService {
 
-  List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> getCartesionPositionsForPeriod(LocalDateTime start
+  List<TimeCoordinateSatellitePosition<CartesianCoordinate3D>> getCartesianPositionsForPeriod(LocalDateTime start
       , LocalDateTime end, EphemerideType ephemerideType, OrbitType orbitType);
 }

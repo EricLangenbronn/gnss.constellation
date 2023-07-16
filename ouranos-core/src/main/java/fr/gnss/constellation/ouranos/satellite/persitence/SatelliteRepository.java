@@ -29,7 +29,7 @@ public class SatelliteRepository implements ISatelliteRepository {
 
     return satelliteRepositoryMapper.satelliteWithSphericalCoordinateForPeriodToSatelliteDomain(
         CoordinateTransformation.transformCartesionsToSphericals(
-            orbitsDataRepository.getCartesionPositionsForPeriod(start, end, EphemerideType.igs, OrbitType.sp3)
+            orbitsDataRepository.getCartesianPositionsForPeriod(start, end, EphemerideType.igs, OrbitType.sp3)
             , satelliteRepositoryMapper.domainGroundStationToGeodeticCoordinate(groundStation)
         )
     );

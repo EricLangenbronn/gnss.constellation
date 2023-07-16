@@ -31,8 +31,11 @@ quarkus.log.file.format=%d{HH:mm:ss.SSS} %-5p [%c{2.}]] (%t) %s%e%n\n\
 quarkus.log.file.level=INFO\n\
 quarkus.banner.path=banner.txt\n\
 \n\
-quarkus.jolokia.path=/jolokia\n\
-quarkus.http.root-path=/'\
+quarkus.cache.enabled=true\n\
+quarkus.cache.caffeine.metrics-enabled\n\
+quarkus.cache.caffeine.\"cartesian-position\".initial-capacity=10\n\
+quarkus.cache.caffeine.\"cartesian-position\".maximum-size=20\n\
+quarkus.cache.caffeine.\"cartesian-position\".expire-after-write=900S\n\
 >> /opt/ouranos/config/application.properties
 
 RUN mkdir /opt/ouranos/sp3

@@ -2,6 +2,7 @@ package fr.gnss.constellation.ouranos.sp3.persitence;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Singleton;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -13,7 +14,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
