@@ -3,8 +3,8 @@ services:
   ouranos-server:
     container_name: ouranos
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: ouranos-docker/Dockerfile
     image: ouranos:latest
     command:
       - "--dev"

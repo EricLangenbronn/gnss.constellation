@@ -87,9 +87,12 @@ Start-Process java -ArgumentList @('-jar ouranos-rest-api-0.0.0-SNAPSHOT-runner.
 
 
 # Docker :
-docker build -t ouranos:latest .
+cd gnss.constellation
+docker build --progress=plain --no-cache -f ouranos-docker/Dockerfile -t ouranos:latest . // debug mode
+docker build -f ouranos-docker/Dockerfile -t ouranos:latest .
 docker run --name ouranos-server -p 8080:8080 -e "JAVA_OPTS=-Ddebug -Xmx128m" ouranos:latest --server.port=8080
 docker rmi --force $(docker images -q) // drop all images
 
 # Docker compose :
+cd gnss.constellation\ouranos-docker
 docker-compose down && docker-compose up --build

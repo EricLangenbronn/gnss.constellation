@@ -1,6 +1,7 @@
 package fr.gnss.constellation.ouranos.rest.controller.cache;
 
-import fr.gnss.constellation.ouranos.common.service.cache.CacheClearer;
+// import fr.gnss.constellation.ouranos.common.service.cache.CacheClearer;
+
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import jakarta.ws.rs.POST;
@@ -14,13 +15,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CacheController {
 
-  private final CacheClearer cacheClearer;
+  // private final CacheClearer cacheClearer;
 
   @POST
   @Path("/clear-all")
   @Timed(value = "clear-all-caches", description = "A measure how long it takes to perform deletion all caches.")
   @Counted(value = "clear-all-caches", description = "A measure how many times is perform deletion all caches.")
   public void clearAllCaches() {
-    cacheClearer.clearAllCaches();
+    // cacheClearer.clearAllCaches();
   }
 }

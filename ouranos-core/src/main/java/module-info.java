@@ -12,7 +12,7 @@ module ouranos.core {
   requires org.slf4j;
   requires quarkus.arc;
   requires quarkus.cache;
-  requires quarkus.cache.runtime.spi;
+  // requires quarkus.cache.runtime.spi;
   requires smallrye.config.core;
   requires static lombok;
 
