@@ -1,0 +1,20 @@
+quarkus:
+  container-image:
+    build: true
+  banner:
+    path: banner.txt
+
+sp3:
+  authorized-download: true
+
+default:
+  sp3:
+    directory: ./target/test-classes
+  products:
+    access:
+      ftp-server-name: igs.ign.fr
+      epoch-directory: /pub/igs/products
+
+elevation:
+  mask:
+    elevation-mask-degree: 10

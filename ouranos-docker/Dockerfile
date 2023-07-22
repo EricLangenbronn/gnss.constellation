@@ -19,7 +19,7 @@ COPY --from=builder /usr/src/ouranos/ouranos-rest-api/target/*-runner.jar /opt/o
 RUN ls /opt/ouranos # for debug mode
 
 RUN mkdir /opt/ouranos/config
-COPY --from=builder /usr/src/ouranos/ouranos-docker/conf/application.properties /opt/ouranos/config
+COPY --from=builder /usr/src/ouranos/ouranos-docker/conf/application.yaml /opt/ouranos/config
 RUN ls /opt/ouranos/config # for debug mode
 
 RUN mkdir /opt/ouranos/sp3
