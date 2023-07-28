@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.sp3.infrastructure;
+package fr.gnss.constellation.ouranos.sp3.infrastructure.sp3;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,9 +1,10 @@
-package fr.gnss.constellation.ouranos.sp3.infrastructure;
+package fr.gnss.constellation.ouranos.sp3.infrastructure.sp3;
 
 import fr.gnss.constellation.ouranos.common.compress.UnCompress;
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.common.network.ManagedConnection;
 import fr.gnss.constellation.ouranos.common.network.ftp.ClientFtp;
+import fr.gnss.constellation.ouranos.common.network.ftp.IClientFtp;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import fr.gnss.constellation.ouranos.monitoring.tracktime.TrackTime;
 import jakarta.inject.Singleton;
@@ -25,7 +26,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
 
   private final FtpServerName ftpServerName;
   private final EpochDirectory epochDirectory;
-  private final ManagedConnection<ClientFtp> managedConnection = new ManagedConnection<>();
+  private final ManagedConnection<IClientFtp> managedConnection = new ManagedConnection<>();
 
   // -------------------- Methodes de l'interface --------------------
 
@@ -33,7 +34,7 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
   @Override
   public InputStream downloadSp3File(Sp3FileName sp3FileName, boolean unCompressSp3File) {
 
-    ClientFtp clientFtp = managedConnection.initConnection(new ClientFtp(ftpServerName));
+    IClientFtp clientFtp = managedConnection.initConnection(new ClientFtp(ftpServerName));
     if (clientFtp == null) {
       throw new RuntimeException(String.format("Impossible d'établir une connexion au serveur FTP : %s ", ftpServerName.getValue()));
     }
@@ -60,9 +61,9 @@ public class Sp3InputStreamDao implements ISp3InputStreamDao {
   }
 
   @Override
-  public Map<Sp3FileName, InputStream> downloadSp3File(List<Sp3FileName> sp3FileNames, boolean unCompressSp3File) {
+  public Map<Sp3FileName, InputStream> downloadSp3Files(List<Sp3FileName> sp3FileNames, boolean unCompressSp3File) {
 
-    ClientFtp clientFtp = managedConnection.initConnection(new ClientFtp(ftpServerName));
+    IClientFtp clientFtp = managedConnection.initConnection(new ClientFtp(ftpServerName));
     if (clientFtp == null) {
       throw new RuntimeException(String.format("Impossible d'établir une connexion au serveur FTP : %s", ftpServerName.getValue()));
     }

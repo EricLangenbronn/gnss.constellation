@@ -1,7 +1,6 @@
 package fr.gnss.constellation.ouranos.common.network.ftp;
 
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
-import fr.gnss.constellation.ouranos.common.network.IConnection;
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +11,7 @@ import org.apache.commons.net.ftp.FTPReply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ClientFtp implements IConnection {
+public class ClientFtp implements IClientFtp {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ClientFtp.class);
 
@@ -62,10 +61,12 @@ public class ClientFtp implements IConnection {
     }
   }
 
+  @Override
   public void setTimeOut(int timeout) {
     this.ftp.setConnectTimeout(timeout);
   }
 
+  @Override
   public boolean isConnected() {
     return this.ftp.isConnected();
   }
@@ -75,6 +76,7 @@ public class ClientFtp implements IConnection {
    *
    * @param remoteFileName - File to store information
    */
+  @Override
   public InputStream retrieveFileStream(String remoteFileName) throws IOException {
 
     this.ftp.setFileType(FTP.BINARY_FILE_TYPE);
@@ -93,6 +95,7 @@ public class ClientFtp implements IConnection {
     return sp3InputSteam;
   }
 
+  @Override
   public void logoutAndCloseConnection() {
     if (this.ftp.isConnected()) {
       try {
@@ -104,10 +107,12 @@ public class ClientFtp implements IConnection {
     }
   }
 
+  @Override
   public String getServerName() {
     return serverName;
   }
 
+  @Override
   public String getUser() {
     return user;
   }

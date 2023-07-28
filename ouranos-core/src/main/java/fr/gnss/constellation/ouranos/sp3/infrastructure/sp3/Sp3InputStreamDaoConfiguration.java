@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.sp3.infrastructure;
+package fr.gnss.constellation.ouranos.sp3.infrastructure.sp3;
 
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import jakarta.enterprise.context.ApplicationScoped;

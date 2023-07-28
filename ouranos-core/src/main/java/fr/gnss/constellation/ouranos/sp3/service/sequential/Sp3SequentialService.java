@@ -2,7 +2,7 @@ package fr.gnss.constellation.ouranos.sp3.service.sequential;
 
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
-import fr.gnss.constellation.ouranos.sp3.infrastructure.ISp3InputStreamDao;
+import fr.gnss.constellation.ouranos.sp3.infrastructure.sp3.ISp3InputStreamDao;
 import fr.gnss.constellation.ouranos.sp3.persitence.ISp3FileDao;
 import fr.gnss.constellation.ouranos.sp3.service.AbstractSp3Service;
 import fr.gnss.constellation.ouranos.sp3.service.AuthorizedNewSp3Download;
@@ -13,20 +13,18 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-public class Sp3sequentialService extends AbstractSp3Service {
+public class Sp3SequentialService extends AbstractSp3Service {
 
   // -------------------- Services --------------------
 
-  private final ISp3FileDao sp3FileRepository;
   private final ISp3InputStreamDao sp3InputStreamRepository;
   private final AuthorizedNewSp3Download authorizedNewSp3Download;
 
   // ------------------------ Constructeur(s) ------------------------
 
-  public Sp3sequentialService(ISp3FileDao sp3FileRepository, ISp3InputStreamDao sp3InputStreamRepository
+  public Sp3SequentialService(ISp3FileDao sp3FileRepository, ISp3InputStreamDao sp3InputStreamRepository
       , AuthorizedNewSp3Download authorizedNewSp3Download) {
     super(sp3FileRepository);
-    this.sp3FileRepository = sp3FileRepository;
     this.sp3InputStreamRepository = sp3InputStreamRepository;
     this.authorizedNewSp3Download = authorizedNewSp3Download;
   }

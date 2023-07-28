@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public abstract class AbstractSp3Service implements ISp3Service {
 
-  private final ISp3FileDao sp3FileRepository;
+  protected final ISp3FileDao sp3FileRepository;
 
 
   public abstract void downloadsAndStoresIfNotExist(List<Sp3FileName> sp3FileNames);

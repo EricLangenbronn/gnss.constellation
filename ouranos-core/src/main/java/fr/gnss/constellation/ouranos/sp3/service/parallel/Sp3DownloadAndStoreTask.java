@@ -2,7 +2,7 @@ package fr.gnss.constellation.ouranos.sp3.service.parallel;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3File;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
-import fr.gnss.constellation.ouranos.sp3.infrastructure.ISp3InputStreamDao;
+import fr.gnss.constellation.ouranos.sp3.infrastructure.sp3.ISp3InputStreamDao;
 import fr.gnss.constellation.ouranos.sp3.persitence.ISp3FileDao;
 import lombok.extern.slf4j.Slf4j;
 

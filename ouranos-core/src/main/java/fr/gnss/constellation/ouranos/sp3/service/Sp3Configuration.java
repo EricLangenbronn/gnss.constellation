@@ -1,10 +1,10 @@
 package fr.gnss.constellation.ouranos.sp3.service;
 
-import fr.gnss.constellation.ouranos.sp3.infrastructure.ISp3InputStreamDao;
+import fr.gnss.constellation.ouranos.sp3.infrastructure.sp3.ISp3InputStreamDao;
 import fr.gnss.constellation.ouranos.sp3.persitence.ISp3FileDao;
 import fr.gnss.constellation.ouranos.sp3.service.parallel.Sp3DownloadAndStoreFactory;
 import fr.gnss.constellation.ouranos.sp3.service.parallel.Sp3ParallelService;
-import fr.gnss.constellation.ouranos.sp3.service.sequential.Sp3sequentialService;
+import fr.gnss.constellation.ouranos.sp3.service.sequential.Sp3SequentialService;
 import io.quarkus.arc.DefaultBean;
 import io.quarkus.arc.properties.IfBuildProperty;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -33,6 +33,6 @@ public class Sp3Configuration {
   public ISp3Service getSp3sequentialService(ISp3FileDao sp3FileRepository, ISp3InputStreamDao sp3InputStreamRepository
       , AuthorizedNewSp3Download authorizedNewSp3Download) {
 
-    return new Sp3sequentialService(sp3FileRepository, sp3InputStreamRepository, authorizedNewSp3Download);
+    return new Sp3SequentialService(sp3FileRepository, sp3InputStreamRepository, authorizedNewSp3Download);
   }
 }

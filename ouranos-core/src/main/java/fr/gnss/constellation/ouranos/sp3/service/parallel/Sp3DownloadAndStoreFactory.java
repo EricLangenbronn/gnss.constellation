@@ -2,8 +2,8 @@ package fr.gnss.constellation.ouranos.sp3.service.parallel;
 
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
-import fr.gnss.constellation.ouranos.sp3.infrastructure.EpochDirectory;
-import fr.gnss.constellation.ouranos.sp3.infrastructure.Sp3InputStreamDao;
+import fr.gnss.constellation.ouranos.sp3.infrastructure.sp3.EpochDirectory;
+import fr.gnss.constellation.ouranos.sp3.infrastructure.sp3.Sp3InputStreamDao;
 import fr.gnss.constellation.ouranos.sp3.persitence.Sp3FileDao;
 import fr.gnss.constellation.ouranos.sp3.persitence.Sp3StorageDirectory;
 import jakarta.inject.Singleton;

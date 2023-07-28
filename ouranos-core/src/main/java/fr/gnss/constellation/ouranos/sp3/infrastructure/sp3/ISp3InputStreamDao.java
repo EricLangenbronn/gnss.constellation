@@ -1,4 +1,4 @@
-package fr.gnss.constellation.ouranos.sp3.infrastructure;
+package fr.gnss.constellation.ouranos.sp3.infrastructure.sp3;
 
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
 import java.io.InputStream;
@@ -9,6 +9,6 @@ public interface ISp3InputStreamDao {
 
   InputStream downloadSp3File(Sp3FileName sp3FileName, boolean unCompressSp3File);
 
-  Map<Sp3FileName, InputStream> downloadSp3File(List<Sp3FileName> sp3FileNames, boolean unCompressSp3File);
+  Map<Sp3FileName, InputStream> downloadSp3Files(List<Sp3FileName> sp3FileNames, boolean unCompressSp3File);
 
 }

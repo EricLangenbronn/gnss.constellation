@@ -2,7 +2,7 @@ package fr.gnss.constellation.ouranos.orbitdata.service.parallel;
 
 import fr.gnss.constellation.ouranos.common.network.FtpServerName;
 import fr.gnss.constellation.ouranos.librairy.almanach.sp3.Sp3FileName;
-import fr.gnss.constellation.ouranos.sp3.infrastructure.EpochDirectory;
+import fr.gnss.constellation.ouranos.sp3.infrastructure.sp3.EpochDirectory;
 import fr.gnss.constellation.ouranos.sp3.persitence.Sp3FileDao;
 import fr.gnss.constellation.ouranos.sp3.persitence.Sp3StorageDirectory;
 import fr.gnss.constellation.ouranos.sp3.service.AuthorizedNewSp3Download;
