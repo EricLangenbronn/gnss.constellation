@@ -39,7 +39,7 @@
 
         <lombok.version>1.18.26</lombok.version>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
-        <logback.version>1.4.6</logback.version>
+        <logback.version>1.4.12</logback.version>
 
         <h2.database.version>2.2.220</h2.database.version>
 
