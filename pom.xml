@@ -32,7 +32,7 @@
         <commons.compress.version>1.23.0</commons.compress.version>
         <commons.collections4.version>4.3</commons.collections4.version>
 
-        <quarkus.version>3.2.0.Final</quarkus.version>
+        <quarkus.version>3.2.9.Final</quarkus.version>
         <quarkus.caffeine.version>3.2.0.Final</quarkus.caffeine.version>
         <smallrye.config.version>3.3.1</smallrye.config.version>
         <rest.assured.version>5.3.1</rest.assured.version>
